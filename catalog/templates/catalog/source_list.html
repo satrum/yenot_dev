@@ -1,0 +1,38 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+    <h1>Source List</h1>
+
+    {% if allsource %}
+<!-- need move to css -->
+<style>
+tr,td {border:1px solid black;}
+</style>
+
+	<table>
+	<tr>
+		<td>#</td>
+		<td>NAME</td>
+		<td>rating</td>
+		<td>LINK</td>
+		<td>Description<td>
+		<td>telegram<td>
+	</tr>
+	{% for source in allsource %}
+	{% if source.promo_status == 'y' %}<tr style="font-weight:bold">{% else %}<tr>{% endif %} 
+		<td>{{source.sourceid}}</td>
+		<td><a href="{{ source.get_absolute_url }}">{{ source.name }}</a></td>
+		<td>{{source.rating}}</td>
+		<td><a href="{{ source.link }}">{{ source.link }}</a></td>
+		<td>{{source.text}}</td>
+		<td>{{source.telegram}}<td>
+		
+	</tr>
+	{% endfor %}
+	</table>
+    {% else %}
+      <p>There are no news.</p>
+    {% endif %}       
+
+{% endblock %}
+

@@ -1,0 +1,53 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+
+<h1>Title: {{ source.name }}</h1>
+<p><strong>Link:</strong><a href="{{ source.link }}">{{ source.link }}</a></p>
+
+<p><strong>Telegam:</strong> {{ source.telegram }}</p> 
+<p><strong>Description:</strong> {{source.text}}</p>
+<p><strong>Rating:</strong> {{ source.rating }}</p> 
+<p><strong>Moderation status:</strong> {{source.moderation_status}}</p>
+
+<div style="margin-left:20px;margin-top:20px">
+<h4>News from this source:</h4>
+
+<!-- need move to css -->
+<style>
+tr,td {border:1px solid black;}
+</style>
+
+	<table>
+	<tr>
+		<td>#</td>
+		<td>TITLE</td>
+		<td>SOURCE</td>
+		<td>TEXT</td>
+		<td>created time</td>
+		<td>direction</td>
+		<td>rating</td>
+		<td>Likes</td>
+		<td>Dislikes</td>
+		<td>LINK</td>
+	</tr>
+	{% for copy in source.news_set.all %}
+	{% if copy.promo_status == 'y' %}<tr style="font-weight:bold">{% else %}<tr>{% endif %} 
+		<td>{{copy.newsid}}</td>
+		<td><a href="{% url 'news-detail' copy.pk %}">{{ copy.title }}</a></td>
+		<td>{{copy.sourceid}}</td>
+		<td>{{copy.text}}</td>
+		<td>{{copy.time}}</td>
+		<td>{{copy.direction}}</td>
+		<td>{{copy.rating}}</td>
+		<td>{{copy.like}}</td>
+		<td>{{copy.dislike}}</td>
+		<td><a href="{{ copy.link }}">{{ copy.link }}</a></td>
+	</tr>
+	{% endfor %}
+	</table>
+
+</div>
+{% endblock %}
+
+

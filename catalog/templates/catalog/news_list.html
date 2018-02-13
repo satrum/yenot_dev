@@ -1,0 +1,77 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+    <h1>News List</h1>
+
+    {% if allnews %}
+<!-- need move to css -->
+<style>
+tr,td {border:1px solid black;}
+</style>
+<strong>All News count :</strong> {{ num_news }}
+<strong>View Type (block or table) :</strong> {{view_newslist_block}}
+<a href="{% url 'change-view' %}"><button>change view</button></a>
+
+	<table>
+	<tr>
+		<td>#</td>
+		<td>TITLE</td>
+		<td>SOURCE</td>
+		<td>TEXT</td>
+		<td>created time</td>
+		<td>direction</td>
+		<td>rating</td>
+		<td>Likes</td>
+		<td></td>
+		<td>Dislikes</td>
+		<td></td>
+		<td>LINK</td>
+		<td>USERNAME</td>
+		
+	</tr>
+	{% for news in allnews %}
+	{% if news.promo_status == 'y' %}<tr style="font-weight:bold">{% else %}<tr>{% endif %} 
+		<td>{{news.newsid}}</td>
+		<td><a href="{{ news.get_absolute_url }}">{{ news.title }}</a></td>
+		<td>{{news.sourceid}}</td>
+		<td>{{news.text}}</td>
+		<td>{{news.time}}</td>
+		<td>{{news.direction}}</td>
+		<td>{{news.rating}}</td>
+		<td>{{news.like}}</td>
+		
+		{% if user.is_authenticated %}
+			{% if news.enable_vote %}
+				<td><a href="{{ news.get_like_url }}"><button>Like</button></a></td>
+			{% else %}
+			    <td></td>
+			{% endif %}
+		{% else %}
+		<td></td>
+		{% endif %}
+		
+		<td>{{news.dislike}}</td>
+		
+		{% if user.is_authenticated %}
+			{% if news.enable_vote %}
+				<td><a href="{{ news.get_dislike_url }}"><button>Dislike</button></a></td>
+			{% else %}
+			    <td></td>
+			{% endif %}
+		{% else %}
+		<td></td>
+		{% endif %}
+		
+		<td><a href="{{ news.link }}">{{ news.link }}</a></td>
+		<td>{{news.user}}</td>
+		
+		
+	</tr>
+	{% endfor %}
+	</table>
+    {% else %}
+      <p>There are no news.</p>
+    {% endif %}       
+
+{% endblock %}
+

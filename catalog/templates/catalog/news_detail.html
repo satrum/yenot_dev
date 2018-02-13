@@ -1,0 +1,27 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+
+<h1>Title: {{ news.title }}</h1>
+<p><strong>Source:</strong> <a href="{% url 'source-detail' news.sourceid.pk %}">{{ news.sourceid }}</a></p>
+
+<p><strong>Details:          </strong> {{ news.text }}</p>
+<p><strong>Time of creation: </strong> {{ news.time }}</p> 
+<p><strong>Direction:        </strong>
+{% if news.direction == 'b' %}BUY
+{% elif news.direction == 's' %}SELL
+{% else %}HODL{% endif %}
+</p>
+<p><strong>Rating:           </strong> {{ news.rating }}</p>
+<p><strong>Likes:            </strong> {{ news.like }}</p>
+<p><strong>Dislikes:         </strong> {{ news.dislike }}</p>
+<p><strong>Owner:            </strong> {{ news.user }}</p>
+<p><strong>Link of new:      </strong><a href="{{ news.link }}">{{ news.link }}</a></p>
+<p><strong>Moderation status:</strong> {{news.moderation_status}}</p>
+{% if news.proof_image %}
+	<p><strong>Image path:</strong> {{ news.proof_image.url }}</p>
+	<img src="{{ news.proof_image.url }}">
+{% endif %}
+{% endblock %}
+
+
