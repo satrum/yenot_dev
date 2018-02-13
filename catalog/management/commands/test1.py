@@ -9,7 +9,7 @@ class Command(BaseCommand):
 	
 	# def add_arguments(self, parser):
 	# 	parser.add_argument('poll_id', nargs='+', type=str)
-
+	
 	def handle(self, *args, **options):
 		# try:
 		# 	print('arguments exists:')

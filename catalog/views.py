@@ -10,6 +10,7 @@ def index(request):
 '''
 from .models import Book, Author, BookInstance, Genre
 from .models import News, Source, Banner
+from random import randint
 
 def index(request):#Функция отображения для домашней страницы сайта.
     # Генерация "количеств" некоторых главных объектов
@@ -26,7 +27,8 @@ def index(request):#Функция отображения для домашне�
     num_visits=request.session.get('num_visits', 0)
     request.session['num_visits'] = num_visits+1
     news = News.objects.all()
- 
+
+    #get votes
     if request.user.is_authenticated:
         view_newslist_block=request.user.profile.view_newslist_block
         for new in news:
@@ -37,14 +39,18 @@ def index(request):#Функция отображения для домашне�
                 new.enable_vote=False
     else:
         view_newslist_block = 'table'
- # Отрисовка HTML-шаблона index.html с данными внутри 
-    # переменной контекста context
-    
-    banner = Banner.objects.filter(status=True)[0]
-    print(banner.id, banner.status, banner.count_view)
+
+    #select one banner with status=True
+    banners = Banner.objects.filter(status=True)
+    bannerlen=len(banners)
+    if bannerlen>0:
+        banner = Banner.objects.filter(status=True)[randint(1,bannerlen)-1]
+        #print(banner.id, banner.status, banner.count_view)
     banner.count_view += 1
     banner.save()
-	
+
+	# Отрисовка HTML-шаблона index.html с данными внутри 
+    # переменной контекста context
     return render(
         request,
         'index.html',
