@@ -41,7 +41,7 @@ def index(request):#Функция отображения для домашне�
     # переменной контекста context
     
     banner = Banner.objects.filter(status=True)[0]
-    print(banner)
+    print(banner.id, banner.status)
 	
     return render(
         request,
