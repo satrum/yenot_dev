@@ -45,7 +45,7 @@ def index(request):#Функция отображения для домашне�
     bannerlen=len(banners)
     if bannerlen>0:
         banner = Banner.objects.filter(status=True)[randint(1,bannerlen)-1]
-        #print(banner.id, banner.status, banner.count_view)
+        print(banner.id, banner.status, banner.count_view, banner.image.url)
     banner.count_view += 1
     banner.save()
 
@@ -261,3 +261,11 @@ def change_view(request):
 	profile=request.user.profile
 	profile.change_vnb()
 	return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+from .models import Banner
+
+def banner_click(request, pk):
+	banner=Banner.objects.get(pk=pk)
+	banner.count_click += 1
+	banner.save()
+	return HttpResponseRedirect(banner.link)

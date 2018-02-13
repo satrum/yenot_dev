@@ -4,7 +4,7 @@
 <div>
 {% load static %}
 <img src="{% static 'images/logo.png' %}" alt="Home" style="width:100%;"/>
-
+<a href="{% url 'banner-click' banner.pk %}"><img src = "{{ banner.image.url }}"></a>
 </div>   
 
    <h1>News List</h1>

@@ -22,5 +22,6 @@ urlpatterns += [
 	path('source/<int:pk>', views.SourceDetailView.as_view(), name='source-detail'),
 	path('signup/', views.signup, name='signup'),
 	path('addnews/', views.addnews, name='addnews'),#form add news
+	path('banner/<int:pk>', views.banner_click, name='banner-click'),
 	
 ]
