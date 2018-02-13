@@ -21,27 +21,30 @@
  
 	<div class="col-sm-2">
       {% block sidebar %}
-      <ul class="sidebar-nav">
-          <li><a href="{% url 'index' %}">Home</a></li>
-		  <li><a href="http://127.0.0.1/admin">Admin panel</a></li>
-          <li><a href="{% url 'books' %}">All books</a></li>
-          <li><a href="">All authors</a></li>
-		
+      <ul class="sidebar-nav logo">
+          <li><a href="{% url 'index' %}"><img src="{% static "images/logo.png" %}" alt="Home" style="width:100%;"/></a></li>
+		 </ul>
+		 <ul class="sidebar-nav menu">
+          <li><a href="{% url 'books' %}">Топ лидеров</a></li>
+		  <li><a href="{% url 'news' %}">Топ новостей</a></li>
+          <li><a href="{% url 'source' %}">Топ каналов</a></li>	
+		  
+		  </ul>
+			 <ul class="sidebar-nav login">
 			{% if user.is_authenticated %}
-			 <li>User: {{ user.get_username }}</li>
-			 <li><a href="{% url 'my-borrowed' %}">My Borrowed</a></li>
+           			
+			 <li>Привет,{{ user.get_username }}!</li>
 			 <li><a href="{% url 'logout'%}?next={{request.path}}">Logout</a></li>
-			 <li><a href="{% url 'addnews'%}?next={{request.path}}">Add New</a></li>
+			 <li class="add_news"><a href="{% url 'addnews'%}?next={{request.path}}"><div class="round">+</div>Add New</a></li>
+			 <li><a href="http://127.0.0.1/admin">Admin panel</a></li>
+		   </ul>
 		   {% else %}
 			 <li><a href="{% url 'login'%}?next={{request.path}}">Login</a></li>
 			 <li><a href="{% url 'signup'%}?next={{request.path}}">Signup</a></li>
 		   {% endif %}
 		   
-      </ul>
-	  <ul class="sidebar-nav">
-          <li><a href="{% url 'news' %}">All News</a></li>
-          <li><a href="{% url 'source' %}">All Sources</a></li>		  
-      </ul>
+             </ul>
+	  
 	  
      {% endblock %}
       </div>
