@@ -26,9 +26,7 @@ class Command(BaseCommand):
 		news = News.objects.all()
 		#print(type(news), news)
 		for new in news:
-	   		print(new.newsid, new.title, new.rating, new.like, new.dislike, new.time)
-
-
-
+	   		#print(new.newsid, new.title, new.rating, new.like, new.dislike, new.time)
+	   		print(new.newsid, new.title, new.rating, new.like, new.dislike, new.sourceid, new.user)
 
 

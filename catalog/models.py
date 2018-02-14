@@ -231,7 +231,8 @@ class Banner(models.Model):
 	#time_from = 
 	#time_to = 
 	#priority = 
-	#max_count = 
+	#max_count_view = 
+	#max_count_click = 
 	
 
 '''
