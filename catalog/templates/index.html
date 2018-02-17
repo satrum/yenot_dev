@@ -1,9 +1,21 @@
 {% extends "base_generic.html" %}
 
 {% block content %}
-<div>
+<div class="banner">
+<div class="banner_img">
 {% load static %}
-<a href="{% url 'banner-click' banner.pk %}"><img src = "{{ banner.image.url }}" alt="Home" style="width:20%;"></a>
+<a href="{% url 'banner-click' banner.pk %}"><img src = "{{ banner.image.url }}" alt="Home"></a>
+</div>
+<div class="banner_content">
+<div>
+<h1>{{banner.title}}</h1>
+<p>{{banner.text}}</p>
+</div>
+<div>
+<div class="link banner_btn"><a href="{% url 'banner-click' banner.pk %}">Заглянуть</a></div>
+<div class="filter banner_btn"> Последние посты</div>
+</div>
+</div>
 </div>   
 
    <h1>News List</h1>
