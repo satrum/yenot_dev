@@ -221,9 +221,9 @@ class Source(models.Model):
 
 class Banner(models.Model):
 	id = models.AutoField(primary_key=True, help_text="banner id")
-	image = models.ImageField(upload_to='banner_images/', max_length=100) # !!!! need size
-	title = models.CharField(max_length=100)
-	text = models.TextField(max_length=1000,help_text="description of banner")
+	image = models.ImageField(upload_to='banner_images/', max_length=100) # !!!! need size , height_field=300, width_field=400
+	title = models.CharField(max_length=20)
+	text = models.TextField(max_length=100,help_text="description of banner")
 	link = models.URLField(max_length=100)
 	count_view = models.IntegerField(default=0, blank=True, null=True, help_text='count of views')
 	count_click = models.IntegerField(default=0, blank=True, null=True, help_text='count of views')
