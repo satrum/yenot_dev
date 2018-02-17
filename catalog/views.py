@@ -44,10 +44,13 @@ def index(request):#Функция отображения для домашне�
     banners = Banner.objects.filter(status=True)
     bannerlen=len(banners)
     if bannerlen>0:
-        banner = Banner.objects.filter(status=True)[randint(1,bannerlen)-1]
+        banner = banners[randint(1,bannerlen)-1]
+        #banner = Banner.objects.filter(status=True)[randint(1,bannerlen)-1]
         #print(banner.id, banner.status, banner.count_view, banner.image.url)
-    banner.count_view += 1
-    banner.save()
+        banner.count_view += 1
+        banner.save()
+    else:
+        banner=''	
 
 	# Отрисовка HTML-шаблона index.html с данными внутри 
     # переменной контекста context
