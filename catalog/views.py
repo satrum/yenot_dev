@@ -26,7 +26,33 @@ def index(request):#Функция отображения для домашне�
 	# Number of visits to this view, as counted in the session variable.
     num_visits=request.session.get('num_visits', 0)
     request.session['num_visits'] = num_visits+1
-    news = News.objects.all()
+    
+    #get parameters for filter and sort
+    # time - sort by time, rating - sort by rating
+    param = request.GET
+    news=[]
+    print(param) #<QueryDict: {'time': ['1'], 'rating': ['1']}>
+    if 'ratimg' in param:
+        print('sorted by rating')
+        if param['rating']=='0':
+            news = News.objects.order_by('rating')
+        else:
+            news = News.objects.order_by('-rating')
+    if 'time' in param:
+        print('sorted by time')
+        if param['time']=='0':
+            if news == []:
+                news = News.objects.order_by('time')
+            else:
+                news = news.order_by('time')
+        else:
+            if news == []:
+                news = News.objects.order_by('-time')
+            else:
+                news = news.order_by('-time')
+    #if 'time' not in param and 'rating' not in param:
+    if news == []:
+        news = News.objects.all()
 
     #get votes
     if request.user.is_authenticated:
@@ -50,7 +76,7 @@ def index(request):#Функция отображения для домашне�
         banner.count_view += 1
         banner.save()
     else:
-        banner=''	
+        banner=''
 
 	# Отрисовка HTML-шаблона index.html с данными внутри 
     # переменной контекста context
@@ -58,7 +84,7 @@ def index(request):#Функция отображения для домашне�
         request,
         'index.html',
         context={'num_books':num_books,'num_instances':num_instances,'num_instances_available':num_instances_available,'num_authors':num_authors,'num_news':num_news,'num_sources':num_sources,'num_visits':num_visits,
-  'num_votes':num_votes,'allnews':news,'view_newslist_block':view_newslist_block, 'banner':banner},
+  'num_votes':num_votes,'allnews':news,'view_newslist_block':view_newslist_block, 'banner':banner, 'param':param},
     )
 
 from django.views import generic
