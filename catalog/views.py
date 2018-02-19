@@ -32,7 +32,7 @@ def index(request):#Функция отображения для домашне�
     param = request.GET
     news=[]
     print(param) #<QueryDict: {'time': ['1'], 'rating': ['1']}>
-    if 'ratimg' in param:
+    if 'rating' in param:
         print('sorted by rating')
         if param['rating']=='0':
             news = News.objects.order_by('rating')
@@ -244,7 +244,7 @@ from .models import News
 class AddNewsModelForm(ModelForm):
     class Meta:
         model = News
-        fields = ['title','text','link','direction','sourceid','proof_image']
+        fields = ['title','text','link','direction','sourceid','proof_image','coinid']
 '''
     def __init__(self, *args, **kwargs):
         super(AddNewsModelForm, self).__init__(*args, **kwargs)

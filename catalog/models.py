@@ -145,7 +145,7 @@ class News(models.Model):
 
     #keys:
     sourceid = models.ForeignKey('Source', on_delete=models.SET_NULL, null=True)
-    #coinid = models.ForeignKey('Coin', on_delete=models.SET_NULL, null=True)
+    coinid = models.ForeignKey('Coin', on_delete=models.SET_NULL, null=True)
     class Meta:
         ordering = ["time"]
 		
@@ -233,7 +233,22 @@ class Banner(models.Model):
 	#priority = 
 	#max_count_view = 
 	#max_count_click = 
+
+class Coin(models.Model):
+	id = models.AutoField(primary_key=True, help_text="coin id")
+	symbol = models.CharField(max_length=10,help_text="coin ticker")
+	name = models.CharField(max_length=20)
+	price = models.DecimalField(max_digits=20, decimal_places=8, help_text="current price of coin")
+	change = models.DecimalField(max_digits=20, decimal_places=8, help_text="change of price 24 hour in perecents")
+	volume = models.DecimalField(max_digits=20, decimal_places=8, help_text="total volume in USD")
+	mktcap = models.DecimalField(max_digits=20, decimal_places=8, help_text="market cap in USD")
+	image = models.ImageField(upload_to='coin_images/', max_length=100, blank=True)
 	
+	class Meta:
+		ordering = ["-volume"]
+		
+	def __str__(self):
+		return self.symbol
 
 '''
 News:
