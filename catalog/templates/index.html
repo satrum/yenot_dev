@@ -5,7 +5,7 @@
 <div class="banner">
 <div class="banner_img">
 {% load static %}
-<a href="{% url 'banner-click' banner.pk %}"><img src = "{{ banner.image.url }}" alt="Home"></a>
+<a href="{% url 'banner-click' banner.pk %}"><img src = "{{ banner.image.url }}"></a>
 </div>
 <div class="banner_content">
 <div>
@@ -17,42 +17,60 @@
 <div class="filter banner_btn"> Последние посты</div>
 </div>
 </div>
-</div>   
+</div>  
+ {% else %}
+ <div></div>
 {% endif %}
-   <h1>News List</h1>
+  <div class="table_filter">
+  <div class="table_btn_promo tab_fil"></div>
+  
+  <div class="table_filter_Search tab_fil">
+  
+  </div>
+  
+  <div class="table_btn_promo tab_fil"></div>
+  </div>
 
     {% if allnews %}
 <!-- need move to css -->
-<style>
-tr,td {border:1px solid black;}
-</style>
+
 <strong>All News count :</strong> {{ num_news }}
 <strong>View Type (block or table) :</strong> {{view_newslist_block}}
 <a href="{% url 'change-view' %}"><button>change view</button></a>
 
-	<table>
+	<table id="user_list">
+	<thead>
 	<tr>
-		<td>#</td>
-		<td>TITLE</td>
-		<td>SOURCE</td>
-		<td>TEXT</td>
-		<td>created time</td>
-		<td>direction</td>
-		<td>rating</td>
-		<td>Likes</td>
-		<td></td>
-		<td>Dislikes</td>
-		<td></td>
-		<td>LINK</td>
-		<td>USERNAME</td>
+		<th>#</th>
+		<th>TITLE</th>
+		<th>SOURCE</th>
+		<th>TEXT</th>
+<th>
+  {% if param.time == '0' %}<button value="time=1">
+  {% elif param.time == '1' %}<button value="time=0">
+  {% else %}<button value="time=1">
+  {% endif %}
+  created time</button>
+  </th>
+		<th>direction</th>
+		<th>rating</th>
+		<th>Likes</th>
+		<th></th>
+		<th>Dislikes</th>
+		<th></th>
+		<th>LINK</th>
+		<th>USERNAME</th>
 		
 	</tr>
+	</thead>
+	<tbody>
 	{% for news in allnews %}
 	{% if news.promo_status == 'y' %}<tr style="font-weight:bold">{% else %}<tr>{% endif %} 
 		<td>{{news.newsid}}</td>
 		<td><a href="{{ news.get_absolute_url }}">{{ news.title }}</a></td>
 		<td>{{news.sourceid}}</td>
 		<td>{{news.text}}</td>
+		
 		<td>{{news.time}}</td>
 		<td>{{news.direction}}</td>
 		<td>{{news.rating}}</td>
@@ -86,6 +104,7 @@ tr,td {border:1px solid black;}
 		
 	</tr>
 	{% endfor %}
+	</tbody>
 	</table>
     {% else %}
       <p>There are no news.</p>
