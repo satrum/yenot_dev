@@ -23,5 +23,7 @@ urlpatterns += [
 	path('signup/', views.signup, name='signup'),
 	path('addnews/', views.addnews, name='addnews'),#form add news
 	path('banner/<int:pk>', views.banner_click, name='banner-click'),
+	path('news/like_news_ajax/', views.news_like_ajax, name='news-like-ajax'),
+	path('news/dislike_news_ajax/', views.news_dislike_ajax, name='news-dislike-ajax'),
 	
 ]
