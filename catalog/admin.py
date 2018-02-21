@@ -73,7 +73,7 @@ class UserProfileAdmin(admin.ModelAdmin):
 
 @admin.register(Banner)
 class BannerAdmin(admin.ModelAdmin):
-    list_display = ('id', 'title', 'text', 'link', 'count_view', 'count_click', 'status', 'image') #
+    list_display = ('id', 'title', 'text', 'link', 'count_view', 'count_click', 'status', 'image', 'place')
 
 
 @admin.register(Coin)

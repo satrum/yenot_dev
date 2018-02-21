@@ -233,6 +233,12 @@ class Banner(models.Model):
 	#priority = 
 	#max_count_view = 
 	#max_count_click = 
+	PLACE_NAME = (
+        ('t', 'Top horizontal'),
+        ('l', 'Under Top on Left'),
+        ('r', 'Under Top on Right'),
+    )
+	place = models.CharField(max_length=1, choices=PLACE_NAME, blank=True, default='t', help_text='Banner place on site')
 
 class Coin(models.Model):
 	id = models.AutoField(primary_key=True, help_text="coin id")
