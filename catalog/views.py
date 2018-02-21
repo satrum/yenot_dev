@@ -31,43 +31,8 @@ def index(request, template='index.html', page_template='index_page.html'):#Фу
     
     #get parameters for filter and sort
     # time - sort by time, rating - sort by rating
-    param = request.GET
-    news=[]
-    print(param) #<QueryDict: {'time': ['1'], 'rating': ['1']}>
-    if 'rating' in param:
-        print('sorted by rating')
-        if param['rating']=='0':
-            news = News.objects.order_by('rating')
-        else:
-            news = News.objects.order_by('-rating')
-    if 'time' in param:
-        print('sorted by time')
-        if param['time']=='0':
-            if news == []:
-                news = News.objects.order_by('time')
-            else:
-                news = news.order_by('time')
-        else:
-            if news == []:
-                news = News.objects.order_by('-time')
-            else:
-                news = news.order_by('-time')
-    #if 'time' not in param and 'rating' not in param:
-    if news == []:
-        news = News.objects.all()
 
-    #get votes
-    if request.user.is_authenticated:
-        view_newslist_block=request.user.profile.view_newslist_block
-        for new in news:
-            votes=UserVotes.objects.filter(news=new, user=request.user)
-            if votes.exists()==0:
-                new.enable_vote=True
-            else:
-                new.enable_vote=False
-    else:
-        view_newslist_block = 'table'
-
+    
     #select one banner with status=True
     banners = Banner.objects.filter(status=True)
     bannerlen=len(banners)
@@ -90,7 +55,18 @@ def index(request, template='index.html', page_template='index_page.html'):#Фу
         news = paginator.page(1)
     except EmptyPage:
         news = paginator.page(paginator.num_pages)
-    
+    #get votes
+    if request.user.is_authenticated:
+        view_newslist_block=request.user.profile.view_newslist_block
+        for new in news:
+            votes=UserVotes.objects.filter(news=new, user=request.user)
+            if votes.exists()==0:
+                new.enable_vote=True
+            else:
+                new.enable_vote=False
+    else:
+        view_newslist_block = 'table'
+		
     context={
     'num_books':num_books,
     'num_instances':num_instances,

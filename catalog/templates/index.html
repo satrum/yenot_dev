@@ -66,7 +66,7 @@
 	<tbody class="infinite-container">
 	
 	{% for news in allnews %}
-	{% if news.promo_status == 'y' %}<tr style="font-weight:bold" >{% else %}<tr class="infinite-item">{% endif %} 
+	{% if news.promo_status == 'y' %}<tr style="font-weight:bold" class="infinite-item" >{% else %}<tr class="infinite-item">{% endif %} 
 		<td>{{news.newsid}}</td>
 		<td><a href="{{ news.get_absolute_url }}">{{ news.title }}</a></td>
 		<td>{{news.sourceid}}</td>
@@ -123,7 +123,9 @@
       },
       onAfterPageLoad: function ($items) {
         $('.loading').hide();
-      }
+		$("#user_list").trigger("update");
+      },
+	  
     });
   </script>
     {% else %}
