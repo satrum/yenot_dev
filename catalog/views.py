@@ -34,7 +34,7 @@ def index(request, template='index.html', page_template='index_page.html'):#Фу
 
     
     #select one banner with status=True
-    banners = Banner.objects.filter(status=True)
+    banners = Banner.objects.filter(status=True, place='t')
     bannerlen=len(banners)
     if bannerlen>0:
         banner = banners[randint(1,bannerlen)-1]
@@ -44,6 +44,24 @@ def index(request, template='index.html', page_template='index_page.html'):#Фу
         banner.save()
     else:
         banner=''
+    
+    banners = Banner.objects.filter(status=True, place='l')
+    bannerlen=len(banners)
+    if bannerlen>0:
+        banner_left = banners[randint(1,bannerlen)-1]
+        banner_left.count_view += 1
+        banner_left.save()
+    else:
+        banner_left=''	
+
+    banners = Banner.objects.filter(status=True, place='r')
+    bannerlen=len(banners)
+    if bannerlen>0:
+        banner_right = banners[randint(1,bannerlen)-1]
+        banner_right.count_view += 1
+        banner_right.save()
+    else:
+        banner_right=''
     
     news_list = News.objects.order_by('-time')
     page = request.GET.get('page', 1)
@@ -78,7 +96,7 @@ def index(request, template='index.html', page_template='index_page.html'):#Фу
     'num_votes':num_votes,
     'allnews':news,
     'view_newslist_block':view_newslist_block,
-    'banner':banner,
+    'banner':banner,'banner_left':banner_left,'banner_right':banner_right,
     'page_template': page_template}
 
 	# Отрисовка HTML-шаблона index.html с данными внутри 
