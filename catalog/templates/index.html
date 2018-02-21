@@ -63,9 +63,10 @@
 		
 	</tr>
 	</thead>
-	<tbody>
+	<tbody class="infinite-container">
+	
 	{% for news in allnews %}
-	{% if news.promo_status == 'y' %}<tr style="font-weight:bold">{% else %}<tr>{% endif %} 
+	{% if news.promo_status == 'y' %}<tr style="font-weight:bold" >{% else %}<tr class="infinite-item">{% endif %} 
 		<td>{{news.newsid}}</td>
 		<td><a href="{{ news.get_absolute_url }}">{{ news.title }}</a></td>
 		<td>{{news.sourceid}}</td>
@@ -106,9 +107,29 @@
 	{% endfor %}
 	</tbody>
 	</table>
+  {% if allnews.has_next %}
+    <a class="infinite-more-link" href="?page={{ allnews.next_page_number }}">More</a>
+  {% endif %}
+
+    <div class="loading" style="display: none;">
+    Loading...
+  </div>
+  
+  <script>
+    var infinite = new Waypoint.Infinite({
+      element: $('.infinite-container')[0],
+      onBeforePageLoad: function () {
+        $('.loading').show();
+      },
+      onAfterPageLoad: function ($items) {
+        $('.loading').hide();
+      }
+    });
+  </script>
     {% else %}
       <p>There are no news.</p>
     {% endif %}       
-
+    
+	
 {% endblock %}
 

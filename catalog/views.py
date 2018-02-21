@@ -1,4 +1,5 @@
-from django.shortcuts import render
+from django.shortcuts import render, render_to_response
+from django.template import RequestContext
 
 # Create your views here.
 
@@ -11,8 +12,9 @@ def index(request):
 from .models import Book, Author, BookInstance, Genre
 from .models import News, Source, Banner
 from random import randint
-
-def index(request):#Функция отображения для домашней страницы сайта.
+from django.contrib.auth.models import User
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+def index(request, template='index.html', page_template='index_page.html'):#Функция отображения для домашней страницы сайта.
     # Генерация "количеств" некоторых главных объектов
     num_books=Book.objects.all().count()
     num_instances=BookInstance.objects.all().count()
@@ -77,15 +79,37 @@ def index(request):#Функция отображения для домашне�
         banner.save()
     else:
         banner=''
+    
+    news_list = News.objects.all()
+    page = request.GET.get('page', 1)
+
+    paginator = Paginator(news_list, 7)
+    try:
+        news = paginator.page(page)
+    except PageNotAnInteger:
+        news = paginator.page(1)
+    except EmptyPage:
+        news = paginator.page(paginator.num_pages)
+    
+    context={
+    'num_books':num_books,
+    'num_instances':num_instances,
+    'num_instances_available':num_instances_available,
+    'num_authors':num_authors,
+    'num_news':num_news,
+    'num_sources':num_sources,
+    'num_visits':num_visits,
+    'num_votes':num_votes,
+    'allnews':news,
+    'view_newslist_block':view_newslist_block,
+    'banner':banner,
+    'param':param,
+    'page_template': page_template}
 
 	# Отрисовка HTML-шаблона index.html с данными внутри 
     # переменной контекста context
-    return render(
-        request,
-        'index.html',
-        context={'num_books':num_books,'num_instances':num_instances,'num_instances_available':num_instances_available,'num_authors':num_authors,'num_news':num_news,'num_sources':num_sources,'num_visits':num_visits,
-  'num_votes':num_votes,'allnews':news,'view_newslist_block':view_newslist_block, 'banner':banner, 'param':param},
-    )
+    
+    return render(request, template, context)
 
 from django.views import generic
 
@@ -298,36 +322,3 @@ def banner_click(request, pk):
 	banner.count_click += 1
 	banner.save()
 	return HttpResponseRedirect(banner.link)
-
-from django.http import HttpResponse
-
-@login_required
-def news_like_ajax(request):
-	#get news id from ajax
-	newsid = None
-	if request.method == 'GET':
-		newsid = request.GET['news_id']
-	#voting and get like count
-	like=0
-	if newsid:
-		current_new = News.objects.get(pk=int(newsid))
-		current_new.vote_like(request.user)
-		like = current_new.like
-	#return like to ajax
-	print(like)
-	return HttpResponse(like)
-
-@login_required
-def news_dislike_ajax(request):
-	#get news id from ajax
-	newsid = None
-	if request.method == 'GET':
-		newsid = request.GET['news_id']
-	#voting and get like count
-	dislike=0
-	if newsid:
-		current_new = News.objects.get(pk=int(newsid))
-		current_new.vote_dislike(request.user)
-		dislike = current_new.dislike
-	#return like to ajax
-	return HttpResponse(dislike)
