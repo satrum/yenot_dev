@@ -48,9 +48,10 @@ from .models import News, Source, UserVotes, Profile, Banner, Coin
 @admin.register(News)
 class NewsAdmin(admin.ModelAdmin):
     list_display = ('newsid', 'title', 'direction', 'coinid', 'text', 'time', 'link', 'rating', 'sourceid','like','dislike','user','moderation_status', 'promo_status', 'proof_image')
-    list_filter = ('direction', 'moderation_status', 'promo_status', 'time', 'coinid')
+    list_filter = ('direction', 'moderation_status', 'promo_status', 'time')
     #fields = [('title', 'direction'), 'text', 'link'] надо сделать разное для add и change, и в зависимости от прав пользователя
-
+    search_fields = ['title','text','coinid__symbol','sourceid__name']
+	
 class NewsInline(admin.TabularInline):
     model = News
 	
@@ -78,3 +79,4 @@ class BannerAdmin(admin.ModelAdmin):
 @admin.register(Coin)
 class CoinAdmin(admin.ModelAdmin):
     list_display = ('id', 'symbol', 'name', 'price', 'change', 'volume', 'mktcap', 'image') #
+    search_fields = ['symbol','name']
