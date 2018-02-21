@@ -49,13 +49,13 @@ class Command(BaseCommand):
 		print('coinimage - read from coinlist and update folder media/coin_images/ with images') #!!!!!!!
 		print('coininfo [symbol] - read info about coin')
 		print('coinadd [action - all, update, add]- read coinlist from file and update list on db model Coin - coin.id, coin.symbol, coin.name')
-		print('--------need:-----')
-		print('imageupdate - update coin.image field in Model Coin')
+		print('update_cycle - coinprice + coinlist_exclude + coinadd update')
+		print('--------need create or update:-----')
+		print('coinprint_db - list info from Model Coin')
 		print('coinpriceupdate - update fields in Model Coin - coin.price, coin.change, coin.volume, coin.mktcap')
-		#coin.id, coin.symbol, coin.name, coin.image, coin.price, coin.change, coin.volume, coin.mktcap
-		
-		print('need work: add list of excluded coins (from coinlist, coinadd)')
-		
+		print('rate_news - calculate rating of news. Likes(Real)/Dislikes(Fake)/News_price/Current_price/Direction -> rating')
+		print('full_cycle - coinlist + coinprice + coinlist_exclude + coinimage + coinadd full')
+
 
 	def list_news(self):
 		#get news ratings:
@@ -163,8 +163,11 @@ class Command(BaseCommand):
 		print('coins from full price file:',len(rawdata))
 		
 		#create list of priced coins with marketcap > 0 
-		priced_coins = [ coin for coin in rawdata if 'MKTCAP' in rawdata[coin]['USD'] and rawdata[coin]['USD']['MKTCAP']!=0 ]
-		print('coins from full price file with MKTCAP:',len(priced_coins))
+		#may be: TOTALVOLUME24HTO > 0 test
+		priced_coins = [ coin for coin in rawdata if 'MKTCAP' in rawdata[coin]['USD'] 
+		and 'TOTALVOLUME24HTO' in rawdata[coin]['USD'] and rawdata[coin]['USD']['MKTCAP']!=0 and rawdata[coin]['USD']['TOTALVOLUME24HTO']!=0]
+		#priced_coins = [ coin for coin in rawdata if 'MKTCAP' in rawdata[coin]['USD'] and rawdata[coin]['USD']['MKTCAP']!=0 ]
+		print('coins from full price file with MKTCAP and TOTALVOLUME24HTO :',len(priced_coins))
 
 		#read from coinlist file
 		file = open(DATADIR+'/'+FILE_COINLIST, 'r')
@@ -232,12 +235,15 @@ class Command(BaseCommand):
 		rawdata = json.load(file)
 		file.close()
 		
+		count_update=0
 		if action in ['all', 'update']:
 			#update coins in db
 			print('update coins in db:')
 			for dbcoin in dbcoins:
 				if dbcoin.symbol in EXCLUDE_LIST:
 					print('coin excluded: '+dbcoin.symbol)
+				elif dbcoin.symbol not in filecoins:
+					print('coin {} not found in coinlist'.format(dbcoin.symbol))
 				else:
 					#name
 					dbcoin.name = filecoins[dbcoin.symbol]['CoinName']
@@ -254,12 +260,16 @@ class Command(BaseCommand):
 						filepath = 'coin_images/'+filecoins[dbcoin.symbol]['CoinName']+'.'+filecoins[dbcoin.symbol]["ImageUrl"].split('.')[-1]
 						#print('image path:', filepath)
 						dbcoin.image = filepath
+					try:
+						dbcoin.save()
+						count_update+=1
+					except Exception as error:
+						print('not saved coin {} with error {}'.format(dbcoin.symbol, error))
+					# print('newdbcoin: {}'.format(dbcoin.symbol)), 
+					# print('name: {}'.format(dbcoin.name)),
+					# print('image: {}'.format(dbcoin.image))
 
-					dbcoin.save()
-					print('newdbcoin: {}'.format(dbcoin.symbol)), 
-					print('name: {}'.format(dbcoin.name)),
-					print('image: {}'.format(dbcoin.image))
-
+		count_add=0
 		if action in ['all', 'add']:
 			#add coins in db
 			print('add coins in db:')
@@ -287,17 +297,20 @@ class Command(BaseCommand):
 							print('error filepath in coin:',symbol)
 						newdbcoin.image = filepath
 					newdbcoin.save()
-					print('newdbcoin: {}'.format(newdbcoin.symbol)), 
-					print('name: {}'.format(newdbcoin.name)),
-					print('image: {}'.format(newdbcoin.image))
+					count_add+=1
+					# print('newdbcoin: {}'.format(newdbcoin.symbol)), 
+					# print('name: {}'.format(newdbcoin.name)),
+					# print('image: {}'.format(newdbcoin.image))
+		print('coins updated:', count_update)
+		print('coins added  :', count_add)
 
 
 
-	def update_images(self):
+	def coinlist_from_db(self):
 		coins = Coin.objects.all()
 		for coin in coins:
 			print(coin.id, coin.symbol, coin.name, coin.image, coin.price, coin.change, coin.volume, coin.mktcap)
-
+		print('coins in db:', len(coins))
 
 		#coin.image = 'coin_images/CoinName.xxx'
 		#coin.save()
@@ -384,8 +397,8 @@ class Command(BaseCommand):
 		if 'coinimage' in poll_id:
 			self.cryptocompare_get_images()
 
-		if 'imageupdate' in poll_id:
-			self.update_images()
+		if 'coinprint_db' in poll_id:
+			self.coinlist_from_db()
 
 		if 'coininfo' in poll_id:
 			index = poll_id.index('coininfo')
@@ -406,6 +419,11 @@ class Command(BaseCommand):
 			except Exception:
 				action = 'all'
 			self.coinadd(action)
+
+		if 'update_cycle' in poll_id:
+			self.cryptocompare_get_price(FILE_COINLIST, FILE_PRICE, TYPE_PRICE)
+			self.coinlist_exclude()
+			self.coinadd('update')
 
 
 
