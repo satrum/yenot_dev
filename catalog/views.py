@@ -79,7 +79,6 @@ def index(request, template='index.html', page_template='index_page.html'):#Фу
     'allnews':news,
     'view_newslist_block':view_newslist_block,
     'banner':banner,
-    'param':param,
     'page_template': page_template}
 
 	# Отрисовка HTML-шаблона index.html с данными внутри 

@@ -75,28 +75,28 @@
 		<td>{{news.time}}</td>
 		<td>{{news.direction}}</td>
 		<td>{{news.rating}}</td>
-		<td>{{news.like}}</td>
+		<td id="like_count_{{news.newsid}}">{{news.like}}</td>
 		
 		{% if user.is_authenticated %}
 			{% if news.enable_vote %}
-				<td><a href="{{ news.get_like_url }}"><button>Like</button></a></td>
+				<td><button id="like_btn_{{news.newsid}}" data-newsid="{{news.newsid}}" data-url="{% url 'news-like-ajax' %}" class="like_btn">Like</button></td>
 			{% else %}
 			    <td></td>
 			{% endif %}
 		{% else %}
-			<td></td>
+		<td></td>
 		{% endif %}
 		
-		<td>{{news.dislike}}</td>
+		<td id="dislike_count_{{news.newsid}}">{{news.dislike}}</td>
 		
 		{% if user.is_authenticated %}
 			{% if news.enable_vote %}
-				<td><a href="{{ news.get_dislike_url }}"><button>Dislike</button></a></td>
+				<td><button id="dislike_btn_{{news.newsid}}" data-newsid="{{news.newsid}}" data-url="{% url 'news-dislike-ajax' %}" class="dislike_btn">Dislike</button></td>
 			{% else %}
 			    <td></td>
 			{% endif %}
 		{% else %}
-			<td></td>
+		<td></td>
 		{% endif %}
 		
 		<td><a href="{{ news.link }}">{{ news.link }}</a></td>
@@ -123,11 +123,32 @@
       },
       onAfterPageLoad: function ($items) {
         $('.loading').hide();
+		$('.like_btn').click(function(){
+    var newsid;
+    newsid = $(this).attr("data-newsid");
+	url = $(this).attr("data-url");
+    $.get(url, {news_id: newsid}, function(data){
+               $('#like_count_'+newsid).html(data);
+               $('#like_btn_'+newsid).hide();
+			   $('#dislike_btn_'+newsid).hide();
+    });
+});
+$('.dislike_btn').click(function(){
+    var newsid;
+    newsid = $(this).attr("data-newsid");
+	url = $(this).attr("data-url");
+    $.get(url, {news_id: newsid}, function(data){
+               $('#dislike_count_'+newsid).html(data);
+               $('#like_btn_'+newsid).hide();
+			   $('#dislike_btn_'+newsid).hide();
+    });
+});
 		$("#user_list").trigger("update");
       },
 	  
     });
   </script>
+
     {% else %}
       <p>There are no news.</p>
     {% endif %}       
