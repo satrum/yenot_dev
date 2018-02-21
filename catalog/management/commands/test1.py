@@ -15,6 +15,21 @@ TYPE_PRICE = 'full'
 DATADIR = 'data'
 COINIMAGESDIR = 'media/coin_images/'
 
+EXCLUDE_LIST = ['ARENA','CNO', 'BTH']
+
+#usage: 20.02.2018
+#cd c:\WORK\Docs\python\web\locallibrary
+#python manage.py test1 coinlist
+		#coins: 2189 coins no image: 2
+#python manage.py test1 coinprice
+#python manage.py test1 coinlist_exclude
+		# coins from full price file: 1878
+		# coins from full price file with MKTCAP: 1100
+		# coins from coinlist file: 2189
+		# coins from coinlist file with price: 1100
+#python manage.py test1 coinimage
+#python manage.py test1 coinadd all
+
 from django.db import models
 from catalog.models import Coin
 
@@ -30,15 +45,17 @@ class Command(BaseCommand):
 		print('coinlist [filename=''coinlist.txt''] - get coin list from cryptocompare and write json to file')
 		print('coinprint [filename=''coinlist.txt''] - read json from file and print ')
 		print('coinprice [filename coinlist.txt] [filename coinpricefull.txt] [simple/full] - read json from file and get price and write json to file')
+		print('coinlist_exclude - read full price, get coins with price, remove coins without from coinlist')
 		print('coinimage - read from coinlist and update folder media/coin_images/ with images') #!!!!!!!
 		print('coininfo [symbol] - read info about coin')
+		print('coinadd [action - all, update, add]- read coinlist from file and update list on db model Coin - coin.id, coin.symbol, coin.name')
 		print('--------need:-----')
-		print('coinadd - read coinlist from file and update list on db model Coin - coin.id, coin.symbol, coin.name')
 		print('imageupdate - update coin.image field in Model Coin')
 		print('coinpriceupdate - update fields in Model Coin - coin.price, coin.change, coin.volume, coin.mktcap')
 		#coin.id, coin.symbol, coin.name, coin.image, coin.price, coin.change, coin.volume, coin.mktcap
 		
 		print('need work: add list of excluded coins (from coinlist, coinadd)')
+		
 
 	def list_news(self):
 		#get news ratings:
@@ -138,6 +155,35 @@ class Command(BaseCommand):
 		json.dump(data, file)
 		file.close()
 
+	def coinlist_exclude(self):
+		#read from price file
+		file = open(DATADIR+'/'+FILE_PRICE, 'r')
+		rawdata = json.load(file)
+		file.close()
+		print('coins from full price file:',len(rawdata))
+		
+		#create list of priced coins with marketcap > 0 
+		priced_coins = [ coin for coin in rawdata if 'MKTCAP' in rawdata[coin]['USD'] and rawdata[coin]['USD']['MKTCAP']!=0 ]
+		print('coins from full price file with MKTCAP:',len(priced_coins))
+
+		#read from coinlist file
+		file = open(DATADIR+'/'+FILE_COINLIST, 'r')
+		coins = json.load(file)
+		file.close()
+		
+		#remove coins without price from coinlist
+		print('coins from coinlist file:', len(coins))
+		new_coins = {k:v for k,v in coins.items() if k in priced_coins}
+		print('coins from coinlist file with price:', len(new_coins))
+		#exclude custom list:
+		for symbol in EXCLUDE_LIST:
+			if symbol in new_coins:
+				new_coins.pop(symbol)
+				print('removed coin:'+symbol)
+		file = open(DATADIR+'/'+FILE_COINLIST, 'w')
+		json.dump(new_coins, file)
+		file.close()
+
 	def cryptocompare_get_images(self):
 		
 		print(os.getcwd()) #coin_images
@@ -166,6 +212,86 @@ class Command(BaseCommand):
 						print('saved file:'+filename+' coinname:'+coins[coin]["CoinName"])
 					except Exception as error:
 						print('error:', error)
+
+	#'coinadd - read coinlist from file and update list on db model Coin - coin.id, coin.symbol, coin.name'
+	def coinadd(self, action='all'):
+		#read from coinlist file
+		file = open(DATADIR+'/'+FILE_COINLIST, 'r')
+		filecoins = json.load(file)
+		file.close()
+		
+		#read from db and creade dict of coins symbol
+		dbcoins = Coin.objects.all()
+		coins_symbol = [coin.symbol for coin in dbcoins]
+		coins_symbol.sort()
+		print(coins_symbol)
+
+		#read from coinprice file
+		#read from price file
+		file = open(DATADIR+'/'+FILE_PRICE, 'r')
+		rawdata = json.load(file)
+		file.close()
+		
+		if action in ['all', 'update']:
+			#update coins in db
+			print('update coins in db:')
+			for dbcoin in dbcoins:
+				if dbcoin.symbol in EXCLUDE_LIST:
+					print('coin excluded: '+dbcoin.symbol)
+				else:
+					#name
+					dbcoin.name = filecoins[dbcoin.symbol]['CoinName']
+					#price
+					pricedata = rawdata[dbcoin.symbol]['USD']
+					dbcoin.price = pricedata['PRICE']
+					dbcoin.change = pricedata['CHANGEPCT24HOUR']
+					dbcoin.volume = pricedata['TOTALVOLUME24HTO']
+					dbcoin.mktcap = pricedata['MKTCAP']
+					#image
+					if 'ImageUrl' not in filecoins[dbcoin.symbol].keys():
+						print('not find ImageUrl for coin:'+ dbcoin.symbol)
+					else:
+						filepath = 'coin_images/'+filecoins[dbcoin.symbol]['CoinName']+'.'+filecoins[dbcoin.symbol]["ImageUrl"].split('.')[-1]
+						#print('image path:', filepath)
+						dbcoin.image = filepath
+
+					dbcoin.save()
+					print('newdbcoin: {}'.format(dbcoin.symbol)), 
+					print('name: {}'.format(dbcoin.name)),
+					print('image: {}'.format(dbcoin.image))
+
+		if action in ['all', 'add']:
+			#add coins in db
+			print('add coins in db:')
+			#for filecoin in filecoins:
+			for symbol in filecoins:
+				if symbol in coins_symbol:
+					print('coin: {} already in db'.format(symbol))
+				else:
+					#newdbcoin = Coin.objects.create()
+					newdbcoin = Coin()
+					newdbcoin.symbol = symbol
+					newdbcoin.name = filecoins[symbol]['CoinName']
+					pricedata = rawdata[symbol]['USD']
+					newdbcoin.price = pricedata['PRICE']
+					newdbcoin.change = pricedata['CHANGEPCT24HOUR']
+					newdbcoin.volume = pricedata['TOTALVOLUME24HTO']
+					newdbcoin.mktcap = pricedata['MKTCAP']
+					if 'ImageUrl' not in filecoins[symbol].keys():
+						print('not find ImageUrl for coin:'+ dbcoin.symbol)
+					else:
+						filepath = 'coin_images/'+filecoins[symbol]['CoinName']+'.'+filecoins[symbol]["ImageUrl"].split('.')[-1]
+						try:
+							print('image path:', filepath)
+						except Exception:
+							print('error filepath in coin:',symbol)
+						newdbcoin.image = filepath
+					newdbcoin.save()
+					print('newdbcoin: {}'.format(newdbcoin.symbol)), 
+					print('name: {}'.format(newdbcoin.name)),
+					print('image: {}'.format(newdbcoin.image))
+
+
 
 	def update_images(self):
 		coins = Coin.objects.all()
@@ -269,6 +395,17 @@ class Command(BaseCommand):
 				symbol = 'BTC'
 			print(symbol)
 			self.coininfo(symbol)
+
+		if 'coinlist_exclude' in poll_id:
+			self.coinlist_exclude()
+
+		if 'coinadd' in poll_id:
+			index = poll_id.index('coinadd')
+			try:
+				action = poll_id[index+1]
+			except Exception:
+				action = 'all'
+			self.coinadd(action)
 
 
 
