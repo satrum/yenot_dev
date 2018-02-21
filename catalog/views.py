@@ -9,7 +9,7 @@ def index(request):
     return HttpResponse("Hello, world. You're at the polls index.")
 '''
 from .models import Book, Author, BookInstance, Genre
-from .models import News, Source, Banner, Coin
+from .models import News, Source, Banner
 from random import randint
 
 def index(request):#Функция отображения для домашней страницы сайта.
@@ -53,10 +53,6 @@ def index(request):#Функция отображения для домашне�
     #if 'time' not in param and 'rating' not in param:
     if news == []:
         news = News.objects.all()
-        t = set([Source.objects.get(sourceid=v['sourceid']).name for v in news.values('sourceid')])
-        print(t)
-        t2 = set([v['title'] for v in news.values('title')])
-        print(t2)
 
     #get votes
     if request.user.is_authenticated:
@@ -160,7 +156,7 @@ class NewsListView(generic.ListView):
 	template_name = 'catalog/news_list.html'
 	model = News
 	context_object_name = 'allnews' #name of context in file news_list.html
-	paginate_by = 20
+	paginate_by = 10
 	def get_queryset(self):
 		return News.objects.order_by('-time').filter() #example filtered News.objects.filter(title__icontains='BTC')[:4]
 		#Добавить атрибут queryset в вашей реализации класса отображения, определяющего order_by().
@@ -180,14 +176,7 @@ class NewsListView(generic.ListView):
 				else:
 					news.enable_vote=False
 				#print(news, len(votes), news.like, news.dislike, news.enable_vote)
-		for news in context['allnews']:
-			coinid = news.coinid
-			if coinid:
-				coin = Coin.objects.get(symbol=coinid)
-				news.symbol = coin.symbol
-				news.price = coin.price
-				news.change = coin.change
-	
+			
 		return context
 
 class NewsDetailView(generic.DetailView):
