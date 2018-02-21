@@ -55,6 +55,7 @@ class Command(BaseCommand):
 		print('coinpriceupdate - update fields in Model Coin - coin.price, coin.change, coin.volume, coin.mktcap')
 		print('rate_news - calculate rating of news. Likes(Real)/Dislikes(Fake)/News_price/Current_price/Direction -> rating')
 		print('full_cycle - coinlist + coinprice + coinlist_exclude + coinimage + coinadd full')
+		print('get_price')
 
 
 	def list_news(self):
@@ -335,7 +336,18 @@ class Command(BaseCommand):
 		for key, value in coin.items():
 			print(key, value)
 
-		
+	def get_price(self, coin):
+		url = 'https://min-api.cryptocompare.com/data/pricemulti?fsyms='+coin+'&tsyms=USD,BTC'
+		try:
+			response = requests.get(url)
+			price=response.json()[coin]['USD']
+			print('from internet')
+		except Exception as error:
+			dbcoin=Coin.objects.get(symbol=coin)
+			price=dbcoin.price
+			print('error:',error)
+			print('from db')
+		return price
 
 	def handle(self, *args, **options):
 		try:
@@ -424,6 +436,15 @@ class Command(BaseCommand):
 			self.cryptocompare_get_price(FILE_COINLIST, FILE_PRICE, TYPE_PRICE)
 			self.coinlist_exclude()
 			self.coinadd('update')
+
+		if 'get_price' in poll_id:
+			index = poll_id.index('get_price')
+			try:
+				coin = poll_id[index+1]
+			except Exception:
+				coin = 'BTC'
+			print(self.get_price(coin))
+
 
 
 

@@ -161,6 +161,7 @@ class News(models.Model):
         return reverse('change-view', args=[str(self.newsid)])
 #voting:
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, related_name="user_posts")
+    coinprice = models.DecimalField(default=0, max_digits=20, decimal_places=8, help_text="price of coin when news create")
     #votes = models.IntegerField(default = 0)
     #нужно переделать: (сделать отдельную таблицу vote с состояниями: newsid, like(0,1), userid)
     like = models.IntegerField(default=0, blank=True, help_text='likes for new')

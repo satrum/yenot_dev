@@ -10,7 +10,7 @@ def index(request):
     return HttpResponse("Hello, world. You're at the polls index.")
 '''
 from .models import Book, Author, BookInstance, Genre
-from .models import News, Source, Banner
+from .models import News, Source, Banner, Coin
 from random import randint
 from django.contrib.auth.models import User
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
@@ -193,7 +193,13 @@ class NewsListView(generic.ListView):
 				else:
 					news.enable_vote=False
 				#print(news, len(votes), news.like, news.dislike, news.enable_vote)
-			
+		for news in context['allnews']:
+			coinid = news.coinid
+			if coinid:
+				coin = Coin.objects.get(symbol=coinid)
+				news.symbol = coin.symbol
+				news.price = coin.price
+				news.change = coin.change
 		return context
 
 class NewsDetailView(generic.DetailView):
@@ -257,7 +263,7 @@ class addnewsform(forms.Form):
 
 #create news from base Modelform:
 from django.forms import ModelForm
-from .models import News
+from .models import News, Coin
 class AddNewsModelForm(ModelForm):
     class Meta:
         model = News
@@ -269,6 +275,9 @@ class AddNewsModelForm(ModelForm):
         self.fields['user'].widget.attrs.update({'readonly':'readonly', 'disabled': 'disabled'}) 
 '''
 from django.contrib.auth.decorators import login_required
+
+import requests
+import json
 @login_required
 def addnews(request):
     if request.method == 'POST':
@@ -276,6 +285,21 @@ def addnews(request):
         if form.is_valid():
             extend_form = form.save(commit=False)
             extend_form.user = request.user
+            #get price:
+            coin = str(extend_form.coinid)
+            url = 'https://min-api.cryptocompare.com/data/pricemulti?fsyms='+coin+'&tsyms=USD'
+            try:
+                response = requests.get(url)
+                price=response.json()[coin]['USD']
+                print('coin: {} price from cryptocompare: {}'.format(coin, price))
+            except Exception as error:
+                print('error:', error)
+                dbcoin=Coin.objects.get(symbol=coin)
+                price=dbcoin.price
+                print('coin: {} price from db without internet: {}'.format(coin, price))
+            print(price)
+            extend_form.coinprice = price
+            #save
             extend_form.save()
 			#time - current time by default
             return redirect('index') #need url for news/pk
