@@ -45,7 +45,7 @@ def index(request, template='index.html', page_template='index_page.html'):#Фу
     else:
         banner=''
     
-    news_list = News.objects.all()
+    news_list = News.objects.order_by('-time')
     page = request.GET.get('page', 1)
 
     paginator = Paginator(news_list, 7)
