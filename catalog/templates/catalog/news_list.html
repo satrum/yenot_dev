@@ -27,6 +27,9 @@ tr,td {border:1px solid black;}
 		<td></td>
 		<td>LINK</td>
 		<td>USERNAME</td>
+		<td>COIN</td>
+		<td>PRICE</td>
+		<td>CHANGE</td>
 		
 	</tr>
 	{% for news in allnews %}
@@ -64,7 +67,9 @@ tr,td {border:1px solid black;}
 		
 		<td><a href="{{ news.link }}">{{ news.link }}</a></td>
 		<td>{{news.user}}</td>
-		
+		<td>{{news.symbol}}</td>
+		<td>{{news.price}}</td>
+		<td>{{news.change}}</td>
 		
 	</tr>
 	{% endfor %}
