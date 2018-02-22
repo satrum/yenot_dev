@@ -141,7 +141,7 @@ class News(models.Model):
 		('h', 'HODL'),
     )
     direction = models.CharField(max_length=1, choices=DIRECTION, blank=True, default='b', help_text='Direction of trade')
-    rating = models.DecimalField(default=0.0, blank=True, max_digits=5, decimal_places=2) #rate news up to 99 with store 2 for example 100.02
+    rating = models.DecimalField(default=0.0, blank=True, max_digits=10, decimal_places=2) #rate news up to 99 with store 2 for example 100.02
 
     #keys:
     sourceid = models.ForeignKey('Source', on_delete=models.SET_NULL, null=True)

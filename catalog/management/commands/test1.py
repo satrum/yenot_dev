@@ -3,7 +3,7 @@ import os,sys
 # print(os.getcwd())
 # print(sys.argv)
 from django.core.management.base import BaseCommand, CommandError
-from catalog.models import News
+from catalog.models import News, Coin
 
 import requests
 import json
@@ -31,7 +31,9 @@ EXCLUDE_LIST = ['ARENA','CNO', 'BTH']
 #python manage.py test1 coinadd all
 
 from django.db import models
-from catalog.models import Coin
+#from catalog.models import Coin
+from django.utils import timezone
+from datetime import datetime, timedelta
 
 class Command(BaseCommand):
 
@@ -41,7 +43,8 @@ class Command(BaseCommand):
 	def help(self):
 		print('parameters:')
 		print('help - print this help')
-		print('list_news - print list of all news')
+		#print('list_news - print list of all news')
+		print('rate_news - calculate rating of news. Likes(Real)/Dislikes(Fake)/News_price/Current_price/Direction/1DAY -> rating')
 		print('coinlist [filename=''coinlist.txt''] - get coin list from cryptocompare and write json to file')
 		print('coinprint [filename=''coinlist.txt''] - read json from file and print ')
 		print('coinprice [filename coinlist.txt] [filename coinpricefull.txt] [simple/full] - read json from file and get price and write json to file')
@@ -50,21 +53,49 @@ class Command(BaseCommand):
 		print('coininfo [symbol] - read info about coin')
 		print('coinadd [action - all, update, add]- read coinlist from file and update list on db model Coin - coin.id, coin.symbol, coin.name')
 		print('update_cycle - coinprice + coinlist_exclude + coinadd update')
-		print('--------need create or update:-----')
 		print('coinprint_db - list info from Model Coin')
+		print('get_price [symbol default=BTC]')
+		print('--------need create or update:-----')
 		print('coinpriceupdate - update fields in Model Coin - coin.price, coin.change, coin.volume, coin.mktcap')
-		print('rate_news - calculate rating of news. Likes(Real)/Dislikes(Fake)/News_price/Current_price/Direction -> rating')
 		print('full_cycle - coinlist + coinprice + coinlist_exclude + coinimage + coinadd full')
-		print('get_price')
+		print('coinhistory - get price history for coins in news and save in files by (day, month, coin)')
+		print('rate_source - calculate stats for sources from news rating (may be in rate_news)')
 
 
-	def list_news(self):
+	def rate_news(self):
 		#get news ratings:
-		news = News.objects.all()
+		news = News.objects.order_by('time')
 		#print(type(news), news)
 		for new in news:
 			#print(new.newsid, new.title, new.rating, new.like, new.dislike, new.time)
-			print(new.newsid, new.title, new.rating, new.like, new.dislike, new.sourceid, new.user)
+			#print(new.newsid, new.title, new.rating, new.like, new.dislike, new.sourceid, new.user, new.coinprice, new.time)
+			time = new.time
+			curtime = timezone.now()
+			delta = curtime-time
+			currating = new.rating
+			oneday = timedelta(days=1, hours=0, seconds=0)
+			if time+oneday<curtime:
+				print('more one day')
+				print(new.newsid, new.title, new.rating, new.like, new.dislike, new.sourceid, new.user, new.coinprice, new.time)
+				continue
+			else:
+			 	curprice = Coin.objects.get(symbol=new.coinid).price
+			 	newsprice = new.coinprice
+			 	if newsprice == 0:
+			 		print('news price is zero, no rate')
+			 		print(new.newsid, new.title, new.rating, new.like, new.dislike, new.sourceid, new.user, new.coinprice, new.time)
+			 		continue
+			 	p2p1 = curprice/newsprice
+			 	decimalp2p1 = int(p2p1*10000)/10000
+			 	if new.direction =='b' or new.direction =='h':
+			 		rating = new.like*p2p1 - new.dislike/p2p1
+			 	else:
+			 		rating = new.like/p2p1 - new.dislike*p2p1
+			 	rating = int(rating*10000)/10000
+			 	likedelta = new.like-new.dislike
+			 	new.rating=rating
+			 	new.save()
+			print(new.newsid, new.coinid, 'time delta:', delta, 'price changed: ',decimalp2p1, new.direction, 'likes:{:<3} dislike:{:<3} delta:{:<3}'.format(new.like,new.dislike,likedelta), 'rating: ',rating)#curprice, newsprice, likedelta
 
 	#'https://www.cryptocompare.com/api/data/coinlist/'
 	#"DGB":{
@@ -367,8 +398,8 @@ class Command(BaseCommand):
 		if 'help' in poll_id:
 			self.help()
 		
-		if 'list_news' in poll_id:
-			self.list_news()
+		if 'rate_news' in poll_id:
+			self.rate_news()
 		
 		if 'coinlist' in poll_id:
 			index = poll_id.index('coinlist')
