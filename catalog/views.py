@@ -63,7 +63,16 @@ def index(request, template='index.html', page_template='index_page.html'):#Фу
     else:
         banner_right=''
     
+	#get news_list
     news_list = News.objects.order_by('-time')
+    
+	#get set of coins from news_list 
+    coins = set([Coin.objects.get(id=v['coinid']).symbol for v in news_list.values('coinid')])
+    print(coins)
+    #t2 = set([v['title'] for v in news.values('title')])
+    #print(t2)
+	
+	#get paginator object from news_list -> news
     page = request.GET.get('page', 1)
 
     paginator = Paginator(news_list, 7)
@@ -73,7 +82,8 @@ def index(request, template='index.html', page_template='index_page.html'):#Фу
         news = paginator.page(1)
     except EmptyPage:
         news = paginator.page(paginator.num_pages)
-    #get votes
+    
+	#get votes
     if request.user.is_authenticated:
         view_newslist_block=request.user.profile.view_newslist_block
         for new in news:
@@ -97,7 +107,8 @@ def index(request, template='index.html', page_template='index_page.html'):#Фу
     'allnews':news,
     'view_newslist_block':view_newslist_block,
     'banner':banner,'banner_left':banner_left,'banner_right':banner_right,
-    'page_template': page_template}
+    'page_template': page_template,
+	'coins': coins}
 
 	# Отрисовка HTML-шаблона index.html с данными внутри 
     # переменной контекста context
