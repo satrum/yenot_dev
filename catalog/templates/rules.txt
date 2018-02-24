@@ -5,10 +5,10 @@ YENOT Rules
 
 Main Rule: 
 ----------
-1. Signin
-2. Rate Cryptosignal News
-3. Add your News
-4. Earn points for Hall of Fames (Opinion Leaders)
+1. Signin (link)
+2. Rate Cryptosignal News (link)
+3. Add your News (link)
+4. Earn points for Hall of Fames (Opinion Leaders) (link)
 
 News:
 ----
@@ -41,7 +41,9 @@ TOP Rated Sources all time - https://yenot.channel/source_list
 Hall of Fame, Opinion Leaders TOP 100 - https://yenot.channel/users_list
 Favorites News https://yenot.channel/profile/news_favorites
 Favorites Sources https://yenot.channel/profile/sources_favorites
-My private stats https://yenot.channel/profile/stats 
+My private stats https://yenot.channel/profile/stats (votes, points)
+Coin Market stats https://yenot.channel/coins_list (market info, count news for coin, social)
+Platform updates and news https://yenot.channel/release
 
 Promo rules:
 ------------

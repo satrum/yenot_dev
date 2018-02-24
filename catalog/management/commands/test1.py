@@ -31,6 +31,10 @@ EXCLUDE_LIST = ['ARENA','CNO', 'BTH']
 		# coins from coinlist file with price: 1100
 #python manage.py test1 coinimage
 #python manage.py test1 coinadd all
+#
+#scheduled: coinprice + coinlist_exclude + coinadd update
+#python manage.py test1 update_cycle
+
 
 from django.db import models
 #from catalog.models import Coin
@@ -469,6 +473,7 @@ class Command(BaseCommand):
 			self.cryptocompare_get_price(FILE_COINLIST, FILE_PRICE, TYPE_PRICE)
 			self.coinlist_exclude()
 			self.coinadd('update')
+			self.rate_news()
 
 		if 'get_price' in poll_id:
 			index = poll_id.index('get_price')
