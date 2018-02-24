@@ -1,0 +1,81 @@
+#template for rules page
+
+YENOT Rules
+===========
+
+Main Rule: 
+----------
+1. Signin
+2. Rate Cryptosignal News
+3. Add your News
+4. Earn points for Hall of Fames (Opinion Leaders)
+
+News:
+----
+<b>All can add News.</b>
+ - Choose source, coin, price direction. 
+ - Add proof image, text, link. 
+ - After fast moderation we add news in time order.
+
+<b>All can rate News.</b>
+ - Read news, click 'real'/'fake' vote. It is your opinion about the reality, integrity, relevance and importance of news. 
+ - Periodical we calculate News Rating. We use users opinion plus price changing. 
+ - We will highlight high-rated news.
+
+<b>All News have Source. If you have youself Source - you can add it. </b>
+ - Signin and go to form: https://yenot.channel/add_source or write us to support@yenot.channel, t.me/yenot.channel
+ - Periodical we calculate Source Rating. 
+  - We use rating from news of this source.
+
+<b>All users earn YENOT Point.</b> 
+ - We calculate your early and accurate opinion about news, popularity if your news and channels. 
+ - Daily we distribute YENOT points for all users with useful actions.
+ - You can find top users here: https://yenot.channel/top_users
+ - You can customise you public profile page.
+ 
+Useful pages:
+------------
+New sources and channels added to platform - https://yenot.channel/source_list_timeline
+TOP Rated News in a week or all time -  https://yenot.channel/news_list
+TOP Rated Sources all time - https://yenot.channel/source_list
+Hall of Fame, Opinion Leaders TOP 100 - https://yenot.channel/users_list
+Favorites News https://yenot.channel/profile/news_favorites
+Favorites Sources https://yenot.channel/profile/sources_favorites
+My private stats https://yenot.channel/profile/stats 
+
+Promo rules:
+------------
+You can promote some news, sources, coins or add adv on home page and other pages.
+We add expressiveness of your content and links to your resource.
+Choose time period, views, clicks. Select your content in your profile:  https://yenot.channel/profile/promo . Price calculates automatic.
+You can pay in profile with crypto or paypal. And you can manage you promo status and view stats in profile.
+
+Future:
+-------
+Users can add news to favorites. Use favorites stats for news rating calculation.
+Daily distribution of points is fixed. Spend YENOT points for vote.
+Upgrade news - TA signals, social activity, integration with twitter, telegram. 
+Automatic pull of news from sources. 
+Users will be choose period for rating when add news. 
+New types of news - ICO signals, Common news, News Fight.
+Source owners advanced cabinet.
+News comments.
+YENOT token with airdrop for platform users and exchange to USD/BTC/ETH and promo with YENOT tokens.
+Users will be trade with cryptosignals based on rating.
+
+
+--------------------------
+Calculation Methods:
+--------------------
+News Rating:  
+new_rate = real*(p2/p1)-fake*(p2/p1) if direction=buy or hodl,  and real*(p2/p1)-fake*(p2/p1) if direction=sell. p1 - news time price of coin. p2 - price after period fo time. Periods - 1h, 4h, 1day, 7days.
+
+Source Rating: 
+We calculate average, median and sum of source's News ratings. New news take more rating. Periods - 1h (x10), 4h(x2), 1day(x1), more 1day(/days). for example:
+	new_1 time=1h rating=4, new_2 time=3h rating=10 , new_3 time=1day rating=20 : source_rate = 4*10 + 10*2 + 20*1 = 80. 
+
+Users Rating/Points:
+
+
+
+

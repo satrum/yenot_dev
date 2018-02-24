@@ -1,4 +1,5 @@
 #update_news_rating_test1
+#C:\WORK\Docs\python\web\locallibrary
 import os,sys
 # print(os.getcwd())
 # print(sys.argv)
@@ -14,6 +15,7 @@ FILE_PRICE = 'coinpricefull.txt'
 TYPE_PRICE = 'full'
 DATADIR = 'data'
 COINIMAGESDIR = 'media/coin_images/'
+RATING_MAX_DAYS = 7
 
 EXCLUDE_LIST = ['ARENA','CNO', 'BTH']
 
@@ -73,7 +75,7 @@ class Command(BaseCommand):
 			curtime = timezone.now()
 			delta = curtime-time
 			currating = new.rating
-			oneday = timedelta(days=1, hours=0, seconds=0)
+			oneday = timedelta(days=RATING_MAX_DAYS, hours=0, seconds=0)
 			if time+oneday<curtime:
 				print('more one day')
 				print(new.newsid, new.title, new.rating, new.like, new.dislike, new.sourceid, new.user, new.coinprice, new.time)
