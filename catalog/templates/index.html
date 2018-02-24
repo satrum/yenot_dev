@@ -25,7 +25,20 @@
   <div class="table_btn_promo tab_fil">{{banner_left.text}}</div>
   
   <div class="table_filter_Search tab_fil">
+  <select>
+  <option  value="" selected disabled hidden>Соin</option>
+  {% for coin in coins %}
+  <option value="{{ coin }}">{{ coin }}</option>
+  {% endfor %}
+  </select>
   
+  <select>
+   <option  value="" selected disabled hidden>Channel</option>
+   {% for source in sources %}
+  <option value="{{ source}}">{{ source }}</option>
+  {% endfor %}
+  </select>
+ 
   </div>
   
   <div class="table_btn_promo tab_fil">{{banner_right.text}}</div>
@@ -42,7 +55,7 @@
 	<thead>
 	<tr>
 		<th>#</th>
-		<th>TITLE</th>
+		<th>Coin</th>
 		<th>SOURCE</th>
 		<th>TEXT</th>
 <th>
@@ -68,9 +81,9 @@
 	{% for news in allnews %}
 	{% if news.promo_status == 'y' %}<tr style="font-weight:bold" class="infinite-item" >{% else %}<tr class="infinite-item">{% endif %} 
 		<td>{{news.newsid}}</td>
-		<td><a href="{{ news.get_absolute_url }}">{{ news.title }}</a></td>
+		<td>{{news.coinid}}</td>
 		<td>{{news.sourceid}}</td>
-		<td>{{news.text}}</td>
+		<td><a href="{{ news.get_absolute_url }}">{{news.text}}</a></td>
 		
 		<td>{{news.time}}</td>
 		<td>{{news.direction}}</td>
