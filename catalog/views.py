@@ -64,15 +64,30 @@ def index(request, template='index.html', page_template='index_page.html'):#Фу
         banner_right=''
     
 	#get news_list
-    news_list = News.objects.order_by('-time')
+    coin = request.GET.get('coin')
+    source = request.GET.get('source')
+    print(coin, source)
+    if coin is None:
+        if source is None: #coin=None, source=None
+            news_list = News.objects.order_by('-time')
+        else: #coin=None, source='source.name'
+            sourceid=Source.objects.get(name=source)
+            news_list = News.objects.order_by('-time').filter(sourceid=sourceid)
+    elif source is None: #coin='coin.symbol', source=None
+        coinid=Coin.objects.get(symbol=coin)
+        news_list = News.objects.order_by('-time').filter(coinid=coinid)
+    else: #coin='coin.symbol' , source='source.name'
+        coinid=Coin.objects.get(symbol=coin)
+        sourceid=Source.objects.get(name=source)
+        news_list = News.objects.order_by('-time').filter(coinid=coinid,sourceid=sourceid)
     
 	#get set of coins from news_list 
     coins = set([Coin.objects.get(id=v['coinid']).symbol for v in news_list.values('coinid')])
-    print(coins)
+    #print(coins)
 	
 	#get set of titles from news_list 
     sources = set([Source.objects.get(sourceid=v['sourceid']).name for v in news_list.values('sourceid')])
-    print(sources)
+    #print(sources)
 	
 	#get paginator object from news_list -> news
     page = request.GET.get('page', 1)
