@@ -69,8 +69,8 @@ def index(request, template='index.html', page_template='index_page.html'):#Фу
 	#get set of coins from news_list 
     coins = set([Coin.objects.get(id=v['coinid']).symbol for v in news_list.values('coinid')])
     print(coins)
-    #t2 = set([v['title'] for v in news.values('title')])
-    #print(t2)
+    titles = set([v['title'] for v in news_list.values('title')])
+    print(titles)
 	
 	#get paginator object from news_list -> news
     page = request.GET.get('page', 1)
@@ -108,7 +108,8 @@ def index(request, template='index.html', page_template='index_page.html'):#Фу
     'view_newslist_block':view_newslist_block,
     'banner':banner,'banner_left':banner_left,'banner_right':banner_right,
     'page_template': page_template,
-	'coins': coins}
+	'coins': coins,
+	'titles': titles}
 
 	# Отрисовка HTML-шаблона index.html с данными внутри 
     # переменной контекста context
