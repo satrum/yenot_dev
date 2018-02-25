@@ -64,8 +64,9 @@ def index(request, template='index.html', page_template='index_page.html'):#Фу
         banner_right=''
     
 	#get news_list
-    coin = request.GET.get('coin')
-    source = request.GET.get('source')
+    rget = request.GET
+    coin = rget.get('coin')
+    source = rget.get('source')
     print(coin, source)
     if coin is None:
         if source is None: #coin=None, source=None
@@ -80,7 +81,8 @@ def index(request, template='index.html', page_template='index_page.html'):#Фу
         coinid=Coin.objects.get(symbol=coin)
         sourceid=Source.objects.get(name=source)
         news_list = News.objects.order_by('-time').filter(coinid=coinid,sourceid=sourceid)
-    
+    #print(coinid, sourceid)
+
 	#get set of coins from news_list 
     coins = set([Coin.objects.get(id=v['coinid']).symbol for v in news_list.values('coinid')])
     #print(coins)
@@ -126,7 +128,8 @@ def index(request, template='index.html', page_template='index_page.html'):#Фу
     'banner':banner,'banner_left':banner_left,'banner_right':banner_right,
     'page_template': page_template,
 	'coins': coins,
-	'sources': sources}
+	'sources': sources,
+	'rget': rget}
 
 	# Отрисовка HTML-шаблона index.html с данными внутри 
     # переменной контекста context
