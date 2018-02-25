@@ -63,11 +63,14 @@ def index(request, template='index.html', page_template='index_page.html'):#Фу
     else:
         banner_right=''
     
-	#get news_list
+	#get news_list &coin=BTC&source=ENOT
     rget = request.GET
+    #print(rget)
     coin = rget.get('coin')
     source = rget.get('source')
-    print(coin, source)
+    if coin == '': coin=None
+    if source == '': source=None
+    #print(coin, source)
     if coin is None:
         if source is None: #coin=None, source=None
             news_list = News.objects.order_by('-time')
@@ -84,11 +87,11 @@ def index(request, template='index.html', page_template='index_page.html'):#Фу
     #print(coinid, sourceid)
 
 	#get set of coins from news_list 
-    coins = set([Coin.objects.get(id=v['coinid']).symbol for v in news_list.values('coinid')])
+    coins = set([Coin.objects.get(id=v['coinid']).symbol for v in News.objects.values('coinid')])
     #print(coins)
 	
 	#get set of titles from news_list 
-    sources = set([Source.objects.get(sourceid=v['sourceid']).name for v in news_list.values('sourceid')])
+    sources = set([Source.objects.get(sourceid=v['sourceid']).name for v in News.objects.values('sourceid')])
     #print(sources)
 	
 	#get paginator object from news_list -> news

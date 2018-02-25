@@ -1,6 +1,7 @@
 {% extends "base_generic.html" %}
 
 {% block content %}
+
 {% if banner %}
 <div class="banner">
 <div class="banner_img">
@@ -25,20 +26,23 @@
   <div class="table_btn_promo tab_fil">{{banner_left.text}}</div>
   
   <div class="table_filter_Search tab_fil">
-  <select>
-  <option  value="" selected disabled hidden>Соin</option>
+  <form role="form" id="form" action="" data-def="">
+  <select name="coin">
+  <option  value="" selected >Соin</option>
   {% for coin in coins %}
   <option value="{{ coin }}">{{ coin }}</option>
   {% endfor %}
   </select>
   
-  <select>
-   <option  value="" selected disabled hidden>Channel</option>
+  <select name="source">
+   <option  value="" selected >Channel</option>
    {% for source in sources %}
   <option value="{{ source}}">{{ source }}</option>
   {% endfor %}
   </select>
- 
+  
+   <input type="submit" value="отправить">
+  </form>
   </div>
   
   <div class="table_btn_promo tab_fil">{{banner_right.text}}</div>
@@ -115,13 +119,12 @@
 		<td><a href="{{ news.link }}">{{ news.link }}</a></td>
 		<td>{{news.user}}</td>
 		
-		
 	</tr>
 	{% endfor %}
 	</tbody>
 	</table>
   {% if allnews.has_next %}
-    <a class="infinite-more-link" href="?page={{ allnews.next_page_number }}">More</a>
+    <a class="infinite-more-link" href="?page={{ allnews.next_page_number}}&coin={{rget.coin}}&source={{rget.source}}">More</a>
   {% endif %}
 
     <div class="loading" style="display: none;">
@@ -161,7 +164,26 @@ $('.dislike_btn').click(function(){
 	  
     });
   </script>
-
+  <script>
+  window.onload = function () {
+  var form = $('#form'), def = form.data('def'), data = {}, action;
+  
+  $(document).on('change', '#form select', function () {
+  	var el = $(this), val = el.val(), name = el.attr('name');
+    if (val) {
+    	data[name] = val;
+    } else {
+      delete data[name];
+    }
+    action = def + "?";
+    for(var i in data) {
+      action += i + "=" + data[i] + '&';
+    }
+    action = action.substr(0, action.length - 1);
+    form.attr('action', action);
+  });
+};
+</script>
     {% else %}
       <p>There are no news.</p>
     {% endif %}       
