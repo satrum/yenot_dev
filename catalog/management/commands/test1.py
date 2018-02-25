@@ -1,5 +1,11 @@
 #update_news_rating_test1
 #C:\WORK\Docs\python\web\locallibrary
+
+#API
+#https://min-api.cryptocompare.com/stats/rate/limit - my limits
+#Hour limit - 150000, Minute limit - 1000, Second limit - 50
+
+
 import os,sys
 # print(os.getcwd())
 # print(sys.argv)
@@ -123,7 +129,9 @@ class Command(BaseCommand):
 	# "SortOrder":"11",
 	# "Sponsored":false}
 	def cryptocompare_get_coinlist(self, filename):
-		url1='https://www.cryptocompare.com/api/data/coinlist/'
+		url1='https://min-api.cryptocompare.com/data/all/coinlist'
+		#old url: https://www.cryptocompare.com/api/data/coinlist/
+		#new url: https://min-api.cryptocompare.com/data/all/coinlist
 		response1 = requests.get(url1)
 		data = response1.json()['Data']
 		file = open(DATADIR+'/'+filename, 'w', encoding='utf8')
