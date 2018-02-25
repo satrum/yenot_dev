@@ -374,3 +374,6 @@ def banner_click(request, pk):
 	banner.count_click += 1
 	banner.save()
 	return HttpResponseRedirect(banner.link)
+
+def rules(request):
+	return render(request, 'rules_template.html')

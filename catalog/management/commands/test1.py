@@ -66,6 +66,8 @@ class Command(BaseCommand):
 		print('full_cycle - coinlist + coinprice + coinlist_exclude + coinimage + coinadd full')
 		print('coinhistory - get price history for coins in news and save in files by (day, month, coin)')
 		print('rate_source - calculate stats for sources from news rating (may be in rate_news)')
+		print('random_news [create, delete] random news with title random_news')
+		print('send_mail [news] [id] - send all or one news to admin with MODERATE_STATUS = `a` status')
 
 
 	def rate_news(self):

@@ -26,5 +26,5 @@ urlpatterns += [
 	path('banner/<int:pk>', views.banner_click, name='banner-click'),
 	path('news/like_news_ajax/', views_ajax_vote.news_like_ajax, name='news-like-ajax'),
 	path('news/dislike_news_ajax/', views_ajax_vote.news_dislike_ajax, name='news-dislike-ajax'),
-	
+	path('rules/', views.rules, name='rules'),
 ]

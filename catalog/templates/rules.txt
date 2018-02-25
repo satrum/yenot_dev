@@ -1,4 +1,8 @@
+{% extends "base_generic.html" %}
+
+
 #template for rules page
+{% block content %}
 
 YENOT Rules
 ===========
@@ -44,6 +48,7 @@ Favorites Sources https://yenot.channel/profile/sources_favorites
 My private stats https://yenot.channel/profile/stats (votes, points)
 Coin Market stats https://yenot.channel/coins_list (market info, count news for coin, social)
 Platform updates and news https://yenot.channel/release
+This rules https://yenot.channel/rules
 
 Promo rules:
 ------------
@@ -65,6 +70,7 @@ News comments.
 YENOT token with airdrop for platform users and exchange to USD/BTC/ETH and promo with YENOT tokens.
 Users will be trade with cryptosignals based on rating.
 
+{% endblock %}
 
 --------------------------
 Calculation Methods:
