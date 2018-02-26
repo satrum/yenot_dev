@@ -43,9 +43,10 @@ EXCLUDE_LIST = ['ARENA','CNO', 'BTH']
 
 
 from django.db import models
-#from catalog.models import Coin
 from django.utils import timezone
+from django.core.mail import send_mail
 from datetime import datetime, timedelta
+
 
 class Command(BaseCommand):
 
@@ -73,7 +74,7 @@ class Command(BaseCommand):
 		print('coinhistory - get price history for coins in news and save in files by (day, month, coin)')
 		print('rate_source - calculate stats for sources from news rating (may be in rate_news)')
 		print('random_news [create, delete] random news with title random_news')
-		print('send_mail [news] [id] - send all or one news to admin with MODERATE_STATUS = `a` status')
+		print('sendmail [news] [id] - send all or one news to admin with MODERATE_STATUS = `a` status')
 
 
 	def rate_news(self):
@@ -396,6 +397,9 @@ class Command(BaseCommand):
 			print('from db')
 		return price
 
+	def sendmail(self):
+		send_mail('subject', 'body of the message', 'admin@yenot.channel', ['roman@satrum.ru'])
+
 	def handle(self, *args, **options):
 		try:
 			print('arguments exists:')
@@ -492,6 +496,9 @@ class Command(BaseCommand):
 			except Exception:
 				coin = 'BTC'
 			print(self.get_price(coin))
+
+		if 'sendmail' in poll_id:
+			self.sendmail()
 
 
 
