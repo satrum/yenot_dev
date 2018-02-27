@@ -208,7 +208,7 @@ class NewsListView(generic.ListView):
 	template_name = 'catalog/news_list.html'
 	model = News
 	context_object_name = 'allnews' #name of context in file news_list.html
-	paginate_by = 10
+	paginate_by = 20
 	def get_queryset(self):
 		return News.objects.order_by('-time').filter() #example filtered News.objects.filter(title__icontains='BTC')[:4]
 		#Добавить атрибут queryset в вашей реализации класса отображения, определяющего order_by().

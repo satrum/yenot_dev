@@ -18,6 +18,7 @@ import os
 
 FILE_COINLIST = 'coinlist.txt'
 FILE_PRICE = 'coinpricefull.txt'
+FILE_RESULT = 'result.txt'
 TYPE_PRICE = 'full'
 DATADIR = 'data'
 COINIMAGESDIR = 'media/coin_images/'
@@ -90,15 +91,15 @@ class Command(BaseCommand):
 			currating = new.rating
 			oneday = timedelta(days=RATING_MAX_DAYS, hours=0, seconds=0)
 			if time+oneday<curtime:
-				print('more one day')
-				print(new.newsid, new.title, new.rating, new.like, new.dislike, new.sourceid, new.user, new.coinprice, new.time)
+				print('more {} day'.format(RATING_MAX_DAYS))
+				#print(new.newsid, new.title, new.rating, new.like, new.dislike, new.sourceid, new.user, new.coinprice, new.time)
 				continue
 			else:
 			 	curprice = Coin.objects.get(symbol=new.coinid).price
 			 	newsprice = new.coinprice
 			 	if newsprice == 0:
 			 		print('news price is zero, no rate')
-			 		print(new.newsid, new.title, new.rating, new.like, new.dislike, new.sourceid, new.user, new.coinprice, new.time)
+			 		#print(new.newsid, new.title, new.rating, new.like, new.dislike, new.sourceid, new.user, new.coinprice, new.time)
 			 		continue
 			 	p2p1 = curprice/newsprice
 			 	decimalp2p1 = int(p2p1*10000)/10000
@@ -400,6 +401,22 @@ class Command(BaseCommand):
 	def sendmail(self):
 		send_mail('subject', 'body of the message', 'admin@yenot.channel', ['roman@satrum.ru'])
 
+	def get_apistats(self):
+		#{"Message":"Total rate limit stats",
+		# "Hour":{"CallsMade":{"Histo":0,"Price":54,"News":0,"Strict":0},
+		#         "CallsLeft":{"Histo":8000,"Price":149946,"News":3000,"Strict":500}},
+		# "Minute":{"CallsMade":{"Histo":0,"Price":0,"News":0,"Strict":0},
+		#         "CallsLeft":{"Histo":300,"Price":1000,"News":100,"Strict":20}},
+		# "Second":{"CallsMade":{"Histo":0,"Price":0,"News":0,"Strict":0},
+		#         "CallsLeft":{"Histo":15,"Price":50,"News":5,"Strict":1}}}
+		url = 'https://min-api.cryptocompare.com/stats/rate/limit'
+		response = requests.get(url)
+		hour_price_made = str(response.json()['Hour']['CallsMade']['Price'])
+		hour_price_left = str(response.json()['Hour']['CallsLeft']['Price'])
+		min_price_made = str(response.json()['Minute']['CallsMade']['Price'])
+		min_price_left = str(response.json()['Minute']['CallsLeft']['Price'])
+		return 'hm:'+hour_price_made+' hl:'+hour_price_left+' mm:'+min_price_made+' ml:'+min_price_left
+
 	def handle(self, *args, **options):
 		try:
 			print('arguments exists:')
@@ -488,6 +505,12 @@ class Command(BaseCommand):
 			self.coinlist_exclude()
 			self.coinadd('update')
 			self.rate_news()
+			stats = self.get_apistats() #https://min-api.cryptocompare.com/stats/rate/limit
+			print(stats)
+			file = open(DATADIR+'/'+FILE_RESULT, 'a')
+			file.write(stats)
+			file.write(' update_cycle finished at time {}\n'.format(timezone.now()))
+			file.close()
 
 		if 'get_price' in poll_id:
 			index = poll_id.index('get_price')
