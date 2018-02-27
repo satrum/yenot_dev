@@ -144,7 +144,11 @@ class News(models.Model):
     rating = models.DecimalField(default=0.0, blank=True, max_digits=10, decimal_places=2) #rate news up to 99 with store 2 for example 100.02
 
     #keys:
-    sourceid = models.ForeignKey('Source', on_delete=models.SET_NULL, null=True)
+    #sourceid = models.ForeignKey('Source', on_delete=models.SET_NULL, null=True)
+    sourceid = models.ForeignKey('Source', on_delete=models.SET_DEFAULT, default = 1)
+	#SET_DEFAULT
+	#Set the ForeignKey to its default value; a default for the ForeignKey must be set.
+	#https://docs.djangoproject.com/en/2.0/ref/models/fields/#django.db.models.ForeignKey
     coinid = models.ForeignKey('Coin', on_delete=models.SET_NULL, null=True)
     class Meta:
         ordering = ["time"]
