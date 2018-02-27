@@ -10,11 +10,12 @@ import os,sys
 # print(os.getcwd())
 # print(sys.argv)
 from django.core.management.base import BaseCommand, CommandError
-from catalog.models import News, Coin
+from catalog.models import News, Coin, Source
 
 import requests
 import json
 import os
+from statistics import median
 
 FILE_COINLIST = 'coinlist.txt'
 FILE_PRICE = 'coinpricefull.txt'
@@ -59,6 +60,7 @@ class Command(BaseCommand):
 		print('help - print this help')
 		#print('list_news - print list of all news')
 		print('rate_news - calculate rating of news. Likes(Real)/Dislikes(Fake)/News_price/Current_price/Direction/1DAY -> rating')
+		print('rate_sources - calculate stats for sources from news rating. News Rating -> Source.stats')
 		print('coinlist [filename=''coinlist.txt''] - get coin list from cryptocompare and write json to file')
 		print('coinprint [filename=''coinlist.txt''] - read json from file and print ')
 		print('coinprice [filename coinlist.txt] [filename coinpricefull.txt] [simple/full] - read json from file and get price and write json to file')
@@ -66,14 +68,13 @@ class Command(BaseCommand):
 		print('coinimage - read from coinlist and update folder media/coin_images/ with images') #!!!!!!!
 		print('coininfo [symbol] - read info about coin')
 		print('coinadd [action - all, update, add]- read coinlist from file and update list on db model Coin - coin.id, coin.symbol, coin.name')
-		print('update_cycle - coinprice + coinlist_exclude + coinadd update')
+		print('update_cycle - coinprice + coinlist_exclude + coinadd update + rate_news + rate_sources')
 		print('coinprint_db - list info from Model Coin')
 		print('get_price [symbol default=BTC]')
 		print('--------need create or update:-----')
 		print('coinpriceupdate - update fields in Model Coin - coin.price, coin.change, coin.volume, coin.mktcap')
 		print('full_cycle - coinlist + coinprice + coinlist_exclude + coinimage + coinadd full')
 		print('coinhistory - get price history for coins in news and save in files by (day, month, coin)')
-		print('rate_source - calculate stats for sources from news rating (may be in rate_news)')
 		print('random_news [create, delete] random news with title random_news')
 		print('sendmail [news] [id] - send all or one news to admin with MODERATE_STATUS = `a` status')
 
@@ -112,6 +113,49 @@ class Command(BaseCommand):
 			 	new.rating=rating
 			 	new.save()
 			print(new.newsid, new.coinid, 'time delta:', delta, 'price changed: ',decimalp2p1, new.direction, 'likes:{:<3} dislike:{:<3} delta:{:<3}'.format(new.like,new.dislike,likedelta), 'rating: ',rating)#curprice, newsprice, likedelta
+
+	# if news.rating == 0 - exclude
+	def rate_sources(self):
+		sources = Source.objects.all()
+		for source in sources:
+			news = News.objects.filter(sourceid=source.sourceid)
+			#print(source, source.sourceid, news.count())
+			likes = 0
+			dislikes = 0
+			minimum = 0
+			maximum = 0
+			count = 0
+			summa = 0 
+			#array = []
+			for new in news:
+				likes+=new.like
+				dislikes+=new.dislike
+				rate = new.rating
+				if rate != 0:
+					count+=1
+					if rate>maximum: maximum=rate
+					if rate<minimum: minimum=rate
+					summa+=rate
+					#array.append(rate)
+
+			source.stats_likes = likes
+			source.stats_dislikes = dislikes
+			source.stats_max = maximum
+			source.stats_min = minimum
+			source.stats_sum = summa
+			if count>0:
+				source.stats_avg = avg = summa/count
+				#source.stats_median = med = median(array)
+			else:
+				source.stats_avg = avg = 0
+				#source.stats_median = med = 0
+			# rating of source = average rating on source's news with rate<>0
+			source.rating = avg 
+			source.save()
+			#print('id:{} news:{:<3} likes:{:<3} dislikes:{:<3} max:{:<5} min:{:<5} sum:{:<5} avg:{:<5} name: {}'.format(source.sourceid, news.count(), likes, dislikes, maximum, minimum, summa, avg, source))
+			print('id:{} news:{:<3} likes:{:<3} dislikes:{:<3} max:{:<5} min:{:<5} sum:{:<5} avg:{:<5}'.format(source.sourceid, news.count(), likes, dislikes, maximum, minimum, summa, avg))
+
+
 
 	#'https://www.cryptocompare.com/api/data/coinlist/'
 	#"DGB":{
@@ -437,6 +481,9 @@ class Command(BaseCommand):
 		
 		if 'rate_news' in poll_id:
 			self.rate_news()
+
+		if 'rate_sources' in poll_id:
+			self.rate_sources()
 		
 		if 'coinlist' in poll_id:
 			index = poll_id.index('coinlist')
@@ -505,6 +552,7 @@ class Command(BaseCommand):
 			self.coinlist_exclude()
 			self.coinadd('update')
 			self.rate_news()
+			self.rate_sources()
 			stats = self.get_apistats() #https://min-api.cryptocompare.com/stats/rate/limit
 			print(stats)
 			file = open(DATADIR+'/'+FILE_RESULT, 'a')

@@ -200,7 +200,15 @@ class Source(models.Model):
     text = models.TextField(default='', max_length=1000,help_text="description of source")
     telegram = 	models.URLField(blank=True, max_length=100) # link to source channel (telegram channel)
     link =  models.URLField(default="https://enot.channel", max_length=100) # link to source channel (site)
-    rating = models.DecimalField(default=0.0, blank=True, max_digits=5, decimal_places=2) #rate source up to 99 with store 2 for example 100.02
+    rating = models.DecimalField(default=0.0, blank=True, max_digits=10, decimal_places=2) #rate source up to 99 with store 2 for example 100.02
+    stats_max      = models.DecimalField(default=0.0, blank=True, max_digits=10, decimal_places=2, help_text='maximum rating of news from source') 
+    stats_min      = models.DecimalField(default=0.0, blank=True, max_digits=10, decimal_places=2, help_text='minimum rating of news from source') 
+    stats_sum      = models.DecimalField(default=0.0, blank=True, max_digits=10, decimal_places=2, help_text='sum of  rating of news from source') 
+    stats_avg      = models.DecimalField(default=0.0, blank=True, max_digits=10, decimal_places=2, help_text='average rating of news from source') 
+    #stats_median   = models.DecimalField(default=0.0, blank=True, max_digits=10, decimal_places=2, help_text='median  rating of news from source') 
+    stats_likes    = models.IntegerField(default=0, blank=True, help_text='sum of likes all news from source')
+    stats_dislikes = models.IntegerField(default=0, blank=True, help_text='sum of dislikes all news from source')
+	
 	#owner = models.ForeignKey('User', on_delete=models.SET_NULL, null=True)
     MODERATE_STATUS = (
         ('a', 'Added and sended for moderate'),

@@ -3,14 +3,23 @@
 {% block content %}
 
 <h1>Title: {{ source.name }}</h1>
+<div>
 <p><strong>Link:</strong><a href="{{ source.link }}">{{ source.link }}</a></p>
 
 <p><strong>Telegam:</strong> {{ source.telegram }}</p> 
 <p><strong>Description:</strong> {{source.text}}</p>
 <p><strong>Rating:</strong> {{ source.rating }}</p> 
+<p><strong>news likes   :</strong> {{ source.stats_likes }}</p>
+<p><strong>news dislikes:</strong> {{ source.stats_dislikes }}</p>
+<p><strong>news max rate:</strong> {{ source.stats_max }}</p>
+<p><strong>news min rate:</strong> {{ source.stats_min }}</p>
+<p><strong>news sum rate:</strong> {{ source.stats_sum }}</p>
+<p><strong>news avg rate:</strong> {{ source.stats_avg }}</p>
 <p><strong>Moderation status:</strong> {{source.moderation_status}}</p>
+</div>
 
-<div style="margin-left:20px;margin-top:20px">
+
+<div style="margin-left:20px;margin-top:20px;">
 <h4>News from this source:</h4>
 
 <!-- need move to css -->
@@ -48,6 +57,7 @@ tr,td {border:1px solid black;}
 	</table>
 
 </div>
+
 {% endblock %}
 
 

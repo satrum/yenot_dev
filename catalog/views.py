@@ -243,6 +243,8 @@ class NewsDetailView(generic.DetailView):
 class SourceListView(generic.ListView):
 	model = Source
 	context_object_name = 'allsource' #name of context in file source_list.html
+	def get_queryset(self):
+		return Source.objects.order_by('-rating')
 
 class SourceDetailView(generic.DetailView):
     model = Source
