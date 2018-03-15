@@ -77,6 +77,7 @@ class Command(BaseCommand):
 		print('coinhistory - get price history for coins in news and save in files by (day, month, coin)')
 		print('random_news [create, delete] random news with title random_news')
 		print('sendmail [news] [id] - send all or one news to admin with MODERATE_STATUS = `a` status')
+		print('promo - change promo status, see views, clicks, time period, views.py')
 
 
 	def rate_news(self):
@@ -210,7 +211,7 @@ class Command(BaseCommand):
 		if type!='simple' and type!='full':
 			return False
 
-		BATCHSIZE=50
+		BATCHSIZE=20
 		file = open(DATADIR+'/'+coinlist_file, 'r')
 		data = json.load(file)
 		file.close()
@@ -229,7 +230,9 @@ class Command(BaseCommand):
 				count=0
 				continue
 		names=names[:-1]
-		sets.append(names)
+		if names != '':
+			sets.append(names)
+		print(sets)
 
 		file = open(DATADIR+'/'+pricelist_file, 'w')
 		data={}
@@ -390,8 +393,15 @@ class Command(BaseCommand):
 						except Exception:
 							print('error filepath in coin:',symbol)
 						newdbcoin.image = filepath
-					newdbcoin.save()
-					count_add+=1
+					try:
+						newdbcoin.save()
+						count_add+=1
+					except Exception as error:
+						print(error)
+						print(newdbcoin.price)
+						print(newdbcoin.change)
+						print(newdbcoin.volume)
+						print(newdbcoin.mktcap)
 					# print('newdbcoin: {}'.format(newdbcoin.symbol)), 
 					# print('name: {}'.format(newdbcoin.name)),
 					# print('image: {}'.format(newdbcoin.image))
