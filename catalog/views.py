@@ -304,7 +304,7 @@ from .models import News, Coin
 class AddNewsModelForm(ModelForm):
     class Meta:
         model = News
-        fields = ['title','text','link','direction','sourceid','proof_image','coinid']
+        fields = ['title','text','link','direction','duration','sourceid','proof_image','coinid']
 '''
     def __init__(self, *args, **kwargs):
         super(AddNewsModelForm, self).__init__(*args, **kwargs)

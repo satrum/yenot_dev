@@ -142,7 +142,11 @@ class News(models.Model):
     )
     direction = models.CharField(max_length=1, choices=DIRECTION, blank=True, default='b', help_text='Direction of trade')
     rating = models.DecimalField(default=0.0, blank=True, max_digits=10, decimal_places=2) #rate news up to 99 with store 2 for example 100.02
-
+    
+    #timeframe duration forecast prediction:
+    TIMEFRAME = ( ('4h', '4 hours'),('1d', '1 day'),('1w', '1 week'), )
+    duration = models.CharField(max_length=2, choices=TIMEFRAME, default='1w', help_text='signal forecast duration')
+    
     #keys:
     #sourceid = models.ForeignKey('Source', on_delete=models.SET_NULL, null=True)
     sourceid = models.ForeignKey('Source', on_delete=models.SET_DEFAULT, default = 1)
@@ -212,6 +216,7 @@ class Source(models.Model):
     #stats_median   = models.DecimalField(default=0.0, blank=True, max_digits=10, decimal_places=2, help_text='median  rating of news from source') 
     stats_likes    = models.IntegerField(default=0, blank=True, help_text='sum of likes all news from source')
     stats_dislikes = models.IntegerField(default=0, blank=True, help_text='sum of dislikes all news from source')
+	#stats: news_count_all
 	
 	#owner = models.ForeignKey('User', on_delete=models.SET_NULL, null=True)
     MODERATE_STATUS = (

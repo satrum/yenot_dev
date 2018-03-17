@@ -91,9 +91,19 @@ class Command(BaseCommand):
 			curtime = timezone.now()
 			delta = curtime-time
 			currating = new.rating
-			oneday = timedelta(days=RATING_MAX_DAYS, hours=0, seconds=0)
-			if time+oneday<curtime:
-				print('more {} day'.format(RATING_MAX_DAYS))
+			duration = new.duration
+			print('id: {} duration: {} delta: {} time: {}'.format(new.newsid, duration, delta, time))
+			if duration == '4h':
+				time_delta = timedelta(days=0, hours=4, seconds=0)
+			elif duration == '1d':
+				time_delta = timedelta(days=1, hours=0, seconds=0)
+			elif duration == '1w':
+				time_delta = timedelta(days=7, hours=0, seconds=0)
+			else:
+				continue
+			#oneday = timedelta(days=RATING_MAX_DAYS, hours=0, seconds=0)
+			if time+time_delta<curtime:
+				print('more then {}'.format(duration))
 				#print(new.newsid, new.title, new.rating, new.like, new.dislike, new.sourceid, new.user, new.coinprice, new.time)
 				continue
 			else:

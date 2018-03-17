@@ -47,8 +47,8 @@ from .models import News, Source, UserVotes, Profile, Banner, Coin
 #admin.site.register(News)
 @admin.register(News)
 class NewsAdmin(admin.ModelAdmin):
-    list_display = ('newsid', 'title', 'direction', 'coinid', 'coinprice', 'text', 'time', 'link', 'rating', 'sourceid','like','dislike','user','moderation_status', 'promo_status', 'proof_image')
-    list_filter = ('direction', 'moderation_status', 'promo_status', 'time')
+    list_display = ('newsid', 'title', 'direction', 'duration', 'coinid', 'coinprice', 'text', 'time', 'link', 'rating', 'sourceid','like','dislike','user','moderation_status', 'promo_status', 'proof_image')
+    list_filter = ('direction', 'duration', 'moderation_status', 'promo_status', 'time')
     #fields = [('title', 'direction'), 'text', 'link'] надо сделать разное для add и change, и в зависимости от прав пользователя
     search_fields = ['title','text','coinid__symbol','sourceid__name']
 	

@@ -26,7 +26,7 @@ SECRET_KEY = 'oc(kqzj^dto2^h$rtt@v%#3n=sf6x9_176-)icxqt3ap&gv1hn'
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
+# ALLOWED_HOSTS = ['195.201.88.235','yeenot.today']
 
 # Application definition
 
