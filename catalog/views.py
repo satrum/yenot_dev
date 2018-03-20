@@ -204,13 +204,31 @@ def renew_book_librarian(request, pk):
 #------------------------------------------------------
 #ENOT Project:
 
+from django.utils import timezone
+
 class NewsListView(generic.ListView):
 	template_name = 'catalog/news_list.html'
 	model = News
 	context_object_name = 'allnews' #name of context in file news_list.html
 	paginate_by = 20
 	def get_queryset(self):
-		return News.objects.order_by('-time').filter() #example filtered News.objects.filter(title__icontains='BTC')[:4]
+		#get parameter from kwargs url 'news/<str:time>/'
+		if 'time' in self.kwargs:
+			time = self.kwargs['time']
+		else:
+			time = None
+		#select range of time - all, day, week, month:
+		if time=='' or time==None:
+			return News.objects.order_by('-rating')
+		else:
+			now = timezone.now()
+			if time=='day': #day
+				delta = datetime.timedelta(days=1)
+			elif time=='week': #week
+				delta = datetime.timedelta(days=7)
+			else: #month
+				delta = datetime.timedelta(days=30)
+			return News.objects.order_by('-rating').filter(time__range=(now-delta,now)) #example filtered News.objects.filter(title__icontains='BTC')[:4]
 		#Добавить атрибут queryset в вашей реализации класса отображения, определяющего order_by().
 		#Добавить метод get_queryset в вашу реализацию класса отображения и также определить метод order_by().
 	def get_context_data(self, **kwargs):

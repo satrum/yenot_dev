@@ -4,6 +4,14 @@
     <h1>News List</h1>
 
     {% if allnews %}
+	<ul>
+          TOP:
+		  <li><a href="{% url 'news' %}day/"  >-DAY-  </a></li>
+		  <li><a href="{% url 'news' %}week/" >-WEEK- </a></li>
+          <li><a href="{% url 'news' %}month/">-MONTH-</a></li>	
+		  <li><a href="{% url 'news' %}"      >-ALL-  </a></li>
+		  
+	</ul>
 <!-- need move to css -->
 <style>
 tr,td {border:1px solid black;}
