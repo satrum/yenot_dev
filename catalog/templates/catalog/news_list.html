@@ -28,6 +28,7 @@ tr,td {border:1px solid black;}
 		<td>TEXT</td>
 		<td>created time</td>
 		<td>direction</td>
+		<td>duration</td>
 		<td>rating</td>
 		<td>Likes</td>
 		<td></td>
@@ -49,6 +50,7 @@ tr,td {border:1px solid black;}
 		<td>{{news.text}}</td>
 		<td>{{news.time}}</td>
 		<td>{{news.get_direction_display}}</td>
+		<td>{{news.get_duration_display}}</td>
 		<td>{{news.rating}}</td>
 		<td id="like_count_{{news.newsid}}">{{news.like}}</td>
 		

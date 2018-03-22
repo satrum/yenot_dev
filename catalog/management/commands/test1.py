@@ -10,7 +10,8 @@ import os,sys
 # print(os.getcwd())
 # print(sys.argv)
 from django.core.management.base import BaseCommand, CommandError
-from catalog.models import News, Coin, Source
+from catalog.models import News, Coin, Source, UserVotes, Profile
+from django.contrib.auth.models import User
 
 import requests
 import json
@@ -78,6 +79,7 @@ class Command(BaseCommand):
 		print('random_news [create, delete] random news with title random_news')
 		print('sendmail [news] [id] - send all or one news to admin with MODERATE_STATUS = `a` status')
 		print('promo - change promo status, see views, clicks, time period, views.py')
+		print('rate_users - rate votes and calculate stats about users(profiles)')
 
 
 	def rate_news(self):
@@ -166,7 +168,81 @@ class Command(BaseCommand):
 			#print('id:{} news:{:<3} likes:{:<3} dislikes:{:<3} max:{:<5} min:{:<5} sum:{:<5} avg:{:<5} name: {}'.format(source.sourceid, news.count(), likes, dislikes, maximum, minimum, summa, avg, source))
 			print('id:{} news:{:<3} likes:{:<3} dislikes:{:<3} max:{:<5} min:{:<5} sum:{:<5} avg:{:<5}'.format(source.sourceid, news.count(), likes, dislikes, maximum, minimum, summa, avg))
 
+	def rate_users(self):
+		#users = User.objects.all()
+		profiles = Profile.objects.all()
+		votes = UserVotes.objects.all()
+		#print(users)
+		#print(profiles)
+		# for user in users:
+		# 	profile = Profile.objects.get(user=user)
+		# 	print('{} {}'.format(profile.user,profile.view_newslist_block))
+		for vote in votes:
+			new_rate = vote.news.rating
+			direction = vote.news.direction #not used
+			duration = vote.news.duration
+			if duration == '4h':
+				dur_time = timedelta(hours=4)
+			elif duration == '1d':
+				dur_time = timedelta(days=1)
+			elif duration == '1w':
+				dur_time = timedelta(days=7)
+			else:
+				dur_time = timedelta(days=7) #default 1 week
+			vote_time = vote.vote_time
+			news_time = vote.news.time
+			# formula:
+			if (news_time+dur_time-vote_time).total_seconds() < 0:
+				vote_rate = 0
+				coef = 0
+			else:
+				#print((news_time+dur_time-vote_time).total_seconds(), dur_time.total_seconds())
+				vote_rate = (news_time+dur_time-vote_time).total_seconds()/dur_time.total_seconds()
+				coef = 1
+				if new_rate > 0 and vote.vote_type =='dislike':
+					coef = -1
+				if new_rate < 0 and vote.vote_type =='like':
+					coef = -1
+				vote_rate = vote_rate * coef * abs(float(new_rate))
+				print('{} {} {}'.format(vote.user, vote.news, vote.vote_type))
+				print('nr:{} dir:{} d:{} n:{} v:{} vr:{} c:{}'.format(new_rate, direction ,dur_time, news_time, vote_time, vote_rate, coef))
+				#save:
+				vote.vote_rate = vote_rate
+				vote.save()
+		#rate profiles:
+		all_users_today_positive = 0
+		all_users_today_active = 0 #sum_today <> 0
+		dayago = timezone.now()-timedelta(days=1)
+		for profile in profiles:
+			print(profile.user)
+			votes = UserVotes.objects.filter(user=profile.user)
+			sum_all = 0
+			sum_positive = 0
+			sum_today = 0
+			sum_today_positive = 0
+			for vote in votes:
+				print('{} {}'.format(vote.vote_rate, vote.vote_time))
+				sum_all +=vote.vote_rate
+				if vote.vote_rate>0:
+					sum_positive += vote.vote_rate
+				
+				if vote.vote_time > dayago:
+					sum_today += vote.vote_rate
+					if vote.vote_rate>0:
+						sum_today_positive += vote.vote_rate
+			profile.sum_all = sum_all
+			profile.sum_positive = sum_positive
+			profile.sum_today = sum_today
+			profile.sum_today_positive = sum_today_positive
+			profile.save()
+			if sum_today != 0:
+				all_users_today_active += 1
+			all_users_today_positive += sum_today_positive
+			print('a:{} p:{} t:{} tp:{}'.format(sum_all, sum_positive, sum_today, sum_today_positive))
+		print('sum positive:{} all active:{}'.format(all_users_today_positive,all_users_today_active))
 
+
+			
 
 	#'https://www.cryptocompare.com/api/data/coinlist/'
 	#"DGB":{
@@ -504,6 +580,9 @@ class Command(BaseCommand):
 
 		if 'rate_sources' in poll_id:
 			self.rate_sources()
+
+		if 'rate_users' in poll_id:
+			self.rate_users()
 		
 		if 'coinlist' in poll_id:
 			index = poll_id.index('coinlist')

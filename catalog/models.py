@@ -97,7 +97,12 @@ class Profile(models.Model):
     location = models.CharField(max_length=30, blank=True)
     birth_date = models.DateField(null=True, blank=True)
     view_newslist_block = models.CharField(max_length = 10, default = 'table', help_text = 'table or blocked view for news list') #see class NewsListView(generic.ListView)
-
+    #stats:
+    sum_all = models.DecimalField(default=0.0, blank=True, max_digits=10, decimal_places=2, help_text = 'sum of all vote_rate')
+    sum_positive = models.DecimalField(default=0.0, blank=True, max_digits=10, decimal_places=2, help_text = 'sum of all positive vote_rate')
+    sum_today = models.DecimalField(default=0.0, blank=True, max_digits=10, decimal_places=2, help_text = 'sum of all vote_rate last day')
+    sum_today_positive = models.DecimalField(default=0.0, blank=True, max_digits=10, decimal_places=2, help_text = 'sum of all positive vote_rate last day')
+	
     @receiver(post_save, sender=User)
     def create_user_profile(sender, instance, created, **kwargs):
         if created:
@@ -121,7 +126,7 @@ class News(models.Model):
     newsid = models.AutoField(primary_key=True, help_text="news id")
     text = models.TextField(max_length=1000,help_text="description of news")
     title = models.CharField(max_length=100) # резервирую название на будущее, для сигналов нет
-    link =  models.URLField(default="https://enot.channel", max_length=100) # link to source of news
+    link =  models.URLField(default="https://yeenot.today", max_length=100) # link to source of news
     time = models.DateTimeField(default=timezone.now) #set time of add news
     proof_image = models.ImageField(upload_to='news_images/', max_length=100, blank=True ) #image of proof height_field=200, width_field=200
     MODERATE_STATUS = (
@@ -177,7 +182,7 @@ class News(models.Model):
 
     def vote_like(self, user):
         try:
-            self.news_votes.create(user=user, news=self, vote_type="like")
+            self.news_votes.create(user=user, news=self.newsid, vote_type="like")
             self.like += 1
             self.save()                
         except Exception:#IntegrityError:
@@ -186,7 +191,7 @@ class News(models.Model):
 
     def vote_dislike(self, user):
         try:
-            self.news_votes.create(user=user, news=self, vote_type="dislike")
+            self.news_votes.create(user=user, news=self.newsid, vote_type="dislike")
             self.dislike += 1
             self.save()                
         except Exception:#IntegrityError:
@@ -198,7 +203,9 @@ class UserVotes(models.Model):
     news = models.ForeignKey(News, on_delete=models.SET_NULL, null=True, related_name="news_votes")
     vote_type = models.CharField(max_length=10)
     vote_time = models.DateTimeField(default=timezone.now) #set time of like/dislike
+    vote_rate = models.DecimalField(default=0.0, blank=True, max_digits=10, decimal_places=2, help_text='rate of vote')
 
+	
     class Meta:
         unique_together = ('user', 'news', 'vote_type') #index for all votes
 		
