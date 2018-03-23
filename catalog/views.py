@@ -331,6 +331,10 @@ class AddNewsModelForm(ModelForm):
     class Meta:
         model = News
         fields = ['title','text','link','direction','duration','sourceid','proof_image','coinid']
+    
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['sourceid'].queryset = Source.objects.filter(moderation_status__in=['o','p'])
 '''
     def __init__(self, *args, **kwargs):
         super(AddNewsModelForm, self).__init__(*args, **kwargs)
