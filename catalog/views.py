@@ -68,9 +68,21 @@ def index(request, template='index.html', page_template='index_page.html'):#Фу
     #print(rget)
     coin = rget.get('coin')
     source = rget.get('source')
+    direction = rget.get('direction')
     if coin == '': coin=None
     if source == '': source=None
-    #print(coin, source)
+    if direction == '': direction=None
+    print(coin, source, direction) #debug only
+    news_list = News.objects.order_by('-time')
+    if coin is not None:
+        coinid=Coin.objects.get(symbol=coin)
+        news_list = news_list.filter(coinid=coinid)
+    if source is not None:
+        sourceid=Source.objects.get(name=source)
+        news_list = news_list.filter(sourceid=sourceid)
+    if direction is not None:
+        news_list = news_list.filter(direction=direction)
+    '''
     if coin is None:
         if source is None: #coin=None, source=None
             news_list = News.objects.order_by('-time')
@@ -84,6 +96,7 @@ def index(request, template='index.html', page_template='index_page.html'):#Фу
         coinid=Coin.objects.get(symbol=coin)
         sourceid=Source.objects.get(name=source)
         news_list = News.objects.order_by('-time').filter(coinid=coinid,sourceid=sourceid)
+    '''
     #print(coinid, sourceid)
 
 	#get set of coins from news_list 
@@ -331,7 +344,7 @@ class AddNewsModelForm(ModelForm):
     class Meta:
         model = News
         fields = ['title','text','link','direction','duration','sourceid','proof_image','coinid']
-    
+    #sources only moderated:
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['sourceid'].queryset = Source.objects.filter(moderation_status__in=['o','p'])
