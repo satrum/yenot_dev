@@ -225,7 +225,6 @@ class Command(BaseCommand):
 				sum_all +=vote.vote_rate
 				if vote.vote_rate>0:
 					sum_positive += vote.vote_rate
-				
 				if vote.vote_time > dayago:
 					sum_today += vote.vote_rate
 					if vote.vote_rate>0:
@@ -234,11 +233,13 @@ class Command(BaseCommand):
 			profile.sum_positive = sum_positive
 			profile.sum_today = sum_today
 			profile.sum_today_positive = sum_today_positive
+			profile.sum_likes = votes.filter(vote_type='like').count()
+			profile.sum_dislikes = votes.filter(vote_type='dislike').count()
 			profile.save()
 			if sum_today != 0:
 				all_users_today_active += 1
 			all_users_today_positive += sum_today_positive
-			print('a:{} p:{} t:{} tp:{}'.format(sum_all, sum_positive, sum_today, sum_today_positive))
+			print('a:{} p:{} t:{} tp:{} counts l:{} d:{}'.format(sum_all, sum_positive, sum_today, sum_today_positive, profile.sum_likes, profile.sum_dislikes))
 		print('sum positive:{} all active:{}'.format(all_users_today_positive,all_users_today_active))
 
 

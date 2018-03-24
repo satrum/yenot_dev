@@ -66,14 +66,18 @@ def index(request, template='index.html', page_template='index_page.html'):#Фу
 	#get news_list &coin=BTC&source=ENOT
     rget = request.GET
     #print(rget)
+    date = rget.get('date')
     coin = rget.get('coin')
     source = rget.get('source')
     direction = rget.get('direction')
+    if date == '' : date=None
     if coin == '': coin=None
     if source == '': source=None
     if direction == '': direction=None
     print(coin, source, direction) #debug only
     news_list = News.objects.order_by('-time')
+    if date is not None:
+        news_list = news_list.filter(time__contains=date)
     if coin is not None:
         coinid=Coin.objects.get(symbol=coin)
         news_list = news_list.filter(coinid=coinid)

@@ -102,6 +102,8 @@ class Profile(models.Model):
     sum_positive = models.DecimalField(default=0.0, blank=True, max_digits=10, decimal_places=2, help_text = 'sum of all positive vote_rate')
     sum_today = models.DecimalField(default=0.0, blank=True, max_digits=10, decimal_places=2, help_text = 'sum of all vote_rate last day')
     sum_today_positive = models.DecimalField(default=0.0, blank=True, max_digits=10, decimal_places=2, help_text = 'sum of all positive vote_rate last day')
+    sum_likes=models.IntegerField(default=0, blank=True, help_text='likes of user')
+    sum_dislikes=models.IntegerField(default=0, blank=True, help_text='dislikes of user')
 	
     @receiver(post_save, sender=User)
     def create_user_profile(sender, instance, created, **kwargs):
