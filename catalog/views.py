@@ -156,6 +156,19 @@ def index(request, template='index.html', page_template='index_page.html'):#Фу
     
     return render(request, template, context)
 
+def profile(request, template='profile.html'):
+	if request.user.is_authenticated:
+		profile=request.user.profile
+		news = News.objects.filter(user=request.user).order_by('-time') #current user news
+		profile.news_count = news.count()
+		context={
+		'profile':profile,
+		'allnews':news,
+		}
+		return render(request, template, context)
+	else:
+		return redirect('index')
+	
 from django.views import generic
 
 class BookListView(generic.ListView):

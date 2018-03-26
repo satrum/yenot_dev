@@ -206,7 +206,7 @@ class UserVotes(models.Model):
     vote_type = models.CharField(max_length=10)
     vote_time = models.DateTimeField(default=timezone.now) #set time of like/dislike
     vote_rate = models.DecimalField(default=0.0, blank=True, max_digits=10, decimal_places=2, help_text='rate of vote')
-
+    vote_rate_status = models.BooleanField(default=False, blank=True, help_text='status of recalculation. If True - not change by rate_users.')
 	
     class Meta:
         unique_together = ('user', 'news', 'vote_type') #index for all votes

@@ -28,4 +28,5 @@ urlpatterns += [
 	path('news/dislike_news_ajax/', views_ajax_vote.news_dislike_ajax, name='news-dislike-ajax'),
 	path('rules/', views.rules, name='rules'),
 	path('news/<str:time>/', views.NewsListView.as_view(), name='news'),
+	path('profile/', views.profile, name='profile')
 ]

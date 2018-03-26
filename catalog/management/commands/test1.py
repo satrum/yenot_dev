@@ -171,13 +171,17 @@ class Command(BaseCommand):
 	def rate_users(self):
 		#users = User.objects.all()
 		profiles = Profile.objects.all()
-		votes = UserVotes.objects.all()
+		#votes = UserVotes.objects.all()
+		votes = UserVotes.objects.filter(vote_rate_status=False)
 		#print(users)
 		#print(profiles)
 		# for user in users:
 		# 	profile = Profile.objects.get(user=user)
 		# 	print('{} {}'.format(profile.user,profile.view_newslist_block))
 		for vote in votes:
+			if vote.vote_rate_status == True: # news duration ended or vote after news ended
+				print('vote {} - news duration ended or vote after news ended, rate: {}'.format(vote.id, vote.vote_rate))
+				continue
 			new_rate = vote.news.rating
 			direction = vote.news.direction #not used
 			duration = vote.news.duration
@@ -192,11 +196,15 @@ class Command(BaseCommand):
 			vote_time = vote.vote_time
 			news_time = vote.news.time
 			# formula:
-			if (news_time+dur_time-vote_time).total_seconds() < 0:
-				vote_rate = 0
-				coef = 0
+			if (news_time+dur_time-vote_time).total_seconds() < 0: #vote after news ended
+				vote.vote_rate = 0
+				vote.vote_rate_status = True # optimize with not recalculation
+				print('vote {} after news ended'.format(vote))
+				vote.save()
+				#coef = 0
 			else:
-				#print((news_time+dur_time-vote_time).total_seconds(), dur_time.total_seconds())
+				print((news_time+dur_time-vote_time).total_seconds(), dur_time.total_seconds())
+				#1 - if vote_time==news_time to 0 if vote_time==news_time+duration
 				vote_rate = (news_time+dur_time-vote_time).total_seconds()/dur_time.total_seconds()
 				coef = 1
 				if new_rate > 0 and vote.vote_type =='dislike':
@@ -208,6 +216,9 @@ class Command(BaseCommand):
 				print('nr:{} dir:{} d:{} n:{} v:{} vr:{} c:{}'.format(new_rate, direction ,dur_time, news_time, vote_time, vote_rate, coef))
 				#save:
 				vote.vote_rate = vote_rate
+				if news_time+dur_time<timezone.now(): # news duration ended
+					print('news duration ended')
+					vote.vote_rate_status=True # optimize with not recalculation
 				vote.save()
 		#rate profiles:
 		all_users_today_positive = 0
@@ -319,7 +330,7 @@ class Command(BaseCommand):
 		names=names[:-1]
 		if names != '':
 			sets.append(names)
-		print(sets)
+		#print(sets)
 
 		file = open(DATADIR+'/'+pricelist_file, 'w')
 		data={}
@@ -333,7 +344,7 @@ class Command(BaseCommand):
 				url2 = 'https://min-api.cryptocompare.com/data/pricemultifull?fsyms='+string+'&tsyms=USD'
 				response2 = requests.get(url2)
 				temp=response2.json()['RAW']
-			print(temp)
+			#print(temp)
 			for coin in temp:
 				data[coin]=temp[coin]
 		json.dump(data, file)
@@ -348,10 +359,12 @@ class Command(BaseCommand):
 		
 		#create list of priced coins with marketcap > 0 
 		#may be: TOTALVOLUME24HTO > 0 test
-		priced_coins = [ coin for coin in rawdata if 'MKTCAP' in rawdata[coin]['USD'] 
-		and 'TOTALVOLUME24HTO' in rawdata[coin]['USD'] and rawdata[coin]['USD']['MKTCAP']!=0 and rawdata[coin]['USD']['TOTALVOLUME24HTO']!=0]
+		priced_coins = [ coin for coin in rawdata if 'TOTALVOLUME24HTO' in rawdata[coin]['USD'] and rawdata[coin]['USD']['TOTALVOLUME24HTO']!=0]
+		#priced_coins = [ coin for coin in rawdata if 'MKTCAP' in rawdata[coin]['USD'] 
+		#and 'TOTALVOLUME24HTO' in rawdata[coin]['USD'] and rawdata[coin]['USD']['MKTCAP']!=0 and rawdata[coin]['USD']['TOTALVOLUME24HTO']!=0]
 		#priced_coins = [ coin for coin in rawdata if 'MKTCAP' in rawdata[coin]['USD'] and rawdata[coin]['USD']['MKTCAP']!=0 ]
-		print('coins from full price file with MKTCAP and TOTALVOLUME24HTO :',len(priced_coins))
+		print('coins from full price file with TOTALVOLUME24HTO :',len(priced_coins))
+		#print('coins from full price file with MKTCAP and TOTALVOLUME24HTO :',len(priced_coins))
 
 		#read from coinlist file
 		file = open(DATADIR+'/'+FILE_COINLIST, 'r')

@@ -63,12 +63,12 @@ class SourceAdmin(admin.ModelAdmin):
 
 @admin.register(UserVotes)
 class UserVotesAdmin(admin.ModelAdmin):
-	list_display = ('user','news','vote_type', 'vote_time', 'vote_rate')
-	list_filter = ('vote_type', 'user', 'news', 'vote_time')
+	list_display = ('id', 'user','news','vote_type', 'vote_time', 'vote_rate', 'vote_rate_status')
+	list_filter = ('vote_type', 'user', 'vote_time', 'vote_rate_status', 'news')
 
 @admin.register(Profile)
 class UserProfileAdmin(admin.ModelAdmin):
-	list_display = ('user','bio','location', 'birth_date', 'view_newslist_block', 'sum_all', 'sum_positive', 'sum_today', 'sum_today_positive')
+	list_display = ('user','bio','location', 'birth_date', 'view_newslist_block', 'sum_all', 'sum_positive', 'sum_today', 'sum_today_positive','sum_likes','sum_dislikes')
 	list_filter = ('user', 'location', 'view_newslist_block')
 
 @admin.register(Banner)

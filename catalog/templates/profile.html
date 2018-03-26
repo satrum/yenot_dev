@@ -1,0 +1,58 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+
+	{% if user.is_authenticated %}
+	
+	<h1>Title: {{ profile.user }}</h1>
+	<p><strong>First Name:</strong> {{ user.first_name }} </p>{% if user.first_name == '' %} update profile info url button{% endif %}
+	<p><strong>Last Name:</strong> {{ user.last_name }} </p>{% if user.last_name == '' %} update profile info url button{% endif %}
+	<p><strong>e-mail:</strong> {{ user.email }} <font color="red">change email link: ...</font></p> 
+	<font color="red">password reset link: ...</font>
+	<font color="red">update profile info url button: ...</font>
+	
+	<h3>Vote rating stats:</h3>
+	<p><strong>sum of all vote_rate</strong> {{ profile.sum_all }}</p>
+	<p><strong>sum of all positive vote_rate</strong> {{ profile.sum_positive }}</p>
+	<p><strong>sum of all vote_rate last day</strong> {{ profile.sum_today }}</p>
+	<p><strong>sum of all positive vote_rate last day</strong> {{ profile.sum_today_positive  }}</p>
+	<p><strong>likes of user</strong> {{ profile.sum_likes }}</p>
+	<p><strong>dislikes of user</strong> {{ profile.sum_dislikes }}</p>
+	
+	
+	<h3>Your news stats:</h3>
+	<p><strong>news count</strong> {{ profile.news_count }}<p>
+	<p><strong>sum of news rate</strong>... <p>
+	<p><strong>sum of news likes</strong>... <p>
+	<p><strong>sum of news dislikes</strong>... <p>
+	<p><strong>sum of link clicks</strong>... <p>
+	
+	<p><font color="red">button display news...</font></p>
+	<table display="none"><tr>
+		<td>#</td><td>TITLE</td><td>SOURCE</td><td>TEXT</td><td>created time</td><td>direction</td><td>duration</td><td>rating</td>
+		<td>Likes</td><td>Dislikes</td><td>LINK</td><td>USERNAME</td><td>NEWS PRICE</td><td>COIN</td><td>moderation_status</td><td>promo_status</td>
+	{% for news in allnews %}
+	{% if news.promo_status == 'y' %}<tr style="font-weight:bold">{% else %}<tr>{% endif %} 
+		<td>{{news.newsid}}</td>
+		<td><a href="{{ news.get_absolute_url }}">{{ news.title }}</a></td>
+		<td>{{news.sourceid}}</td>
+		<td>{{news.text}}</td>
+		<td>{{news.time}}</td>
+		<td>{{news.get_direction_display}}</td>
+		<td>{{news.get_duration_display}}</td>
+		<td>{{news.rating}}</td>
+		<td>{{news.like}}</td>
+		<td>{{news.dislike}}</td>
+		<td><a href="{{ news.link }}">{{ news.link }}</a></td>
+		<td>{{news.user}}</td>
+		<td>{{news.coinprice}}</td>
+		<td>{{news.coinid}}</td>
+		<td>{{news.get_moderation_status_display}}</td>
+		<td>{{news.get_promo_status_display}}</td>
+		
+	</tr>
+	{% endfor %}
+	</table>
+	
+	{% endif %}
+{% endblock %}
