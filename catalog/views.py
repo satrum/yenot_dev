@@ -380,6 +380,7 @@ def addnews(request):
     if request.method == 'POST':
         form = AddNewsModelForm(request.POST, request.FILES)
         if form.is_valid():
+            #print(request.FILES['proof_image'])
             extend_form = form.save(commit=False)
             extend_form.user = request.user
             #get price:

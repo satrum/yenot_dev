@@ -78,10 +78,10 @@ tr,td {border:1px solid black;}
 		
 		<td><a href="{{ news.link }}">{{ news.link }}</a></td>
 		<td>{{news.user}}</td>
-		<td>{{news.coinprice}}</td>
+		<td>{{news.coinprice|floatformat:3}}</td>
 		<td>{{news.symbol}}</td>
-		<td>{{news.price}}</td>
-		<td>{{news.change}}</td>
+		<td>{{news.price|floatformat:3}}</td>
+		<td>{{news.change|floatformat:3}}</td>
 		
 	</tr>
 	{% endfor %}

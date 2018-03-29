@@ -47,8 +47,14 @@ EXCLUDE_LIST = ['ARENA','CNO', 'BTH']
 
 from django.db import models
 from django.utils import timezone
-from django.core.mail import send_mail
+from django.core.mail import send_mail, get_connection
 from datetime import datetime, timedelta
+
+#email:
+SMTP_EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+CONSOLE_EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
 
 
 class Command(BaseCommand):
@@ -553,7 +559,24 @@ class Command(BaseCommand):
 		return price
 
 	def sendmail(self):
-		send_mail('subject', 'body of the message', 'admin@yenot.channel', ['roman@satrum.ru'])
+		try:
+			connection = get_connection(backend=SMTP_EMAIL_BACKEND)
+			with open('email.txt') as f:
+				email_setting = [line.strip() for line in f]
+			connection.host = email_setting[1]
+			connection.username = email_setting[2]
+			connection.password = email_setting[3]
+			connection.port = EMAIL_PORT
+			connection.use_tls = EMAIL_USE_TLS
+			test_to = email_setting[4]
+			print(email_setting[0])
+			print(connection)
+			print(connection.host, connection.username, connection.password)
+			send_mail('from test1', 'test1 sendmail function', connection.username, [test_to], connection = connection)
+		except Exception:
+			connection = get_connection(backend=CONSOLE_EMAIL_BACKEND)
+			print(connection)
+			send_mail('from test1', 'test1 sendmail function', 'admin@localhost', ['user@localhost'], connection = connection)
 
 	def get_apistats(self):
 		#{"Message":"Total rate limit stats",

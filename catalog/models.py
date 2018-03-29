@@ -123,10 +123,11 @@ class Profile(models.Model):
 		
 
 from  django.utils import timezone
+from django.core.validators import MinLengthValidator
 
 class News(models.Model):
     newsid = models.AutoField(primary_key=True, help_text="news id")
-    text = models.TextField(max_length=1000,help_text="description of news")
+    text = models.TextField(max_length=1000,help_text="description of news",validators=[MinLengthValidator(20)])
     title = models.CharField(max_length=100) # резервирую название на будущее, для сигналов нет
     link =  models.URLField(default="https://yeenot.today", max_length=100) # link to source of news
     time = models.DateTimeField(default=timezone.now) #set time of add news

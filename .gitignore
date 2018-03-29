@@ -3,3 +3,5 @@ db.sqlite3
 *.pyc
 data/coinlist.txt
 data/coinpricefull.txt
+secret.txt
+email.txt
