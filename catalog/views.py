@@ -70,7 +70,7 @@ def index(request, template='index.html', page_template='index_page.html'):#Фу
     coin = rget.get('coin')
     source = rget.get('source')
     direction = rget.get('direction')
-    if date == '' : date=None
+    if date == '' or date == 'MM/DD/YYYY' : date=None
     if coin == '': coin=None
     if source == '': source=None
     if direction == '': direction=None
@@ -372,9 +372,10 @@ class AddNewsModelForm(ModelForm):
         self.fields['user'].widget.attrs.update({'readonly':'readonly', 'disabled': 'disabled'}) 
 '''
 from django.contrib.auth.decorators import login_required
-
+from django.core import mail
 import requests
 import json
+
 @login_required
 def addnews(request):
     if request.method == 'POST':
@@ -399,7 +400,18 @@ def addnews(request):
             extend_form.coinprice = price
             #save
             extend_form.save()
-			#time - current time by default
+            #send mail:
+            subject = 'News added from user: {} newsid: {}'.format(extend_form.user, extend_form.newsid)
+            body = 'news id: {} \n'.format(extend_form.newsid)
+            body+= 'time: {} \n'.format(extend_form.time)
+            body+= 'coin: {}, coinprice: {} direction: {} duration: {} \n'.format(extend_form.coinid, extend_form.coinprice, extend_form.direction, extend_form.duration)
+            body+= 'title: {}, link: {} source: {} \ntext: {} \n'.format(extend_form.title, extend_form.link, extend_form.sourceid, extend_form.text)
+            try:
+                connection = mail.get_connection()
+                mail.send_mail(subject, body, connection.username, [connection.username])
+            except Exception:
+                mail.send_mail(subject, body, 'admin@localhost', ['moderator@localhost'])
+            #time - current time by default
             return redirect('index') #need url for news/pk
     else:
         form = AddNewsModelForm()

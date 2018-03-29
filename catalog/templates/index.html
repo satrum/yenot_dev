@@ -101,7 +101,7 @@ CREATED TIME
 		
 		
 			{% if news.enable_vote %}
-		<div id="like_btn_{{news.newsid}}" data-newsid="{{news.newsid}}" data-url="{% url 'news-like-ajax' %}"  class="like_btn" ><p>VOTE</p></div>
+		<div id="like_btn_{{news.newsid}}" data-newsid="{{news.newsid}}" data-url="{% url 'news-like-ajax' %}"  class="like_btn" onclick="like(this)"><p>VOTE</p></div>
 				{% endif %}
 		
 		
@@ -114,7 +114,7 @@ CREATED TIME
 		
 		{% if user.is_authenticated %}
 			{% if news.enable_vote %}
-				<div id="dislike_btn_{{news.newsid}}" data-newsid="{{news.newsid}}" data-url="{% url 'news-dislike-ajax' %}"  class="dislike_btn"><p>VOTE</p></div>
+				<div id="dislike_btn_{{news.newsid}}" data-newsid="{{news.newsid}}" data-url="{% url 'news-dislike-ajax' %}"  class="dislike_btn" onclick="dislike(this)"><p>VOTE</p></div>
 			{% endif %}
 		{% endif %}
 		<p>FAKE</p>
@@ -131,63 +131,54 @@ CREATED TIME
     <div class="loading" style="display: none;">
     Loading...
   </div>
+<script type="text/javascript">
+function like(elem){
+console.log('clicked like');
+var newsid;
+newsid = elem.getAttribute('data-newsid');
+console.log(newsid);
+url = elem.getAttribute('data-url');
+console.log(url);
+$.get(url, {news_id: newsid}, function(data){
+		   $('#like_count_'+newsid).html(data);
+		   $('#like_btn_'+newsid).hide();
+		   $('#dislike_btn_'+newsid).hide();
+	});
+};
+function dislike(elem){
+console.log('clicked dislike');
+var newsid;
+newsid = elem.getAttribute('data-newsid');
+console.log(newsid);
+url = elem.getAttribute('data-url');
+console.log(url);
+$.get(url, {news_id: newsid}, function(data){
+               $('#dislike_count_'+newsid).html(data);
+               $('#like_btn_'+newsid).hide();
+			   $('#dislike_btn_'+newsid).hide();
+    });
+};
+
+  </script>
   
   <script>
     var infinite = new Waypoint.Infinite({
       element: $('.infinite-container')[0],
       onBeforePageLoad: function () {
         $('.loading').show();
+		console.log('before pageLoad ajax');
+				
       },
       onAfterPageLoad: function ($items) {
         $('.loading').hide();
-				$('.like_btn').click(function(){
-    var newsid;
-    newsid = $(this).attr("data-newsid");
-	url = $(this).attr("data-url");
-    $.get(url, {news_id: newsid}, function(data){
-               $('#like_count_'+newsid).html(data);
-               $('#like_btn_'+newsid).hide();
-			   $('#dislike_btn_'+newsid).hide();
-    });
-});
-$('.dislike_btn').click(function(){
-    var newsid;
-    newsid = $(this).attr("data-newsid");
-	url = $(this).attr("data-url");
-    $.get(url, {news_id: newsid}, function(data){
-               $('#dislike_count_'+newsid).html(data);
-               $('#like_btn_'+newsid).hide();
-			   $('#dislike_btn_'+newsid).hide();
-    });
-});
-				$("#user_list").trigger("update");
+		$("#user_list").trigger("update");
+		console.log('after pageLoad ajax');
+					
       },
 	  
     });
 	</script>
-	<script type="text/javascript">
-		$('.like_btn').click(function(){
-    var newsid;
-    newsid = $(this).attr("data-newsid");
-	url = $(this).attr("data-url");
-    $.get(url, {news_id: newsid}, function(data){
-               $('#like_count_'+newsid).html(data);
-               $('#like_btn_'+newsid).hide();
-			   $('#dislike_btn_'+newsid).hide();
-    });
-});
-$('.dislike_btn').click(function(){
-    var newsid;
-    newsid = $(this).attr("data-newsid");
-	url = $(this).attr("data-url");
-    $.get(url, {news_id: newsid}, function(data){
-               $('#dislike_count_'+newsid).html(data);
-               $('#like_btn_'+newsid).hide();
-			   $('#dislike_btn_'+newsid).hide();
-    });
-});
 
-  </script>
   <script>
   window.onload = function () {
   var form = $('#form'), def = form.data('def'), data = {}, action;
