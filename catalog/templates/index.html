@@ -140,6 +140,32 @@ CREATED TIME
       },
       onAfterPageLoad: function ($items) {
         $('.loading').hide();
+				$('.like_btn').click(function(){
+    var newsid;
+    newsid = $(this).attr("data-newsid");
+	url = $(this).attr("data-url");
+    $.get(url, {news_id: newsid}, function(data){
+               $('#like_count_'+newsid).html(data);
+               $('#like_btn_'+newsid).hide();
+			   $('#dislike_btn_'+newsid).hide();
+    });
+});
+$('.dislike_btn').click(function(){
+    var newsid;
+    newsid = $(this).attr("data-newsid");
+	url = $(this).attr("data-url");
+    $.get(url, {news_id: newsid}, function(data){
+               $('#dislike_count_'+newsid).html(data);
+               $('#like_btn_'+newsid).hide();
+			   $('#dislike_btn_'+newsid).hide();
+    });
+});
+				$("#user_list").trigger("update");
+      },
+	  
+    });
+	</script>
+	<script type="text/javascript">
 		$('.like_btn').click(function(){
     var newsid;
     newsid = $(this).attr("data-newsid");
@@ -160,10 +186,7 @@ $('.dislike_btn').click(function(){
 			   $('#dislike_btn_'+newsid).hide();
     });
 });
-		$("#user_list").trigger("update");
-      },
-	  
-    });
+
   </script>
   <script>
   window.onload = function () {
