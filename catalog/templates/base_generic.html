@@ -6,11 +6,34 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-   <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.6.1.min.js"></script>
+  <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script>
+ $(function() {
+  $("#datepicker").datepicker({
+    beforeShow: addCustomInformation,
+    onChangeMonthYear: addCustomInformation,
+    onSelect: addCustomInformation,
+    firstDay: 1,
+	dateFormat: "yy-mm-dd",
+  });
+  addCustomInformation();
+});
+
+function addCustomInformation() {
+  setTimeout(function() {
+    $(".ui-datepicker-calendar td").filter(function() {
+      var date = $(this).text();
+    });
+  }, 0)
+}
+</script>
    {% load static %}
-   <script src="{% static 'jquery-3.1.1.min.js' %}"></script>
+
    <script src="{% static 'jquery.waypoints.min.js' %}"></script>
    <script src="{% static 'infinite.min.js' %}"></script>
     
@@ -35,32 +58,41 @@
  
 	<div class="col-sm-2">
       {% block sidebar %}
-      <ul class="sidebar-nav logo">
-          <li><a href="{% url 'index' %}"><img src="{% static "images/logo.png" %}" alt="Home" style="width:100%;"/></a></li>
+     
+		 <div class="menu">
+		  <ul class="sidebar-nav logo">
+          <li><a href="{% url 'index' %}"><img src="{% static "images/yeenot.png" %}" alt="Home" style="height: 159.5px;width: 159px;"/></a></li>
 		 </ul>
-		 <ul class="sidebar-nav menu">
-          <li><a href="{% url 'books' %}">Топ лидеров</a></li>
-		  <li><a href="{% url 'news' %}">Топ новостей</a></li>
-          <li><a href="{% url 'source' %}">Топ каналов</a></li>	
-		  <li><a href="{% url 'rules' %}">RULES</a></li>
-		  
-		  </ul>
-			 <ul class="sidebar-nav login">
-			{% if user.is_authenticated %}
+		 <div class="sl_menu">
+		 <ul class="sidebar-nav we">
+          <li class="linetop"><h3><strong>SING UP, VOTE, BECOME A GURU OF CRYPTO SIGNALS!</strong></h3></li>
+		  {% if user.is_authenticated %}
            			
 			 <li>Привет,{{ user.get_username }}!</li>
-			 <li><a href="{% url 'logout'%}?next={{request.path}}">Logout</a></li>
-			 <li class="add_news"><a href="{% url 'addnews'%}?next={{request.path}}"><div class="round">+</div>Add New</a></li>
-			 <li><a href="http://127.0.0.1/admin">Admin panel</a></li>
+			 <li><a href="{% url 'logout'%}?next={{request.path}}" class="logout">Logout</a></li>
+			{% else %}
+			
+			{% endif %}
+		 </ul>
+		 <ul class="sidebar-nav linetop">
+          <a href="{% url 'books' %}"><li class="menu_main">TOP LEADERS</li></a>
+          <a href="{% url 'source' %}"><li class="menu_main">TOP CHANNELS</li></a>	
+          <a href="{% url 'news' %}"><li class="menu_main">TOP NEWS</li></a>
+		  <a href="{% url 'rules' %}"><li class="menu_main">RULES</li></a>
+		  
+		  </ul>
+		  <div class="sidebar-nav">
+		  {% if user.is_authenticated %}
+			 <div class="add_news sidebar-nav"><a href="{% url 'addnews'%}?next={{request.path}}"><div class="round">+</div>Add New</a></div>
+			 <div class="sidebar-nav"><a href="http://127.0.0.1/admin">Admin panel</a></div>
 		   </ul>
 		   {% else %}
-			 <li><a href="{% url 'login'%}?next={{request.path}}">Login</a></li>
-			 <li><a href="{% url 'signup'%}?next={{request.path}}">Signup</a></li>
+			 <a href="{% url 'login'%}?next={{request.path}}"><div class="sidebar-nav login">Login</div></a>
+			 <a href="{% url 'signup'%}?next={{request.path}}"><div class="sidebar-nav signup" >Signup</div></a>
 		   {% endif %}
-		   
-             </ul>
-	  
-	  
+		   </div>
+	  </div>
+	</div>	
      {% endblock %}
       </div>
     
@@ -87,7 +119,10 @@
       </div>
     
 	</div>
-
+<footer>
+<p>© YEENOT.TODAY</p>
+</footer>
 </div>
+
 </body>
 </html>

@@ -23,108 +23,109 @@
  <div></div>
 {% endif %}
   <div class="table_filter">
+  <div class="tab_front">
   <div class="table_btn_promo tab_fil">{{banner_left.text}}</div>
   
   <div class="table_filter_Search tab_fil">
   <form role="form" id="form" action="" data-def="">
-  <select name="coin">
+  <select class="sel_fil" name="coin">
   <option  value="" selected >Соin</option>
   {% for coin in coins %}
   <option value="{{ coin }}">{{ coin }}</option>
   {% endfor %}
   </select>
   
-  <select name="source">
+  <select class="sel_fil" name="source">
    <option  value="" selected >Channel</option>
    {% for source in sources %}
   <option value="{{ source}}">{{ source }}</option>
   {% endfor %}
   </select>
-  
-   <input type="submit" value="отправить">
+	<div class="rad fr">
+	<p class="rad">DATA:</p>
+  <input type="text" name="date" id="datepicker" class="sel_fil rad mm" value="MM/DD/YYYY">
+ </div>
+  <p class="rad"><b>DIRECTION:</b></p>
+   <input class="rad" name="direction" type="radio" value="" id="radi1" checked><label for="radi1"><span></span> All</label>
+   <input  class="rad" name="direction" type="radio" id="radi2" value="b"><label for="radi2"><span></span><img src="{% static "images/UP.png" %}"></label>
+   <input class="rad" name="direction" type="radio" id="radi3" value="s" ><label for="radi3"><span></span> <img src="{% static "images/Down.png" %}"></label>
+   
+   <input class="inp" type="submit" value="FILTER">
   </form>
   </div>
   
-  <div class="table_btn_promo tab_fil">{{banner_right.text}}</div>
+  
+  <div class="table_btn_promo tab_fil" style="float: right;">{{banner_right.text}}</div>
+  </div>
   </div>
 
     {% if allnews %}
 <!-- need move to css -->
 
-<strong>All News count :</strong> {{ num_news }}
-<strong>View Type (block or table) :</strong> {{view_newslist_block}}
-<a href="{% url 'change-view' %}"><button>change view</button></a>
-
 	<table id="user_list">
 	<thead>
 	<tr>
-		<th>#</th>
-		<th>Coin</th>
-		<th>SOURCE</th>
-		<th>TEXT</th>
-<th>
-  {% if param.time == '0' %}<button value="time=1">
-  {% elif param.time == '1' %}<button value="time=0">
-  {% else %}<button value="time=1">
-  {% endif %}
-  created time</button>
+		<th>COIN</th>
+		<th>CHANNEL</th>
+		<th>NEWS</th>
+<th style="width: 11%;">
+CREATED TIME
   </th>
-		<th>direction</th>
-		<th>rating</th>
-		<th>Likes</th>
-		<th></th>
-		<th>Dislikes</th>
-		<th></th>
-		<th>LINK</th>
-		<th>USERNAME</th>
+		<th>DIRECTION</th>
+		<th style="width: 10%;">RATING</th>
+		<th style="width: 10%;">REAL</th>
+		<th style="width: 10%;">FAKE</th>
 		
 	</tr>
 	</thead>
 	<tbody class="infinite-container">
 	
 	{% for news in allnews %}
-	{% if news.promo_status == 'y' %}<tr style="font-weight:bold" class="infinite-item" >{% else %}<tr class="infinite-item">{% endif %} 
-		<td>{{news.newsid}}</td>
-		<td>{{news.coinid}}</td>
-		<td>{{news.sourceid}}</td>
-		<td><a href="{{ news.get_absolute_url }}">{{news.text}}</a></td>
+	{% if news.promo_status == 'y' %}<tr style="font-weight:bold" class="infinite-item tab_pro" >{% else %}<tr class="infinite-item tab_fon">{% endif %} 
+		<td class="td_pd"style="width: 10%;">
+		<img src="{{news.coinid.image.url}}" style="border-radius: 100%; width: 77px;padding-top: 6px;">
+		<h3>{{news.coinid}}</h3>
+        <p class="price_change">{{news.coinprice|floatformat:3}}$
+		({{news.coinid.change|floatformat:1}}%)</p>		
+		</td>
+		<td class="td_pd" style="width: 10%;">{{news.sourceid}}</td>
+		<td class="td_pd ria"style="width: 45%;"><a href="{{ news.get_absolute_url }}"><h4>{{news.title}}</h4></a><div class="textnews"><p>{{news.text|truncatechars:245}}</p></div>
+		{%if news.link %}<a href="{{ news.link }}" class="rt">{{ news.link|truncatechars:130}}</a>{% endif %}
+		</td>
 		
-		<td>{{news.time}}</td>
-		<td>{{news.direction}}</td>
-		<td>{{news.rating}}</td>
-		<td id="like_count_{{news.newsid}}">{{news.like}}</td>
+		<td class="td_pd" style="width: 10%;">{{news.time|date:"d M Y"}}<br>{{news.time|time:"H:i"}}</</td>
+		<td class="td_pd">{% if news.direction == 'b' %}<img src="{% static 'images/UP_news.png' %}">{% elif news.direction == 's' %}<img src="{% static 'images/D2l.png' %}">{% endif %}</td>
+		<td class="td_pd" style="width: 10%;">{{news.rating}}</td>
+		<td style="width: 10%;    text-align: center;     padding: 0px 16px;"><p  id="like_count_{{news.newsid}}">{{news.like}}</p>
+		{% if user.is_authenticated %}
+		
+		
+			{% if news.enable_vote %}
+		<div id="like_btn_{{news.newsid}}" data-newsid="{{news.newsid}}" data-url="{% url 'news-like-ajax' %}"  class="like_btn" ><p>VOTE</p></div>
+				{% endif %}
+		
+		
+{% endif %}
+
+        <p> REAL</p>		
+		</td>
+		
+		<td style="width: 10%;    text-align: center;     padding: 0px 16px;"><p id="dislike_count_{{news.newsid}}">{{news.dislike}}</p>
 		
 		{% if user.is_authenticated %}
 			{% if news.enable_vote %}
-				<td><button id="like_btn_{{news.newsid}}" data-newsid="{{news.newsid}}" data-url="{% url 'news-like-ajax' %}" class="like_btn">Like</button></td>
-			{% else %}
-			    <td></td>
+				<div id="dislike_btn_{{news.newsid}}" data-newsid="{{news.newsid}}" data-url="{% url 'news-dislike-ajax' %}"  class="dislike_btn"><p>VOTE</p></div>
 			{% endif %}
-		{% else %}
-		<td></td>
 		{% endif %}
-		
-		<td id="dislike_count_{{news.newsid}}">{{news.dislike}}</td>
-		
-		{% if user.is_authenticated %}
-			{% if news.enable_vote %}
-				<td><button id="dislike_btn_{{news.newsid}}" data-newsid="{{news.newsid}}" data-url="{% url 'news-dislike-ajax' %}" class="dislike_btn">Dislike</button></td>
-			{% else %}
-			    <td></td>
-			{% endif %}
-		{% else %}
-		<td></td>
-		{% endif %}
-		
-		<td><a href="{{ news.link }}">{{ news.link }}</a></td>
-		<td>{{news.user}}</td>
+		<p>FAKE</p>
+		</td>
 		
 	</tr>
 	{% endfor %}
 	</tbody>
 	</table>
   {% if allnews.has_next %}
-    <a class="infinite-more-link" href="?page={{ allnews.next_page_number}}&coin={{rget.coin}}&source={{rget.source}}">More</a>
+    <a class="infinite-more-link" href="?page={{ allnews.next_page_number}}&coin={{rget.coin}}&source={{rget.source}}&date={{rget.date}}&direction={{rget.direction}}">More</a>
   {% endif %}
 
     <div class="loading" style="display: none;">
@@ -184,6 +185,7 @@ $('.dislike_btn').click(function(){
   });
 };
 </script>
+
     {% else %}
       <p>There are no news.</p>
     {% endif %}       

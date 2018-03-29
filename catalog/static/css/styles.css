@@ -4,37 +4,41 @@
     list-style: none;
 }
 .add_news{
-    background: transparent;
-    width: 45%;
+    background: #46bb1b1a;
     text-align: center;
-    border: 1px solid #b48dd8;
-    border-radius: 5px;
+    border: 1px solid #124c04;
+    border-radius: 1px;
     height: 30px;
     padding-top: 3px;
-    padding-left: 3px;
+    padding-left: 5px;
+    padding-right: 6px;
+    box-shadow: 2px 1px 73px 4px rgba(67, 168, 65, 0.41);
 }
 .round{
-	display: inline-block;
+display: inline-block;
     width: 24px;
     float: left;
-    border: 1px solid #a674d0;
+    border: 2px solid #3a7908;
     border-radius: 100%;
-    height: 22px;
+    height: 23px;
+    color: #aeec2f;
+    background: #44581a7d;
+    margin-right: 6px;
 }
 .col-sm-2{
 	    width: 100%;
-	
-    border-bottom: 1px solid #b48dd8;
+
 }
 .col-sm-10 {
     width: 100%;
-	padding:0px;
+    padding: 0px;
+    margin: auto;
 }
 .banner{
-	    border: 1px solid #b48dd8;
+	border: 1px solid #a0b987;
     margin: 20px auto;
     width: 95%;
-    border-radius: 8px;
+	background: #1b2d0cb0;
 }
 .banner_content{
 	    display: inline-block;
@@ -61,43 +65,328 @@
 max-height:300px;
 }
 .banner_btn{
-	cursor:pointer;
-	display:inline-block;
-	padding:3%;
-	    border: 1px solid #b48dd8;
+cursor: pointer;
+    display: inline-block;
+    padding: 3%;
+    border: 1px solid #9baa46;
     margin: 2% auto 0px;
-	    border-radius: 5px;
+    background: #71aa1f69;
 }
 .table_filter{
-border-top: 1px solid #b48dd8;	
-border-bottom: 1px solid #b48dd8;	
+border: 1px solid #a0b987;
 margin:auto;
 position: absolute;
   position: sticky;
   top: 0px;
-  background: white;
-  padding:0px 15px;
+    background: url(/static/images/Yeenot_gl.png) 29% 7% fixed;
+}
+.tab_front{
+	    background: #1b2d0cb0;
+    padding: 7px 7px;
 }
 .table_btn_promo{
-	border: 1px solid #b48dd8;
-	border-radius: 5px;
-	width: 205px;
+	border: 1px solid #a0b987;
+	width: 250px;
     height: 50px;
 }
 .tab_fil{
 	display:inline-block;
-    margin: 2% auto;  
+    margin:auto; 
+    vertical-align: middle;	
 	}
-	tr,td, th {border:1px solid black;}
+.tab_fon{
+	background: #021202c9;
+    border-bottom: 1px solid #102205;
+    border-left: 1px solid #102205;
+    border-right: 1px solid #102205;
+}
+.td_pd{
+     text-align: center;
+    padding: 0px 6px;
+}
+.table_filter_Search{
+padding: 0px 12px;	
+}
+.price_change{
+background: #1f45024d;
+    padding: 3px 0px;
+	}
+p, h1, h2, h3, h4, li, button, ol, a, option, input, td, th, select, label{
+	font-family: 'Montserrat', sans-serif;
+	color:white;
+	font-weight:900;
+}	
+#user_list{
+	width: 100%;
+}
+a:hover, a:active{
+	font-family: 'Montserrat', sans-serif;
+	color:white;
+	font-weight:900;
+	text-decoration:none;
+}
+.we h3{
+	font-weight:900;
+	
+}
+.we{
+	width: 100%;
+    border-top: 2px solid #a0b987;
+    border-bottom: 1px solid #a0b987;
+	background: #1b2d0cb0;
+}
+.sl_menu{
+    display: inline-block;
+    margin: 0px 0px 0px 0px;
+    vertical-align: top;
+position: absolute;
+	height:162px;
+	text-align:left;
+}
+body{
+	    background: url(/static/images/Yeenot_gl_2.png) 15% 29% fixed;
+		background-size: cover;
+}
+footer{
+	    background: #000e01eb;
+    border-bottom: 0px;
+    margin: 5px 0px 0px;
+    padding: 0px;
+	margin:auto;
+	    width: 1300px;
+}
+footer p{
+	    margin: 0px;
+    padding: 5px;
+    text-align: center;
+}
 @media (min-width: 768px){
 .col-sm-1, .col-sm-10, .col-sm-11, .col-sm-12, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9 {
 float: none;
+padding: 0px;
+}
+.like_btn{
+background: #35ae16;
+    border-radius: 100%;
+    width: 53px;
+    height: 53px;
+    box-shadow: 0px 0px 0px 4px rgba(27, 46, 23, 0.7);
+    margin: 8px auto;
+    border: 2px solid silver;
+    cursor: pointer;
+}
+.like_btn p{
+	padding: 14px 0px;
+	}
+.dislike_btn{
+background: #be0708;
+    border-radius: 100%;
+    width: 53px;
+    height: 53px;
+    box-shadow: 0px 0px 0px 4px rgba(27, 46, 23, 0.7);
+    margin: 8px auto;
+    border: 2px solid silver;
+    cursor: pointer;
+}
+.tab_pro{
+	    font-weight: bold;
+    background: #27400b7d;
+    border: 2px solid #315304;
+}
+.ria{
+	text-align:left;
+	vertical-align: text-top;
+}
+.textnews{
+	max-height: 86px;
+    text-overflow: ellipsis;
+    padding: 2px;
+    overflow: hidden;
+    min-height: 86px;
+    line-height: 20px;
+	margin-bottom: 13px;
+}
+
+.ria h4{
+	text-decoration:underline;
+}
+.rt, .rt:hover{
+	color: #67ab3a;
+}
+.dislike_btn p{
+	padding: 14px 0px;
+	}
+.inp{
+	    background: #64b609;
+    border: 1px solid #a0b987;
+	    padding: 4px 17px;
+}
+.sel_fil{
+    background: #48a22b17;
+    border: 1px solid #a0b987;	
+	    padding: 4px 0px;
+}
+select:after{
+	border-color: #a0b987;
+}
+.rad{
+    display: inline-block;
+    vertical-align: middle;
+    padding: 0px 3px;
+    margin: 0px;
+}
+input[type=radio] {
+display:none;
+}
+input[type=radio] + label span {
+    display: inline-block;
+    vertical-align: middle;
+    margin: 0px 0 0;
+    width: 18px;
+    height: 18px;
+    border-radius: 100%;
+    background: white;
+	
+} 
+input[type=radio]:checked + label span {
+background: #64d90b -20px 6px no-repeat;
+    border: 3px solid white;
+
+	
+}
+
+#datepicker {
+padding: 0px;
+    text-align: center;
+    width: 121px;	
+}
+option, selected{
+	    background: #234700;
+}
+.fr{
+	border: 1px solid #a0b987;
+    padding: 2px;
+    vertical-align: bottom;
+    height: 30px;
+}
+.mm{
+	border:0px;
+	background:transparent;
+}
+.mm:after{
+	border:0px;
+	background:transparent;
+}
+div.datepicker{
+  display: none;
+}
+.ui-datepicker .weekend .ui-state-default {
+  background: #FEA;
+}
+
+.ui-datepicker-calendar td a[data-custom] {
+  position: relative;
+  padding-bottom: 10px;
+}
+
+.ui-datepicker-calendar td a[data-custom]:after {
+  content: '$' attr(data-custom);
+  display: block;
+  font-size: small;
+}
+.header{
+	    background: #010500f5;
+    text-align: center;
+    padding: 10px;
+}
+.sel_fil:hover{
+    background: #48a22b17;
+    border: 1px solid #a0b987;	
+	    padding: 4px 0px;
+}
+.signup{
+	padding: 2px 21px;
+    background: #5a9f0821;
+    box-shadow: 2px 1px 55px 4px rgba(67, 168, 65, 0.41);
+    border: 1px solid #2f500e;
+	cursor:pointer;
+}
+.logout{
+    padding: 5px 6px;
+    background: #5a9f0821;
+    box-shadow: 2px 1px 38px 4px rgba(67, 168, 65, 0.41);
+    border: 1px solid #2b4313;
+
+}
+.login{
+	padding: 2px 21px;
+    background: #5a9f0821;
+    box-shadow: 2px 1px 38px 4px rgba(67, 168, 65, 0.41);
+    border: 1px solid #325014;
+}
+.menu_main{
+    padding: 5px 5px;
+    background: #5a9f0842;
+    margin: 0px 25px 0px 0px;
+    width: 144px;
+    text-align: center;
+	position: relative;
+	box-shadow: 2px 1px 38px 4px rgba(67, 168, 65, 0.41);
+}
+.menu_main:hover{
+    padding: 5px 5px;
+    background: #6ec5076e;
+    margin: 0px 25px 0px 0px;
+    width: 144px;
+    text-align: center;
+	position: relative;
+	box-shadow: 2px 1px 38px 4px rgba(33, 164, 30, 0.71);
+}
+.menu_main:before {
+	content: "";
+	position: absolute;
+	top: -25px; 
+	left: 0;
+	width: 0;
+	height: 0;
+	border-left: 72px solid transparent;
+	border-right: 72px solid transparent;
+	border-bottom: 25px solid #5a9f0842;
+}
+.menu_main:after {
+	content: "";
+	position: absolute;
+	bottom: -25px; 
+	left: 0;
+	width: 0;
+	height: 0;
+	border-left: 72px solid transparent;
+	border-right: 72px solid transparent;
+	border-top: 25px solid #5a9f0842;
+}
+.we {
+    width: 100%;
+    border-top: 1px solid #a0b987;
+    border-bottom: 1px solid #a0b987;
+    background: #1b2d0cb0;
+    height: 37%;
+}
+
+.row {
+    margin-right: 0px;
+    margin-left: 0px;
+	max-width: 1300px;
+    margin: auto;
+}
+}
+.linetop{
+	width:80%;
 }
 .banner{
-	    border: 1px solid #b48dd8;
+	border: 1px solid #a0b987;
     margin: 20px auto;
     width: 87%;
-    border-radius: 8px;
+	background: #1b2d0cb0;
 }
 
 .banner_img{
@@ -121,23 +410,43 @@ float: none;
 li{
 	display:inline-block;
 }
-
+.ui-state-highlight, .ui-widget-content .ui-state-highlight, .ui-widget-header .ui-state-highlight {
+    border: 1px solid #377905;
+    background:#2b4f03;
+    color: #f0f2ef;
+}
+.ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active, a.ui-button:active, .ui-button:active, .ui-button.ui-state-active:hover {
+    border: 1px solid #377905;
+    background: #2b4f03;
+    font-weight: normal;
+    color: #ffffff;
+}
+.ui-datepicker th {
+    padding: .7em .3em;
+    text-align: center;
+    font-weight: bold;
+    border: 0;
+    background: #2b4f03;
+}
 .col-sm-2 ul {
-    margin: 20px auto 0px;
+    margin: 0px auto 0px;
     display: inline-block;
 	vertical-align: middle;
 }
 .logo{
-	width: 20%;
-}
-.menu{
-	width: 55%;
-    text-align: center;
+	    padding: 0px;
+	    border: 1px solid #a0b987;
 	}
-.login{
-	    width: 20%;
-    text-align: right;
-}
+.menu{
+   width: 1300px;
+    border-bottom: 1px solid #a0b987;
+    border-right: 1px solid #a0b987;
+    background: #1b2d0cb0;
+    height: 63%;
+    position: relative;
+    margin: auto;
+	}
+
 	}
 @media (min-width: 768px)and (max-width:888px){
 .banner_content h1 {
@@ -159,20 +468,21 @@ li{
 }
 @media (min-width: 1024px){
 .banner_btn {
-    cursor: pointer;
+cursor: pointer;
     display: inline-block;
     padding: 3%;
-    border: 1px solid #b48dd8;
+    border: 1px solid #9baa46;
     margin: 8% auto 0px;
-    border-radius: 5px;
+    background: #71aa1f69;
 }
 }
 @media (min-width: 1500px){
 
 .banner {
-    border: 1px solid #b48dd8;
+    border: 1px solid #a0b987;
     margin: 20px auto;
     width: 60%;
-    border-radius: 8px;
+ 
 }
+
 }
