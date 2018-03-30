@@ -10,7 +10,7 @@ import os,sys
 # print(os.getcwd())
 # print(sys.argv)
 from django.core.management.base import BaseCommand, CommandError
-from catalog.models import News, Coin, Source, UserVotes, Profile
+from catalog.models import News, Coin, Source, UserVotes, Profile, YeenotSettings
 from django.contrib.auth.models import User
 
 import requests
@@ -132,6 +132,17 @@ class Command(BaseCommand):
 			 	new.rating=rating
 			 	new.save()
 			print(new.newsid, new.coinid, 'time delta:', delta, 'price changed: ',decimalp2p1, new.direction, 'likes:{:<3} dislike:{:<3} delta:{:<3}'.format(new.like,new.dislike,likedelta), 'rating: ',rating)#curprice, newsprice, likedelta
+		# setup YeenotSettings with aggregation and update_or_create:
+		# https://docs.djangoproject.com/en/2.0/topics/db/aggregation/
+		# https://docs.djangoproject.com/en/2.0/ref/models/querysets/#update-or-create
+		agg_value = news.aggregate(num_value = models.Max('rating')) #{'num_value': Decimal('41.74')}
+		obj, created = YeenotSettings.objects.update_or_create(name='news_rate_max',defaults=agg_value)
+		print(obj.id, obj.num_value, created)
+		agg_value_2 = news.aggregate(num_value = models.Min('rating')) #{'num_value': Decimal('41.74')}
+		obj, created = YeenotSettings.objects.update_or_create(name='news_rate_min',defaults=agg_value_2)
+		print(obj.id, obj.num_value, created)
+			
+
 
 	# if news.rating == 0 - exclude
 	def rate_sources(self):

@@ -284,6 +284,11 @@ class Coin(models.Model):
 	def __str__(self):
 		return self.symbol
 
+class YeenotSettings(models.Model):
+	name = models.CharField(max_length=20)
+	#text_value = models.CharField(max_length=20, help_text="text value of settings")
+	num_value = models.DecimalField(default=0.0, blank=True, max_digits=10, decimal_places=2, help_text="digital value of settings")
+
 '''
 News:
  !newsid
@@ -304,14 +309,14 @@ like
 dislike
 
 news methods:
-addnews
-listnews
-likenews
-dislikenews
-approvwnews
-removenews
-changenews
-ratenews
+ок addnews
+ок listnews
+ок likenews
+ок dislikenews
+approvwnews moderator
+ок removenews
+ок changenews
+ок ratenews
 
 Source (channel of news):
  !sourceid

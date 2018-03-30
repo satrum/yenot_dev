@@ -42,7 +42,7 @@ class BookInstanceAdmin(admin.ModelAdmin):
 
 #-------------------------
 #ENOT
-from .models import News, Source, UserVotes, Profile, Banner, Coin
+from .models import News, Source, UserVotes, Profile, Banner, Coin, YeenotSettings
 
 #admin.site.register(News)
 @admin.register(News)
@@ -80,3 +80,7 @@ class BannerAdmin(admin.ModelAdmin):
 class CoinAdmin(admin.ModelAdmin):
     list_display = ('id', 'symbol', 'name', 'price', 'change', 'volume', 'mktcap', 'image') #
     search_fields = ['symbol','name']
+
+@admin.register(YeenotSettings)
+class YeenotSettingsAdmin(admin.ModelAdmin):
+	list_display = ('id', 'name', 'num_value')

@@ -10,28 +10,20 @@ def index(request):
     return HttpResponse("Hello, world. You're at the polls index.")
 '''
 from .models import Book, Author, BookInstance, Genre
-from .models import News, Source, Banner, Coin
+from .models import News, Source, Banner, Coin, YeenotSettings
 from random import randint
 from django.contrib.auth.models import User
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 def index(request, template='index.html', page_template='index_page.html'):#Функция отображения для домашней страницы сайта.
-    # Генерация "количеств" некоторых главных объектов
-    num_books=Book.objects.all().count()
-    num_instances=BookInstance.objects.all().count()
-    # Доступные книги (статус = 'a')
-    num_instances_available=BookInstance.objects.filter(status__exact='a').count()
-    num_authors=Author.objects.count()  # Метод 'all()' применен по умолчанию.
     #ENOT
+    news_rate_max = YeenotSettings.objects.get(name='news_rate_max').num_value
+    news_rate_min = YeenotSettings.objects.get(name='news_rate_min').num_value
     num_news=News.objects.count()
     num_sources=Source.objects.count()
     num_votes=UserVotes.objects.count()
 	# Number of visits to this view, as counted in the session variable.
     num_visits=request.session.get('num_visits', 0)
     request.session['num_visits'] = num_visits+1
-    
-    #get parameters for filter and sort
-    # time - sort by time, rating - sort by rating
-
     
     #select one banner with status=True
     banners = Banner.objects.filter(status=True, place='t')
@@ -62,7 +54,8 @@ def index(request, template='index.html', page_template='index_page.html'):#Фу
         banner_right.save()
     else:
         banner_right=''
-    
+
+    #get parameters for filter and sort    
 	#get news_list &coin=BTC&source=ENOT
     rget = request.GET
     #print(rget)
@@ -135,10 +128,8 @@ def index(request, template='index.html', page_template='index_page.html'):#Фу
         view_newslist_block = 'table'
 		
     context={
-    'num_books':num_books,
-    'num_instances':num_instances,
-    'num_instances_available':num_instances_available,
-    'num_authors':num_authors,
+    'news_rate_max':news_rate_max,
+    'news_rate_min':news_rate_min,
     'num_news':num_news,
     'num_sources':num_sources,
     'num_visits':num_visits,
