@@ -160,10 +160,52 @@ footer p{
     padding: 5px;
     text-align: center;
 }
+
 @media (min-width: 768px){
 .col-sm-1, .col-sm-10, .col-sm-11, .col-sm-12, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9 {
 float: none;
 padding: 0px;
+}
+.log_in_p{
+    margin: 100px auto 16%;
+    width: 448px;
+    text-align: center;
+    background: #43650a70;
+    padding: 25px;
+    box-shadow: 1px 1px 10px 1px #82c345;
+}
+
+.log_2d {
+    color: #c50d0d;
+    font-weight: bold;
+    font-size: 1.2em;
+}
+.log_username label{
+	       font-size: 1.65em;
+}
+#id_username{
+    width: 345px;
+    border: 2px solid #4ea60a;
+    height: 40px;
+    box-shadow: 1px 2px 21px -1px #9ad33c;
+    background: #3b520b61;
+    padding: 2px 8px;
+}
+#id_password{
+    width: 345px;
+    border: 2px solid #4ea60a;
+    height: 40px;
+    box-shadow: 1px 2px 21px -1px #9ad33c;
+    background: #3b520b61;
+    padding: 2px 8px;
+}
+.log_sub{
+	    width: 100px;
+    height: 32px;
+    box-shadow: 1px 2px 21px -1px #9ad33c;
+    background: #3b520b61;
+    border: 2px solid #4ea60a;
+    margin: 8% 0px;
 }
 .like_btn{
 background: #35ae16;
@@ -174,6 +216,7 @@ background: #35ae16;
     margin: 8px auto;
     border: 2px solid silver;
     cursor: pointer;
+	
 }
 .like_btn p{
 	padding: 14px 0px;
@@ -187,6 +230,10 @@ background: #be0708;
     margin: 8px auto;
     border: 2px solid silver;
     cursor: pointer;
+
+}
+.source_chann{
+	width:150px;
 }
 .tab_pro{
 	    font-weight: bold;
