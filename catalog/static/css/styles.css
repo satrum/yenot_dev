@@ -166,6 +166,11 @@ footer p{
 float: none;
 padding: 0px;
 }
+.done_res{
+	margin: 23% auto 30%;
+    width: 900px;
+	text-align:center;
+}
 .log_in_p{
     margin: 100px auto 16%;
     width: 448px;
@@ -174,13 +179,23 @@ padding: 0px;
     padding: 25px;
     box-shadow: 1px 1px 10px 1px #82c345;
 }
-
+.log_in_p_2{
+    margin: 100px auto 31%;
+    width: 448px;
+    text-align: center;
+    background: #43650a70;
+    padding: 25px;
+    box-shadow: 1px 1px 10px 1px #82c345;
+}
 .log_2d {
     color: #c50d0d;
     font-weight: bold;
     font-size: 1.2em;
 }
 .log_username label{
+	       font-size: 1.65em;
+}
+.log_username_2 {
 	       font-size: 1.65em;
 }
 #id_username{
@@ -199,6 +214,30 @@ padding: 0px;
     background: #3b520b61;
     padding: 2px 8px;
 }
+#id_email{
+	    width: 345px;
+    border: 2px solid #4ea60a;
+    height: 40px;
+    box-shadow: 1px 2px 21px -1px #9ad33c;
+    background: #3b520b61;
+    padding: 2px 8px;
+}
+#id_new_password1{
+		    width: 345px;
+    border: 2px solid #4ea60a;
+    height: 40px;
+    box-shadow: 1px 2px 21px -1px #9ad33c;
+    background: #3b520b61;
+    padding: 2px 8px;
+}
+#id_new_password2{
+		    width: 345px;
+    border: 2px solid #4ea60a;
+    height: 40px;
+    box-shadow: 1px 2px 21px -1px #9ad33c;
+    background: #3b520b61;
+    padding: 2px 8px;
+}
 .log_sub{
 	    width: 100px;
     height: 32px;
@@ -206,6 +245,24 @@ padding: 0px;
     background: #3b520b61;
     border: 2px solid #4ea60a;
     margin: 8% 0px;
+}
+.log_sub_2{
+	width: 134px;
+    height: 32px;
+    box-shadow: 1px 2px 21px -1px #9ad33c;
+    background: #3b520b61;
+    border: 2px solid #4ea60a;
+    margin: 4% 0px;
+    font-size: 1.0em;
+}
+.log_sub_3{
+	width: 178px;
+    height: 32px;
+    box-shadow: 1px 2px 21px -1px #9ad33c;
+    background: #3b520b61;
+    border: 2px solid #4ea60a;
+    margin: 4% 0px;
+    font-size: 1.0em;
 }
 .like_btn{
 background: #35ae16;
