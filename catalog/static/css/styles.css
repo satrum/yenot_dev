@@ -157,8 +157,9 @@ footer{
 }
 footer p{
 	    margin: 0px;
-    padding: 5px;
     text-align: center;
+	 display:inline-block; 
+	 padding:8px;
 }
 
 @media (min-width: 768px){
@@ -170,6 +171,10 @@ padding: 0px;
 	margin: 23% auto 30%;
     width: 900px;
 	text-align:center;
+}
+.fl{
+	    display: inline-block;
+
 }
 .log_in_p{
     margin: 100px auto 16%;
@@ -183,6 +188,14 @@ padding: 0px;
     margin: 100px auto 31%;
     width: 448px;
     text-align: center;
+    background: #43650a70;
+    padding: 25px;
+    box-shadow: 1px 1px 10px 1px #82c345;
+}
+.log_in_p_add{
+	margin: 40px auto 16%;
+    width: 700px;
+    text-align: left;
     background: #43650a70;
     padding: 25px;
     box-shadow: 1px 1px 10px 1px #82c345;
@@ -230,6 +243,22 @@ padding: 0px;
     background: #3b520b61;
     padding: 2px 8px;
 }
+#id_password1{
+			    width: 345px;
+    border: 2px solid #4ea60a;
+    height: 40px;
+    box-shadow: 1px 2px 21px -1px #9ad33c;
+    background: #3b520b61;
+    padding: 2px 8px;
+}
+#id_password2{
+			    width: 345px;
+    border: 2px solid #4ea60a;
+    height: 40px;
+    box-shadow: 1px 2px 21px -1px #9ad33c;
+    background: #3b520b61;
+    padding: 2px 8px;
+}
 #id_new_password2{
 		    width: 345px;
     border: 2px solid #4ea60a;
@@ -237,6 +266,116 @@ padding: 0px;
     box-shadow: 1px 2px 21px -1px #9ad33c;
     background: #3b520b61;
     padding: 2px 8px;
+}
+#id_last_name{
+
+    border: 2px solid #4ea60a;
+    height: 40px;
+    box-shadow: 1px 2px 21px -1px #9ad33c;
+    background: #3b520b61;
+    padding: 2px 8px;
+	width:170px;
+}
+#id_first_name{
+    width:170px;
+    border: 2px solid #4ea60a;
+    height: 40px;
+    box-shadow: 1px 2px 21px -1px #9ad33c;
+    background: #3b520b61;
+    padding: 2px 8px;
+}
+#id_sourceid{
+	    width:205px;
+    border: 2px solid #4ea60a;
+    height: 30px;
+    box-shadow: 1px 2px 21px -1px #9ad33c;
+    background: #3b520b61;
+    padding: 2px 2px;
+}
+#id_title{
+    width: 200px;
+    border: 2px solid #4ea60a;
+    height: 30px;
+    box-shadow: 1px 2px 21px -1px #9ad33c;
+    background: #3b520b61;
+    padding: 2px 2px;
+    margin: 20px auto;
+}
+#id_text{
+	    border: 2px solid #4ea60a;
+    box-shadow: 1px 2px 21px -1px #9ad33c;
+    background: #3b520b61;
+    padding: 2px 2px;
+}
+#id_coinid{
+    width:75px;
+    border: 2px solid #4ea60a;
+    height: 30px;
+    box-shadow: 1px 2px 21px -1px #9ad33c;
+    background: #3b520b61;
+    padding: 2px 2px;
+
+}
+#id_direction{
+	    width:75px;
+    border: 2px solid #4ea60a;
+    height: 30px;
+    box-shadow: 1px 2px 21px -1px #9ad33c;
+    background: #3b520b61;
+    padding: 2px 2px;
+}
+#id_duration{
+	    width:170px;
+    border: 2px solid #4ea60a;
+    height: 30px;
+    box-shadow: 1px 2px 21px -1px #9ad33c;
+    background: #3b520b61;
+    padding: 2px 8px;
+}
+#id_proof_image{
+	    width: 170px;
+    border: 2px solid #4ea60a;
+    height: 30px;
+    box-shadow: 1px 2px 21px -1px #9ad33c;
+    background: #3b520b61;
+    padding: 2px 2px;
+    margin: 20px 15px;
+    display: inline-block;
+}
+#id_link{
+    width: 64%;
+    border: 2px solid #4ea60a;
+    height: 30px;
+    box-shadow: 1px 2px 21px -1px #9ad33c;
+    background: #3b520b61;
+    padding: 2px 2px;
+    margin: 20px 0px 0px 59px;
+    display: inline-block;
+}
+.i_link{
+	
+}
+.text_area{
+	margin:20px auto;
+}
+
+.title_add_news{
+	text-align:center;
+
+}
+.title_add_news label{
+	font-size: 1.2em;
+}
+.rem{
+    font-size: 0.75em;
+    padding: 2px 5px;
+    color: #9eea1f;
+    margin: 1px 23px;
+}
+.text_add{
+	margin: 40px auto;
+	text-align: center;
+	
 }
 .log_sub{
 	    width: 100px;
@@ -263,6 +402,15 @@ padding: 0px;
     border: 2px solid #4ea60a;
     margin: 4% 0px;
     font-size: 1.0em;
+}
+.log_sub_4 {
+    width: 100px;
+    height: 32px;
+    box-shadow: 1px 2px 21px -1px #9ad33c;
+    background: #3b520b61;
+    border: 2px solid #4ea60a;
+    margin: 8% auto;
+    display: block;
 }
 .like_btn{
 background: #35ae16;

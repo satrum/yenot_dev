@@ -1,13 +1,55 @@
 {% extends 'base_generic.html' %}
 
 {% block content %}
+<div class="text_add">
+<h3>ADD YOUR SIGNAL HERE:</h3>
+</div>
+<div class="log_in_p_add">
   <form method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Add New</button>
+<div class="title_add_news">
+	{{ form.title.label_tag }}
+ <input type="text"
+       name="{{ form.title.name }}"
+       id="{{ form.title.id_for_label }}"
+       {% if form.title.value != None %}value="{{ form.title.value|stringformat:'s' }}"{% endif %}
+       maxlength="{{ form.title.field.max_length }}"
+       {% if form.tilte.field.required %}required{% endif %}>
+	   
+</div>	   
+
+	   {{ form.coinid.label_tag }}
+       {{form.coinid}}
+	   
+	   {{ form.sourceid.label_tag }}
+       {{form.sourceid}}
+	   
+	   {{ form.direction.label_tag }}
+       {{form.direction}}
+	<div class="text_area">   
+	   {{ form.text.label_tag }}
+ <textarea type="text"
+       name="{{ form.text.name }}" cols="89" rows="5" maxlength="1000"
+       id="{{ form.text.id_for_label }}"
+       {% if form.text.value != None %}value="{{ form.text.value|stringformat:'s' }}"{% endif %}
+       maxlength="{{ form.text.field.max_length }}"
+       {% if form.text.field.required %}required{% endif %}></textarea>
+	   </div>
+	    {{ form.duration.label_tag }}
+       {{form.duration}}
+	   <div class="i_link">
+	           {{ form.link.label_tag }}
+       {{form.link}}
+	   </div>
+	   <div class="i_proof">
+	    {{ form.proof_image.label_tag }}
+       {{form.proof_image}}
+	   </div>
+
+    <button class="log_sub_4" type="submit">Add New</button>
   </form>
 
-  <p><a href="{% url 'index' %}">Return to home</a></p>
+  <p style="text-align:center"><a href="{% url 'index' %}">Return to home</a></p>
+  </div>
 {% endblock %}
 
 

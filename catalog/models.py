@@ -127,11 +127,11 @@ from django.core.validators import MinLengthValidator
 
 class News(models.Model):
     newsid = models.AutoField(primary_key=True, help_text="news id")
-    text = models.TextField(max_length=1000,help_text="description of news",validators=[MinLengthValidator(20)])
-    title = models.CharField(max_length=100) # резервирую название на будущее, для сигналов нет
-    link =  models.URLField(default="https://yeenot.today", max_length=100) # link to source of news
+    text = models.TextField(max_length=1000,verbose_name="DESCRIPTION OF NEWS",validators=[MinLengthValidator(20)])
+    title = models.CharField(max_length=100,verbose_name="TITLE OF NEWS:") # резервирую название на будущее, для сигналов нет
+    link =  models.URLField(default="https://yeenot.today", max_length=100,verbose_name="REFERENCE ON NEWS:") # link to source of news
     time = models.DateTimeField(default=timezone.now) #set time of add news
-    proof_image = models.ImageField(upload_to='news_images/', max_length=100, blank=True ) #image of proof height_field=200, width_field=200
+    proof_image = models.ImageField(upload_to='news_images/', max_length=100, blank=True,verbose_name="SCREENSHOT OF THE NEWS" ) #image of proof height_field=200, width_field=200
     MODERATE_STATUS = (
         ('a', 'Added and sended for moderate'),
         ('p', 'Approved for view'),
@@ -148,20 +148,20 @@ class News(models.Model):
         ('s', 'Sell'),
 	#	('h', 'HODL'),
     )
-    direction = models.CharField(max_length=1, choices=DIRECTION, blank=True, default='b', help_text='Direction of trade')
+    direction = models.CharField(max_length=1, choices=DIRECTION, blank=True, default='b', verbose_name='DIRECTION OF TRADE')
     rating = models.DecimalField(default=0.0, blank=True, max_digits=10, decimal_places=2) #rate news up to 99 with store 2 for example 100.02
     
     #timeframe duration forecast prediction:
     TIMEFRAME = ( ('4h', '4 hours'),('1d', '1 day'),('1w', '1 week'), )
-    duration = models.CharField(max_length=2, choices=TIMEFRAME, default='1w', help_text='signal forecast duration')
+    duration = models.CharField(max_length=2, choices=TIMEFRAME, default='1w', verbose_name='DURATION TIME OF FORECAST')
     
     #keys:
     #sourceid = models.ForeignKey('Source', on_delete=models.SET_NULL, null=True)
-    sourceid = models.ForeignKey('Source', on_delete=models.SET_DEFAULT, default = 1)
+    sourceid = models.ForeignKey('Source', on_delete=models.SET_DEFAULT, default = 1,verbose_name="SOURCE")
 	#SET_DEFAULT
 	#Set the ForeignKey to its default value; a default for the ForeignKey must be set.
 	#https://docs.djangoproject.com/en/2.0/ref/models/fields/#django.db.models.ForeignKey
-    coinid = models.ForeignKey('Coin', on_delete=models.SET_NULL, null=True)
+    coinid = models.ForeignKey('Coin', on_delete=models.SET_NULL, null=True, verbose_name="COIN")
     class Meta:
         ordering = ["time"]
 		

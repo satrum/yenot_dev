@@ -1,23 +1,74 @@
 {% extends "base_generic.html" %}
 
 {% block content %}
-  <h2>Sign up</h2>
+<div class="log_in_p" >
+  <h3 style="margin:0px auto 20px;">Sign up</h3>
   <form method="post">
     {% csrf_token %}
-    {% for field in form %}
-      <p>
-        {{ field.label_tag }}<br>
-        {{ field }}
-        {% if field.help_text %}
-          <small style="color: grey">{{ field.help_text }}</small>
-        {% endif %}
-        {% for error in field.errors %}
+      <div>
+	  <div class="log_username">{{ form.username.label_tag }}</div>
+ <input type="text"
+       name="{{ form.username.name }}"
+       id="{{ form.username.id_for_label }}"
+       {% if form.username.value != None %}value="{{ form.username.value|stringformat:'s' }}"{% endif %}
+       maxlength="{{ form.username.field.max_length }}"
+       {% if form.username.field.required %}required{% endif %}>
+	   <p class="rem">{{form.username.help_text}}</p> 
+<div class="fl">
+	   <div class="log_username">{{ form.first_name.label_tag }}</div>
+ <input type="text"
+       name="{{ form.first_name.name }}"
+       id="{{ form.first_name.id_for_label }}"
+       {% if form.first_name.value != None %}value="{{ form.first_name.value|stringformat:'s' }}"{% endif %}
+       maxlength="{{ form.first_name.field.max_length }}"
+       {% if form.first_name.field.required %}required{% endif %}>
+	    <p class="rem">{{form.first_name.help_text}}</p> 
+	   </div>
+<div class="fl">	   
+<div class="log_username">{{ form.last_name.label_tag }}</div>
+ <input type="text"
+       name="{{ form.last_name.name }}"
+       id="{{ form.last_name.id_for_label }}"
+       {% if form.last_name.value != None %}value="{{ form.last_name.value|stringformat:'s' }}"{% endif %}
+       maxlength="{{ form.last_name.field.max_length }}"
+       {% if form.last_name.field.required %}required{% endif %}>
+	   <p class="rem">{{form.last_name.help_text}}</p> 
+	   </div>
+	   
+<div class="log_username">*{{ form.email.label_tag }}</div>
+ <input type="email"
+       name="{{ form.email.name }}"
+       id="{{ form.email.id_for_label }}"
+       {% if form.email.value != None %}value="{{ form.email.value|stringformat:'s' }}"{% endif %}
+       maxlength="{{ form.email.field.max_length }}"
+       {% if form.email.field.required %}required{% endif %}>
+	   <p class="rem">{{form.email.help_text}}</p> 
+<div class="log_username">*{{ form.password1.label_tag }}</div>
+ <input type="password"
+       name="{{ form.password1.name }}"
+       id="{{ form.password1.id_for_label }}"
+       {% if form.password1.value != None %}value="{{ form.password1.value|stringformat:'s' }}"{% endif %}
+       maxlength="{{ form.password1.field.max_length }}"
+       {% if form.password1.field.required %}required{% endif %}>
+       <p class="rem">{{form.password1.help_text}}</p> 	   
+<div class="log_username">*{{ form.password2.label_tag }}</div>
+ <input type="password"
+       name="{{ form.password2.name }}"
+       id="{{ form.password2.id_for_label }}"
+       {% if form.password2.value != None %}value="{{ form.password2.value|stringformat:'s' }}"{% endif %}
+       maxlength="{{ form.password2.field.max_length }}"
+       {% if form.password2.field.required %}required{% endif %}>		   
+       <p class="rem">{{form.password2.help_text}}</p> 
+        
+		</div>
+         
+        {% for error in form.errors %}
           <p style="color: red">{{ error }}</p>
         {% endfor %}
-      </p>
-    {% endfor %}
-    <button type="submit">Sign up</button>
+      
+    <button class="log_sub" type="submit">Sign up</button>
   </form>
+  </div>
 {% endblock %}
 
 
