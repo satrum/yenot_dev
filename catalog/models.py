@@ -127,7 +127,7 @@ from django.core.validators import MinLengthValidator
 
 class News(models.Model):
     newsid = models.AutoField(primary_key=True, help_text="news id")
-    text = models.TextField(max_length=1000,verbose_name="DESCRIPTION OF NEWS",validators=[MinLengthValidator(20)], help_text="YOUR MESSAGE MUST HAVE MORE THAN 20 CHARACTERS")
+    text = models.TextField(max_length=1000,verbose_name="DESCRIPTION OF NEWS",validators=[MinLengthValidator(20)])
     title = models.CharField(max_length=100,verbose_name="TITLE OF NEWS:") # резервирую название на будущее, для сигналов нет
     link =  models.URLField(default="https://yeenot.today", max_length=100,verbose_name="REFERENCE ON NEWS:") # link to source of news
     time = models.DateTimeField(default=timezone.now) #set time of add news

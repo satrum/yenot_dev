@@ -34,8 +34,6 @@
        {% if form.text.value != None %}value="{{ form.text.value|stringformat:'s' }}"{% endif %}
        maxlength="{{ form.text.field.max_length }}"
        {% if form.text.field.required %}required{% endif %}></textarea>
-	   <p class="rem" style="text-align:center;">{{form.text.help_text}} <br> {{ form.text.errors }}</p> 
-	  
 	   </div>
 	    {{ form.duration.label_tag }}
        {{form.duration}}
@@ -47,10 +45,10 @@
 	    {{ form.proof_image.label_tag }}
        {{form.proof_image}}
 	   </div>
-    
+
     <button class="log_sub_4" type="submit">Add New</button>
   </form>
-  
+
   <p style="text-align:center;"><a href="{% url 'index' %}">Return to home</a></p>
   </div>
 {% endblock %}
