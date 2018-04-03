@@ -110,6 +110,7 @@ padding: 0px 12px;
 .price_change{
 background: #1f45024d;
     padding: 3px 0px;
+	border: 1px solid yellowgreen;
 	}
 p, h1, h2, h3, h4, li, button, ol, a, option, input, td, th, select, label{
 	font-family: 'Montserrat', sans-serif;
@@ -353,8 +354,15 @@ padding: 0px;
     margin: 20px 0px 0px 59px;
     display: inline-block;
 }
-.i_link{
-	
+.duration_change{
+    background: #1f45024d;
+    padding: 3px 5px;
+    width: 50%;
+    border: 1px solid yellowgreen;
+    text-align: center;
+    display: inline-block;
+    float: right;
+    margin: 8px 0px 0px;
 }
 .text_area{
 	margin:20px auto;
@@ -462,7 +470,8 @@ background: #be0708;
 
 .ria h4{
 	text-decoration:underline;
-}
+        display: inline-block;
+	}
 .rt, .rt:hover{
 	color: #67ab3a;
 }
