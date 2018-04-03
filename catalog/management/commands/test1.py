@@ -199,6 +199,7 @@ class Command(BaseCommand):
 			if vote.vote_rate_status == True: # news duration ended or vote after news ended
 				print('vote {} - news duration ended or vote after news ended, rate: {}'.format(vote.id, vote.vote_rate))
 				continue
+			#print(vote.news)
 			new_rate = vote.news.rating
 			direction = vote.news.direction #not used
 			duration = vote.news.duration
@@ -570,7 +571,7 @@ class Command(BaseCommand):
 		return price
 
 	def sendmail(self):
-		try:
+		try: #get production settings
 			connection = get_connection(backend=SMTP_EMAIL_BACKEND)
 			with open('email.txt') as f:
 				email_setting = [line.strip() for line in f]
@@ -584,7 +585,7 @@ class Command(BaseCommand):
 			print(connection)
 			print(connection.host, connection.username, connection.password)
 			send_mail('from test1', 'test1 sendmail function', connection.username, [test_to], connection = connection)
-		except Exception:
+		except Exception: #get console settings for dev
 			connection = get_connection(backend=CONSOLE_EMAIL_BACKEND)
 			print(connection)
 			send_mail('from test1', 'test1 sendmail function', 'admin@localhost', ['user@localhost'], connection = connection)
