@@ -8,10 +8,10 @@
 	<p><strong>First Name:</strong> {{ user.first_name }} {% if user.first_name == '' %} <font color="red">update profile info url button{% endif %}</font></p>
 	<p><strong>Last Name:</strong> {{ user.last_name }}   {% if user.last_name == '' %}  <font color="red">update profile info url button{% endif %}</font></p>
 	<p><strong>e-mail:</strong> {{ user.email }} <font color="red">change email link: ...</font></p> 
-	<font color="red">password reset link: ...</font>
+	<font color="red">password reset link: <a href="{% url 'password_reset' %}">RESET PASSWORD</a><br /></font>
 	<font color="red">update profile info url button: ...</font>
 	
-	<div style="display:inline-block;">
+	
 	<h3>Vote rating stats:</h3>
 	<p><strong>sum of all vote_rate</strong> {{ profile.sum_all }}</p>
 	<p><strong>sum of all positive vote_rate</strong> {{ profile.sum_positive }}</p>
@@ -19,16 +19,16 @@
 	<p><strong>sum of all positive vote_rate last day</strong> {{ profile.sum_today_positive  }}</p>
 	<p><strong>likes of user</strong> {{ profile.sum_likes }}</p>
 	<p><strong>dislikes of user</strong> {{ profile.sum_dislikes }}</p>
-	</div>
 	
-	<div style="display:inline-block;">
+	
+	
 	<h3>Your news stats:</h3>
 	<p><strong>news count</strong> {{ profile.news_count }}<p>
 	<p><strong>sum of news rate</strong>... <p>
 	<p><strong>sum of news likes</strong>... <p>
 	<p><strong>sum of news dislikes</strong>... <p>
 	<p><strong>sum of link clicks</strong>... <p>
-	</div>
+	
 	
 	<p><font color="red">button display news...</font></p>
 	
