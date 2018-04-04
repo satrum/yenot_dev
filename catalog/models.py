@@ -130,6 +130,7 @@ class News(models.Model):
     text = models.TextField(max_length=1000,verbose_name="DESCRIPTION OF NEWS",validators=[MinLengthValidator(20)], help_text="YOUR MESSAGE MUST HAVE MORE THAN 20 CHARACTERS")
     title = models.CharField(max_length=100,verbose_name="TITLE OF NEWS:") # резервирую название на будущее, для сигналов нет
     link =  models.URLField(default="https://yeenot.today", max_length=100,verbose_name="REFERENCE ON NEWS:") # link to source of news
+    count_link_click = models.IntegerField(default=0, blank=True, null=True, help_text='count of clicks to news link')
     time = models.DateTimeField(default=timezone.now) #set time of add news
     proof_image = models.ImageField(upload_to='news_images/', max_length=100, blank=True,verbose_name="SCREENSHOT OF THE NEWS" ) #image of proof height_field=200, width_field=200
     MODERATE_STATUS = (
@@ -217,7 +218,7 @@ class Source(models.Model):
     name = models.CharField(max_length=100,help_text="name of source/channel")
     text = models.TextField(default='', max_length=1000,help_text="description of source")
     telegram = 	models.URLField(blank=True, max_length=100) # link to source channel (telegram channel)
-    link =  models.URLField(default="https://enot.channel", max_length=100) # link to source channel (site)
+    link =  models.URLField(default="https://yeenot.today", max_length=100) # link to source channel (site)
     rating = models.DecimalField(default=0.0, blank=True, max_digits=10, decimal_places=2) #rate source up to 99 with store 2 for example 100.02
     stats_max      = models.DecimalField(default=0.0, blank=True, max_digits=10, decimal_places=2, help_text='maximum rating of news from source') 
     stats_min      = models.DecimalField(default=0.0, blank=True, max_digits=10, decimal_places=2, help_text='minimum rating of news from source') 
@@ -254,7 +255,7 @@ class Banner(models.Model):
 	text = models.TextField(max_length=100,help_text="description of banner")
 	link = models.URLField(max_length=100)
 	count_view = models.IntegerField(default=0, blank=True, null=True, help_text='count of views')
-	count_click = models.IntegerField(default=0, blank=True, null=True, help_text='count of views')
+	count_click = models.IntegerField(default=0, blank=True, null=True, help_text='count of clicks to link')
 	status = models.BooleanField(default=False, blank=True, help_text='status of promo - enabled, disabled')
 	#time_from = 
 	#time_to = 

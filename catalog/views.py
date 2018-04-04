@@ -452,3 +452,9 @@ def banner_click(request, pk):
 
 def rules(request):
 	return render(request, 'rules_template.html')
+
+def news_click(request, pk):
+	new=News.objects.get(pk=pk)
+	new.count_link_click += 1
+	new.save()
+	return HttpResponseRedirect(new.link)

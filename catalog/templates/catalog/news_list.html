@@ -76,7 +76,7 @@ tr,td {border:1px solid black;}
 		<td></td>
 		{% endif %}
 		
-		<td><a href="{{ news.link }}">{{ news.link }}</a></td>
+		<td><a href="{% url 'news-click' news.pk %}">{{ news.link }}</a></td>
 		<td>{{news.user}}</td>
 		<td>{{news.coinprice|floatformat:3}}</td>
 		<td>{{news.symbol}}</td>

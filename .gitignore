@@ -5,3 +5,6 @@ data/coinlist.txt
 data/coinpricefull.txt
 secret.txt
 email.txt
+catalog/management/commands/__pycache__/test1.cpython-35.pyc
+catalog/__pycache__/models.cpython-35.pyc
+*.pyc
