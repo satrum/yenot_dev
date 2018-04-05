@@ -29,5 +29,6 @@ urlpatterns += [
 	path('rules/', views.rules, name='rules'),
 	path('news/<str:time>/', views.NewsListView.as_view(), name='news'),
 	path('profile/', views.profile, name='profile'),
+	path('profile/addsource/', views.addsource, name='addsource'),
 	path('news_click/<int:pk>', views.news_click, name='news-click'),
 ]

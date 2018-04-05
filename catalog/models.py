@@ -228,8 +228,8 @@ class Source(models.Model):
     stats_likes    = models.IntegerField(default=0, blank=True, help_text='sum of likes all news from source')
     stats_dislikes = models.IntegerField(default=0, blank=True, help_text='sum of dislikes all news from source')
 	#stats: news_count_all
+    user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, related_name="user_sources") #owner(manager) of added Source
 	
-	#owner = models.ForeignKey('User', on_delete=models.SET_NULL, null=True)
     MODERATE_STATUS = (
         ('a', 'Added and sended for moderate'),
         ('p', 'Approved for view without owner'),

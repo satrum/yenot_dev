@@ -417,6 +417,33 @@ def addnews(request):
         form = AddNewsModelForm()
     return render(request, 'addnews2.html', {'form': form})	
 
+class AddSourceModelForm(ModelForm):
+	class Meta:
+		model = Source
+		fields = ['name','text','telegram','link',]
+
+@login_required
+def addsource(request):	
+	if request.method == 'POST':
+		form = AddSourceModelForm(request.POST)
+		if form.is_valid():
+			source = form.save(commit=False)
+			source.user = request.user
+			source.save()
+			#send mail to admin for moderation:
+			subject = 'Source added from user: {} newsid: {}'.format(request.user, source.sourceid)
+			body = 'source id: {} \n'.format(source.sourceid, request.user.email)
+			body+= ' name: {}\n text: {}\n telegram: {}\n link: {}\n'.format(source.name, source.text, source.telegram, source.link)
+			connection = mail.get_connection()
+			try:
+				mail.send_mail(subject, body, connection.username, [connection.username])
+			except Exception:
+				mail.send_mail(subject, body, 'admin@localhost', ['moderator@localhost'])
+			return redirect('index')
+	else:
+		form = AddSourceModelForm()
+	return render(request, 'addsource.html', {'form': form})
+	
 from .models import UserVotes
 
 @login_required

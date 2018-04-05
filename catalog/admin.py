@@ -57,7 +57,7 @@ class NewsInline(admin.TabularInline):
 	
 @admin.register(Source)
 class SourceAdmin(admin.ModelAdmin):
-    list_display = ('sourceid', 'name', 'link', 'rating', 'text', 'telegram', 'moderation_status', 'promo_status', 'stats_likes', 'stats_dislikes', 'stats_max', 'stats_min', 'stats_sum', 'stats_avg')
+    list_display = ('sourceid', 'name', 'link', 'rating', 'text', 'telegram', 'moderation_status', 'promo_status', 'user', 'stats_likes', 'stats_dislikes', 'stats_max', 'stats_min', 'stats_sum', 'stats_avg')
     list_filter = ('moderation_status', 'promo_status')
     inlines = [NewsInline]
 
