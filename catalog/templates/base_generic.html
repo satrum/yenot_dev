@@ -68,7 +68,7 @@ function addCustomInformation() {
           <li class="linetop"><h3><strong>SING UP, VOTE, BECOME A GURU OF CRYPTO SIGNALS!</strong></h3></li>
 		  {% if user.is_authenticated %}
            			
-			 <li>Привет,{{ user.get_username }}!</li>
+			 <li><a href="{% url 'profile' %}" class="logout">{{ user.get_username|title }}'s profile</a></li>
 			 <li><a href="{% url 'logout'%}?next={{request.path}}" class="logout">Logout</a></li>
 			{% else %}
 			
@@ -84,7 +84,9 @@ function addCustomInformation() {
 		  <div class="sidebar-nav">
 		  {% if user.is_authenticated %}
 			 <div class="add_news sidebar-nav"><a href="{% url 'addnews'%}?next={{request.path}}"><div class="round">+</div>Add New</a></div>
-			 <div class="sidebar-nav"><a href="{% url 'admin:index' %}">Admin panel</a></div>
+			 <div class="sidebar-nav">
+			 <a>
+			 <a href="{% url 'admin:index' %}">Admin panel</a></div>
 		   </ul>
 		   {% else %}
 			 <a href="{% url 'login'%}?next={{request.path}}"><div class="sidebar-nav login">Login</div></a>
@@ -126,6 +128,14 @@ function addCustomInformation() {
 			</a>
 </footer>
 </div>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-116928228-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
+  gtag('config', 'UA-116928228-1');
+</script>
 </body>
 </html>

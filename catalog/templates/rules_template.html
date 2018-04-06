@@ -5,88 +5,112 @@
 #https://html-online.com/editor/
 
 {% block content %}
-
-<h3><strong>YENOT Rules</strong></h3>
-
-<div style="display:inline-block;">
-<h4>Main Rule:</h4>
-<ol>
-<li>Signin (link)</li><br />
-<li>Rate Cryptosignal News (link)</li><br />
-<li>Add your News (link)</li><br />
-<li>Earn points for Hall of Fames (Opinion Leaders) (link)</li><br />
+<div class="rule_yeenot">
+<h3><strong>YEENOT Info and rules:</strong></h3>
+<p>Here you can find some information about YEENOT.TODAY and read the rules, how to add news and get your first points to your rank:</p>
+</div>
+<div class="about">
+<h4>About this project:</h4>
+</div>
+<div class="about">
+<div class="ov_about">
+<div class="rab"><p>1</p></div><p> This project was create for people who want to find from many crypto-signals the truest one.</p>
+</div>
+<div class="ov_about">
+<div class="rab_2"><p>2</p></div><p> This project was created for crypto-community voting to decide  fake or real signal is. </p>
+</div>
+<div class="ov_about" style="border-right:0px;">
+<div class="rab_2"><p>3</p></div><p> Also this project has a some game elements, like score, ranks and points for users/channels/news - all of their can get a status "crypto-guru" here.</p>
+</div>
+</div>
+<div class="become">
+<h4>How to become a user and get a rating:</h4>
+{% if user.is_authenticated %}<div class="sidebar-nav become_signup" ><p style="margin:0px;">Signup</p></div>{% else %}<a href="{% url 'signup'%}?next={{request.path}}"><div class="sidebar-nav become_signup" >Signup</div></a>{% endif %}<h3 class="my_result">&#10144;</h3><div  class="dislike_btn_become"><p>FAKE</p></div><h4 class="my_result">VOTE</h4><div  class="like_btn_become"><p>REAL</p></div>
+<h3 class="my_result">+</h3>
+{% if user.is_authenticated %}<div class="become_add_news sidebar-nav"><a href="{% url 'addnews'%}?next={{request.path}}"><div class="round">+</div>Add New</a></div>{% else %}<div class="become_add_news sidebar-nav"><a href="{% url 'signup'%}?next={{request.path}}"><div class="round">+</div>Add New</a></div>{% endif %}<h3 class="my_result">&#61;</h3>
+<h4 class="my_result"> get your rating  and points on </h4><div class="sidebar-nav become_signup_lead" ><h4 style="margin:0px;">leader's board</h4></div>
+</div>
+<div class="about">
+<div class="ov_rules">
+<h4 style="text-align: center;"> How to add news:</h4>
+<ol start="1">
+<li> 1) Choose source, coin, price direction, duration.</li>
+<li> 2) Add proof image, title, text, link.</li>
+<li> 3) Users can choose period, duration time for news.</li>
 </ol>
+<h4 style="text-align: center;">Moderation rule:</h4>
+<ol>
+<li> 1) We moderate all your news and try to do it fast as we can.</li>
+<li> 2) After our moderation you can see the status of news in your profile.</li>
+</ol>
+</div>
+<div class="ov_rules">
+<h4 style="text-align: center;"> How to rate your news:</h4>
+<ol start="1">
+<li> 1) All can rate your news.</li>
+<li> 2) Read news, click 'real'/'fake' vote. It is your opinion about the reality, integrity, relevance and importance of news.</li>
+<li> 3) Periodical we calculate News Rating. We use users opinion plus price changing.</li>
+<li> 4) We will highlight high-rated news.</li>
+</ol>
+</div>
+<div class="ov_rules" style="border-right:0px;">
+<h4 style="text-align: center;"> How you can get your points and rank:</h4>
+<ol start="1">
+<li> 1) We calculate your early and accurate opinion about news, popularity of your news and channels.</li>
+<li> 2) Daily we allot YEENOT points and upgrade  the rank to all users.</li>
+<li> 3) You can find top users here: <a href="https://yenot.channel/top_users">yenot.channel/top_users</a></li>
+</ol>
+</div>
+</div>
+<div class="become">
+<div class="fd">
+<h4 style="text-align: center;"> What means source "YEENOT":</h4>
+<p>All News need source. If you want type some news, but you are not the owner that news you can add only title and link on add news. The source will automatic add by "YEENOT", which means this source is not in list "channels" on our site.</p>
+<h4 style="text-align: center;"> Add source:</h4>
+<p>If you owner on some source/media portal - you can add it source in your profile or write us to <a href="mailto:support@yenot.channel">support@yenot.channel</a> , <a href="http://t.me/yenot.channel">http://t.me/yenot.channel</a></p>
+<p>Periodical we calculate Source Rating.</p>
+<p>We use rating from news of this source.</p>
+</div>
+</div>
+<div class="become tab_pro">
 
-<h4>News:</h4>
-
-<p><strong>All can add News.</strong></p>
-<ul style="list-style-type: square;">
-<li>Choose source (for example - YEENOT), coin, price direction, duration.</li><br />
-<li>Add proof image, title, text, link.</li><br />
-<li>Users can choose period (duration) for rating when add news.</li><br />
-<li>After fast moderation we add news in time order.</li><br />
-</ul>
-
-<p><strong>All can rate News.</strong></p>
-<ul style="list-style-type: square;">
-<li>Read news, click 'real'/'fake' vote. It is your opinion about the reality, integrity, relevance and importance of news.</li><br />
-<li>Periodical we calculate News Rating. We use users opinion plus price changing.</li><br />
-<li>We will highlight high-rated news.</li><br />
-</ul>
-
-<p><strong>All News have Source. If you have youself Source - you can add it.</strong></p>
-<ul style="list-style-type: square;">
-<li>Signin and go to form: <a href="{% url 'addsource' %}">ADD SOURCE</a>&nbsp; or write us to <a href="mailto:support@yenot.channel">support@yenot.channel</a> , <a href="http://t.me/yenot.channel">http://t.me/yenot.channel</a></li><br />
-<li>Periodical we calculate Source Rating.</li><br />
-<li>We use rating from news of this source.</li><br />
-</ul>
-
-<p><strong>All users earn YENOT Point.</strong></p>
-<ul style="list-style-type: square;">
-<li>We calculate your early and accurate opinion about news, popularity of your news and channels.</li><br />
-<li>Daily we distribute YENOT points for all users with useful actions.</li<br />
-<li>You can find top users here: <a href="https://yenot.channel/top_users">https://yenot.channel/top_users</a></li><br />
-<li>You can customise you public profile page.</li><br />
-</ul>
+<h4 style="text-align: center;">Promo option:</h4>
+<p>You can promote some news, sources, coins on home page and other pages in table lists. We add a special background to your content to highlight it among other rows.</p>
+<h4> What's need to do:</h4>
+<ol class="ol_promo">
+<li> 1) Select your content in your profile and choose time period to your promo (Price will calculate automatic).</li>
+<li> 2) Pay in profile with crypto or paypal. You can manage you promo status and view stats in profile.</li>
+</ol>
 </div>
 
-<div style="display:inline-block;">
-<p>
-<strong>Useful pages:</strong>
-<br /><br />
-My private info and stats (votes, points) <a href="{% url 'profile' %}">PROFILE</a><br />
-TOP Rated News all time, last day, last week, last month - <a href="{% url 'news' %}">TOP NEWS</a> <br />
-New sources and channels added to platform - <a href="https://yenot.channel/source_list_timeline">https://yenot.channel/source_list_timeline</a> <br />
-TOP Rated Sources all time - <a href="https://yenot.channel/source_list">https://yenot.channel/source_list</a> <br />
-Hall of Fame, Opinion Leaders TOP 100 - <a href="https://yenot.channel/users_list">https://yenot.channel/users_list</a> <br />
-Favorites News <a href="https://yenot.channel/profile/news_favorites">https://yenot.channel/profile/news_favorites</a> <br />
-Favorites Sources <a href="https://yenot.channel/profile/sources_favorites">https://yenot.channel/profile/sources_favorites</a> <br />
-Coin Market stats <a href="https://yenot.channel/coins_list">https://yenot.channel/coins_list</a>&nbsp; (market info, count news for coin, social)<br />
-Platform updates and news <a href="https://yenot.channel/release">https://yenot.channel/release</a> <br />
-This rules <a href="https://yenot.channel/rules">https://yenot.channel/rules</a> </p>
+ {% load static %}
+<div class="become">
+<h4 style="text-align: center;"> Adv option:</h4>
 
-<p>
-<strong>Promo rules:</strong>
-<br /><br />
-You can promote some news, sources, coins or add adv on home page and other pages.<br />
-We add expressiveness of your content and links to your resource.<br />
-Choose time period, views, clicks. Select your content in your profile: <a href="https://yenot.channel/profile/promo">https://yenot.channel/profile/promo</a> . Price calculates automatic.<br />
-You can pay in profile with crypto or paypal. And you can manage you promo status and view stats in profile.</p>
+<img src="{% static 'images/Avd_ops.png' %}" style="width: 99%;">
 
-<p>
-<strong>Future:</strong>
-<br /><br />
-Users can add news to favorites. Use favorites stats for news rating calculation.<br />
-COINS info - website, price details, exchanges<br />
-Daily distribution of points is fixed. Spend YENOT points for vote.<br />
-Upgrade news - TA signals, social activity, integration with twitter, telegram. <br />
-Automatic pull of news from sources. <br />
-News categories filter <br />
-New types of news - ICO signals, Common news, News Fight.<br />
-Source owners advanced cabinet.<br />
-News comments.<br />
-YENOT token with airdrop for platform users and exchange to USD/BTC/ETH and promo with YENOT tokens.<br />
-Users will be trade with cryptosignals based on rating.</p>
+<h4 style="text-align: center;"> This three type of banners located on all our site, except this page, profile and registration pages.</h4>
+<h4 style="text-align: center;"> If you want to advertise your project on our site please write to our email <a href="mailto:support@yenot.channel" style="color: #67ab3a;">support@yenot.channel</a> or <a href="http://t.me/yenot.channel" style="color: #67ab3a;">http://t.me/yenot.channel</a>.</h4>
+</div>
+
+<div class="become">
+
+<div class="ov_future">
+<h4>Soon on YEENOT.TODAY:</h4>
+<p> 1) As soon as users comes to our site and get their first points, we will make a page <br>"TOP LEADER"</p>
+<p> 2) As soon as  channels comes to our site and put some news, we will make a page <br>"TOP CHANNEL"</p>
+<p> 3) Create favorites for user who want to save some news. Use favorites stats for news rating calculation.</p>
+<p> 4) Daily distribution of points is fixed. Spend YENOT points for vote.</p>
+<p> 5) Automatic pull of news from sources. </p>
+<p> 6) News categories filter </p>
+
+</div>
+<div class="ov_future" style="border-right:0px;">
+<h4>Near future on YEENOT.TODAY:</h4>
+<p> 1) Upgrade news to sharing  at the social activity, integration with twitter, telegram. </p>
+<p> 2) New types of news - ICO signals, Common news, News Fight.</p>
+<p> 3)YENOT token with airdrop for platform users and exchange to BTC/ETH and promo with YENOT tokens.</p>
+</div>
 </div>
 {% endblock %}
 

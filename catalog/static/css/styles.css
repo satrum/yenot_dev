@@ -148,26 +148,42 @@ body{
 	    background: url(/static/images/Yeenot_gl_2.png) 15% 29% fixed;
 		background-size: cover;
 }
-footer{
-	    background: #000e01eb;
-    border-bottom: 0px;
-    margin: 5px 0px 0px;
-    padding: 0px;
-	margin:auto;
-	    width: 1300px;
-}
 footer p{
 	    margin: 0px;
     text-align: center;
 	 display:inline-block; 
 	 padding:8px;
 }
-
-@media (min-width: 768px){
+footer{
+	    background: #000e01eb;
+    border-bottom: 0px;
+    margin: 5px 0px 0px;
+	    padding: 0px;
+	margin:auto;
+	width:100%;
+}
+.about{
+	border:1px solid #a0b987;
+	text-align:center;
+	    background: #1b2d0cb0;
+	
+}
+.title_about{
+	border-bottom:1px solid #a0b987;
+}
+@media (min-width: 1300px){
 .col-sm-1, .col-sm-10, .col-sm-11, .col-sm-12, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9 {
 float: none;
 padding: 0px;
 }
+footer{
+    border-bottom: 0px;
+    margin: 5px 0px 0px;
+    padding: 0px;
+	margin:auto;
+	    width: 1300px;
+}
+
 .done_res{
 	margin: 23% auto 30%;
     width: 900px;
@@ -364,6 +380,118 @@ padding: 0px;
     float: right;
     margin: 8px 0px 0px;
 }
+.rule_yeenot{
+	text-align:center;
+}
+.ov_rules{
+    display: inline-block;
+    width: 33%;
+    vertical-align: top;
+    text-align: left;
+    border-right: 1px solid #a0b987;
+    padding-right: 9px;
+    height: 240px;
+    padding-left: 1px;
+}
+.ov_rules li a{
+	color: #67ab3a;
+}
+.ov_rules li a:hover{
+	color: #67ab3a;
+}
+.ov_rules li {
+	padding-top:5px;
+}
+.ov_rules ol{
+	padding-left:15px;
+}
+.fd{
+	padding: 12px;
+}
+.fd a {
+	color: #67ab3a;
+}
+.fd a:hover {
+	color: #67ab3a;
+}
+.ov_future{
+display: inline-block;
+    width: 49%;
+    vertical-align: top;
+    text-align: left;
+    border-right: 1px solid #a0b987;
+    padding-right: 9px;
+    padding-left: 1px;
+}
+.ol_promo{
+	text-align:left; 
+	margin:auto; 
+	width:62%;
+	padding-bottom: 12px;
+}
+.ov_about {
+    display: inline-block;
+    width: 33%;
+    vertical-align: top;
+    text-align: left;
+    border-right: 1px solid #a0b987;
+    padding-right: 9px;
+    height: 125px;
+    padding-left: 1px;
+}
+.become{
+		border:1px solid #a0b987;
+	text-align:center;
+	margin-top: 40px;
+	background: #1b2d0cb0;
+	    margin-bottom: 10px;
+	
+}
+.my_result{
+display: inline-block;
+    margin: 8px 6px 8px 8px;
+}
+.become_add_news {
+background: #46bb1b1a;
+    text-align: center;
+    border: 1px solid #588510;
+    border-radius: 1px;
+    height: 38px;
+    padding-top: 7px;
+    padding-left: 18px;
+    padding-right: 20px;
+    box-shadow: 2px 1px 73px 4px rgba(67, 168, 65, 0.41);
+    vertical-align: top;
+}
+.become_signup {
+    padding: 8px 21px;
+    background: #5a9f0821;
+    box-shadow: 2px 1px 55px 4px rgba(67, 168, 65, 0.41);
+    border: 1px solid #48830e;
+    cursor: pointer;
+    width: 143px;
+	margin-bottom:12px;
+}
+.ov_about p{
+	text-align:center;
+	font-size:1.2em;
+}
+.rab {
+    display: inline-block;
+    padding: 2px 16px 0px 14px;
+    border: 1px solid #a0b987;
+    margin: -1px -3px 6px;
+    vertical-align: top;
+    text-align: center;
+}
+.rab_2 {
+    display: inline-block;
+    padding: 2px 14px 0px 14px;
+    border: 1px solid #a0b987;
+    margin: -1px -6px 6px;
+    vertical-align: top;
+    text-align: center;
+}
 .text_area{
 	margin:20px auto;
 }
@@ -385,6 +513,44 @@ padding: 0px;
 	margin: 40px auto;
 	text-align: center;
 	
+}
+.like_btn_become{
+background: #35ae16;
+    border-radius: 100%;
+    width: 53px;
+    height: 53px;
+    box-shadow: 0px 0px 0px 4px rgba(27, 46, 23, 0.7);
+    margin: 8px auto;
+    border: 2px solid silver;
+    cursor: pointer;
+	display:inline-block;
+	
+}
+.like_btn_become p{
+	padding: 14px 0px;
+	}
+	.dislike_btn_become p{
+	padding: 14px 0px;
+	}
+.dislike_btn_become{
+background: #be0708;
+    border-radius: 100%;
+    width: 53px;
+    height: 53px;
+    box-shadow: 0px 0px 0px 4px rgba(27, 46, 23, 0.7);
+    margin: 8px auto;
+    border: 2px solid silver;
+    cursor: pointer;
+display:inline-block;
+}
+.become_signup_lead {
+    padding: 8px 21px;
+    background: #5a9f0821;
+    box-shadow: 2px 1px 55px 4px rgba(67, 168, 65, 0.41);
+    border: 1px solid #48830e;
+    cursor: pointer;
+    width: 171px;
+    margin-bottom: 12px;
 }
 .log_sub{
 	    width: 100px;
