@@ -68,7 +68,7 @@ function addCustomInformation() {
           <li class="linetop"><h3><strong>SING UP, VOTE, BECOME A GURU OF CRYPTO SIGNALS!</strong></h3></li>
 		  {% if user.is_authenticated %}
            			
-			 <li><a href="{% url 'profile' %}" class="logout">{{ user.get_username|title }}'s profile</a></li>
+			 <li><a href="{% url 'profile' %}" class="logout">{{ user.get_username|title | truncatechars:15 }}'s profile</a></li>
 			 <li><a href="{% url 'logout'%}?next={{request.path}}" class="logout">Logout</a></li>
 			{% else %}
 			
