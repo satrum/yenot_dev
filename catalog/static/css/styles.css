@@ -436,7 +436,7 @@ display: inline-block;
     text-align: left;
     border-right: 1px solid #a0b987;
     padding-right: 9px;
-    height: 125px;
+    height: 140px;
     padding-left: 1px;
 }
 .become{
@@ -461,7 +461,7 @@ background: #46bb1b1a;
     padding-left: 18px;
     padding-right: 20px;
     box-shadow: 2px 1px 73px 4px rgba(67, 168, 65, 0.41);
-    vertical-align: top;
+   
 }
 .become_signup {
     padding: 8px 21px;
@@ -549,7 +549,7 @@ display:inline-block;
     box-shadow: 2px 1px 55px 4px rgba(67, 168, 65, 0.41);
     border: 1px solid #48830e;
     cursor: pointer;
-    width: 171px;
+    
     margin-bottom: 12px;
 }
 .log_sub{
@@ -808,7 +808,7 @@ div.datepicker{
 }
 }
 .linetop{
-	width:80%;
+	width: 78%;
 }
 .banner{
 	border: 1px solid #a0b987;

@@ -75,8 +75,8 @@ function addCustomInformation() {
 			{% endif %}
 		 </ul>
 		 <ul class="sidebar-nav linetop">
-          <a href="{% url 'books' %}"><li class="menu_main">TOP LEADERS</li></a>
-          <a href="{% url 'source' %}"><li class="menu_main">TOP CHANNELS</li></a>	
+          <li class="menu_main">TOP LEADERS</li></a>
+          <li class="menu_main">TOP CHANNELS</li></a>	
           <a href="{% url 'news' %}"><li class="menu_main">TOP NEWS</li></a>
 		  <a href="{% url 'rules' %}"><li class="menu_main">RULES</li></a>
 		  
@@ -85,8 +85,9 @@ function addCustomInformation() {
 		  {% if user.is_authenticated %}
 			 <div class="add_news sidebar-nav"><a href="{% url 'addnews'%}?next={{request.path}}"><div class="round">+</div>Add New</a></div>
 			 <div class="sidebar-nav">
-			 <a>
-			 <a href="{% url 'admin:index' %}">Admin panel</a></div>
+			 {% if request.user.is_staff %}
+			 <a href="{% url 'admin:index' %}"class="logout">Admin panel</a>{% else %}<a href=""class="logout">Promotion news</a> {% endif %}</div>
+			 
 		   </ul>
 		   {% else %}
 			 <a href="{% url 'login'%}?next={{request.path}}"><div class="sidebar-nav login">Login</div></a>
