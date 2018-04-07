@@ -2,14 +2,8 @@ from django.shortcuts import render, render_to_response
 from django.template import RequestContext
 
 # Create your views here.
+##from .models import Book, Author, BookInstance, Genre
 
-#first test:
-'''
-from django.http import HttpResponse
-def index(request):
-    return HttpResponse("Hello, world. You're at the polls index.")
-'''
-from .models import Book, Author, BookInstance, Genre
 from .models import News, Source, Banner, Coin, YeenotSettings
 from random import randint
 from django.contrib.auth.models import User
@@ -162,20 +156,23 @@ def profile(request, template='profile.html'):
 	
 from django.views import generic
 
+'''
 class BookListView(generic.ListView):
     model = Book
 	#templates: /locallibrary/catalog/templates/catalog/book_list.html
 	#help: https://docs.djangoproject.com/en/2.0/topics/class-based-views/
-    '''
-    context_object_name = 'my_book_list'   # ваше собственное имя переменной контекста в шаблоне
-    queryset = Book.objects.filter(title__icontains='war')[:5] # Получение 5 книг, содержащих слово 'war' в заголовке
-    template_name = 'books/my_arbitrary_template_name_list.html'  # Определение имени вашего шаблона и его расположения
-	'''
+    
+    #context_object_name = 'my_book_list'   # ваше собственное имя переменной контекста в шаблоне
+    #queryset = Book.objects.filter(title__icontains='war')[:5] # Получение 5 книг, содержащих слово 'war' в заголовке
+    #template_name = 'books/my_arbitrary_template_name_list.html'  # Определение имени вашего шаблона и его расположения
+'''	
+
+'''
 class BookDetailView(generic.DetailView):
     model = Book #/locallibrary/catalog/templates/catalog/book_detail.html
-
+'''
 from django.contrib.auth.mixins import LoginRequiredMixin #for view only to auth user
-
+'''
 class LoanedBooksByUserListView(LoginRequiredMixin,generic.ListView):
     """
     Generic class-based view listing books on loan to current user. 
@@ -186,6 +183,7 @@ class LoanedBooksByUserListView(LoginRequiredMixin,generic.ListView):
     
     def get_queryset(self):
         return BookInstance.objects.filter(borrower=self.request.user).filter(status__exact='o').order_by('due_back')
+'''
 
 #form test:
 from django.shortcuts import get_object_or_404
@@ -194,6 +192,7 @@ from django.urls import reverse
 import datetime
 from django.contrib.auth.decorators import permission_required
 
+'''
 from .forms import RenewBookForm
 
 def renew_book_librarian(request, pk):
@@ -221,6 +220,7 @@ def renew_book_librarian(request, pk):
         form = RenewBookForm(initial={'renewal_date': proposed_renewal_date,})
 
     return render(request, 'catalog/book_renew_librarian.html', {'form': form, 'bookinst':book_inst})
+'''
 	
 #------------------------------------------------------
 #ENOT Project:
@@ -431,14 +431,18 @@ def addsource(request):
 			source.user = request.user
 			source.save()
 			#send mail to admin for moderation:
-			subject = 'Source added from user: {} newsid: {}'.format(request.user, source.sourceid)
+			subject = 'Source added from user: {} sourceid: {}'.format(request.user, source.sourceid)
 			body = 'source id: {} \n'.format(source.sourceid, request.user.email)
 			body+= ' name: {}\n text: {}\n telegram: {}\n link: {}\n'.format(source.name, source.text, source.telegram, source.link)
+			usermail = source.user.email
+			userbody = ' New Source(Channel) added for moderation. \n We notify your after this Source change status.'
 			connection = mail.get_connection()
 			try:
 				mail.send_mail(subject, body, connection.username, [connection.username])
+				mail.send_mail(subject, body+userbody, connection.username, [usermail])
 			except Exception:
 				mail.send_mail(subject, body, 'admin@localhost', ['moderator@localhost'])
+				mail.send_mail(subject, body+userbody, 'support@localhost', [usermail])
 			return redirect('index')
 	else:
 		form = AddSourceModelForm()

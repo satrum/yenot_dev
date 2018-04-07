@@ -1,20 +1,21 @@
 from django.db import models
 from django.contrib.auth.models import User #for voting in News, UserVotes and BookInstance
-
+'''
 # Create your models here.
 class Genre(models.Model):
     name = models.CharField(max_length=200, help_text="Enter a book genre (e.g. Science Fiction, French Poetry etc.)")
     def __str__(self):
         return self.name
-
+'''
 from django.urls import reverse #Used to generate URLs by reversing the URL patterns
-
+'''
 class Language(models.Model):#Model representing a Language (e.g. English, French, Japanese, etc.)
     name = models.CharField(max_length=200, help_text="Enter a the book's natural language (e.g. English, French, Japanese etc.)")
     
     def __str__(self):#String for representing the Model object (in Admin site etc.)
         return self.name
-
+'''
+'''
 class Book(models.Model):#    Model representing a book (but not a specific copy of a book).
     title = models.CharField(max_length=200)
     author = models.ForeignKey('Author', on_delete=models.SET_NULL, null=True)
@@ -36,10 +37,11 @@ class Book(models.Model):#    Model representing a book (but not a specific copy
     def display_genre(self):#Creates a string for the Genre. This is required to display genre in Admin.
         return ', '.join([ genre.name for genre in self.genre.all()[:3] ])
     display_genre.short_description = 'Genre'
-
+'''
 import uuid # Required for unique book instances
 from datetime import date #property that we can call from our templates to tell if a particular book instance is overdue.
 
+'''
 class BookInstance(models.Model): #    Model representing a specific copy of a book (i.e. that can be borrowed from the library).
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, help_text="Unique ID for this particular book across whole library")
     book = models.ForeignKey('Book', on_delete=models.SET_NULL, null=True) 
@@ -68,7 +70,9 @@ class BookInstance(models.Model): #    Model representing a specific copy of a b
         if self.due_back and date.today() > self.due_back:
             return True
         return False
+'''
 
+'''
 class Author(models.Model):#Model representing an author.
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
@@ -80,6 +84,7 @@ class Author(models.Model):#Model representing an author.
 
     def __str__(self):
         return '%s, %s' % (self.last_name, self.first_name)
+'''
 
 #-----------------------------------------		
 #Project: ENOT Channels
@@ -295,7 +300,7 @@ News:
  !newsid
  !sourceid
  !user
-!coinid
+ !coinid
  text
  direction
  title - optional
@@ -323,7 +328,7 @@ Source (channel of news):
  !sourceid
  name
  text
-owner
+ user
  link
  !rating
 logo
