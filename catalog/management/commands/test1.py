@@ -274,12 +274,14 @@ class Command(BaseCommand):
 		print('sum positive:{} all active:{}'.format(all_users_today_positive,all_users_today_active))
 		#sort by profile.point and save order place in rank:
 		profiles=Profile.objects.order_by('-point')
-		for i in range(profiles.count()):
-			print(profiles[i])
+		i=0
+		for profile in profiles:
+			if profile.point>0:
+				i+=1
+				profile.rank=i
+				profile.save()
+			#print(i, profile, profile.point, profile.rank, profile.user)
 
-
-
-			
 
 	#'https://www.cryptocompare.com/api/data/coinlist/'
 	#"DGB":{
