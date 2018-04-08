@@ -72,7 +72,7 @@ class UserVotesAdmin(admin.ModelAdmin):
 
 @admin.register(Profile)
 class UserProfileAdmin(admin.ModelAdmin):
-	list_display = ('user','bio','location', 'birth_date', 'view_newslist_block', 'sum_all', 'sum_positive', 'sum_today', 'sum_today_positive','sum_likes','sum_dislikes')
+	list_display = ('user','bio','location', 'birth_date', 'view_newslist_block', 'sum_all', 'sum_positive', 'sum_today', 'sum_today_positive','sum_likes','sum_dislikes', 'sum_right', 'point', 'rank')
 	list_filter = ('user', 'location', 'view_newslist_block')
 
 @admin.register(Banner)

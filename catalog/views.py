@@ -146,6 +146,7 @@ def profile(request, template='profile.html'):
 		profile=request.user.profile
 		news = News.objects.filter(user=request.user).order_by('-time') #current user news
 		profile.news_count = news.count()
+		profile.sum_negative = profile.sum_all-profile.sum_positive
 		context={
 		'profile':profile,
 		'allnews':news,

@@ -264,12 +264,19 @@ class Command(BaseCommand):
 			profile.sum_today_positive = sum_today_positive
 			profile.sum_likes = votes.filter(vote_type='like').count()
 			profile.sum_dislikes = votes.filter(vote_type='dislike').count()
+			profile.sum_right = votes.filter(vote_rate__gt=0).count()
+			profile.point = sum_positive # first stage
 			profile.save()
 			if sum_today != 0:
 				all_users_today_active += 1
 			all_users_today_positive += sum_today_positive
-			print('a:{} p:{} t:{} tp:{} counts l:{} d:{}'.format(sum_all, sum_positive, sum_today, sum_today_positive, profile.sum_likes, profile.sum_dislikes))
+			print('a:{} p:{} ta:{} tp:{} counts l:{} d:{} r:{}'.format(sum_all, sum_positive, sum_today, sum_today_positive, profile.sum_likes, profile.sum_dislikes, profile.sum_right))
 		print('sum positive:{} all active:{}'.format(all_users_today_positive,all_users_today_active))
+		#sort by profile.point and save order place in rank:
+		profiles=Profile.objects.order_by('-point')
+		for i in range(profiles.count()):
+			print(profiles[i])
+
 
 
 			
