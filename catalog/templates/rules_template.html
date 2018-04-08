@@ -118,10 +118,11 @@
 Calculation Methods:
 --------------------
 News Rating:  
-new_rate = real*(p2/p1)-fake*(p2/p1) if direction=buy or hodl,  and real*(p2/p1)-fake*(p2/p1) if direction=sell. p1 - news time price of coin. p2 - price after period fo time. Periods - 1h, 4h, 1day, 7days.
+new_rate = real*(p2/p1)-fake*(p2/p1) if direction=buy or hodl,  and real*(p2/p1)-fake*(p2/p1) if direction=sell. 
+p1 - news time price of coin. p2 - price after period fo time. Periods - 4h, 1day, 7days.
 
 Source Rating: 
-We calculate average, median and sum of source's News ratings. New news take more rating. Periods - 1h (x10), 4h(x2), 1day(x1), more 1day(/days). for example:
+We calculate min, max, average and sum of source's News ratings. New news take more rating. Periods - 1h (x10), 4h(x2), 1day(x1), more 1day(/days). for example:
 	new_1 time=1h rating=4, new_2 time=3h rating=10 , new_3 time=1day rating=20 : source_rate = 4*10 + 10*2 + 20*1 = 80. 
 
 Users Rating/Points:

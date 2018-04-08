@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   
-  {% block title %}<title>Local Library</title>{% endblock %}
+  {% block title %}<title>YEENOT</title>{% endblock %}
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -51,7 +51,6 @@ function addCustomInformation() {
   <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 </head>
 <body>
-
 <div class="container-fluid">
 
     <div class="row">
@@ -129,6 +128,7 @@ function addCustomInformation() {
 			</a>
 </footer>
 </div>
+{% if GOOGLE_ANALYTICS_KEY %}
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-116928228-1"></script>
 <script>
@@ -138,5 +138,6 @@ function addCustomInformation() {
 
   gtag('config', 'UA-116928228-1');
 </script>
+{% endif %}
 </body>
 </html>

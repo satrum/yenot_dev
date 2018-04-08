@@ -26,7 +26,7 @@ DATADIR = 'data'
 COINIMAGESDIR = 'media/coin_images/'
 RATING_MAX_DAYS = 7
 
-EXCLUDE_LIST = ['ARENA','CNO', 'BTH']
+EXCLUDE_LIST = ['ARENA','CNO', 'BTH', 'ADL']
 
 #usage: 20.02.2018
 #cd c:\WORK\Docs\python\web\locallibrary

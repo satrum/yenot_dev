@@ -84,6 +84,7 @@ class BannerAdmin(admin.ModelAdmin):
 class CoinAdmin(admin.ModelAdmin):
     list_display = ('id', 'symbol', 'name', 'price', 'change', 'volume', 'mktcap', 'image') #
     search_fields = ['symbol','name']
+    inlines = [NewsInline]
 
 @admin.register(YeenotSettings)
 class YeenotSettingsAdmin(admin.ModelAdmin):
