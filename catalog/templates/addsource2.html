@@ -1,0 +1,94 @@
+{% extends 'base_generic.html' %}
+
+{% block content %}
+<style>
+#id_telegram{
+    width: 64%;
+    border: 2px solid #4ea60a;
+    height: 30px;
+    box-shadow: 1px 2px 21px -1px #9ad33c;
+    background: #3b520b61;
+    padding: 2px 2px;
+    margin: 20px 0px 0px 22px;
+    display: inline-block;
+}
+#id_name{
+    width: 200px;
+    border: 2px solid #4ea60a;
+    height: 30px;
+    box-shadow: 1px 2px 21px -1px #9ad33c;
+    background: #3b520b61;
+    padding: 2px 2px;
+    margin: 20px auto;
+}
+.name_add_news{
+	text-align:center;
+
+}
+.name_add_news label{
+	font-size: 1.2em;
+}
+</style>
+
+<div class="text_add">
+<h3>ADD YOUR SOURCE (CHANNEL) HERE:</h3>
+</div>
+<div class="log_in_p_add">
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+
+<div class="name_add_news">
+	{{ form.name.label_tag }}
+ <input type="text"
+       name="{{ form.name.name }}"
+       id="{{ form.name.id_for_label }}"
+       {% if form.name.value != None %}value="{{ form.name.value|stringformat:'s' }}"{% endif %}
+       maxlength="{{ form.name.field.max_length }}"
+       {% if form.name.field.required %}required{% endif %}>  
+</div>	   
+
+
+	<div class="text_area">   
+	   {{ form.text.label_tag }}
+ <textarea type="text"
+       name="{{ form.text.name }}" cols="94" rows="5" maxlength="1000"
+       id="{{ form.text.id_for_label }}"
+       {% if form.text.value != None %}value="{{ form.text.value|stringformat:'s' }}"{% endif %}
+       maxlength="{{ form.text.field.max_length }}"
+       {% if form.text.field.required %}required{% endif %}></textarea>
+	   <p class="rem" style="text-align:center;">{{form.text.help_text}} <br> {{ form.text.errors }}</p> 
+	  
+	   </div>
+
+	   <div class="i_link">
+	   {{form.telegram.label_tag }}
+       {{form.telegram}}
+	   </div>
+	   
+	   <div class="i_link">
+	   {{ form.link.label_tag }}
+       {{form.link}}
+	   </div>
+	   
+   
+    <button class="log_sub_4" type="submit">Add Source</button>
+  </form>
+  
+  <p style="text-align:center;"><a href="{% url 'index' %}">Return to home</a></p>
+  </div>
+{% endblock %}
+
+*id_name input type=text
+id_text textarea
+*id_telegram input type=url
+id_link input type=url
+
+
+
+
+
+	
+
+
+
+

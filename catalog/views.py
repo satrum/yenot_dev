@@ -141,12 +141,22 @@ def index(request, template='index.html', page_template='index_page.html'):#Фу
     
     return render(request, template, context)
 
+from django.db.models import Avg, Max, Min, Sum
+
 def profile(request, template='profile.html'):
 	if request.user.is_authenticated:
 		profile=request.user.profile
 		news = News.objects.filter(user=request.user).order_by('-time') #current user news
 		profile.news_count = news.count()
 		profile.sum_negative = profile.sum_all-profile.sum_positive
+		aggr = news.aggregate(Min('rating'), Avg('rating'), Max('rating'), Sum('like'), Sum('dislike'), Sum('count_link_click'))
+		print(aggr)
+		profile.rating_max = aggr['rating__max']
+		profile.rating_min = aggr['rating__min']
+		profile.rating_avg = aggr['rating__avg']
+		profile.likes = aggr['like__sum']
+		profile.dislikes = aggr['dislike__sum']
+		profile.link_clicks = aggr['count_link_click__sum']
 		context={
 		'profile':profile,
 		'allnews':news,
@@ -447,7 +457,7 @@ def addsource(request):
 			return redirect('index')
 	else:
 		form = AddSourceModelForm()
-	return render(request, 'addsource.html', {'form': form})
+	return render(request, 'addsource2.html', {'form': form})
 	
 from .models import UserVotes
 
