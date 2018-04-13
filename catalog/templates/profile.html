@@ -3,33 +3,83 @@
 {% block content %}
 
 	{% if user.is_authenticated %}
+	<div class="prof_inf">
+	<h3>{{ profile.user }}:</h3>
+	<div class="prof_name">
+	<h4><strong>First Name:</strong> {{ user.first_name }}  {% if user.first_name == '' %}<div class="fixed_prof_name">&#9998;</div>{% endif %}</h4>
+	<h4><strong>Last Name:</strong> {{ user.last_name }}    {% if user.last_name == '' %} <div class="fixed_prof_name">&#9998;</div>{% endif %} </h4>
+	</div>
+	<div class="prof_email">
+	<h4><strong>e-mail:</strong> {{ user.email }} <div class="fixed_prof_name">&#9998;</div></h4> 
+	</div>
+    <div class="log_sub_3_prof"> <a href="{% url 'password_reset' %}">RESET PASSWORD</a></div>
+	</div>
+
+	<div class="prof_inf_2">
+	<h3 style="text-align:center; margin-bottom: 18px;">Your rank:</h3>
+	<div class="rank">
+  
+  <div class="small_up"></div>
+  <div class="small_up_left"></div>
+  <div class="smal_left_up"></div>
+  <div class="small_left"></div>
+  <div class="smal_left_down"></div>
+  <div class="ea"></div>
+  <div class="small_up_right"></div>
+  <div class="smal_right_up"></div>
+  <div class="small_right"></div>
+  <div class="smal_right_down"></div>
+   <div class="small_down"></div>
+   <div class="small_down_left"></div>
+   <div class="small_down_right"></div>
+   <div class="rank_status"><h3>{{ profile.rank }}</h3></div>
+  </div>
+  </div>
+  
+	<div class="prof_inf">
+	<h3 style="text-align:center;">Your points:</h3>
+	<div class="type_points">
+	<h2><strong>Your points</strong><br>{{ profile.sum_all }}</h2>
+	</div>
+	<div class="type_points">
+	<p style="color: green;"><strong>Sum of all points you get</strong> + {{ profile.sum_positive }}</h4>
+	<p style="color: red;"><strong>Sum of all points you loose</strong> {{ profile.sum_negative }}</h4>
+	</div>
+	<hr>
+	<div class="type_points_2">
+	<h2><strong> Last day points</strong><br> {{ profile.sum_all }}</h2>
+	</div>
+	<div class="type_points_2">
+	<p style="color: green;"><strong>Sum of all points you get</strong> +{{ profile.sum_today_positive  }}</p>
+	<p style="color: red;"><strong>Sum of all points you loose</strong> {{ profile.sum_today_positive  }}</p>
+	</div>
+	</div>
 	
-	<h1>Title: {{ profile.user }}</h1>
-	<p><strong>First Name:</strong> {{ user.first_name }} {% if user.first_name == '' %} <font color="red">update profile info url button{% endif %}</font></p>
-	<p><strong>Last Name:</strong> {{ user.last_name }}   {% if user.last_name == '' %}  <font color="red">update profile info url button{% endif %}</font></p>
-	<p><strong>e-mail:</strong> {{ user.email }} <font color="red">change email link: ...</font></p> 
-	<font color="red">password reset link: <a href="{% url 'password_reset' %}">RESET PASSWORD</a><br /></font>
-	<font color="red">update profile info url button: ...</font>
-	
-	
-	<h3>Vote rating stats:</h3>
-	<p><strong>sum of all vote_rate</strong> {{ profile.sum_all }}</p>
-	<p><strong>sum of all positive vote_rate</strong> {{ profile.sum_positive }}</p>
-	<p><strong>sum of all vote_rate last day</strong> {{ profile.sum_today }}</p>
-	<p><strong>sum of all positive vote_rate last day</strong> {{ profile.sum_today_positive  }}</p>
-	<p><strong>likes of user</strong> {{ profile.sum_likes }}</p>
-	<p><strong>dislikes of user</strong> {{ profile.sum_dislikes }}</p>
-	
-	
-	
-	<h3>Your news stats:</h3>
-	<p><strong>news count</strong> {{ profile.news_count }}<p>
-	<p><strong>sum of news rate</strong>... <p>
-	<p><strong>sum of news likes</strong>... <p>
-	<p><strong>sum of news dislikes</strong>... <p>
-	<p><strong>sum of link clicks</strong>... <p>
-	
-	
+	<div class="prof_news">
+	<h3 style="text-align: center;">Your count news: {{ profile.news_count }} </h3>
+	<div class="prof_rating">
+	<div class="prof_rating_news_max">
+	<p><strong>MAX rating of the news</strong></p><div class="max_rating">{{ profile.rating_max|floatformat:2 }}</div>
+	</div>
+	<div class="prof_rating_news_avg">
+	<p><strong>AVG rating of the news</strong></p><div class="avg_rating">{{ profile.rating_avg|floatformat:2 }}</div>
+    </div>	
+	<div class="prof_rating_news_min">
+	<p><strong>MIN rating of the news</strong></p><div class="min_rating">{{ profile.rating_min|floatformat:2 }}</div>
+	</div>
+	</div>
+	<div class="prof_news_votes">
+	<div class="prof_vote_real">
+	<p><strong>Sum news votes of REAL :</strong>{{profile.likes}}</p>
+	</div>
+	<div class="prof_vote_fake">
+	<p><strong>Sum news votes of FAKE :</strong>{{profile.dislikes}}</p>
+    </div>	
+	</div>
+	<div class="prof_clicks">
+	<p><strong>Sum of all clicks on your link news :</strong>{{profile.link_clicks}}</p>
+	</div>
+	</div>
 	<p><font color="red">button display news...</font></p>
 	
 	<font color="red">add news clicks</font>
