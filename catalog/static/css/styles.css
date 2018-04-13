@@ -313,13 +313,13 @@ padding: 0px;
 }
 .prof_inf{
 	display:inline-block;
-	width:36%;
+	width:38%;
 	    vertical-align: top;
 }
 .prof_inf_2 {
     display: inline-block;
     vertical-align: top;
-    width: 20%;
+    width: 16%;
     margin: -7px 7% 0px 0px;
 }
 .rank{
@@ -557,7 +557,7 @@ width: 0px;
 }
 .prof_news{
 	    border: 1px solid #a0b987;
-    margin: 20px auto;
+    margin: 37px auto;
 	
 }
 .type_points h3 {
