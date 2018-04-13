@@ -39,7 +39,7 @@
 	<div class="prof_inf">
 	<h3 style="text-align:center;">Your points:</h3>
 	<div class="type_points">
-	<h2><strong>Your points</strong><br>{{ profile.sum_all }}</h2>
+	<h3><strong>Your points</strong><br>{{ profile.sum_all }}</h3>
 	</div>
 	<div class="type_points">
 	<p style="color: green;"><strong>Sum of all points you get</strong> + {{ profile.sum_positive }}</h4>
@@ -47,7 +47,7 @@
 	</div>
 	<hr>
 	<div class="type_points_2">
-	<h2><strong> Last day points</strong><br> {{ profile.sum_all }}</h2>
+	<h3><strong> Last day points</strong><br> {{ profile.sum_all }}</h3>
 	</div>
 	<div class="type_points_2">
 	<p style="color: green;"><strong>Sum of all points you get</strong> +{{ profile.sum_today_positive  }}</p>
@@ -59,13 +59,13 @@
 	<h3 style="text-align: center;">Your count news: {{ profile.news_count }} </h3>
 	<div class="prof_rating">
 	<div class="prof_rating_news_max">
-	<p><strong>MAX rating of the news</strong></p><div class="max_rating">{{ profile.rating_max|floatformat:2 }}</div>
+	<p><strong>MAX rating of the news</strong></p><div class="max_rating"><p>{{ profile.rating_max|floatformat:2 }}</p></div>
 	</div>
 	<div class="prof_rating_news_avg">
-	<p><strong>AVG rating of the news</strong></p><div class="avg_rating">{{ profile.rating_avg|floatformat:2 }}</div>
+	<p><strong>AVG rating of the news</strong></p><div class="avg_rating"><p>{{ profile.rating_avg|floatformat:2 }}</p></div>
     </div>	
 	<div class="prof_rating_news_min">
-	<p><strong>MIN rating of the news</strong></p><div class="min_rating">{{ profile.rating_min|floatformat:2 }}</div>
+	<p><strong>MIN rating of the news</strong></p><div class="min_rating"><p>{{ profile.rating_min|floatformat:2 }}</p></div>
 	</div>
 	</div>
 	<div class="prof_news_votes">
