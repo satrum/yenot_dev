@@ -143,7 +143,7 @@ def index(request, template='index.html', page_template='index_page.html'):#Фу
 
 from django.db.models import Avg, Max, Min, Sum
 
-def profile(request, template='profile2.html'):
+def profile(request, template='profile.html'):
 	if request.user.is_authenticated:
 		profile=request.user.profile
 		news = News.objects.filter(user=request.user).order_by('-time') #current user news
