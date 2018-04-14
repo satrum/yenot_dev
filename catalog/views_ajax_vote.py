@@ -32,3 +32,73 @@ def news_dislike_ajax(request):
 		dislike = current_new.dislike
 	#return like to ajax
 	return HttpResponse(dislike)
+
+#################
+#from django.shortcuts import redirect
+import json
+from django.http import Http404, HttpResponse
+#from django.contrib.auth.models import User
+
+@login_required
+def user_update(request):
+	if request.is_ajax() and request.method == 'POST':
+		field = request.POST.get('field')
+		print(field)
+		item = request.POST.get('item')
+		print(item)
+		print(request.user, request.user.first_name, request.user.last_name, request.user.email)
+		if field == 'first_name':
+			#change name
+			request.user.first_name = item
+			request.user.save()
+			#return alert and new name
+			data = {'message': "first name changed: {}".format(item), 'item': request.user.first_name}
+			print(data)
+		return HttpResponse(json.dumps(data), content_type='application/json')
+	else:
+		raise Http404
+		#return redirect('profile')
+
+'''
+def more_todo(request):
+    if request.is_ajax():
+        todo_items = ['Mow Lawn', 'Buy Groceries',]
+        data = json.dumps(todo_items)
+        return HttpResponse(data, content_type='application/json')
+    else:
+        raise Http404
+
+$(document).ready(function() {
+    $('.first_name').click(function(){
+      console.log('am i called');
+
+        $.ajax({
+            type: "POST",
+            url: "/catalog/profile/user_update/",
+            dataType: "json",
+            data: { "item": $(".first_name").val() },
+            success: function(data) {
+                alert(data.message);
+            }
+        });
+
+    });
+});
+
+    // AJAX GET
+    $('.get-more').click(function(){
+
+        $.ajax({
+            type: "GET",
+            url: "/ajax/more/",
+            success: function(data) {
+            for(i = 0; i < data.length; i++){
+                $('ul').append('<li>'+data[i]+'</li>');
+            }
+        }
+        });
+
+    });
+'''
+
+

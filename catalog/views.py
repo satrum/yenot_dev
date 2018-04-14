@@ -150,7 +150,6 @@ def profile(request, template='profile.html'):
 		profile.news_count = news.count()
 		profile.sum_negative = profile.sum_all-profile.sum_positive
 		aggr = news.aggregate(Min('rating'), Avg('rating'), Max('rating'), Sum('like'), Sum('dislike'), Sum('count_link_click'))
-		print(aggr)
 		profile.rating_max = aggr['rating__max']
 		profile.rating_min = aggr['rating__min']
 		profile.rating_avg = aggr['rating__avg']

@@ -1,0 +1,171 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+
+	{% if user.is_authenticated %}
+	<div class="prof_inf">
+	<h3>{{ profile.user }}:</h3>
+	<div class="prof_name">
+	<h4 class='first_name' value='{{ user.first_name }}'><strong>First Name:</strong> {{ user.first_name }}</h4>
+	<input class='new_first_name' type="text" value="{{ user.first_name }}" />
+	<button class='change_first_name' >Change Name</button>
+	
+<script type="text/javascript">
+$(document).ready(function() {
+    // AJAX POST
+	$('.change_first_name').click(function(){
+      console.log('am i called');
+
+        $.ajax({
+            type: "POST",
+            url: "/catalog/profile/user_update/",
+            dataType: "json",
+            data: { "item": $(".new_first_name").val() ,"field": "first_name" },
+            success: function(data) {
+                alert(data.message);
+				$(".first_name").text(data.item)
+            }
+        });
+
+    });
+
+    // CSRF code
+    function getCookie(name) {
+        var cookieValue = null;
+        var i = 0;
+        if (document.cookie && document.cookie !== '') {
+            var cookies = document.cookie.split(';');
+            for (i; i < cookies.length; i++) {
+                var cookie = jQuery.trim(cookies[i]);
+                // Does this cookie string begin with the name we want?
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+    var csrftoken = getCookie('csrftoken');
+
+    function csrfSafeMethod(method) {
+        // these HTTP methods do not require CSRF protection
+        return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+    }
+    $.ajaxSetup({
+        crossDomain: false, // obviates need for sameOrigin test
+        beforeSend: function(xhr, settings) {
+            if (!csrfSafeMethod(settings.type)) {
+                xhr.setRequestHeader("X-CSRFToken", csrftoken);
+            }
+        }
+    });
+});
+</script>
+
+	<h4><strong>First Name:</strong> {{ user.first_name }}  {% if user.first_name == '' %}<div class="fixed_prof_name">&#9998;</div>{% endif %}</h4>
+	<h4><strong>Last Name:</strong> {{ user.last_name }}    {% if user.last_name == '' %} <div class="fixed_prof_name">&#9998;</div>{% endif %} </h4>
+	</div>
+	<div class="prof_email">
+	<h4><strong>e-mail:</strong> {{ user.email }} <div class="fixed_prof_name">&#9998;</div></h4> 
+	</div>
+    <div class="log_sub_3_prof"> <a href="{% url 'password_reset' %}">RESET PASSWORD</a></div>
+	</div>
+
+	<div class="prof_inf_2">
+	<h3 style="text-align:center; margin-bottom: 18px;">Your rank:</h3>
+	<div class="rank">
+  
+  <div class="small_up"></div>
+  <div class="small_up_left"></div>
+  <div class="smal_left_up"></div>
+  <div class="small_left"></div>
+  <div class="smal_left_down"></div>
+  <div class="ea"></div>
+  <div class="small_up_right"></div>
+  <div class="smal_right_up"></div>
+  <div class="small_right"></div>
+  <div class="smal_right_down"></div>
+   <div class="small_down"></div>
+   <div class="small_down_left"></div>
+   <div class="small_down_right"></div>
+   <div class="rank_status"><h3>{{ profile.rank }}</h3></div>
+  </div>
+  </div>
+  
+	<div class="prof_inf">
+	<h3 style="text-align:center;">Your points:</h3>
+	<div class="type_points">
+	<h3><strong>Your points</strong><br>{{ profile.sum_all }}</h3>
+	</div>
+	<div class="type_points">
+	<p style="color: green;"><strong>Sum of all points you get</strong> + {{ profile.sum_positive }}</h4>
+	<p style="color: red;"><strong>Sum of all points you loose</strong> {{ profile.sum_negative }}</h4>
+	</div>
+	<hr>
+	<div class="type_points_2">
+	<h3><strong> Last day points</strong><br> {{ profile.sum_today }}</h3>
+	</div>
+	<div class="type_points_2">
+	<p style="color: green;"><strong>Sum of all points you get</strong> +{{ profile.sum_today_positive  }}</p>
+	<p style="color: red;"><strong>Sum of all points you loose</strong> {{ profile.sum_today_positive  }}</p>
+	</div>
+	</div>
+	
+	<div class="prof_news">
+	<h3 style="text-align: center;">Your count news: {{ profile.news_count }} </h3>
+	<div class="prof_rating">
+	<div class="prof_rating_news_max">
+	<p><strong>MAX rating of the news</strong></p><div class="max_rating"><p>{{ profile.rating_max|floatformat:2 }}</p></div>
+	</div>
+	<div class="prof_rating_news_avg">
+	<p><strong>AVG rating of the news</strong></p><div class="avg_rating"><p>{{ profile.rating_avg|floatformat:2 }}</p></div>
+    </div>	
+	<div class="prof_rating_news_min">
+	<p><strong>MIN rating of the news</strong></p><div class="min_rating"><p>{{ profile.rating_min|floatformat:2 }}</p></div>
+	</div>
+	</div>
+	<div class="prof_news_votes">
+	<div class="prof_vote_real">
+	<p><strong>Sum news votes of REAL :</strong>{{profile.likes}}</p>
+	</div>
+	<div class="prof_vote_fake">
+	<p><strong>Sum news votes of FAKE :</strong>{{profile.dislikes}}</p>
+    </div>	
+	</div>
+	<div class="prof_clicks">
+	<p><strong>Sum of all clicks on your link news :</strong>{{profile.link_clicks}}</p>
+	</div>
+	</div>
+	<p><font color="red">button display news...</font></p>
+	
+	<font color="red">add news clicks</font>
+	<div style="display:;">
+	<table><tr>
+		<td>#</td><td>TITLE</td><td>SOURCE</td><td>TEXT</td><td>created time</td><td>direction</td><td>duration</td><td>rating</td>
+		<td>Likes</td><td>Dislikes</td><td>LINK</td><td>USERNAME</td><td>NEWS PRICE</td><td>COIN</td><td>moderation_status</td><td>promo_status</td>
+	{% for news in allnews %}
+	{% if news.promo_status == 'y' %}<tr style="font-weight:bold">{% else %}<tr>{% endif %} 
+		<td>{{news.newsid}}</td>
+		<td><a href="{{ news.get_absolute_url }}">{{ news.title }}</a></td>
+		<td>{{news.sourceid}}</td>
+		<td>{{news.text|truncatechars:40}}</td>
+		<td>{{news.time}}</td>
+		<td>{{news.get_direction_display}}</td>
+		<td>{{news.get_duration_display}}</td>
+		<td>{{news.rating}}</td>
+		<td>{{news.like}}</td>
+		<td>{{news.dislike}}</td>
+		<td><a href="{{ news.link }}">{{ news.link }}</a></td>
+		<td>{{news.user}}</td>
+		<td>{{news.coinprice}}</td>
+		<td>{{news.coinid}}</td>
+		<td>{{news.get_moderation_status_display}}</td>
+		<td>{{news.get_promo_status_display}}</td>
+	</tr>
+	{% endfor %}
+	</table>
+	</div>
+	
+	{% endif %}
+{% endblock %}
