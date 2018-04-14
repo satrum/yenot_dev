@@ -1,0 +1,61 @@
+profile:
+ok rank - место в рейтинге
+profile.balance - вычисляется
+
+update request.user:
+user.first_name
+user.last_name
+user.email
+
+update profile:
+profile.ethaddress
+profile.btcaddress
+profile.usdtaddress (ethereum smart contract)
+profile.bio
+profile.link
+profile.facebook
+profile.twitter
+profile.linkedin
+profile.company
+profile.company_url
+
+
+
+promo:
+tx model with status and user
+	user - fk of user
+	crypto - btc, eth, usdt or usd(manual)
+	txid
+	time
+	balance - price of order
+	balance in usd
+	promoid - fk promo_task
+
+promo_task model with status and user
+	user - fk
+	type - news, source or banner
+	newsid - id of news
+	sourceid - id of source
+	bannerid - id of banner
+	status - заказано, оплачено, запущено, завершено (ordered, paid, launched, completed)
+	promo_param - параметры промотирования, например срок (для новости - нет, для канала - длительность week, month, для баннера - week, month)
+	price - вычисляется в USD (тут нужен калькулятор)
+	time - datetime of add task
+	
+1. пользователь заполняет форму заказа (status=заказано, user, price form: type, id, promo_param)
+	verify: для данного канала или новости или баннера нет работающего заказа
+2. task 'tx_eth_get' 5min - обход транзакций в сети ETH , и добавление в кабинет пользователя, вычисление баланса (в том числе по всем вручную созданным транзакциям) 
+3. task 'pay_promo_task' 5min - обход promo_task status=ordered , если profile.balance >= promo_task.price то:
+	promo_task.status = 'paid'
+	new tx: crypto=usd, balance = -promo_task.price
+	profile.balance =-promo_task.price
+4. task 'start_promo_task' 5min - обход promo_task status=paid
+	promo_task.status = 'launched'
+	source.promo - изменить статус, если promo_task.type = source (а так же все новости канала)
+	news.promo - изменить статус, если promo_task.type = news
+	banner.promo - изменить статус, если promo_task.type = banner
+5. task 'stop_promo_task' 5min - обход promo_task status=launched ,проверить что условие в promo_task.promo_param выполнено. Если да, то:
+	promo_task.status = 'completed'
+	source.promo - изменить статус, если promo_task.type = source (а так же все новости канала, но проверять что нет другого активного promo_task.type=news для этой новости)
+	news.promo - изменить статус, если promo_task.type = news
+	banner.promo - изменить статус, если promo_task.type = banner

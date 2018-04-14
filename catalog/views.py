@@ -156,7 +156,7 @@ def profile(request, template='profile.html'):
 		profile.likes = aggr['like__sum']
 		profile.dislikes = aggr['dislike__sum']
 		profile.link_clicks = aggr['count_link_click__sum']
-		sources = Source.objects.filter(user=request.user).order_by('-time') #current user sources
+		sources = Source.objects.filter(user=request.user) #current user sources
 		context={
 		'profile':profile,
 		'allnews':news,

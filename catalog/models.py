@@ -299,6 +299,34 @@ class YeenotSettings(models.Model):
 	#text_value = models.CharField(max_length=20, help_text="text value of settings")
 	num_value = models.DecimalField(default=0.0, blank=True, max_digits=10, decimal_places=2, help_text="digital value of settings")
 
+class Promo_task(models.Model):
+	user     = models.ForeignKey(User,   on_delete=models.SET_NULL, null=True, blank=True, related_name="user_promo") #owner(manager) of Promo_task
+	newsid   = models.ForeignKey(News,   on_delete=models.SET_NULL, null=True, blank=True , verbose_name="NEWS")
+	sourceid = models.ForeignKey(Source, on_delete=models.SET_NULL, null=True, blank=True , verbose_name="SOURCE")
+	bannerid = models.ForeignKey(Banner, on_delete=models.SET_NULL, null=True, blank=True , verbose_name="BANNER")
+	TYPE_NAME = (
+        ('n', 'News promo'),
+        ('s', 'Source promo'),
+        ('b', 'Banner promo'),
+    )
+	type = models.CharField(max_length=1, choices=TYPE_NAME, blank=True, default='n', help_text='Type of promo task')
+	STATUS_NAME = (
+        ('o', 'Ordered'),
+        ('p', 'Paid'),
+        ('l', 'Launched'),
+		('c', 'Completed'),
+    )
+	status = models.CharField(max_length=1, choices=STATUS_NAME, blank=True, default='o', help_text='Status of promo task')
+	PARAM_NAME = (
+        ('w', 'Week'),
+        ('m', 'Month'),
+    )
+	#param - for example duration or clicks or views (news - no, source - duration week or month, banner - duration week or month)
+	param = models.CharField(max_length=1, choices=PARAM_NAME, blank=True, default='w', help_text='Parameters of promo task')
+	#price -calculated in USD (need calculator in views.addpromo)
+	price = models.DecimalField(max_digits=20, decimal_places=2, help_text='price of promo task calculated after promo added')
+	time = models.DateTimeField(default=timezone.now, help_text='time after promo task added')
+
 '''
 News:
  !newsid
