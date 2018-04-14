@@ -156,9 +156,11 @@ def profile(request, template='profile.html'):
 		profile.likes = aggr['like__sum']
 		profile.dislikes = aggr['dislike__sum']
 		profile.link_clicks = aggr['count_link_click__sum']
+		sources = Source.objects.filter(user=request.user).order_by('-time') #current user sources
 		context={
 		'profile':profile,
 		'allnews':news,
+		'allsources':sources,
 		}
 		return render(request, template, context)
 	else:
@@ -516,7 +518,18 @@ def user_update(request):
 			request.user.save()
 			#return alert and new name
 			data = {'message': "first name changed: {}".format(item), 'item': request.user.first_name}
-			print('response: ', data)
+		elif field == 'last_name':
+			request.user.last_name = item
+			request.user.save()
+			data = {'message': "last name changed: {}".format(item), 'item': request.user.last_name}
+		elif field == 'email':
+			if User.objects.filter(email=item).exclude(user=request.user).exists() or item == '': #нужна проверка на соответствие формату почтового адреса и тесты
+				print('incorrect email')
+				item = request.user.email
+			request.user.email = item
+			request.user.save()
+			data = {'message': "email changed: {}".format(item), 'item': request.user.email}			
+		print('response: ', data)
 		return HttpResponse(json.dumps(data), content_type='application/json')
 	else:
 		raise Http404
