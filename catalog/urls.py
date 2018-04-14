@@ -30,6 +30,6 @@ urlpatterns += [
 	path('news/<str:time>/', views.NewsListView.as_view(), name='news'),
 	path('profile/', views.profile, name='profile'),
 	path('profile/addsource/', views.addsource, name='addsource'),
-	path('profile/user_update/', views_ajax_vote.user_update, name='user_update'),
+	path('profile/user_update/', views.user_update, name='user_update'),
 	path('news_click/<int:pk>', views.news_click, name='news-click'),
 ]

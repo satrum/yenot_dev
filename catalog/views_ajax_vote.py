@@ -33,31 +33,6 @@ def news_dislike_ajax(request):
 	#return like to ajax
 	return HttpResponse(dislike)
 
-#################
-#from django.shortcuts import redirect
-import json
-from django.http import Http404, HttpResponse
-#from django.contrib.auth.models import User
-
-@login_required
-def user_update(request):
-	if request.is_ajax() and request.method == 'POST':
-		field = request.POST.get('field')
-		print(field)
-		item = request.POST.get('item')
-		print(item)
-		print(request.user, request.user.first_name, request.user.last_name, request.user.email)
-		if field == 'first_name':
-			#change name
-			request.user.first_name = item
-			request.user.save()
-			#return alert and new name
-			data = {'message': "first name changed: {}".format(item), 'item': request.user.first_name}
-			print(data)
-		return HttpResponse(json.dumps(data), content_type='application/json')
-	else:
-		raise Http404
-		#return redirect('profile')
 
 '''
 def more_todo(request):
@@ -67,7 +42,8 @@ def more_todo(request):
         return HttpResponse(data, content_type='application/json')
     else:
         raise Http404
-
+'''
+'''
 $(document).ready(function() {
     $('.first_name').click(function(){
       console.log('am i called');
@@ -99,6 +75,39 @@ $(document).ready(function() {
         });
 
     });
+	
+    // CSRF code
+    function getCookie(name) {
+        var cookieValue = null;
+        var i = 0;
+        if (document.cookie && document.cookie !== '') {
+            var cookies = document.cookie.split(';');
+            for (i; i < cookies.length; i++) {
+                var cookie = jQuery.trim(cookies[i]);
+                // Does this cookie string begin with the name we want?
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+    var csrftoken = getCookie('csrftoken');
+
+    function csrfSafeMethod(method) {
+        // these HTTP methods do not require CSRF protection
+        return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+    }
+    $.ajaxSetup({
+        crossDomain: false, // obviates need for sameOrigin test
+        beforeSend: function(xhr, settings) {
+            if (!csrfSafeMethod(settings.type)) {
+                xhr.setRequestHeader("X-CSRFToken", csrftoken);
+            }
+        }
+    });
+	
 '''
 
 

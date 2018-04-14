@@ -6,7 +6,7 @@
 	<div class="prof_inf">
 	<h3>{{ profile.user }}:</h3>
 	<div class="prof_name">
-	<h4 class='first_name' value='{{ user.first_name }}'><strong>First Name:</strong> {{ user.first_name }}</h4>
+	<h4><strong>First Name:</strong> <div class='first_name'>{{ user.first_name }}</div></h4>
 	<input class='new_first_name' type="text" value="{{ user.first_name }}" />
 	<button class='change_first_name' >Change Name</button>
 	
@@ -14,51 +14,19 @@
 $(document).ready(function() {
     // AJAX POST
 	$('.change_first_name').click(function(){
-      console.log('am i called');
+      console.log('click on change name');
 
         $.ajax({
-            type: "POST",
-            url: "/catalog/profile/user_update/",
-            dataType: "json",
-            data: { "item": $(".new_first_name").val() ,"field": "first_name" },
+            type: 'POST',
+            url: '/catalog/profile/user_update/',
+            dataType: 'json',
+            data: { 'item': $('.new_first_name').val() ,'field': 'first_name' ,'csrfmiddlewaretoken': '{{ csrf_token }}'},
             success: function(data) {
-                alert(data.message);
-				$(".first_name").text(data.item)
+                <!-- alert(data.message); -->
+				$('.first_name').text(data.item)
             }
         });
 
-    });
-
-    // CSRF code
-    function getCookie(name) {
-        var cookieValue = null;
-        var i = 0;
-        if (document.cookie && document.cookie !== '') {
-            var cookies = document.cookie.split(';');
-            for (i; i < cookies.length; i++) {
-                var cookie = jQuery.trim(cookies[i]);
-                // Does this cookie string begin with the name we want?
-                if (cookie.substring(0, name.length + 1) === (name + '=')) {
-                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                    break;
-                }
-            }
-        }
-        return cookieValue;
-    }
-    var csrftoken = getCookie('csrftoken');
-
-    function csrfSafeMethod(method) {
-        // these HTTP methods do not require CSRF protection
-        return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
-    }
-    $.ajaxSetup({
-        crossDomain: false, // obviates need for sameOrigin test
-        beforeSend: function(xhr, settings) {
-            if (!csrfSafeMethod(settings.type)) {
-                xhr.setRequestHeader("X-CSRFToken", csrftoken);
-            }
-        }
     });
 });
 </script>

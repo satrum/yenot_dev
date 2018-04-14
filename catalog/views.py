@@ -143,7 +143,7 @@ def index(request, template='index.html', page_template='index_page.html'):#Фу
 
 from django.db.models import Avg, Max, Min, Sum
 
-def profile(request, template='profile.html'):
+def profile(request, template='profile2.html'):
 	if request.user.is_authenticated:
 		profile=request.user.profile
 		news = News.objects.filter(user=request.user).order_by('-time') #current user news
@@ -499,3 +499,25 @@ def news_click(request, pk):
 	new.count_link_click += 1
 	new.save()
 	return HttpResponseRedirect(new.link)
+
+
+from django.http import Http404, HttpResponse
+
+@login_required
+def user_update(request):
+	if request.is_ajax() and request.method == 'POST':
+		field = request.POST.get('field')
+		item = request.POST.get('item')
+		print('current user: ',request.user, request.user.first_name, request.user.last_name, request.user.email)
+		print('request: ',request.POST.get)
+		if field == 'first_name':
+			#change name
+			request.user.first_name = item
+			request.user.save()
+			#return alert and new name
+			data = {'message': "first name changed: {}".format(item), 'item': request.user.first_name}
+			print('response: ', data)
+		return HttpResponse(json.dumps(data), content_type='application/json')
+	else:
+		raise Http404
+		#return redirect('profile')
