@@ -29,7 +29,7 @@
 	<div class="text_area">   
 	   {{ form.text.label_tag }}
  <textarea type="text"
-       name="{{ form.text.name }}" cols="94" rows="5" maxlength="1000"
+       name="{{ form.text.name }}" cols="91" rows="5" maxlength="1000"
        id="{{ form.text.id_for_label }}"
        {% if form.text.value != None %}value="{{ form.text.value|stringformat:'s' }}"{% endif %}
        maxlength="{{ form.text.field.max_length }}"

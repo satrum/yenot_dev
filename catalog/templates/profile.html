@@ -3,6 +3,7 @@
 {% block content %}
 
 	{% if user.is_authenticated %}
+	{% load static %}
 	<div class="prof_inf">
 	<h3>{{ profile.user }}:</h3>
 	<div class="prof_name">
@@ -80,35 +81,122 @@
 	<p><strong>Sum of all clicks on your link news :</strong>{{profile.link_clicks}}</p>
 	</div>
 	</div>
-	<p><font color="red">button display news...</font></p>
+<div style="text-align:center; margin: 20px;">
+<div class="stat_all_act" onclick="show('dfg1'); newstat(this);"><p>YOUR NEWS</p>
+</div>
+<div class="stat_all_act" onclick="show('dfg2'); newstat(this);"><p>YOUR SOURCES</p>
+</div>
+<div  class="stat_all_act" onclick="show('dfg3'); newstat(this);"><p>YOUR ADVERTISEMENT</p>
+</div>
+</div>
+     <div id="dfg1" style="display:none;">
+	 {% if allnews %}
+	<div class="add_news tab_news_add_2"><a href="{% url 'addnews'%}?next={{request.path}}"><div class="round">+</div>Add New</a></div>
+<!-- need move to css -->
+
+	<table id="user_list">
+	<thead>
+	<tr>
+		<th>COIN</th>
+		<th>CHANNEL</th>
+		<th>NEWS</th>
+<th style="width: 11%;">
+CREATED TIME
+  </th>
+		<th>DIRECTION</th>
+		<th style="width: 10%;">RATING</th>
+		<th style="width: 10%;">REAL</th>
+		<th style="width: 10%;">FAKE</th>
+		<th>NEWS PRICE</th>
+		<th>MODERATION STATUS</th>
+		<th>PROMO STATUS</th>
+	</tr>
+		
+		</thead>
+	<tbody class="infinite-container">
 	
-	<font color="red">add news clicks</font>
-	<div style="display:;">
-	<table><tr>
-		<td>#</td><td>TITLE</td><td>SOURCE</td><td>TEXT</td><td>created time</td><td>direction</td><td>duration</td><td>rating</td>
-		<td>Likes</td><td>Dislikes</td><td>LINK</td><td>USERNAME</td><td>NEWS PRICE</td><td>COIN</td><td>moderation_status</td><td>promo_status</td>
 	{% for news in allnews %}
-	{% if news.promo_status == 'y' %}<tr style="font-weight:bold">{% else %}<tr>{% endif %} 
-		<td>{{news.newsid}}</td>
-		<td><a href="{{ news.get_absolute_url }}">{{ news.title }}</a></td>
-		<td>{{news.sourceid}}</td>
-		<td>{{news.text|truncatechars:40}}</td>
-		<td>{{news.time}}</td>
-		<td>{{news.get_direction_display}}</td>
-		<td>{{news.get_duration_display}}</td>
-		<td>{{news.rating}}</td>
-		<td>{{news.like}}</td>
-		<td>{{news.dislike}}</td>
-		<td><a href="{{ news.link }}">{{ news.link }}</a></td>
-		<td>{{news.user}}</td>
-		<td>{{news.coinprice}}</td>
-		<td>{{news.coinid}}</td>
-		<td>{{news.get_moderation_status_display}}</td>
+	{% if news.promo_status == 'y' %}<tr style="font-weight:bold" class="infinite-item tab_pro" >{% else %}<tr class="infinite-item tab_fon">{% endif %} 
+		<td class="td_pd"style="width: 10%;">
+		<img src="{{news.coinid.image.url}}" style="border-radius: 100%; width: 77px;padding-top: 6px;">
+		<h3>{{news.coinid}}</h3>
+        <p class="price_change">{{news.coinid.price|floatformat:3}}$
+		({{news.coinid.change|floatformat:1}}%)</p>		
+		</td>
+		<td class="td_pd" style="width: 10%;">{{news.sourceid}}</td>
+		<td class="td_pd ria"style="width: 45%;">
+		<p class="duration_change_2">DURATION TIME OF NEWS: {{news.duration}}</p>
+		<a href="{{ news.get_absolute_url }}">
+		<h4>{{news.title}}</h4></a>
+		<div class="textnews_2"><p>{{news.text|truncatechars:245}}</p></div>
+		{%if news.link %}<a href="{% url 'news-click' news.pk %}" class="rt">{{ news.link|truncatechars:130}}</a>{% endif %}
+		</td>
+		
+		<td class="td_pd" style="width: 11%;">{{news.time|date:"d M Y"}}<br>{{news.time|time:"H:i"}}</</td>
+		<td class="td_pd">{% if news.direction == 'b' %}<img src="{% static 'images/UP_news.png' %}" style="vertical-align: top;">{% elif news.direction == 's' %}<img src="{% static 'images/D2l.png' %}" style="vertical-align: top;">{% endif %}</td>
+		<td class="td_pd" style="width: 10%;">{{news.rating}}</td>
+		<td style="width: 10%;    text-align: center;     padding: 0px 16px;"><p  id="like_count_{{news.newsid}}">{{news.like}}</p>
+		{% if user.is_authenticated %}
+		
+		
+			{% if news.enable_vote %}
+		<div id="like_btn_{{news.newsid}}" data-newsid="{{news.newsid}}" data-url="{% url 'news-like-ajax' %}"  class="like_btn" onclick="like(this)"><p>VOTE</p></div>
+				{% endif %}
+		
+		
+{% endif %}
+
+        <p> REAL</p>		
+		</td>
+		
+		<td style="width: 10%;    text-align: center;     padding: 0px 16px;"><p id="dislike_count_{{news.newsid}}">{{news.dislike}}</p>
+		
+		{% if user.is_authenticated %}
+			{% if news.enable_vote %}
+				<div id="dislike_btn_{{news.newsid}}" data-newsid="{{news.newsid}}" data-url="{% url 'news-dislike-ajax' %}"  class="dislike_btn" onclick="dislike(this)"><p>VOTE</p></div>
+			{% endif %}
+		{% endif %}
+		<p>FAKE</p>
+		</td>
+		<td>{{news.coinprice|floatformat:3}}</td>
+		<td style="text-align:center;">{{news.get_moderation_status_display}}</td>
 		<td>{{news.get_promo_status_display}}</td>
 	</tr>
 	{% endfor %}
+	</tbody>
 	</table>
-	</div>
+	    {% else %}
+      <div class="add_news tab_news_add_2"><a href="{% url 'addnews'%}?next={{request.path}}"><div class="round">+</div>Add New</a></div>
+	  {% endif %} 
+	  </div>
+	  <div id="dfg2"style="display:none;">
+	  	{% if allsource%}    
+		
+			{% else %}
+      <div class="add_news tab_news_add_2"><a href="{% url 'addnews'%}?next={{request.path}}"><div class="round">+</div>Add Sources</a></div>
+	  {% endif %} 
+	  </div>
+      <div id="dfg3"style="display:none;">
+	  <h3 style="text-align:center;">This statistic is develop.</h3>
+	  </div>
+	  <script>
+var current = 'dfg1';
+
+function show(id) {
 	
-	{% endif %}
+document.getElementById(current).style.display = 'none';
+	document.getElementById(id).style.display = 'block';
+	current = id;
+} 
+</script>
+<script>
+var drg;
+function newstat(obj) {
+obj.className = 'stat_one_act'; 
+   if (drg)
+drg.className = 'stat_all_act'; 
+drg = obj;
+}
+</script>
+	  {% endif %}       
 {% endblock %}
