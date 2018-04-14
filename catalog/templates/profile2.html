@@ -9,12 +9,17 @@
 	<h4><strong>First Name:</strong> <div class='first_name'>{{ user.first_name }}</div></h4>
 	<input class='new_first_name' type="text" value="{{ user.first_name }}" />
 	<button class='change_first_name' >Change Name</button>
-	
+	<h4><strong>Last Name:</strong> <div class='last_name'>{{ user.last_name }}</div></h4>
+	<input class='new_last_name' type="text" value="{{ user.last_name }}" />
+	<button class='change_last_name' >Change Name</button>
+	<h4><strong>e-mail:</strong> <div class='email'>{{ user.email }}</div></h4>
+	<input class='new_email' type="text" value="{{ user.email }}" />
+	<button class='change_email' >Change Name</button>
 <script type="text/javascript">
 $(document).ready(function() {
     // AJAX POST
 	$('.change_first_name').click(function(){
-      console.log('click on change name');
+      console.log('click on change first name');
 
         $.ajax({
             type: 'POST',
@@ -24,6 +29,36 @@ $(document).ready(function() {
             success: function(data) {
                 <!-- alert(data.message); -->
 				$('.first_name').text(data.item)
+            }
+        });
+
+    });
+	$('.change_last_name').click(function(){
+      console.log('click on change last name');
+
+        $.ajax({
+            type: 'POST',
+            url: '/catalog/profile/user_update/',
+            dataType: 'json',
+            data: { 'item': $('.new_last_name').val() ,'field': 'last_name' ,'csrfmiddlewaretoken': '{{ csrf_token }}'},
+            success: function(data) {
+                <!-- alert(data.message); -->
+				$('.last_name').text(data.item)
+            }
+        });
+
+    });
+	$('.change_email').click(function(){
+      console.log('click on change email');
+
+        $.ajax({
+            type: 'POST',
+            url: '/catalog/profile/user_update/',
+            dataType: 'json',
+            data: { 'item': $('.new_email').val() ,'field': 'email' ,'csrfmiddlewaretoken': '{{ csrf_token }}'},
+            success: function(data) {
+                <!-- alert(data.message); -->
+				$('.last_name').text(data.item)
             }
         });
 

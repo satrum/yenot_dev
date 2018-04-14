@@ -523,7 +523,7 @@ def user_update(request):
 			request.user.save()
 			data = {'message': "last name changed: {}".format(item), 'item': request.user.last_name}
 		elif field == 'email':
-			if User.objects.filter(email=item).exclude(user=request.user).exists() or item == '': #нужна проверка на соответствие формату почтового адреса и тесты
+			if User.objects.filter(email=item).exclude(username=request.user).exists() or item == '': #нужна проверка на соответствие формату почтового адреса и тесты
 				print('incorrect email')
 				item = request.user.email
 			request.user.email = item
