@@ -756,7 +756,8 @@ footer{
     background: #3b520b61;
     padding: 2px 2px;
 	    color: white;
-		    max-width: 644px;
+		width: 100%;
+		max-width:700px;
 }
 #id_coinid{
     width:75px;
