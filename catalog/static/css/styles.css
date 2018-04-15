@@ -66,6 +66,30 @@ a:hover, a:active{
 	text-align:center;
 	margin: 0px auto 23px;
 }
+.prof_rating_source_max{
+	text-align:center;
+	display:inline-block;
+	margin: 2px 12px;
+padding: 5px 10px;
+    border: 2px solid #a0b987;
+	background: #015c00;
+}
+.prof_rating_source_avg{
+	text-align:center;
+	display:inline-block;
+	margin: 2px 12px 0px;
+padding: 5px 11px;
+    border: 2px solid #a0b987;
+	    background: #7c9907;
+}
+.prof_rating_source_min{
+	text-align:center;
+	display:inline-block;
+	margin: 0px 12px;
+padding: 5px 11px;
+    border: 2px solid #a0b987;
+	    background: #b81403;
+}
 .prof_rating_news_max{
 	text-align:center;
 	display:inline-block;
@@ -823,6 +847,29 @@ footer{
     display: inline-block;
     float: right;
     margin: 8px 0px 0px;
+}
+.click_count{
+    background: #1f45024d;
+    padding: 3px 5px;
+    width: 100%;
+    border: 1px solid yellowgreen;
+    text-align: center;
+    display: inline-block;
+    float: right;
+    margin: 8px 0px;
+}
+#user_list_2 {
+    width: 100%;
+
+}
+#dfg1{
+	margin-bottom:20px;
+}
+#dfg3{
+	margin-bottom:20px;
+}
+#dfg2{
+	margin-bottom:20px;
 }
 .rule_yeenot{
 	text-align:center;

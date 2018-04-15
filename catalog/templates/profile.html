@@ -59,26 +59,27 @@
 	<div class="prof_news">
 	<h3 style="text-align: center;">Your count news: {{ profile.news_count }} </h3>
 	<div class="prof_rating">
-	<div class="prof_rating_news_max">
-	<p><strong>MAX rating of the news</strong></p><div class="max_rating"><p>{{ profile.rating_max|floatformat:2 }}</p></div>
+		<div class="prof_rating_news_min">
+	<p><strong>MIN rating of the news</strong></p><div class="min_rating"><p>{{ profile.rating_min|floatformat:2 }}</p></div>
 	</div>
+
 	<div class="prof_rating_news_avg">
 	<p><strong>AVG rating of the news</strong></p><div class="avg_rating"><p>{{ profile.rating_avg|floatformat:2 }}</p></div>
     </div>	
-	<div class="prof_rating_news_min">
-	<p><strong>MIN rating of the news</strong></p><div class="min_rating"><p>{{ profile.rating_min|floatformat:2 }}</p></div>
+	<div class="prof_rating_news_max">
+	<p><strong>MAX rating of the news</strong></p><div class="max_rating"><p>{{ profile.rating_max|floatformat:2 }}</p></div>
 	</div>
 	</div>
 	<div class="prof_news_votes">
 	<div class="prof_vote_real">
-	<p><strong>Sum news votes of REAL :</strong>{{profile.likes}}</p>
+	<p><strong>Sum news votes of REAL : </strong>{{profile.likes}}</p>
 	</div>
 	<div class="prof_vote_fake">
-	<p><strong>Sum news votes of FAKE :</strong>{{profile.dislikes}}</p>
+	<p><strong>Sum news votes of FAKE : </strong>{{profile.dislikes}}</p>
     </div>	
 	</div>
 	<div class="prof_clicks">
-	<p><strong>Sum of all clicks on your link news :</strong>{{profile.link_clicks}}</p>
+	<p><strong>Sum of all clicks on your link news : </strong>{{profile.link_clicks}}</p>
 	</div>
 	</div>
 <div style="text-align:center; margin: 20px;">
@@ -98,7 +99,7 @@
 	<thead>
 	<tr>
 		<th>COIN</th>
-		<th>CHANNEL</th>
+		<th>SOURCE</th>
 		<th>NEWS</th>
 <th style="width: 11%;">
 CREATED TIME
@@ -129,7 +130,8 @@ CREATED TIME
 		<a href="{{ news.get_absolute_url }}">
 		<h4>{{news.title}}</h4></a>
 		<div class="textnews_2"><p>{{news.text|truncatechars:245}}</p></div>
-		{%if news.link %}<a href="{% url 'news-click' news.pk %}" class="rt">{{ news.link|truncatechars:130}}</a>{% endif %}
+		{%if news.link %}<a href="{% url 'news-click' news.pk %}" class="rt">{{ news.link|truncatechars:100}}</a><p class="click_count">count of clicks on link: 
+		{{ news.count_link_click }}</p>{% endif %}
 		</td>
 		
 		<td class="td_pd" style="width: 11%;">{{news.time|date:"d M Y"}}<br>{{news.time|time:"H:i"}}</</td>
@@ -170,10 +172,44 @@ CREATED TIME
 	  {% endif %} 
 	  </div>
 	  <div id="dfg2"style="display:none;">
-	  	{% if allsource%}    
+	  	{% if allsources %}    
+		<div class="add_news tab_news_add_2"><a href="{% url 'addsource'%}?next={{request.path}}"><div class="round">+</div>Add Sources</a></div>
 		
+		<table id="user_list_2" >
+		<thead>
+		<tr>
+		<th>SOURCE</th>
+		<th>DESCRIPTION</th>
+		<th>SITE URL</th>
+		<th>TELEGRAM</th>
+		<th>MODERATION STATUS</th>
+		<th>PROMO STATUS</th>
+		<th>VOTES OF NEWS REAL</th>
+		<th>VOTES OF NEWS FAKE</th>
+		<th>RATING OF NEWS</th>
+		</tr>
+		</thead>
+		<tbody class="infinite-container">
+		{% for source in allsources %}
+		
+		
+		{% if news.promo_status == 'y' %}<tr style="font-weight:bold" class="infinite-item tab_pro" >{% else %}<tr class="infinite-item tab_fon">{% endif %} 
+		<td style="width: 10%;    text-align: center;     padding: 0px 5px;">{{ source.name }}</td>
+		<td style="width: 20%;    text-align: center;     padding: 0px 5px;">{{ source.text }}</td>
+		<td style="width: 10%;    text-align: center;     padding: 0px 5px;">{{ source.link }}</td>
+		<td style="width: 10%;    text-align: center;     padding: 0px 5px;">{{ source.telegram }}</td>
+		<td style="width: 10%;    text-align: center;     padding: 0px 5px;">{{ source.get_moderation_status_display}}</td>
+		<td style="    text-align: center;     padding: 0px 5px;">{{ source.get_promo_status_display }}</td>
+		<td style="   text-align: center;     padding: 0px 5px;"><p> REAL</p>{{ source.stats_likes}}</td>
+		<td style="   text-align: center;     padding: 0px 5px;"><p> FAKE</p>{{ source.stats_dislikes }}</td>
+		<td style="   text-align: center;     padding: 3px 5px;"><p class="prof_rating_source_min">MIN <br>{{ source.stats_max }}</p><p class="prof_rating_source_avg">AVG <br>{{ source.stats_avg }}</p><p class="prof_rating_source_max">MAX <br>{{ source.stats_min }}</p></td>
+		</tr>
+		
+		{% endfor %}
+		</tbody>
+		</table>
 			{% else %}
-      <div class="add_news tab_news_add_2"><a href="{% url 'addnews'%}?next={{request.path}}"><div class="round">+</div>Add Sources</a></div>
+      <div class="add_news tab_news_add_2"><a href="{% url 'addsource'%}?next={{request.path}}"><div class="round">+</div>Add Sources</a></div>
 	  {% endif %} 
 	  </div>
       <div id="dfg3"style="display:none;">

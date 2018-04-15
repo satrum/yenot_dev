@@ -41,7 +41,7 @@ function addCustomInformation() {
     <script type="text/javascript">
     $(document).ready(function() {
 	$("#user_list").tablesorter({sortList: [[4,0]]});
-
+    $("#user_list_2").tablesorter({sortList: [[0,1]]});
 
     });          
     </script>
@@ -75,7 +75,7 @@ function addCustomInformation() {
 		 </ul>
 		 <ul class="sidebar-nav linetop">
           <li class="menu_main">TOP LEADERS</li></a>
-          <li class="menu_main">TOP CHANNELS</li></a>	
+          <li class="menu_main">TOP SOURCE</li></a>	
           <a href="{% url 'news' %}"><li class="menu_main">TOP NEWS</li></a>
 		  <a href="{% url 'rules' %}"><li class="menu_main">RULES</li></a>
 		  
