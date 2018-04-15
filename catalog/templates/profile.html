@@ -193,7 +193,7 @@ CREATED TIME
 		{% for source in allsources %}
 		
 		
-		{% if news.promo_status == 'y' %}<tr style="font-weight:bold" class="infinite-item tab_pro" >{% else %}<tr class="infinite-item tab_fon">{% endif %} 
+		{% if source.promo_status == 'y' %}<tr style="font-weight:bold" class="infinite-item tab_pro" >{% else %}<tr class="infinite-item tab_fon">{% endif %} 
 		<td style="width: 10%;    text-align: center;     padding: 0px 5px;">{{ source.name }}</td>
 		<td style="width: 20%;    text-align: center;     padding: 0px 5px;">{{ source.text }}</td>
 		<td style="width: 10%;    text-align: center;     padding: 0px 5px;">{{ source.link }}</td>
