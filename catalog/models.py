@@ -277,6 +277,8 @@ class Banner(models.Model):
         ('r', 'Under Top on Right'),
     )
 	place = models.CharField(max_length=1, choices=PLACE_NAME, blank=True, default='t', help_text='Banner place on site')
+	def __str__(self):
+		return self.title
 
 class Coin(models.Model):
 	id = models.AutoField(primary_key=True, help_text="coin id")
@@ -309,20 +311,20 @@ class Promo_task(models.Model):
         ('s', 'Source promo'),
         ('b', 'Banner promo'),
     )
-	type = models.CharField(max_length=1, choices=TYPE_NAME, blank=True, default='n', help_text='Type of promo task')
+	type = models.CharField(max_length=1, choices=TYPE_NAME, blank=False, default='n', help_text='Type of promo task')
 	STATUS_NAME = (
         ('o', 'Ordered'),
         ('p', 'Paid'),
         ('l', 'Launched'),
 		('c', 'Completed'),
     )
-	status = models.CharField(max_length=1, choices=STATUS_NAME, blank=True, default='o', help_text='Status of promo task')
+	status = models.CharField(max_length=1, choices=STATUS_NAME, blank=False, default='o', help_text='Status of promo task')
 	PARAM_NAME = (
         ('w', 'Week'),
         ('m', 'Month'),
     )
 	#param - for example duration or clicks or views (news - no, source - duration week or month, banner - duration week or month)
-	param = models.CharField(max_length=1, choices=PARAM_NAME, blank=True, default='w', help_text='Parameters of promo task')
+	param = models.CharField(max_length=1, choices=PARAM_NAME, blank=False, default='w', help_text='Parameters of promo task')
 	#price -calculated in USD (need calculator in views.addpromo)
 	price = models.DecimalField(max_digits=20, decimal_places=2, help_text='price of promo task calculated after promo added')
 	time = models.DateTimeField(default=timezone.now, help_text='time after promo task added')

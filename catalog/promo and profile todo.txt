@@ -42,7 +42,7 @@ promo_task model with status and user
 	price - вычисляется в USD (тут нужен калькулятор)
 	time - datetime of add task
 	
-1. пользователь заполняет форму заказа (status=заказано, user, price form: type, id, promo_param)
+1. пользователь заполняет форму заказа (status=заказано, user, price form: type, *id, param)
 	verify: для данного канала или новости или баннера нет работающего заказа
 2. task 'tx_eth_get' 5min - обход транзакций в сети ETH , и добавление в кабинет пользователя, вычисление баланса (в том числе по всем вручную созданным транзакциям) 
 3. task 'pay_promo_task' 5min - обход promo_task status=ordered , если profile.balance >= promo_task.price то:
