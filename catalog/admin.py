@@ -46,7 +46,7 @@ class BookInstanceAdmin(admin.ModelAdmin):
 '''
 #-------------------------
 #ENOT
-from .models import News, Source, UserVotes, Profile, Banner, Coin, YeenotSettings
+from .models import News, Source, UserVotes, Profile, Banner, Coin, YeenotSettings, Promo_task
 
 #admin.site.register(News)
 @admin.register(News)
@@ -89,3 +89,7 @@ class CoinAdmin(admin.ModelAdmin):
 @admin.register(YeenotSettings)
 class YeenotSettingsAdmin(admin.ModelAdmin):
 	list_display = ('id', 'name', 'num_value')
+
+@admin.register(Promo_task)
+class PromotaskAdmin(admin.ModelAdmin):
+    list_display = ('id', 'user', 'newsid', 'sourceid', 'bannerid', 'type', 'status', 'param', 'price', 'time')
