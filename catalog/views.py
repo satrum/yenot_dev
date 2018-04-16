@@ -319,6 +319,7 @@ class SignUpForm(UserCreationForm):
         self.fields['username'].help_text = 'Required. 150 characters or fewer. Letters, digits and @ . + - _ only.'
         self.fields['password1'].help_text = 'Your password cannot be too similar to your other personal information. Your password must contain at least 8 characters. Your password cannot be a commonly used password. Your password cannot be entirely numeric.'
         self.fields['password2'].help_text = 'Enter the same password as before, for verification.'
+        self.fields['first_name'].label = 'Nickname'
 		#for fieldname in ['username', 'password1', 'password2']:
         #    self.fields[fieldname].help_text = None
 	
@@ -334,6 +335,13 @@ class SignUpForm(UserCreationForm):
         if email and User.objects.filter(email=email).exclude(username=username).exists():
             raise forms.ValidationError(u'Email addresses must be unique.')
         return email
+
+    def clean_first_name(self):
+        first_name = self.cleaned_data.get('first_name')
+        username = self.cleaned_data.get('username')
+        if first_name and User.objects.filter(first_name=first_name).exclude(username=username).exists():
+            raise forms.ValidationError(u'Nickname must be unique.')
+        return first_name
 
 from django.contrib.auth import login, authenticate
 #from django.contrib.auth.forms import UserCreationForm

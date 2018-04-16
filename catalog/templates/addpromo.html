@@ -1,13 +1,31 @@
 {% extends "base_generic.html" %}
 
 {% block content %}
+<p> Select promo type: your news, source or banner</p>
+<p> if you select news: promo duration equal news duration. Price: 10</p>
+<p> if you select source: select duration. Price: week 20, month 80. All news in source will be promoted</p>
+<p> if you select banner: select duration. Price: week 50, month 200.</p>
+<p> After add promo task you can see status of tasks in profile. link:</p>
+<p> You can transfer paiment and see your transactions here: link </p>
+<p> If you have enough funds on the balance, task change status to Paid, and Launched. </p>
+<p> After promo task duration expired status changed to Completed.</p>
 
   <h2>Add Promo Task</h2>
   <form method="post">
     {% csrf_token %}
     {% for field in form %}
-      <p>
-        {{ field.label_tag }}<br>
+      
+	  {% if field.name == 'sourceid' %}
+	  <p id="{{ field.name }}" style="visibility: hidden;">
+	  {% elif field.name == 'bannerid' %}
+	  <p id="{{ field.name }}" style="visibility: hidden;">
+	  {% elif field.name == 'param' %}
+	  <p id="{{ field.name }}" style="visibility: hidden;">
+	  {% else %}
+	  <p id="{{ field.name }}" style="visibility: visible;">
+	  {% endif %}
+        
+		{{ field.label_tag }}<br>
         {{ field }}
         {% if field.help_text %}
           <small style="color: grey">{{ field.help_text }}</small>
@@ -17,9 +35,46 @@
         {% endfor %}
       </p>
     {% endfor %}
+	<!-- {{form.type}} -->
+	<!-- {{form.newsid}} -->
+	<!-- {{form.sourceid}} -->
+	<!-- {{form.bannerid}} -->
     <button type="submit">Add Task</button>
   </form>
-  
+
+<script>
+<!-- window.onclick=function(){ -->
+$("#id_type").change(function(){
+	
+	var e = document.getElementById("id_type");
+	var value = e.options[e.selectedIndex].value;
+	var text = e.options[e.selectedIndex].text;
+	console.log("type select changed");
+	console.log(value)
+	console.log(text)
+	switch (value) {
+	case "n":
+	document.getElementById("newsid").style.visibility="visible";
+	document.getElementById("sourceid").style.visibility="hidden";
+	document.getElementById("bannerid").style.visibility="hidden";
+	document.getElementById("param").style.visibility="hidden";
+	break;
+	case "s":
+	document.getElementById("newsid").style.visibility="hidden";
+	document.getElementById("sourceid").style.visibility="visible";
+	document.getElementById("bannerid").style.visibility="hidden";
+	document.getElementById("param").style.visibility="visible";
+	break;
+	case "b":
+	document.getElementById("newsid").style.visibility="hidden";
+	document.getElementById("sourceid").style.visibility="hidden";
+	document.getElementById("bannerid").style.visibility="visible";
+	document.getElementById("param").style.visibility="param";
+	break;
+	}
+	});
+<!-- } -->
+</script>
 {% endblock %}
 
 
