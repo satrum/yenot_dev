@@ -7,11 +7,10 @@
 	<div class="prof_inf">
 	<h3>{{ profile.user }}:</h3>
 	<div class="prof_name">
-	<h4><strong>First Name:</strong> {{ user.first_name }}  {% if user.first_name == '' %}<div class="fixed_prof_name">&#9998;</div>{% endif %}</h4>
-	<h4><strong>Last Name:</strong> {{ user.last_name }}    {% if user.last_name == '' %} <div class="fixed_prof_name">&#9998;</div>{% endif %} </h4>
+	<h4><strong>Nickname:</strong></h4><div class='first_name'><h4>{{ user.first_name }}</h4></div><div class="fixed_prof_name" onclick="email_use2(this)">&#9998;</div>
 	</div>
 	<div class="prof_email">
-	<h4><strong>e-mail:</strong> {{ user.email }} <div class="fixed_prof_name">&#9998;</div></h4> 
+	<h4><strong>e-mail:</strong> </h4> <div class='email'><h4>{{ user.email }}</h4></div> <div class="fixed_prof_email" onclick="email_use3(this)">&#9998;</div>
 	</div>
     <div class="log_sub_3_prof"> <a href="{% url 'password_reset' %}">RESET PASSWORD</a></div>
 	</div>
@@ -233,6 +232,59 @@ obj.className = 'stat_one_act';
 drg.className = 'stat_all_act'; 
 drg = obj;
 }
+</script>
+<script>
+function email_use2() {
+$('.fixed_prof_name').replaceWith( "<div><input class=new_first_name type=text value=" +"{{ user.first_name }} >" +
+	"<button class=change_first_name >SAVE</button></div>");
+	}
+
+function email_use3() {
+$('.fixed_prof_email').replaceWith( "<div><input class=new_email type=text value="+"{{ user.email }}>" +
+	"<button class='change_email'>SAVE</button></div>");
+}
+
+
+</script>
+<script type="text/javascript">
+window.onclick = function() {
+
+    // AJAX POST
+	$('.change_first_name').click(function(){
+      console.log('click on change first name');
+
+        $.ajax({
+            type: 'POST',
+            url: '/catalog/profile/user_update/',
+            dataType: 'json',
+            data: { 'item': $('.new_first_name').val() ,'field': 'first_name' ,'csrfmiddlewaretoken': '{{ csrf_token }}'},
+            success: function(data) {
+                <!-- alert(data.message); -->
+				$('.first_name').text(data.item)
+              window.location.reload(true);
+            }
+			
+        });
+
+    });
+	
+	$('.change_email').click(function(){
+      console.log('click on change email');
+
+        $.ajax({
+            type: 'POST',
+            url: '/catalog/profile/user_update/',
+            dataType: 'json',
+            data: { 'item': $('.new_email').val() ,'field': 'email' ,'csrfmiddlewaretoken': '{{ csrf_token }}'},
+            success: function(data) {
+                <!-- alert(data.message); -->
+				$('.email').text(data.item)
+				window.location.reload(true);
+            }
+        });
+
+    });
+};
 </script>
 	  {% endif %}       
 {% endblock %}
