@@ -177,6 +177,7 @@ class News(models.Model):
 		
     def __str__(self):
         return '%s, %s' % (self.newsid, self.title)
+        #return self.title
     def get_absolute_url(self):#        Returns the url to access a particular news instance.
         return reverse('news-detail', args=[str(self.newsid)])
     def get_like_url(self):
@@ -297,7 +298,7 @@ class Coin(models.Model):
 		return self.symbol
 
 class YeenotSettings(models.Model):
-	name = models.CharField(max_length=20)
+	name = models.CharField(max_length=30)
 	#text_value = models.CharField(max_length=20, help_text="text value of settings")
 	num_value = models.DecimalField(default=0.0, blank=True, max_digits=10, decimal_places=2, help_text="digital value of settings")
 
@@ -320,6 +321,7 @@ class Promo_task(models.Model):
     )
 	status = models.CharField(max_length=1, choices=STATUS_NAME, blank=False, default='o', help_text='Status of promo task')
 	PARAM_NAME = (
+        ('d', 'Day'),
         ('w', 'Week'),
         ('m', 'Month'),
     )
@@ -328,6 +330,12 @@ class Promo_task(models.Model):
 	#price -calculated in USD (need calculator in views.addpromo)
 	price = models.DecimalField(max_digits=20, decimal_places=2, help_text='price of promo task calculated after promo added')
 	time = models.DateTimeField(default=timezone.now, help_text='time after promo task added')
+	
+	def user_email(self):
+		try:
+			return self.user.email
+		except:
+			return None
 
 '''
 News:

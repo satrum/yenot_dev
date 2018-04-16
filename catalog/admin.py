@@ -92,4 +92,4 @@ class YeenotSettingsAdmin(admin.ModelAdmin):
 
 @admin.register(Promo_task)
 class PromotaskAdmin(admin.ModelAdmin):
-    list_display = ('id', 'user', 'newsid', 'sourceid', 'bannerid', 'type', 'status', 'param', 'price', 'time')
+    list_display = ('id', 'user', 'user_email', 'newsid', 'sourceid', 'bannerid', 'type', 'status', 'param', 'price', 'time')

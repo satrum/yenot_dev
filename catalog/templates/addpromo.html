@@ -2,9 +2,12 @@
 
 {% block content %}
 <p> Select promo type: your news, source or banner</p>
-<p> if you select news: promo duration equal news duration. Price: 10</p>
-<p> if you select source: select duration. Price: week 20, month 80. All news in source will be promoted</p>
-<p> if you select banner: select duration. Price: week 50, month 200.</p>
+<p> if you select news: promo duration equal news duration. Price: {{ form.price_promo_news }}</p>
+<p> if you select source: select duration. 
+Price: day {{ form.price_promo_source_day }}, week {{ form.price_promo_source_week }}, month {{ form.price_promo_source_month }}.  
+All news in source will be promoted</p>
+<p> if you select banner: select duration. 
+Price: day {{ form.price_promo_banner_day }}, week {{ form.price_promo_banner_week }}, month {{ form.price_promo_banner_month }}.</p>
 <p> After add promo task you can see status of tasks in profile. link:</p>
 <p> You can transfer paiment and see your transactions here: link </p>
 <p> If you have enough funds on the balance, task change status to Paid, and Launched. </p>
@@ -35,10 +38,6 @@
         {% endfor %}
       </p>
     {% endfor %}
-	<!-- {{form.type}} -->
-	<!-- {{form.newsid}} -->
-	<!-- {{form.sourceid}} -->
-	<!-- {{form.bannerid}} -->
     <button type="submit">Add Task</button>
   </form>
 
@@ -69,7 +68,7 @@ $("#id_type").change(function(){
 	document.getElementById("newsid").style.visibility="hidden";
 	document.getElementById("sourceid").style.visibility="hidden";
 	document.getElementById("bannerid").style.visibility="visible";
-	document.getElementById("param").style.visibility="param";
+	document.getElementById("param").style.visibility="visible";
 	break;
 	}
 	});
