@@ -101,7 +101,6 @@ def addpromo(request):
 			return redirect('profile')
 	else:
 		form = AddPromoModelForm(request.user)
-		'''
 		yeenotsettings = promo_price() #get settings and create prices in model if not exist
 		form.price_promo_news = yeenotsettings.get(name='price_promo_news').num_value
 		form.price_promo_source_day = yeenotsettings.get(name='price_promo_source_day').num_value
@@ -110,5 +109,4 @@ def addpromo(request):
 		form.price_promo_banner_day = yeenotsettings.get(name='price_promo_banner_day').num_value
 		form.price_promo_banner_week = yeenotsettings.get(name='price_promo_banner_week').num_value
 		form.price_promo_banner_month = yeenotsettings.get(name='price_promo_banner_month').num_value
-		'''
 	return render(request, 'addpromo.html', {'form': form})	#need modify template structure and price calculation
