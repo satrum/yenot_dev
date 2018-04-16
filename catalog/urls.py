@@ -2,6 +2,7 @@ from django.urls import path
 
 from . import views
 from . import views_ajax_vote
+from . import views_promo
 
 urlpatterns = [
     path('', views.index, name='index'),
@@ -31,5 +32,6 @@ urlpatterns += [
 	path('profile/', views.profile, name='profile'),
 	path('profile/addsource/', views.addsource, name='addsource'),
 	path('profile/user_update/', views.user_update, name='user_update'),
+	path('profile/addpromo/', views_promo.addpromo, name='addpromo'),
 	path('news_click/<int:pk>', views.news_click, name='news-click'),
 ]
