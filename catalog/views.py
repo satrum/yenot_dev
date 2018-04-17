@@ -8,23 +8,13 @@ from .models import News, Source, Banner, Coin, YeenotSettings
 from random import randint
 from django.contrib.auth.models import User
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-def index(request, template='index.html', page_template='index_page.html'):#Функция отображения для домашней страницы сайта.
-    #ENOT
-    news_rate_max = YeenotSettings.objects.get(name='news_rate_max').num_value
-    news_rate_min = YeenotSettings.objects.get(name='news_rate_min').num_value
-    num_news=News.objects.count()
-    num_sources=Source.objects.count()
-    num_votes=UserVotes.objects.count()
-	# Number of visits to this view, as counted in the session variable.
-    num_visits=request.session.get('num_visits', 0)
-    request.session['num_visits'] = num_visits+1
-    
+
+def page_banners():
     #select one banner with status=True
     banners = Banner.objects.filter(status=True, place='t')
     bannerlen=len(banners)
     if bannerlen>0:
         banner = banners[randint(1,bannerlen)-1]
-        #banner = Banner.objects.filter(status=True)[randint(1,bannerlen)-1]
         #print(banner.id, banner.status, banner.count_view, banner.image.url)
         banner.count_view += 1
         banner.save()
@@ -48,7 +38,22 @@ def index(request, template='index.html', page_template='index_page.html'):#Фу
         banner_right.save()
     else:
         banner_right=''
+    return banner, banner_left, banner_right
 
+def index(request, template='index.html', page_template='index_page.html'):#Функция отображения для домашней страницы сайта.
+    #ENOT
+    news_rate_max = YeenotSettings.objects.get(name='news_rate_max').num_value
+    news_rate_min = YeenotSettings.objects.get(name='news_rate_min').num_value
+    num_news=News.objects.count()
+    num_sources=Source.objects.count()
+    num_votes=UserVotes.objects.count()
+	# Number of visits to this view, as counted in the session variable.
+    num_visits=request.session.get('num_visits', 0)
+    request.session['num_visits'] = num_visits+1
+    
+    #setup banners:
+    banner, banner_left, banner_right = page_banners()
+    
     #get parameters for filter and sort    
 	#get news_list &coin=BTC&source=ENOT
     rget = request.GET
@@ -270,6 +275,7 @@ class NewsListView(generic.ListView):
 		# Add in a QuerySet of all the books
 		#context['book_list'] = Source.objects.all()
 		context['num_news']=News.objects.count()
+		context['banner'], context['banner_left'], context['banner_right'] = page_banners()
 		if self.request.user.is_authenticated:
 			context['view_newslist_block']=self.request.user.profile.view_newslist_block
 			for news in context['allnews']:

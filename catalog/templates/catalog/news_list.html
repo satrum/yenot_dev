@@ -2,6 +2,28 @@
 
 {% block content %}
 {% load static %}
+
+{% if banner %}
+<div class="banner">
+<div class="banner_img">
+{% load static %}
+<a href="{% url 'banner-click' banner.pk %}"><img src = "{{ banner.image.url }}"></a>
+</div>
+<div class="banner_content">
+<div>
+<h1>{{banner.title}}</h1>
+<p>{{banner.text}}</p>
+</div>
+<div>
+<div class="link banner_btn"><a href="{% url 'banner-click' banner.pk %}">Quick View</a></div>
+</div>
+</div>
+</div>  
+ {% else %}
+ <div></div>
+{% endif %}
+<div class="table_btn_promo tab_fil">{{banner_left.text}}</div>
+<div class="table_btn_promo tab_fil" style="float: right;">{{banner_right.text}}</div>
     <h1>News List</h1><strong>All News count :</strong> {{ num_news }}
 		<ul>
           TOP:
