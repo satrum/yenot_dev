@@ -512,6 +512,7 @@ def news_click(request, pk):
 
 
 from django.http import Http404, HttpResponse
+from django.core.validators import validate_email
 
 @login_required
 def user_update(request):
@@ -533,6 +534,12 @@ def user_update(request):
 		elif field == 'email':
 			if User.objects.filter(email=item).exclude(username=request.user).exists() or item == '': #нужна проверка на соответствие формату почтового адреса и тесты
 				print('incorrect email')
+				item = request.user.email
+			try:
+				validate_email(item)
+				print('validate email ok')
+			except:
+				print('validate email error')
 				item = request.user.email
 			request.user.email = item
 			request.user.save()
