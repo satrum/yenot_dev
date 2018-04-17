@@ -1,94 +1,87 @@
 {% extends "base_generic.html" %}
 
 {% block content %}
-    <h1>News List</h1>
-
-    {% if allnews %}
-	<ul>
+{% load static %}
+    <h1>News List</h1><strong>All News count :</strong> {{ num_news }}
+		<ul>
           TOP:
 		  <li><a href="{% url 'news' %}day/"  >-DAY-  </a></li>
 		  <li><a href="{% url 'news' %}week/" >-WEEK- </a></li>
           <li><a href="{% url 'news' %}month/">-MONTH-</a></li>	
 		  <li><a href="{% url 'news' %}"      >-ALL-  </a></li>
-		  
-	</ul>
-<!-- need move to css -->
-<style>
-tr,td {border:1px solid black;}
-</style>
-<strong>All News count :</strong> {{ num_news }}
-<strong>View Type (block or table) :</strong> {{view_newslist_block}}
-<a href="{% url 'change-view' %}"><button>change view</button></a>
+		</ul>
 
-	<table>
+{% if allnews %}
+	<table id="user_list">
+	<thead>
 	<tr>
-		<td>#</td>
-		<td>TITLE</td>
-		<td>SOURCE</td>
-		<td>TEXT</td>
-		<td>created time</td>
-		<td>direction</td>
-		<td>duration</td>
-		<td>rating</td>
-		<td>Likes</td>
-		<td></td>
-		<td>Dislikes</td>
-		<td></td>
-		<td>LINK</td>
-		<td>USERNAME</td>
-		<td>NEWS PRICE</td>
-		<td>COIN</td>
-		<td>CURRENT PRICE</td>
-		<td>CHANGE</td>
-		
+		<th>COIN</th>
+		<th>SOURCE</th>
+		<th>NEWS</th>
+		<th style="width: 11%;">CREATED TIME</th>
+		<th>DIRECTION</th>
+		<th style="width: 10%;">RATING</th>
+		<th style="width: 10%;">REAL</th>
+		<th style="width: 10%;">FAKE</th>
+		<th>NEWS PRICE</th>
+		<th>MODERATION STATUS</th>
+		<th>PROMO STATUS</th>
 	</tr>
+	</thead>
+	<tbody class="infinite-container">
+	
 	{% for news in allnews %}
-	{% if news.promo_status == 'y' %}<tr style="font-weight:bold">{% else %}<tr>{% endif %} 
-		<td>{{news.newsid}}</td>
-		<td><a href="{{ news.get_absolute_url }}">{{ news.title }}</a></td>
-		<td>{{news.sourceid}}</td>
-		<td>{{news.text}}</td>
-		<td>{{news.time}}</td>
-		<td>{{news.get_direction_display}}</td>
-		<td>{{news.get_duration_display}}</td>
-		<td>{{news.rating}}</td>
-		<td id="like_count_{{news.newsid}}">{{news.like}}</td>
+	{% if news.promo_status == 'y' %}<tr style="font-weight:bold" class="infinite-item tab_pro" >{% else %}<tr class="infinite-item tab_fon">{% endif %} 
+		<td class="td_pd"style="width: 10%;">
+		<img src="{{news.coinid.image.url}}" style="border-radius: 100%; width: 77px;padding-top: 6px;">
+		<h3>{{news.coinid}}</h3>
+        <p class="price_change">{{news.coinid.price|floatformat:3}}$
+		({{news.coinid.change|floatformat:1}}%)</p>		
+		</td>
+		<td class="td_pd" style="width: 10%;">{{news.sourceid}}</td>
+		<td class="td_pd ria"style="width: 45%;">
+		<p class="duration_change_2">DURATION TIME OF NEWS: {{news.duration}}</p>
+		<a href="{{ news.get_absolute_url }}">
+		<h4>{{news.title}}</h4></a>
+		<div class="textnews_2"><p>{{news.text|truncatechars:245}}</p></div>
+		{%if news.link %}<a href="{% url 'news-click' news.pk %}" class="rt">{{ news.link|truncatechars:100}}</a><p class="click_count">count of clicks on link: 
+		{{ news.count_link_click }}</p>{% endif %}
+		</td>
+		
+		<td class="td_pd" style="width: 11%;">{{news.time|date:"d M Y"}}<br>{{news.time|time:"H:i"}}</</td>
+		<td class="td_pd">{% if news.direction == 'b' %}<img src="{% static 'images/UP_news.png' %}" style="vertical-align: top;">{% elif news.direction == 's' %}<img src="{% static 'images/D2l.png' %}" style="vertical-align: top;">{% endif %}</td>
+		<td class="td_pd" style="width: 10%;">{{news.rating}}</td>
+		<td style="width: 10%;    text-align: center;     padding: 0px 16px;"><p  id="like_count_{{news.newsid}}">{{news.like}}</p>
+		{% if user.is_authenticated %}
+		
+		
+			{% if news.enable_vote %}
+		<div id="like_btn_{{news.newsid}}" data-newsid="{{news.newsid}}" data-url="{% url 'news-like-ajax' %}"  class="like_btn" onclick="like(this)"><p>VOTE</p></div>
+				{% endif %}
+		
+		
+		{% endif %}
+
+        <p> REAL</p>		
+		</td>
+		
+		<td style="width: 10%;    text-align: center;     padding: 0px 16px;"><p id="dislike_count_{{news.newsid}}">{{news.dislike}}</p>
 		
 		{% if user.is_authenticated %}
 			{% if news.enable_vote %}
-				<td><button id="like_btn_{{news.newsid}}" data-newsid="{{news.newsid}}" data-url="{% url 'news-like-ajax' %}" class="like_btn">Like</button></td>
-			{% else %}
-			    <td></td>
+				<div id="dislike_btn_{{news.newsid}}" data-newsid="{{news.newsid}}" data-url="{% url 'news-dislike-ajax' %}"  class="dislike_btn" onclick="dislike(this)"><p>VOTE</p></div>
 			{% endif %}
-		{% else %}
-		<td></td>
 		{% endif %}
-		
-		<td id="dislike_count_{{news.newsid}}">{{news.dislike}}</td>
-		
-		{% if user.is_authenticated %}
-			{% if news.enable_vote %}
-				<td><button id="dislike_btn_{{news.newsid}}" data-newsid="{{news.newsid}}" data-url="{% url 'news-dislike-ajax' %}" class="dislike_btn">Dislike</button></td>
-			{% else %}
-			    <td></td>
-			{% endif %}
-		{% else %}
-		<td></td>
-		{% endif %}
-		
-		<td><a href="{% url 'news-click' news.pk %}">{{ news.link }}</a></td>
-		<td>{{news.user}}</td>
+		<p>FAKE</p>
+		</td>
 		<td>{{news.coinprice|floatformat:3}}</td>
-		<td>{{news.symbol}}</td>
-		<td>{{news.price|floatformat:3}}</td>
-		<td>{{news.change|floatformat:3}}</td>
-		
+		<td style="text-align:center;">{{news.get_moderation_status_display}}</td>
+		<td>{{news.get_promo_status_display}}</td>
 	</tr>
 	{% endfor %}
+	</tbody>
 	</table>
-    {% else %}
-      <p>There are no news.</p>
-    {% endif %}       
+{% endif %} 
 
 <script type="text/javascript">
 $('.like_btn').click(function(){
