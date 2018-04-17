@@ -7,6 +7,13 @@ p, h1, h2, h3, h4, li, button, ol, a, option, input, td, th, select, label{
 	color:white;
 	font-weight:900;
 }
+hr {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border: 0;
+    border-top: 1px solid #a0b987;
+}
+
 a:hover, a:active{
 	font-family: 'Montserrat', sans-serif;
 	color:white;
@@ -393,7 +400,7 @@ padding: 0px;
     display: inline-block;
     vertical-align: top;
     width: 16%;
-    margin: -7px 7% 0px 0px;
+        margin: -7px 5% 0px 30px;
 }
 .rank{
   width:200px;
@@ -789,7 +796,25 @@ footer{
     background: #3b520b61;
     padding: 2px 8px;
 }
+.prof_page{
+		    display: inline-block;
+    text-align: center;
+    padding: 13px 11px;
+    border: 1px solid #a0b987;
+	    background: #1b2d0cb0;
+    cursor: pointer;
+	    margin: 20px 10px 0px;
+}
 
+.prof_page_2{
+	display: inline-block;
+    text-align: center;
+    padding: 13px 11px;
+    border: 1px solid #a0b987;
+    background: #2b4f0c;
+    cursor: pointer;
+	   margin: 20px 10px 0px;
+}
 #id_first_name{
 	    width: 345px;
     border: 2px solid #4ea60a;
@@ -797,6 +822,115 @@ footer{
     box-shadow: 1px 2px 21px -1px #9ad33c;
     background: #3b520b61;
     padding: 2px 8px;
+}
+#id_type{
+    width: 205px;
+    border: 2px solid #4ea60a;
+    height: 30px;
+    box-shadow: 1px 2px 21px -1px #9ad33c;
+    background: #3b520b61;
+    padding: 2px 2px;
+}
+#id_newsid{
+    width: 205px;
+    border: 2px solid #4ea60a;
+    height: 30px;
+    box-shadow: 1px 2px 21px -1px #9ad33c;
+    background: #3b520b61;
+    padding: 2px 2px;
+}
+#id_param{
+    width: 205px;
+    border: 2px solid #4ea60a;
+    height: 30px;
+    box-shadow: 1px 2px 21px -1px #9ad33c;
+    background: #3b520b61;
+    padding: 2px 2px;
+}
+#id_type option{
+
+	text-align:center;
+}
+#d1{
+	margin:20px auto;
+}
+#d2{
+	margin:20px auto;
+}
+#checkBox {
+	    display: inline-block;
+    vertical-align: middle;
+	margin: 3px auto;
+}
+.check_your_task p {
+	    display: inline-block;
+    vertical-align: middle;
+	margin: 3px auto;
+}
+.check_your_task{
+	width: 393px;
+    margin: 21px auto;
+    text-align: center;
+    border: 1px solid #4ea60a;
+    padding: 3px 5px;
+	box-shadow: 1px 2px 21px -1px #9ad33c;
+	background: #3b520b61;
+}
+.check_your_task_2 p {
+	    display: inline-block;
+    vertical-align: middle;
+	margin: 3px auto;
+}
+.check_your_task_2{
+	width: 393px;
+    margin: 21px auto;
+    text-align: center;
+    border: 1px solid #4ea60a;
+    padding: 3px 5px;
+	box-shadow: 1px 2px 21px -1px #9ad33c;
+	background: #3b520b61;
+}
+.ads_prom{
+    margin: 40px auto 30%;
+
+    text-align: center;	
+}
+.price_cost_promotion{
+    border: 1px solid #a0b987;
+    text-align: center;
+    width: 50%;
+    margin: auto;
+}
+.name_cost{
+	border: 1px solid #a0b987;
+	text-align:left;
+	display:inline-block;
+	width:60%;
+	padding:2px ;
+}
+.price_cost{
+	border: 1px solid #a0b987;
+	text-align:center;
+	display:inline-block;
+     width:28%;
+	 padding:2px ;
+}
+.price_cost p{
+	margin:0px;
+
+}
+.name_cost p{
+	margin:0px;
+
+}
+.log_sub_task {
+    width: 100px;
+    height: 32px;
+    box-shadow: 1px 2px 21px -1px #9ad33c;
+    background: #3b520b61;
+    border: 2px solid #4ea60a;
+    margin: 20px auto;
+    display: block;
 }
 #id_sourceid{
 	    width:205px;

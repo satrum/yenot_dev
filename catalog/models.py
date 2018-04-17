@@ -308,11 +308,12 @@ class Promo_task(models.Model):
 	sourceid = models.ForeignKey(Source, on_delete=models.SET_NULL, null=True, blank=True , verbose_name="SOURCE")
 	bannerid = models.ForeignKey(Banner, on_delete=models.SET_NULL, null=True, blank=True , verbose_name="BANNER")
 	TYPE_NAME = (
+	     
         ('n', 'News promo'),
         ('s', 'Source promo'),
         ('b', 'Banner promo'),
     )
-	type = models.CharField(max_length=1, choices=TYPE_NAME, blank=False, default='n', help_text='Type of promo task')
+	type = models.CharField(max_length=1, choices=TYPE_NAME, blank=True, help_text='Type of promo task')
 	STATUS_NAME = (
         ('o', 'Ordered'),
         ('p', 'Paid'),

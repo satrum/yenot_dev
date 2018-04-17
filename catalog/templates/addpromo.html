@@ -1,48 +1,61 @@
 {% extends "base_generic.html" %}
 
 {% block content %}
-<p> Select promo type: your news, source or banner</p>
-<p> if you select news: promo duration equal news duration. Price: {{ form.price_promo_news }}</p>
-<p> if you select source: select duration. 
-Price: day {{ form.price_promo_source_day }}, week {{ form.price_promo_source_week }}, month {{ form.price_promo_source_month }}.  
-All news in source will be promoted</p>
-<p> if you select banner: select duration. 
-Price: day {{ form.price_promo_banner_day }}, week {{ form.price_promo_banner_week }}, month {{ form.price_promo_banner_month }}.</p>
-<p> After add promo task you can see status of tasks in profile. link:</p>
-<p> You can transfer paiment and see your transactions here: link </p>
-<p> If you have enough funds on the balance, task change status to Paid, and Launched. </p>
-<p> After promo task duration expired status changed to Completed.</p>
+	<div style="text-align:center;">
+	<a href="{% url 'profile' %}"><div class="prof_page"><h4>PROFILE</h4></div></a>
+	<a href="{% url 'addpromo' %}"><div class="prof_page_2"><h4>PROMOTION</h4></div></a>
+	</div>
+	<hr>
 
-  <h2>Add Promo Task</h2>
-  <form method="post">
+
+
+  <h2 style="text-align:center;">Promotion your news and source here:</h2>
+   <div  class="price_cost_promotion">
+ <h4 style="text-align:center;">Price</h4>
+ <div>
+ <div class="name_cost"><p>Cost per one news for all period</p></div><div class="price_cost"><p>{{ form.price_promo_news }}</p></div>
+ <div class="name_cost"><p>Cost per day of promotion your source</p></div><div class="price_cost"><p>{{ form.price_promo_source_day }}</p></div>
+ <div class="name_cost"><p>Cost per day of promotion your source</p></div><div class="price_cost"><p>{{ form.price_promo_source_week }}</p></div>
+ <div class="name_cost"><p>Cost per day of promotion your source</p></div><div class="price_cost"><p>{{ form.price_promo_source_month }}</p></div>
+ 
+ </div>
+ <h4 style="text-align:center;">After add promo task you can see status of tasks on your profile page.</h4>
+ </div>
+  <form method="post" class="ads_prom">
     {% csrf_token %}
-    {% for field in form %}
-      
-	  {% if field.name == 'sourceid' %}
-	  <p id="{{ field.name }}" style="visibility: hidden;">
-	  {% elif field.name == 'bannerid' %}
-	  <p id="{{ field.name }}" style="visibility: hidden;">
-	  {% elif field.name == 'param' %}
-	  <p id="{{ field.name }}" style="visibility: hidden;">
-	  {% else %}
-	  <p id="{{ field.name }}" style="visibility: visible;">
-	  {% endif %}
-        
-		{{ field.label_tag }}<br>
-        {{ field }}
-        {% if field.help_text %}
-          <small style="color: grey">{{ field.help_text }}</small>
-        {% endif %}
+
+    <h4> Select type of promotion:</h4>
+		{{ form.type }}
+
+<div id="d1" style="display:none;" >       
+	  <h4 style="margin:0px auto 20px;"> Select your news:</h4>
+		{{ form.newsid }}
+	 <h4 style="margin:20px auto;"> Choose period of duration:</h4>
+		{{ form.param }}
+				<div class="check_your_task_2">
+		<input id="checkBox" type="checkbox" onclick="addtask_news(this)"> <p>Please check this box that you confirm your choice.</p>
+		</div>
+		</div>
+
+		<div id="d2" style="display:none;"> 
+        <h4 style="margin:0px auto 20px;"> Select source:</h4>
+		{{ form.sourceid }}
+		<h4 style="margin:20px auto;"> Choose period of duration:</h4>
+		{{ form.param }}
+		<div class="check_your_task">
+		<input id="checkBox" type="checkbox" onclick="addtask(this)"> <p>Please check this box that you confirm your choice.</p>
+		</div>
+		</div>
+         
         {% for error in field.errors %}
           <p style="color: red">{{ error }}</p>
         {% endfor %}
-      </p>
-    {% endfor %}
-    <button type="submit">Add Task</button>
+
+    
   </form>
 
 <script>
-<!-- window.onclick=function(){ -->
+window.onload=function(){
 $("#id_type").change(function(){
 	
 	var e = document.getElementById("id_type");
@@ -53,26 +66,34 @@ $("#id_type").change(function(){
 	console.log(text)
 	switch (value) {
 	case "n":
-	document.getElementById("newsid").style.visibility="visible";
-	document.getElementById("sourceid").style.visibility="hidden";
-	document.getElementById("bannerid").style.visibility="hidden";
-	document.getElementById("param").style.visibility="hidden";
+	document.getElementById('d1').style.display="block";
+    document.getElementById('d2').style.display="none";
+
 	break;
 	case "s":
-	document.getElementById("newsid").style.visibility="hidden";
-	document.getElementById("sourceid").style.visibility="visible";
-	document.getElementById("bannerid").style.visibility="hidden";
-	document.getElementById("param").style.visibility="visible";
+    document.getElementById('d1').style.display="none";
+	document.getElementById('d2').style.display="block";
+
 	break;
-	case "b":
-	document.getElementById("newsid").style.visibility="hidden";
-	document.getElementById("sourceid").style.visibility="hidden";
-	document.getElementById("bannerid").style.visibility="visible";
-	document.getElementById("param").style.visibility="visible";
-	break;
+	<!-- case "b": -->
+	<!-- document.getElementById("newsid").style.visibility="hidden"; -->
+	<!-- document.getElementById("sourceid").style.visibility="hidden"; -->
+	<!-- document.getElementById("bannerid").style.visibility="visible"; -->
+	<!-- document.getElementById("param").style.visibility="visible"; -->
+	<!-- break; -->
 	}
 	});
-<!-- } -->
+ } 
+
+</script>
+
+<script>
+ function addtask() {
+$('.check_your_task').replaceWith( "<button class=log_sub type=submit id=me2  >Add Task</button>");
+}
+ function addtask_news() {
+$('.check_your_task_2').replaceWith( "<button class=log_sub_task type=submit id=me2  >Add Task</button>");
+}
 </script>
 {% endblock %}
 

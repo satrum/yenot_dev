@@ -4,13 +4,19 @@
 
 	{% if user.is_authenticated %}
 	{% load static %}
+	<div style="text-align:center;">
+	<a href="{% url 'profile' %}"><div class="prof_page_2"><h4>PROFILE</h4></div></a>
+	<a href="{% url 'addpromo' %}"><div class="prof_page"><h4>PROMOTION</h4></div></a>
+	</div>
+	<hr>
+	<div>
 	<div class="prof_inf">
 	<h3>{{ profile.user }}:</h3>
 	<div class="prof_name">
-	<h4><strong>Nickname:</strong></h4><div class='first_name'><h4>{{ user.first_name }}</h4></div><div class="fixed_prof_name" onclick="email_use2(this)">&#9998;</div>
+	<h4><strong>Nickname:</strong></h4><div class='first_name'><h4 class='first_name_h4'>{{ user.first_name }}</h4></div><div class="fixed_prof_name" onclick="email_use2(this)">&#9998;</div>
 	</div>
 	<div class="prof_email">
-	<h4><strong>e-mail:</strong> </h4> <div class='email'><h4>{{ user.email }}</h4></div> <div class="fixed_prof_email" onclick="email_use3(this)">&#9998;</div>
+	<h4><strong>e-mail:</strong> </h4> <div class='email'><h4  class='email_h4'>{{ user.email }}</h4></div> <div class="fixed_prof_email" onclick="email_use3(this)">&#9998;</div>
 	</div>
     <div class="log_sub_3_prof"> <a href="{% url 'password_reset' %}">RESET PASSWORD</a></div>
 	</div>
@@ -207,6 +213,7 @@ CREATED TIME
 		{% endfor %}
 		</tbody>
 		</table>
+		
 			{% else %}
       <div class="add_news tab_news_add_2"><a href="{% url 'addsource'%}?next={{request.path}}"><div class="round">+</div>Add Sources</a></div>
 	  {% endif %} 
@@ -235,22 +242,15 @@ drg = obj;
 </script>
 <script>
 function email_use2() {
-$('.fixed_prof_name').replaceWith( "<div><input class=new_first_name type=text value=" +"{{ user.first_name }} >" +
-	"<button class=change_first_name >SAVE</button></div>");
+$('.fixed_prof_name').replaceWith( "<div class='fixed_prof_name_2'><input class=new_first_name type=text value=" +"{{ user.first_name }} >" +
+	"<button class=change_first_name onclick='ajax_click_1(this)'>SAVE</button></div>");
 	}
 
 function email_use3() {
-$('.fixed_prof_email').replaceWith( "<div><input class=new_email type=text value="+"{{ user.email }}>" +
-	"<button class='change_email'>SAVE</button></div>");
+$('.fixed_prof_email').replaceWith( "<div class='fixed_prof_email_2'><input class=new_email type=text value="+"{{ user.email }}>" +
+	"<button class='change_email' onclick='ajax_click_2(this)'>SAVE</button></div>");
 }
-
-
-</script>
-<script type="text/javascript">
-window.onclick = function() {
-
-    // AJAX POST
-	$('.change_first_name').click(function(){
+function ajax_click_1() {
       console.log('click on change first name');
 
         $.ajax({
@@ -260,15 +260,14 @@ window.onclick = function() {
             data: { 'item': $('.new_first_name').val() ,'field': 'first_name' ,'csrfmiddlewaretoken': '{{ csrf_token }}'},
             success: function(data) {
                 <!-- alert(data.message); -->
-				$('.first_name').text(data.item)
-              window.location.reload(true);
-            }
+				$('.first_name_h4').text(data.item);
+			    $('.fixed_prof_name_2').replaceWith( "<div class='fixed_prof_name' onclick='email_use2(this)'>&#9998;</div>");
+				}
+            });
 			
-        });
+}
 
-    });
-	
-	$('.change_email').click(function(){
+function ajax_click_2(){
       console.log('click on change email');
 
         $.ajax({
@@ -278,13 +277,13 @@ window.onclick = function() {
             data: { 'item': $('.new_email').val() ,'field': 'email' ,'csrfmiddlewaretoken': '{{ csrf_token }}'},
             success: function(data) {
                 <!-- alert(data.message); -->
-				$('.email').text(data.item)
-				window.location.reload(true);
+				$('.email_h4').text(data.item);
+				$('.fixed_prof_email_2').replaceWith( "<div class='fixed_prof_email' onclick='email_use3(this)'>&#9998;</div>");
             }
         });
 
-    });
-};
+    }
 </script>
+</div>
 	  {% endif %}       
 {% endblock %}
