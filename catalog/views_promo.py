@@ -43,6 +43,7 @@ def promo_price():
 from django.forms import ModelForm
 from .models import News, Source, Banner, Promo_task
 from django.shortcuts import render, redirect
+from django import forms
 
 class AddPromoModelForm(ModelForm):
 	class Meta:
@@ -58,7 +59,29 @@ class AddPromoModelForm(ModelForm):
 		self.fields['newsid'].queryset = News.objects.filter(user=user, promo_status='n') #and promo status no 'Promoted'
 		self.fields['bannerid'].queryset = Banner.objects.filter(status=False) #and promo status no 'Promoted' and only user banner
 		#print(self.fields['newsid'].queryset)
+	
+	def clean_type(self):
+		type = self.cleaned_data.get('type')
+		if type=='':
+			raise forms.ValidationError(u'Need not empty type.')
+		return type
 
+	def clean_newsid(self):
+		newsid = self.cleaned_data.get('newsid')
+		type = self.cleaned_data.get('type')
+		print(type, newsid)
+		if type=='n' and newsid==None:
+			raise forms.ValidationError(u'Need not empty news.')
+		return newsid
+
+	def clean_sourceid(self):
+		sourceid = self.cleaned_data.get('sourceid')
+		type = self.cleaned_data.get('type')
+		print(type, sourceid)
+		if type=='s' and sourceid==None:
+			raise forms.ValidationError(u'Need not empty source.')
+		return sourceid
+		
 from django.contrib.auth.decorators import login_required
 #from django.core import mail
 #import requests
