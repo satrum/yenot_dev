@@ -23,8 +23,7 @@
  <div></div>
 {% endif %}
 <div class="table_btn_promo tab_fil">{{banner_left.text}}</div>
-<div class="table_btn_promo tab_fil" style="float: right;">{{banner_right.text}}</div>
-    <h1>News List</h1><strong>All News count :</strong> {{ num_news }}
+
 		<ul>
           TOP:
 		  <li><a href="{% url 'news' %}day/"  >-DAY-  </a></li>
@@ -32,7 +31,7 @@
           <li><a href="{% url 'news' %}month/">-MONTH-</a></li>	
 		  <li><a href="{% url 'news' %}"      >-ALL-  </a></li>
 		</ul>
-
+<div class="table_btn_promo tab_fil" style="float: right;">{{banner_right.text}}</div>
 {% if allnews %}
 	<table id="user_list">
 	<thead>
@@ -46,8 +45,7 @@
 		<th style="width: 10%;">REAL</th>
 		<th style="width: 10%;">FAKE</th>
 		<th>NEWS PRICE</th>
-		<th>MODERATION STATUS</th>
-		<th>PROMO STATUS</th>
+
 	</tr>
 	</thead>
 	<tbody class="infinite-container">
@@ -97,12 +95,17 @@
 		<p>FAKE</p>
 		</td>
 		<td>{{news.coinprice|floatformat:3}}</td>
-		<td style="text-align:center;">{{news.get_moderation_status_display}}</td>
-		<td>{{news.get_promo_status_display}}</td>
 	</tr>
 	{% endfor %}
 	</tbody>
 	</table>
+	  {% if allnews.has_next %}
+    <a class="infinite-more-link" href="?page={{ allnews.next_page_number}}&coin={{rget.coin}}&source={{rget.source}}&date={{rget.date}}&direction={{rget.direction}}">More</a>
+  {% endif %}
+
+    <div class="loading" style="display: none;">
+    Loading...
+  </div>
 {% endif %} 
 
 <script type="text/javascript">
@@ -127,6 +130,22 @@ $('.dislike_btn').click(function(){
     });
 });
 </script>
-	
+		  <script>
+    var infinite = new Waypoint.Infinite({
+      element: $('.infinite-container')[0],
+      onBeforePageLoad: function () {
+        $('.loading').show();
+		console.log('before pageLoad ajax');
+				
+      },
+      onAfterPageLoad: function ($items) {
+        $('.loading').hide();
+		$("#user_list").trigger("update");
+		console.log('after pageLoad ajax');
+					
+      },
+	  
+    });
+	</script>
 {% endblock %}
 
