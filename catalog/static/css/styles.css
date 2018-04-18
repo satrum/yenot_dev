@@ -633,6 +633,14 @@ footer {
     text-align: center;
 
 }
+	.table_filter {
+    border: 1px solid #a0b987;
+    margin: auto;
+    position: relative;
+    top: 0px;
+    background: url(/static/images/Yeenot_gl.png) 29% 7%;
+    min-width: 880px;
+}
 .banner{
 	border: 1px solid #a0b987;
     margin: 20px auto;
@@ -680,14 +688,7 @@ footer a, footer a:hover, footer a:active{
     display: inline-block;
     padding: 8px;
 }
-	.table_filter {
-    border: 1px solid #a0b987;
-    margin: auto;
-    position: relative;
-    top: 0px;
-    background: url(/static/images/Yeenot_gl.png) 29% 7%;
-    min-width: 880px;
-}
+
 .right_banner_float{
     margin: -85px 0px 0px 502px;
     position: absolute;	
@@ -1289,6 +1290,7 @@ footer{
 
     text-align: center;	
 }
+
 .price_cost_promotion{
     border: 1px solid #a0b987;
     text-align: center;
@@ -1360,6 +1362,10 @@ footer{
     background: #3b520b61;
     padding: 2px 2px;
 
+}
+body{
+	    background: url(/static/images/Yeenot_gl_2.png) 15% 29% fixed;
+		background-size: cover;
 }
 #id_direction{
 	    width:75px;
