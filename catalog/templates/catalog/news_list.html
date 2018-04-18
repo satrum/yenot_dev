@@ -22,21 +22,28 @@
  {% else %}
  <div></div>
 {% endif %}
+ <div class="table_filter">
+  <div class="tab_front">
 <div class="table_btn_promo tab_fil">{{banner_left.text}}</div>
-
-		<ul>
-          TOP:
-		  <li><a href="{% url 'news' %}day/"  >-DAY-  </a></li>
-		  <li><a href="{% url 'news' %}week/" >-WEEK- </a></li>
-          <li><a href="{% url 'news' %}month/">-MONTH-</a></li>	
-		  <li><a href="{% url 'news' %}"      >-ALL-  </a></li>
+  <div class="table_filter_Search tab_fil">
+  <p class="ns_top_text">Here you can see the TOP of news by their rating  and filter by period you needs:</p>
+		<ul class="fil_ns_top_ul">
+         
+		  <li><a href="{% url 'news' %}day/"  >DAY  </a></li>
+		  <li><a href="{% url 'news' %}week/" >WEEK </a></li>
+          <li><a href="{% url 'news' %}month/">MONTH</a></li>	
+		  <li><a href="{% url 'news' %}"      >ALL  </a></li>
 		</ul>
-<div class="table_btn_promo tab_fil" style="float: right;">{{banner_right.text}}</div>
+</div>
+		<div class="table_btn_promo tab_fil right_banner" >{{banner_right.text}}</div>
+</div>
+</div>
 {% if allnews %}
 	<table id="user_list">
 	<thead>
 	<tr>
 		<th>COIN</th>
+		<th>NEWS PRICE</th>
 		<th>SOURCE</th>
 		<th>NEWS</th>
 		<th style="width: 11%;">CREATED TIME</th>
@@ -44,7 +51,7 @@
 		<th style="width: 10%;">RATING</th>
 		<th style="width: 10%;">REAL</th>
 		<th style="width: 10%;">FAKE</th>
-		<th>NEWS PRICE</th>
+		
 
 	</tr>
 	</thead>
@@ -55,17 +62,17 @@
 		<td class="td_pd"style="width: 10%;">
 		<img src="{{news.coinid.image.url}}" style="border-radius: 100%; width: 77px;padding-top: 6px;">
 		<h3>{{news.coinid}}</h3>
-        <p class="price_change">{{news.coinid.price|floatformat:3}}$
+        <p class="price_change">{{news.coinid.price|floatformat:3}}$<br>
 		({{news.coinid.change|floatformat:1}}%)</p>		
 		</td>
+		<td style="text-align:center; width:12%">{{news.coinprice|floatformat:3}}</td>
 		<td class="td_pd" style="width: 10%;">{{news.sourceid}}</td>
-		<td class="td_pd ria"style="width: 45%;">
+		<td class="td_pd ria"style="width: 35%;">
 		<p class="duration_change_2">DURATION TIME OF NEWS: {{news.duration}}</p>
 		<a href="{{ news.get_absolute_url }}">
 		<h4>{{news.title}}</h4></a>
 		<div class="textnews_2"><p>{{news.text|truncatechars:245}}</p></div>
-		{%if news.link %}<a href="{% url 'news-click' news.pk %}" class="rt">{{ news.link|truncatechars:100}}</a><p class="click_count">count of clicks on link: 
-		{{ news.count_link_click }}</p>{% endif %}
+		{%if news.link %}<a href="{% url 'news-click' news.pk %}" class="rt">{{ news.link|truncatechars:100}}</a>{% endif %}
 		</td>
 		
 		<td class="td_pd" style="width: 11%;">{{news.time|date:"d M Y"}}<br>{{news.time|time:"H:i"}}</</td>
@@ -94,7 +101,7 @@
 		{% endif %}
 		<p>FAKE</p>
 		</td>
-		<td>{{news.coinprice|floatformat:3}}</td>
+		
 	</tr>
 	{% endfor %}
 	</tbody>

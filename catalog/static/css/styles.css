@@ -13,12 +13,56 @@ hr {
     border: 0;
     border-top: 1px solid #a0b987;
 }
-
+.fil_ns_top_ul{
+	    margin: 10px 0px 0px;
+    text-align: center;
+    padding: 0px;
+}
+.fil_ns_top_ul li{
+	border: 1px solid;
+    padding: 5px;
+}
+.pagination>li>a, .pagination>li>span {
+    position: relative;
+    float: left;
+    padding: 6px 12px;
+    margin-left: -1px;
+    line-height: 1.42857143;
+    color: #59a00c !important;
+    text-decoration: none;
+    background-color: #fff;
+    border: 1px solid #ddd;
+}
+.pagination>li>a:hover, .pagination>li>span {
+    position: relative;
+    float: left;
+    padding: 6px 12px;
+    margin-left: -1px;
+    line-height: 1.42857143;
+    color: #59a00c !important;
+    text-decoration: none;
+    background-color: #fff;
+    border: 1px solid #ddd;
+}
+.pagination>.active>a, .pagination>.active>a:focus, .pagination>.active>a:hover, .pagination>.active>span, .pagination>.active>span:focus, .pagination>.active>span:hover {
+    z-index: 3;
+    color: #fff !important;
+    cursor: default;
+    background-color: #59a00c !important;
+    border-color: #59a00c !important;
+}
 a:hover, a:active{
 	font-family: 'Montserrat', sans-serif;
 	color:white;
 	font-weight:900;
 	text-decoration:none;
+}
+.ns_top_text{
+	margin:0px;
+	text-align:center;
+}
+.ns_top_text_f{
+
 }
 .prof_inf{
 	display:inline-block;
@@ -390,6 +434,10 @@ footer{
 .col-sm-1, .col-sm-10, .col-sm-11, .col-sm-12, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9 {
 float: none;
 padding: 0px;
+}
+.ns_top_text {
+    margin: 0px 72px;
+    text-align: center;
 }
 .prof_inf{
 	display:inline-block;
@@ -1045,6 +1093,9 @@ footer{
 }
 #dfg2{
 	margin-bottom:20px;
+}
+.right_banner{
+	margin-left: 51px;
 }
 .rule_yeenot{
 	text-align:center;
