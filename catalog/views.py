@@ -295,7 +295,19 @@ class NewsListView(generic.ListView):
 		return context
 
 class NewsDetailView(generic.DetailView):
-    model = News
+	model = News
+	
+	def get_context_data(self, **kwargs):
+		context = super(NewsDetailView, self).get_context_data(**kwargs)
+		if self.request.user.is_authenticated:
+			#print(self.kwargs.get('pk'))
+			votes=UserVotes.objects.filter(news=self.kwargs.get('pk'), user=self.request.user)
+			if votes.exists()==0:
+				context['enable_vote']=True
+			else:
+				context['enable_vote']=False
+		#print(context)
+		return context
 
 class SourceListView(generic.ListView):
 	model = Source
