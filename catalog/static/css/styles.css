@@ -403,8 +403,24 @@ background: #1f45024d;
     border-bottom: 1px solid #a0b987;
 	background: #1b2d0cb0;
 }
+.text_ns_top_prof{
+	border: 1px solid  #a0b987;
+    padding: 5px;
+}
+.text_ns_top_prof_time{
+	border: 1px solid  #a0b987;
+    padding: 5px;
+	text-align:center;
+	border-top:0px;
 
+}
+.text_ns_top_prof_time p{
+margin:0px;
 
+}
+.text_ns_top_prof p{
+min-height: 88px;
+}
 footer p{
 	    margin: 0px;
     text-align: center;

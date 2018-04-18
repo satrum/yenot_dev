@@ -134,7 +134,7 @@ CREATED TIME
 		<p class="duration_change_2">DURATION TIME OF NEWS: {{news.duration}}</p>
 		<a href="{{ news.get_absolute_url }}">
 		<h4>{{news.title}}</h4></a>
-		<div class="textnews_2"><p>{{news.text|truncatechars:245}}</p></div>
+		<div class="textnews_2"><p>{{news.text|truncatechars:100}}</p></div>
 		{%if news.link %}<a href="{% url 'news-click' news.pk %}" class="rt">{{ news.link|truncatechars:100}}</a><p class="click_count">count of clicks on link: 
 		{{ news.count_link_click }}</p>{% endif %}
 		</td>

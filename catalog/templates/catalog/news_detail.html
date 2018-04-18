@@ -1,27 +1,82 @@
 {% extends "base_generic.html" %}
 
 {% block content %}
-
-<h1>Title: {{ news.title }}</h1>
-<p><strong>Source:</strong> <a href="{% url 'source-detail' news.sourceid.pk %}">{{ news.sourceid }}</a></p>
-
-<p><strong>Details:          </strong> {{ news.text }}</p>
-<p><strong>Time of creation: </strong> {{ news.time }}</p> 
-<p><strong>Direction:        </strong>
-{% if news.direction == 'b' %}BUY
-{% elif news.direction == 's' %}SELL
-{% else %}HODL{% endif %}
-</p>
-<p><strong>Rating:           </strong> {{ news.rating }}</p>
-<p><strong>Likes:            </strong> {{ news.like }}</p>
-<p><strong>Dislikes:         </strong> {{ news.dislike }}</p>
-<p><strong>Owner:            </strong> {{ news.user }}</p>
-<p><strong>Link of new:      </strong><a href="{{ news.link }}">{{ news.link }}</a></p>
-<p><strong>Moderation status:</strong> {{news.moderation_status}}</p>
-{% if news.proof_image %}
-	<p><strong>Image path:</strong> {{ news.proof_image.url }}</p>
-	<img src="{{ news.proof_image.url }}">
+{% load static %}
+<div class="log_in_p_add">
+<h1 style="text-align:center;">{{ news.title }}</h1>
+<p style="text-align:center;"><strong>Author:</strong> {{ news.user.first_name }}</p>
+<p style="text-align:center;"><strong>Source:</strong> <a href="{% url 'source-detail' news.sourceid.pk %}">{{ news.sourceid }}</a> | <strong>Direction:</strong>
+{% if news.direction == 'b' %}<img src="{% static 'images/UP.png' %}">
+{% elif news.direction == 's' %}<img src="{% static 'images/Down.png' %}">
 {% endif %}
+|
+<strong>Rating:</strong> {{ news.rating }}
+</p>
+<div style="text-align:center;">
+<div class="fl">
+<p id="like_count_{{news.newsid}}">{{news.like}}</p>
+		{% if user.is_authenticated %}
+		{% if enable_vote %}
+		<div id="like_btn_{{news.newsid}}" data-newsid="{{news.newsid}}" data-url="{% url 'news-like-ajax' %}"  class="like_btn" onclick="like(this)"><p>VOTE</p></div>
+				{% endif %}
+{% endif %}
+
+        <p> REAL</p>
+</div>		
+<div class="fl">
+<p id="dislike_count_{{news.newsid}}">{{news.dislike}}</p>
+		
+		{% if user.is_authenticated %}
+			{% if enable_vote %}
+				<div id="dislike_btn_{{news.newsid}}" data-newsid="{{news.newsid}}" data-url="{% url 'news-dislike-ajax' %}"  class="dislike_btn" onclick="dislike(this)"><p>VOTE</p></div>
+			{% endif %}
+		{% endif %}
+		<p>FAKE</p>
+		
+</div>
+</div>
+<p><strong>Details:          </strong></p>
+<div class="text_ns_top_prof">
+ <p>{{ news.text }}</p>
+{%if news.link %}<a href="{% url 'news-click' news.pk %}" class="rt">{{ news.link|truncatechars:100}}</a>{% endif %}
+</div>
+<div class="text_ns_top_prof_time">
+ <p><strong>Time of creation: </strong> {{ news.time }}</p> 
+</div>
+{% if news.proof_image %}
+	<h4 style="text-align:center; margin:10px 0px;"><strong>Image of proof:</strong></h4>
+	<img src="{{ news.proof_image.url }}" style="width: 100%;">
+{% endif %}
+</div>
+<script type="text/javascript">
+function like(elem){
+console.log('clicked like');
+var newsid;
+newsid = elem.getAttribute('data-newsid');
+console.log(newsid);
+url = elem.getAttribute('data-url');
+console.log(url);
+$.get(url, {news_id: newsid}, function(data){
+		   $('#like_count_'+newsid).html(data);
+		   $('#like_btn_'+newsid).hide();
+		   $('#dislike_btn_'+newsid).hide();
+	});
+};
+function dislike(elem){
+console.log('clicked dislike');
+var newsid;
+newsid = elem.getAttribute('data-newsid');
+console.log(newsid);
+url = elem.getAttribute('data-url');
+console.log(url);
+$.get(url, {news_id: newsid}, function(data){
+               $('#dislike_count_'+newsid).html(data);
+               $('#like_btn_'+newsid).hide();
+			   $('#dislike_btn_'+newsid).hide();
+    });
+};
+
+  </script>
 {% endblock %}
 
 
