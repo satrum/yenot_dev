@@ -99,13 +99,7 @@
 	{% endfor %}
 	</tbody>
 	</table>
-	  {% if allnews.has_next %}
-    <a class="infinite-more-link" href="?page={{ allnews.next_page_number}}&coin={{rget.coin}}&source={{rget.source}}&date={{rget.date}}&direction={{rget.direction}}">More</a>
-  {% endif %}
-
-    <div class="loading" style="display: none;">
-    Loading...
-  </div>
+	
 {% endif %} 
 
 <script type="text/javascript">
@@ -130,22 +124,6 @@ $('.dislike_btn').click(function(){
     });
 });
 </script>
-		  <script>
-    var infinite = new Waypoint.Infinite({
-      element: $('.infinite-container')[0],
-      onBeforePageLoad: function () {
-        $('.loading').show();
-		console.log('before pageLoad ajax');
-				
-      },
-      onAfterPageLoad: function ($items) {
-        $('.loading').hide();
-		$("#user_list").trigger("update");
-		console.log('after pageLoad ajax');
-					
-      },
-	  
-    });
-	</script>
+	
 {% endblock %}
 

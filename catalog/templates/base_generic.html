@@ -102,19 +102,22 @@ function addCustomInformation() {
 	  
 	    {% block pagination %}
 			{% if is_paginated %}
-			  <div class="pagination">
-				  <span class="page-links">
+			  <ul class="pagination">
+				  <li class="page-item">
 					  {% if page_obj.has_previous %}
-						  <a href="{{ request.path }}?page={{ page_obj.previous_page_number }}">previous</a>
+						  <a class="page-links" href="{{ request.path }}?page={{ page_obj.previous_page_number }}">previous</a>
 					  {% endif %}
-					  <span class="page-current">
-						  Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
-					  </span>
+					  </li>
+					  <li class="page-item">
+						<a class="page-links" href="#" > {{ page_obj.number }}</a>
+					  </li>
 					  {% if page_obj.has_next %}
-						  <a href="{{ request.path }}?page={{ page_obj.next_page_number }}">next</a>
+					  <li class="page-item">
+						  <a class="page-links" href="{{ request.path }}?page={{ page_obj.next_page_number }}">next</a>
+						  </li>
 					  {% endif %}
-				  </span>
-			  </div>
+				</ul>
+			  
 			{% endif %}
 		{% endblock %}
       </div>
