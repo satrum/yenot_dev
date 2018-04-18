@@ -23,7 +23,7 @@
 {% endif %}
   <div class="table_filter">
   <div class="tab_front">
-  <div class="table_btn_promo tab_fil">
+  <div class="table_btn_promo tab_fil cr">
   {% if banner_left %}<a href="{% url 'banner-click' banner_left.pk %}"><img src = "{{ banner_left.image.url}}"></a>{% endif %}
   </div>
   <div class="table_filter_Search tab_fil">
@@ -35,7 +35,7 @@
   {% endfor %}
   </select>
   
-  <select class="source_chann sel_fil" name="source">
+  <select class="source_chann sel_fil " name="source">
    <option  value="" selected >SOURCE</option>
    {% for source in sources %}
   <option  value="{{ source}}">{{ source }}</option>
@@ -55,7 +55,7 @@
   </div>
   
   
-  <div class="table_btn_promo tab_fil" style="float: right;">
+  <div class="table_btn_promo tab_fil right_banner_float">
   {% if banner_right %}<a href="{% url 'banner-click' banner_right.pk %}"><img src = "{{ banner_right.image.url}}"></a>{% endif %}
   </div>
   </div>

@@ -13,6 +13,17 @@ hr {
     border: 0;
     border-top: 1px solid #a0b987;
 }
+li{
+	display:inline-block;
+}
+.sl_menu{
+    display: inline-block;
+    margin: 0px 0px 0px 0px;
+    vertical-align: top;
+position: absolute;
+	height:162px;
+	text-align:left;
+}
 .fil_ns_top_ul{
 	    margin: 10px 0px 0px;
     text-align: center;
@@ -22,6 +33,174 @@ hr {
 	border: 1px solid;
     padding: 5px;
 }
+	.rt, .rt:hover, .rt:active{
+	color: #67ab3a !important;
+	text-decoration:none!important;
+}
+.inp{
+	    background: #64b609;
+    border: 1px solid #a0b987;
+	    padding: 4px 17px;
+}
+select:after{
+	border-color: #a0b987;
+}
+.col-sm-2{
+	    width: 100%;
+
+}
+.col-sm-2 ul {
+    margin: 0px auto 0px;
+    display: inline-block;
+    vertical-align: middle;
+}
+.rad{
+    display: inline-block;
+    vertical-align: middle;
+    padding: 0px 3px;
+    margin: 0px;
+}
+input[type=radio] {
+display:none;
+}
+input[type=radio] + label span {
+    display: inline-block;
+    vertical-align: middle;
+    margin: 0px 0 0;
+    width: 18px;
+    height: 18px;
+    border-radius: 100%;
+    background: white;
+	
+} 
+input[type=radio]:checked + label span {
+background: #64d90b -20px 6px no-repeat;
+    border: 3px solid white;
+
+	
+}
+.sel_fil{
+    background: #48a22b17;
+    border: 1px solid #a0b987;	
+	    padding: 4px 0px;
+}
+
+
+#datepicker {
+padding: 0px;
+    text-align: center;
+    width: 121px;	
+}
+option, selected{
+	    background: #234700;
+}
+.fr{
+	border: 1px solid #a0b987;
+    padding: 2px;
+    vertical-align: bottom;
+    height: 30px;
+}
+.mm{
+	border:0px;
+	background:transparent;
+}
+.mm:after{
+	border:0px;
+	background:transparent;
+}
+div.datepicker{
+  display: none;
+}
+.ui-datepicker .weekend .ui-state-default {
+  background: #FEA;
+}
+
+.ui-datepicker-calendar td a[data-custom] {
+  position: relative;
+  padding-bottom: 10px;
+}
+
+.ui-datepicker-calendar td a[data-custom]:after {
+  content: '$' attr(data-custom);
+  display: block;
+  font-size: small;
+}
+.header{
+	    background: #010500f5;
+    text-align: center;
+    padding: 10px;
+}
+.sel_fil:hover{
+    background: #48a22b17;
+    border: 1px solid #a0b987;	
+	    padding: 4px 0px;
+}
+.log_sub{
+	    width: 100px;
+    height: 32px;
+    box-shadow: 1px 2px 21px -1px #9ad33c;
+    background: #3b520b61;
+    border: 2px solid #4ea60a;
+    margin: 8% 0px;
+}
+.log_sub_2{
+	width: 134px;
+    height: 32px;
+    box-shadow: 1px 2px 21px -1px #9ad33c;
+    background: #3b520b61;
+    border: 2px solid #4ea60a;
+    margin: 4% 0px;
+    font-size: 1.0em;
+}
+.log_sub_3{
+	width: 178px;
+    height: 32px;
+    box-shadow: 1px 2px 21px -1px #9ad33c;
+    background: #3b520b61;
+    border: 2px solid #4ea60a;
+    margin: 4% 0px;
+    font-size: 1.0em;
+}
+.log_sub_4 {
+    width: 100px;
+    height: 32px;
+    box-shadow: 1px 2px 21px -1px #9ad33c;
+    background: #3b520b61;
+    border: 2px solid #4ea60a;
+    margin: 8% auto;
+    display: block;
+}
+.like_btn{
+background: #35ae16;
+    border-radius: 100%;
+    width: 53px;
+    height: 53px;
+    box-shadow: 0px 0px 0px 4px rgba(27, 46, 23, 0.7);
+    margin: 8px auto;
+    border: 2px solid silver;
+    cursor: pointer;
+	
+}
+.green_top{
+	background:#7fd5188f;
+}
+.like_btn p{
+	padding: 14px 0px;
+	}
+.dislike_btn{
+background: #be0708;
+    border-radius: 100%;
+    width: 53px;
+    height: 53px;
+    box-shadow: 0px 0px 0px 4px rgba(27, 46, 23, 0.7);
+    margin: 8px auto;
+    border: 2px solid silver;
+    cursor: pointer;
+
+}
+.dislike_btn p{
+	padding: 14px 0px;
+	}
 .pagination>li>a, .pagination>li>span {
     position: relative;
     float: left;
@@ -32,6 +211,60 @@ hr {
     text-decoration: none;
     background-color: #fff;
     border: 1px solid #ddd;
+}
+.ui-state-highlight, .ui-widget-content .ui-state-highlight, .ui-widget-header .ui-state-highlight {
+    border: 1px solid #377905;
+    background:#2b4f03;
+    color: #f0f2ef;
+}
+.ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active, a.ui-button:active, .ui-button:active, .ui-button.ui-state-active:hover {
+    border: 1px solid #377905;
+    background: #2b4f03;
+    font-weight: normal;
+    color: #ffffff;
+}
+.ui-datepicker th {
+    padding: .7em .3em;
+    text-align: center;
+    font-weight: bold;
+    border: 0;
+    background: #2b4f03;
+}
+.like_btn_become{
+background: #35ae16;
+    border-radius: 100%;
+    width: 53px;
+    height: 53px;
+    box-shadow: 0px 0px 0px 4px rgba(27, 46, 23, 0.7);
+    margin: 8px auto;
+    border: 2px solid silver;
+    cursor: pointer;
+	display:inline-block;
+	
+}
+.like_btn_become p{
+	padding: 14px 0px;
+	}
+	.dislike_btn_become p{
+	padding: 14px 0px;
+	}
+.dislike_btn_become{
+background: #be0708;
+    border-radius: 100%;
+    width: 53px;
+    height: 53px;
+    box-shadow: 0px 0px 0px 4px rgba(27, 46, 23, 0.7);
+    margin: 8px auto;
+    border: 2px solid silver;
+    cursor: pointer;
+display:inline-block;
+}
+
+.login{
+	padding: 2px 21px;
+    background: #5a9f0821;
+    box-shadow: 2px 1px 38px 4px rgba(67, 168, 65, 0.41);
+    border: 1px solid #325014;
 }
 .pagination>li>a:hover, .pagination>li>span {
     position: relative;
@@ -237,46 +470,7 @@ padding: 5px 11px;
     padding: 2px 0px;
 	text-align:center;
 }
-@media (max-width: 400px) {
 
-.menu {
-    width: 100%;
-    border-bottom: 1px solid #a0b987;
-    border-right: 1px solid #a0b987;
-    background: #1b2d0cb0;
-    margin: auto;
-}
-
-.col-sm-2 ul {
-    margin: 0px auto 0px;
-    display: block;
-    vertical-align: middle;
-}
-.sl_menu {
-    display: block;
-    margin: 0px 0px 0px 0px;
-    vertical-align: top;
-    position: relative;
-    height: 100%;
-    text-align: left;
-}
-.logo{
-	    padding: 0px;
-	    border: 1px solid #a0b987;
-		text-align: center;
-	}
-.linetop{
-	width: 100%;
-	text-align:center;
-     }
-	 .we {
-    width: 100%;
-    border-top: 2px solid #a0b987;
-    border-bottom: 1px solid #a0b987;
-    background: #1b2d0cb0;
-    padding: 8px;
-}
-}
 .sidebar-nav {
     margin-top: 20px;
     display: inline-block;
@@ -348,18 +542,8 @@ cursor: pointer;
     margin: 2% auto 0px;
     background: #71aa1f69;
 }
-.table_filter{
-border: 1px solid #a0b987;
-margin:auto;
-position: absolute;
-  position: sticky;
-  top: 0px;
-    background: url(/static/images/Yeenot_gl.png) 29% 7% fixed;
-}
-.tab_front{
-	    background: #1b2d0cb0;
-    padding: 7px 7px;
-}
+
+
 .table_btn_promo{
 	border: 1px solid #a0b987;
 	width: 250px;
@@ -380,9 +564,7 @@ position: absolute;
      text-align: center;
     padding: 0px 6px;
 }
-.table_filter_Search{
-padding: 0px 12px;	
-}
+
 .price_change{
 background: #1f45024d;
     padding: 3px 0px;
@@ -392,17 +574,19 @@ background: #1f45024d;
 #user_list{
 	width: 100%;
 }
+#user_list_2 {
+    width: 100%;
 
+}
+#user_list_3 {
+    width: 100%;
+
+}
 .we h3{
 	font-weight:900;
 	
 }
-.we{
-	width: 100%;
-    border-top: 2px solid #a0b987;
-    border-bottom: 1px solid #a0b987;
-	background: #1b2d0cb0;
-}
+
 .text_ns_top_prof{
 	border: 1px solid  #a0b987;
     padding: 5px;
@@ -444,11 +628,158 @@ footer{
 .title_about{
 	border-bottom:1px solid #a0b987;
 }
-@media (min-width: 1300px) {
+@media (min-width: 320px) {
+footer {
+    background: #000e01eb;
+    border-bottom: 0px;
+    padding: 0px;
+    margin: auto;
+    width: 100%;
+    text-align: center;
+
+}
+.signup{
+	padding: 2px 21px;
+    background: #5a9f0821;
+    box-shadow: 2px 1px 55px 4px rgba(67, 168, 65, 0.41);
+    border: 1px solid #2f500e;
+	cursor:pointer;
+}
+.sidebar-nav {
+    margin-top: 6px;
+    display: inline-block;
+    list-style: none;
+}
+.menu_main{
+    padding: 5px 5px;
+    background: #5a9f0842;
+    margin: 0px 13px 0px 0px;
+    width: 120px;
+    text-align: center;
+	position: relative;
+	box-shadow: 2px 1px 38px 4px rgba(67, 168, 65, 0.41);
+}
+
+.logout{
+    padding: 5px 6px;
+    background: #5a9f0821;
+    box-shadow: 2px 1px 38px 4px rgba(67, 168, 65, 0.41);
+    border: 1px solid #2b4313;
+    display: inline-block;
+    vertical-align: middle; 
+}
+body {
+    background: url(/static/images/Yeenot_gl_2.png) 15% 29% ;
+    background-size: cover;
+    min-width: 980px;
+	max-width:100%;
+}
+footer a, footer a:hover, footer a:active{
+    float: none;
+    display: inline-block;
+    padding: 8px;
+}
+	.table_filter {
+    border: 1px solid #a0b987;
+    margin: auto;
+    position: relative;
+    top: 0px;
+    background: url(/static/images/Yeenot_gl.png) 29% 7%;
+    min-width: 880px;
+}
+.right_banner_float{
+    margin: -85px 0px 0px 502px;
+    position: absolute;	
+}
+.table_filter_Search {
+    padding: 0px 12px;
+    display: block;
+}
+.cr{
+	    margin: -2px 12px 5px;
+}
+
+.menu {
+    width: 100%;
+    border-bottom: 1px solid #a0b987;
+    border-right: 1px solid #a0b987;
+    background: #1b2d0cb0;
+    margin: auto;
+}
+.tab_front {
+    background: transparent;
+    padding: 7px 7px;
+    margin: auto;
+    width: 880px;
+}
+
+
+.logo{
+	    padding: 0px;
+	    border: 1px solid #a0b987;
+		text-align: center;
+	}
+.linetop{
+width: 70%;
+    vertical-align: middle;
+    text-align: center;
+	padding: 0px;
+     }
+	 .we {
+    width: 100%;
+    border-top: 2px solid #a0b987;
+    border-bottom: 1px solid #a0b987;
+    background: #1b2d0cb0;
+    padding: 8px;
+	
+}
+
+.banner_content p{
+ margin:12% auto 0px;
+}
+.banner_content h1{
+ margin: 6% auto;
+ font-size: 3.25em;
+}
 .col-sm-1, .col-sm-10, .col-sm-11, .col-sm-12, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9 {
 float: none;
 padding: 0px;
 }
+}
+@media (min-width: 1310px) {
+.col-sm-1, .col-sm-10, .col-sm-11, .col-sm-12, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9 {
+float: none;
+padding: 0px;
+}
+footer a, footer a:hover, footer a:active{
+    float: right;
+    display: inline-block;
+    padding: 8px;
+}
+.tab_front{
+	    background: #1b2d0cb0;
+    padding: 7px 7px;
+	    margin: 0px;
+    width: 100%;
+}
+.table_filter_Search{
+padding: 0px 12px;	
+display:inline-block;
+}
+.table_filter{
+border: 1px solid #a0b987;
+margin:auto;
+position: absolute;
+  position: sticky;
+  top: 0px;
+    background: url(/static/images/Yeenot_gl.png) 29% 7% fixed;
+}
+.right_banner_float {
+    float: right;
+    margin: auto;
+    position: relative;
+}
+
 .right_banner{
     float: right;
     margin: 7px 0px 0px;
@@ -698,10 +1029,7 @@ width: 0px;
     text-align: center;	
 	padding-top: 12px;
 	}
-.col-sm-2{
-	    width: 100%;
 
-}
 .prof_news{
 	    border: 1px solid #a0b987;
     margin: 37px auto;
@@ -714,7 +1042,7 @@ width: 0px;
 	    background: #447b07d9;
     border: 1px solid #a0b987;
 }
-}
+
 .stat_all_act p{
 	margin:0px;
 }
@@ -747,14 +1075,7 @@ margin: 0px 7px 0px 0px;
     text-align: center;
     width: 233px;
 }
-.sl_menu{
-    display: inline-block;
-    margin: 0px 0px 0px 0px;
-    vertical-align: top;
-position: absolute;
-	height:162px;
-	text-align:left;
-}
+
 footer{
     border-bottom: 0px;
     margin: 5px 0px 0px;
@@ -1100,10 +1421,7 @@ footer{
     float: right;
     margin: 8px 0px;
 }
-#user_list_2 {
-    width: 100%;
 
-}
 #dfg1{
 	margin-bottom:20px;
 }
@@ -1248,35 +1566,7 @@ background: #46bb1b1a;
 	text-align: center;
 	
 }
-.like_btn_become{
-background: #35ae16;
-    border-radius: 100%;
-    width: 53px;
-    height: 53px;
-    box-shadow: 0px 0px 0px 4px rgba(27, 46, 23, 0.7);
-    margin: 8px auto;
-    border: 2px solid silver;
-    cursor: pointer;
-	display:inline-block;
-	
-}
-.like_btn_become p{
-	padding: 14px 0px;
-	}
-	.dislike_btn_become p{
-	padding: 14px 0px;
-	}
-.dislike_btn_become{
-background: #be0708;
-    border-radius: 100%;
-    width: 53px;
-    height: 53px;
-    box-shadow: 0px 0px 0px 4px rgba(27, 46, 23, 0.7);
-    margin: 8px auto;
-    border: 2px solid silver;
-    cursor: pointer;
-display:inline-block;
-}
+
 .become_signup_lead {
     padding: 8px 21px;
     background: #5a9f0821;
@@ -1286,69 +1576,7 @@ display:inline-block;
     
     margin-bottom: 12px;
 }
-.log_sub{
-	    width: 100px;
-    height: 32px;
-    box-shadow: 1px 2px 21px -1px #9ad33c;
-    background: #3b520b61;
-    border: 2px solid #4ea60a;
-    margin: 8% 0px;
-}
-.log_sub_2{
-	width: 134px;
-    height: 32px;
-    box-shadow: 1px 2px 21px -1px #9ad33c;
-    background: #3b520b61;
-    border: 2px solid #4ea60a;
-    margin: 4% 0px;
-    font-size: 1.0em;
-}
-.log_sub_3{
-	width: 178px;
-    height: 32px;
-    box-shadow: 1px 2px 21px -1px #9ad33c;
-    background: #3b520b61;
-    border: 2px solid #4ea60a;
-    margin: 4% 0px;
-    font-size: 1.0em;
-}
-.log_sub_4 {
-    width: 100px;
-    height: 32px;
-    box-shadow: 1px 2px 21px -1px #9ad33c;
-    background: #3b520b61;
-    border: 2px solid #4ea60a;
-    margin: 8% auto;
-    display: block;
-}
-.like_btn{
-background: #35ae16;
-    border-radius: 100%;
-    width: 53px;
-    height: 53px;
-    box-shadow: 0px 0px 0px 4px rgba(27, 46, 23, 0.7);
-    margin: 8px auto;
-    border: 2px solid silver;
-    cursor: pointer;
-	
-}
-.green_top{
-	background:#7fd5188f;
-}
-.like_btn p{
-	padding: 14px 0px;
-	}
-.dislike_btn{
-background: #be0708;
-    border-radius: 100%;
-    width: 53px;
-    height: 53px;
-    box-shadow: 0px 0px 0px 4px rgba(27, 46, 23, 0.7);
-    margin: 8px auto;
-    border: 2px solid silver;
-    cursor: pointer;
 
-}
 .source_chann{
 	width:150px;
 }
@@ -1383,101 +1611,11 @@ background: #be0708;
 	text-decoration:underline;
         display: inline-block;
 	}
-.rt, .rt:hover, .rt:active{
-	color: #67ab3a !important;
-	text-decoration:none!important;
-}
-.dislike_btn p{
-	padding: 14px 0px;
-	}
-.inp{
-	    background: #64b609;
-    border: 1px solid #a0b987;
-	    padding: 4px 17px;
-}
-.sel_fil{
-    background: #48a22b17;
-    border: 1px solid #a0b987;	
-	    padding: 4px 0px;
-}
-select:after{
-	border-color: #a0b987;
-}
-.rad{
-    display: inline-block;
-    vertical-align: middle;
-    padding: 0px 3px;
-    margin: 0px;
-}
-input[type=radio] {
-display:none;
-}
-input[type=radio] + label span {
-    display: inline-block;
-    vertical-align: middle;
-    margin: 0px 0 0;
-    width: 18px;
-    height: 18px;
-    border-radius: 100%;
-    background: white;
-	
-} 
-input[type=radio]:checked + label span {
-background: #64d90b -20px 6px no-repeat;
-    border: 3px solid white;
 
-	
-}
 
-#datepicker {
-padding: 0px;
-    text-align: center;
-    width: 121px;	
-}
-option, selected{
-	    background: #234700;
-}
-.fr{
-	border: 1px solid #a0b987;
-    padding: 2px;
-    vertical-align: bottom;
-    height: 30px;
-}
-.mm{
-	border:0px;
-	background:transparent;
-}
-.mm:after{
-	border:0px;
-	background:transparent;
-}
-div.datepicker{
-  display: none;
-}
-.ui-datepicker .weekend .ui-state-default {
-  background: #FEA;
-}
 
-.ui-datepicker-calendar td a[data-custom] {
-  position: relative;
-  padding-bottom: 10px;
-}
 
-.ui-datepicker-calendar td a[data-custom]:after {
-  content: '$' attr(data-custom);
-  display: block;
-  font-size: small;
-}
-.header{
-	    background: #010500f5;
-    text-align: center;
-    padding: 10px;
-}
-.sel_fil:hover{
-    background: #48a22b17;
-    border: 1px solid #a0b987;	
-	    padding: 4px 0px;
-}
+
 .signup{
 	padding: 2px 21px;
     background: #5a9f0821;
@@ -1485,19 +1623,7 @@ div.datepicker{
     border: 1px solid #2f500e;
 	cursor:pointer;
 }
-.logout{
-    padding: 5px 6px;
-    background: #5a9f0821;
-    box-shadow: 2px 1px 38px 4px rgba(67, 168, 65, 0.41);
-    border: 1px solid #2b4313;
 
-}
-.login{
-	padding: 2px 21px;
-    background: #5a9f0821;
-    box-shadow: 2px 1px 38px 4px rgba(67, 168, 65, 0.41);
-    border: 1px solid #325014;
-}
 .menu_main{
     padding: 5px 5px;
     background: #5a9f0842;
@@ -1543,7 +1669,7 @@ div.datepicker{
     border-top: 1px solid #a0b987;
     border-bottom: 1px solid #a0b987;
     background: #1b2d0cb0;
-    height: 37%;
+	padding:0px;
 }
 
 .row {
@@ -1581,32 +1707,9 @@ div.datepicker{
     padding-right: 9%;
 }
 
-li{
-	display:inline-block;
-}
-.ui-state-highlight, .ui-widget-content .ui-state-highlight, .ui-widget-header .ui-state-highlight {
-    border: 1px solid #377905;
-    background:#2b4f03;
-    color: #f0f2ef;
-}
-.ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active, a.ui-button:active, .ui-button:active, .ui-button.ui-state-active:hover {
-    border: 1px solid #377905;
-    background: #2b4f03;
-    font-weight: normal;
-    color: #ffffff;
-}
-.ui-datepicker th {
-    padding: .7em .3em;
-    text-align: center;
-    font-weight: bold;
-    border: 0;
-    background: #2b4f03;
-}
-.col-sm-2 ul {
-    margin: 0px auto 0px;
-    display: inline-block;
-	vertical-align: middle;
-}
+
+
+
 .logo{
 	    padding: 0px;
 	    border: 1px solid #a0b987;
@@ -1622,34 +1725,7 @@ li{
 	}
 
 	}
-@media (min-width: 768px)and (max-width:888px){
-.banner_content h1 {
-    margin: 2% auto;
-    font-size: 3.25em;
-}
-.banner_content p {
-    margin: 0% auto 0px;
-}
-}
-@media (min-width:888px){
-.banner_content p{
- margin:12% auto 0px;
-}
-.banner_content h1{
- margin: 6% auto;
- font-size: 3.25em;
-}
-}
-@media (min-width: 1024px){
-.banner_btn {
-cursor: pointer;
-    display: inline-block;
-    padding: 3%;
-    border: 1px solid #9baa46;
-    margin: 8% auto 0px;
-    background: #71aa1f69;
-}
-}
+
 @media (min-width: 1500px){
 
 .banner {
