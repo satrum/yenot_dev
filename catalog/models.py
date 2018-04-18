@@ -133,12 +133,13 @@ class Profile(models.Model):
 
 from  django.utils import timezone
 from django.core.validators import MinLengthValidator
+from django.template.defaultfilters import truncatechars
 
 class News(models.Model):
     newsid = models.AutoField(primary_key=True, help_text="news id")
-    text = models.TextField(max_length=1000,verbose_name="DESCRIPTION OF NEWS",validators=[MinLengthValidator(20)], help_text="YOUR MESSAGE MUST HAVE MORE THAN 20 CHARACTERS")
+    text = models.TextField(max_length=2000,verbose_name="DESCRIPTION OF NEWS",validators=[MinLengthValidator(20)], help_text="YOUR MESSAGE MUST HAVE MORE THAN 20 CHARACTERS")
     title = models.CharField(max_length=100,verbose_name="TITLE OF NEWS:") # резервирую название на будущее, для сигналов нет
-    link =  models.URLField(default="https://yeenot.today", max_length=100,verbose_name="REFERENCE ON NEWS:") # link to source of news
+    link =  models.URLField(default="https://yeenot.today", max_length=200,verbose_name="REFERENCE ON NEWS:") # link to source of news
     count_link_click = models.IntegerField(default=0, blank=True, null=True, help_text='count of clicks to news link')
     time = models.DateTimeField(default=timezone.now) #set time of add news
     proof_image = models.ImageField(upload_to='news_images/', max_length=100, blank=True,verbose_name="SCREENSHOT OF THE NEWS" ) #image of proof height_field=200, width_field=200
@@ -186,6 +187,8 @@ class News(models.Model):
         return reverse('news-dislike', args=[str(self.newsid)])
     def get_change_view(self):
         return reverse('change-view', args=[str(self.newsid)])
+    def short_text(self):
+        return truncatechars(self.text, 100)
 #voting:
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, related_name="user_posts")
     coinprice = models.DecimalField(default=0, max_digits=20, decimal_places=8, help_text="price of coin when news create")
