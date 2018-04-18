@@ -24,18 +24,18 @@
 {% endif %}
  <div class="table_filter">
   <div class="tab_front">
-<div class="table_btn_promo tab_fil">{{banner_left.text}}</div>
+<div class="table_btn_promo tab_fil">{% if banner_left %}<a href="{% url 'banner-click' banner_right.pk %}"><img src = "{{ banner_right.image.url}}"></a>{% endif %}</div>
   <div class="table_filter_Search tab_fil">
   <p class="ns_top_text">Here you can see the TOP of news by their rating  and filter by period you needs:</p>
 		<ul class="fil_ns_top_ul">
          
-		  <li><a href="{% url 'news' %}day/"  >DAY  </a></li>
-		  <li><a href="{% url 'news' %}week/" >WEEK </a></li>
-          <li><a href="{% url 'news' %}month/">MONTH</a></li>	
-		  <li><a href="{% url 'news' %}"      >ALL  </a></li>
+		  <li {% if 'day' in request.path %} class="green_top" {% endif %}><a href="{% url 'news' %}day/"  >DAY  </a></li>
+		  <li {% if 'week' in request.path %} class="green_top" {% endif %}><a href="{% url 'news' %}week/" >WEEK </a></li>
+          <li {% if 'month' in request.path %} class="green_top" {% endif %}><a href="{% url 'news' %}month/">MONTH</a></li>	
+		  <li {% if '/catalog/news/' == request.path %} class="green_top" {% endif %}><a href="{% url 'news' %}"      >ALL  </a></li>
 		</ul>
 </div>
-		<div class="table_btn_promo tab_fil right_banner">{{banner_right.text}}</div>
+		<div class="table_btn_promo tab_fil right_banner">  {% if banner_right %}<a href="{% url 'banner-click' banner_right.pk %}"><img src = "{{ banner_right.image.url}}"></a>{% endif %}</div>
 </div>
 </div>
 {% if allnews %}

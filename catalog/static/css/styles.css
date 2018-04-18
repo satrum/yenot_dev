@@ -1332,6 +1332,9 @@ background: #35ae16;
     cursor: pointer;
 	
 }
+.green_top{
+	background:#7fd5188f;
+}
 .like_btn p{
 	padding: 14px 0px;
 	}

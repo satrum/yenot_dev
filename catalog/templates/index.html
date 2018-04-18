@@ -23,8 +23,9 @@
 {% endif %}
   <div class="table_filter">
   <div class="tab_front">
-  <div class="table_btn_promo tab_fil">{{banner_left.text}}</div>
-  
+  <div class="table_btn_promo tab_fil">
+  {% if banner_left %}<a href="{% url 'banner-click' banner_left.pk %}"><img src = "{{ banner_left.image.url}}"></a>{% endif %}
+  </div>
   <div class="table_filter_Search tab_fil">
   <form role="form" id="form" action="" data-def="">
   <select class="sel_fil" name="coin">
@@ -54,7 +55,9 @@
   </div>
   
   
-  <div class="table_btn_promo tab_fil" style="float: right;">{{banner_right.text}}</div>
+  <div class="table_btn_promo tab_fil" style="float: right;">
+  {% if banner_right %}<a href="{% url 'banner-click' banner_right.pk %}"><img src = "{{ banner_right.image.url}}"></a>{% endif %}
+  </div>
   </div>
   </div>
 
