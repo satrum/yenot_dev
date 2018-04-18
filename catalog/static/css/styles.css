@@ -433,6 +433,10 @@ footer{
 float: none;
 padding: 0px;
 }
+.right_banner{
+	margin-left: 51px;
+}
+}
 .ns_top_text {
     margin: 0px 71px;
     text-align: center;
@@ -1092,9 +1096,7 @@ footer{
 #dfg2{
 	margin-bottom:20px;
 }
-.right_banner{
-	margin-left: 51px;
-}
+
 .rule_yeenot{
 	text-align:center;
 }
