@@ -504,12 +504,7 @@ display: inline-block;
     padding: 0px;
     margin: auto;
 }
-.banner{
-	border: 1px solid #a0b987;
-    margin: 20px auto;
-    width: 95%;
-	background: #1b2d0cb0;
-}
+
 .banner_content{
 	    display: inline-block;
     text-align: center;
@@ -638,6 +633,12 @@ footer {
     text-align: center;
 
 }
+.banner{
+	border: 1px solid #a0b987;
+    margin: 20px auto;
+    width: 95%;
+	background: #1b2d0cb0;
+}
 .signup{
 	padding: 2px 21px;
     background: #5a9f0821;
@@ -750,6 +751,11 @@ padding: 0px;
 .col-sm-1, .col-sm-10, .col-sm-11, .col-sm-12, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9 {
 float: none;
 padding: 0px;
+}
+.sidebar-nav {
+    margin-top: 20px;
+    display: inline-block;
+    list-style: none;
 }
 footer a, footer a:hover, footer a:active{
     float: right;
