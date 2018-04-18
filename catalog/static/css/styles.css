@@ -434,9 +434,10 @@ float: none;
 padding: 0px;
 }
 .right_banner{
-	margin-left: 51px;
+    float: right;
+    margin: 7px 0px 0px;
 }
-}
+
 .ns_top_text {
     margin: 0px 71px;
     text-align: center;
