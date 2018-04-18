@@ -1380,8 +1380,9 @@ background: #be0708;
 	text-decoration:underline;
         display: inline-block;
 	}
-.rt, .rt:hover{
-	color: #67ab3a;
+.rt, .rt:hover, .rt:active{
+	color: #67ab3a !important;
+	text-decoration:none!important;
 }
 .dislike_btn p{
 	padding: 14px 0px;
