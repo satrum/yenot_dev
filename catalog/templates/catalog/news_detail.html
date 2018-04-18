@@ -11,6 +11,8 @@
 {% endif %}
 |
 <strong>Rating:</strong> {{ news.rating }}
+| 
+<strong>News price:</strong> {{news.coinprice|floatformat:3}}
 </p>
 <div style="text-align:center;">
 <div class="fl">
@@ -41,7 +43,9 @@
 {%if news.link %}<a href="{% url 'news-click' news.pk %}" class="rt">{{ news.link|truncatechars:100}}</a>{% endif %}
 </div>
 <div class="text_ns_top_prof_time">
- <p><strong>Time of creation: </strong> {{ news.time }}</p> 
+ <p><strong>Time of creation: </strong> {{ news.time }} <br>
+ <strong>Duration:</strong> {{news.get_duration_display}}
+ </p> 
 </div>
 {% if news.proof_image %}
 	<h4 style="text-align:center; margin:10px 0px;"><strong>Image of proof:</strong></h4>
