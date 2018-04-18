@@ -61,9 +61,7 @@ a:hover, a:active{
 	margin:0px;
 	text-align:center;
 }
-.ns_top_text_f{
 
-}
 .prof_inf{
 	display:inline-block;
 	
@@ -436,7 +434,7 @@ float: none;
 padding: 0px;
 }
 .ns_top_text {
-    margin: 0px 72px;
+    margin: 0px 71px;
     text-align: center;
 }
 .prof_inf{
