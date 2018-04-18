@@ -1,10 +1,11 @@
 #need to do:
 #1. add user to Banner
 #2. add email to user and admin
-#3. add external prices for promo
-#4. modify structure of form
-#5. modify css of form
-#6. price in template from YeenotSettings (calculation or table)
+#ok 3. add external prices for promo
+#ok 4. modify structure of form
+#ok 5. modify css of form
+#ok 6. price in template from YeenotSettings (calculation or table)
+#ok 7. modify clean
 
 #YeenotSettings promo price initialization:
 from .models import YeenotSettings
@@ -58,10 +59,12 @@ class AddPromoModelForm(ModelForm):
 		self.fields['sourceid'].queryset = Source.objects.filter(user=user, promo_status='n') #and promo status no 'Promoted'
 		self.fields['newsid'].queryset = News.objects.filter(user=user, promo_status='n') #and promo status no 'Promoted'
 		self.fields['bannerid'].queryset = Banner.objects.filter(status=False) #and promo status no 'Promoted' and only user banner
-		#print(self.fields['newsid'].queryset)
+		#print(self.fields['type'].choices)
+		self.fields['type'].choices = [('', '---------'), ('n', 'News promo'), ('s', 'Source promo')]
 	
 	def clean_type(self):
 		type = self.cleaned_data.get('type')
+		print(type)
 		if type=='':
 			raise forms.ValidationError(u'Need not empty type.')
 		return type

@@ -25,11 +25,7 @@
     {% csrf_token %}
 
     <h4> Select type of promotion:</h4>
-		<select name="type" id="id_type">
-		<option value="" selected="">---------</option>
-		<option value="n">News promo</option>
-		<option value="s">Source promo</option>
-		</select>
+	{{ form.type }}
 
 <div id="d1" style="display:none;" >       
 	  <h4 style="margin:0px auto 20px;"> Select your news:</h4>
