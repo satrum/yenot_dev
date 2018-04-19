@@ -6,7 +6,7 @@
 <div class="banner">
 <div class="banner_img">
 {% load static %}
-<a href="{% url 'banner-click' banner.pk %}"><img src = "{{ banner.image.url }}"></a>
+<a href="{% url 'banner-click' banner.pk %}" target="_blank"><img src = "{{ banner.image.url }}"></a>
 </div>
 <div class="banner_content">
 <div>
@@ -14,7 +14,7 @@
 <p>{{banner.text}}</p>
 </div>
 <div>
-<div class="link banner_btn"><a href="{% url 'banner-click' banner.pk %}">Quick View</a></div>
+<div class="link banner_btn"><a href="{% url 'banner-click' banner.pk %}" target="_blank">Quick View</a></div>
 </div>
 </div>
 </div>  
@@ -24,7 +24,7 @@
   <div class="table_filter">
   <div class="tab_front">
   <div class="table_btn_promo tab_fil cr">
-  {% if banner_left %}<a href="{% url 'banner-click' banner_left.pk %}"><img src = "{{ banner_left.image.url}}"></a>{% endif %}
+  {% if banner_left %}<a href="{% url 'banner-click' banner_left.pk %}" target="_blank"><img src = "{{ banner_left.image.url}}"></a>{% endif %}
   </div>
   <div class="table_filter_Search tab_fil">
   <form role="form" id="form" action="" data-def="">
@@ -56,7 +56,7 @@
   
   
   <div class="table_btn_promo tab_fil right_banner_float">
-  {% if banner_right %}<a href="{% url 'banner-click' banner_right.pk %}"><img src = "{{ banner_right.image.url}}"></a>{% endif %}
+  {% if banner_right %}<a href="{% url 'banner-click' banner_right.pk %}" target="_blank"><img src = "{{ banner_right.image.url}}"></a>{% endif %}
   </div>
   </div>
   </div>
@@ -94,7 +94,7 @@ CREATED TIME
 		<td class="td_pd ria"style="width: 45%;"><a href="{{ news.get_absolute_url }}"><h4>{{news.title}}</h4></a>
 		<p class="duration_change">DURATION TIME OF NEWS: {{news.duration}}</p>
 		<div class="textnews"><p>{{news.text|truncatechars:245}}</p></div>
-		{%if news.link %}<a href="{% url 'news-click' news.pk %}" class="rt">{{ news.link|truncatechars:130}}</a>{% endif %}
+		{%if news.link %}<a href="{% url 'news-click' news.pk %}" target="_blank" class="rt">{{ news.link|truncatechars:130}}</a>{% endif %}
 		</td>
 		
 		<td class="td_pd" style="width: 11%;">{{news.time|date:"d M Y"}}<br>{{news.time|time:"H:i"}}</</td>

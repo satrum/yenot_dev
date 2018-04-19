@@ -7,7 +7,7 @@
 <div class="banner">
 <div class="banner_img">
 {% load static %}
-<a href="{% url 'banner-click' banner.pk %}"><img src = "{{ banner.image.url }}"></a>
+<a href="{% url 'banner-click' banner.pk %}" target="_blank"><img src = "{{ banner.image.url }}"></a>
 </div>
 <div class="banner_content">
 <div>
@@ -15,7 +15,7 @@
 <p>{{banner.text}}</p>
 </div>
 <div>
-<div class="link banner_btn"><a href="{% url 'banner-click' banner.pk %}">Quick View</a></div>
+<div class="link banner_btn"><a href="{% url 'banner-click' banner.pk %}" target="_blank">Quick View</a></div>
 </div>
 </div>
 </div>  
@@ -24,7 +24,7 @@
 {% endif %}
  <div class="table_filter">
   <div class="tab_front">
-<div class="table_btn_promo tab_fil">{% if banner_left %}<a href="{% url 'banner-click' banner_right.pk %}"><img src = "{{ banner_right.image.url}}"></a>{% endif %}</div>
+<div class="table_btn_promo tab_fil">{% if banner_left %}<a href="{% url 'banner-click' banner_right.pk %}" target="_blank"><img src = "{{ banner_right.image.url}}"></a>{% endif %}</div>
   <div class="table_filter_Search tab_fil">
   <p class="ns_top_text">Here you can see the TOP of news by their rating  and filter by period you needs:</p>
 		<ul class="fil_ns_top_ul">
@@ -35,7 +35,7 @@
 		  <li {% if '/catalog/news/' == request.path %} class="green_top" {% endif %}><a href="{% url 'news' %}"      >ALL  </a></li>
 		</ul>
 </div>
-		<div class="table_btn_promo tab_fil right_banner">  {% if banner_right %}<a href="{% url 'banner-click' banner_right.pk %}"><img src = "{{ banner_right.image.url}}"></a>{% endif %}</div>
+		<div class="table_btn_promo tab_fil right_banner">  {% if banner_right %}<a href="{% url 'banner-click' banner_right.pk %}" target="_blank"><img src = "{{ banner_right.image.url}}"></a>{% endif %}</div>
 </div>
 </div>
 {% if allnews %}
@@ -72,7 +72,7 @@
 		<a href="{{ news.get_absolute_url }}">
 		<h4>{{news.title}}</h4></a>
 		<div class="textnews_2"><p>{{news.text|truncatechars:100}}</p></div>
-		{%if news.link %}<a href="{% url 'news-click' news.pk %}" class="rt">{{ news.link|truncatechars:100}}</a>{% endif %}
+		{%if news.link %}<a href="{% url 'news-click' news.pk %}" class="rt" target="_blank">{{ news.link|truncatechars:100}}</a>{% endif %}
 		</td>
 		
 		<td class="td_pd" style="width: 11%;">{{news.time|date:"d M Y"}}<br>{{news.time|time:"H:i"}}</</td>
