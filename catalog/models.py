@@ -188,7 +188,7 @@ class News(models.Model):
     def get_change_view(self):
         return reverse('change-view', args=[str(self.newsid)])
     def short_text(self):
-        return truncatechars(self.text, 100)
+        return truncatechars(self.text, 50)
 #voting:
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, related_name="user_posts")
     coinprice = models.DecimalField(default=0, max_digits=20, decimal_places=8, help_text="price of coin when news create")

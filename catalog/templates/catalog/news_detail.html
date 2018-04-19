@@ -39,7 +39,7 @@
 </div>
 <p><strong>Details:          </strong></p>
 <div class="text_ns_top_prof">
- <p>{{ news.text }}</p>
+ <p>{{ news.text|linebreaks }}</p>
 {%if news.link %}<a href="{% url 'news-click' news.pk %}" class="rt">{{ news.link|truncatechars:100}}</a>{% endif %}
 </div>
 <div class="text_ns_top_prof_time">

@@ -67,6 +67,7 @@ def index(request, template='index.html', page_template='index_page.html'):#Фу
     if source == '': source=None
     if direction == '': direction=None
     print(coin, source, direction) #debug only
+    #news list filter: Approved for view order: -time
     news_list = News.objects.filter(moderation_status='p').order_by('-time')
     if date is not None:
         news_list = news_list.filter(time__contains=date)
