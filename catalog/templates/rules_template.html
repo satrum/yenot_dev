@@ -57,7 +57,7 @@
 <h4 style="text-align: center;"> How you can get your points and rank:</h4>
 <ol start="1">
 <li> 1) We calculate your early and accurate opinion about news, popularity of your news and channels.</li>
-<li> 2) Daily we allot YEENOT points and upgrade  the rank to all users.</li>
+<li> 2) Hourly/Daily we calculate YEENOT points and upgrade  the rank to all users.</li>
 <li> 3) You can find top users here: <a href="">TOP LEADER</a></li>
 </ol>
 </div>
@@ -67,7 +67,7 @@
 <h4 style="text-align: center;"> What means source "YEENOT":</h4>
 <p>All News need source. If you want type some news, but you are not the owner that news you can add only title and link on add news. The source will automatic add by "YEENOT", which means this source is not in list "channels" on our site.</p>
 <h4 style="text-align: center;"> Add source:</h4>
-<p>If you owner on some source/media portal - you can add it source in your profile or write us to <a href="mailto:support@yenot.today">support@yenot.today</a> , <a href="http://t.me/yenot.today">http://t.me/yenot.today</a></p>
+<p>If you owner on some source/media portal - you can <a href="{% url 'addsource'%}">add it source in your profile</a> or write us to <a href="mailto:support@yenot.today">support@yenot.today</a> , <a href="http://t.me/yenot.today">http://t.me/yenot.today</a></p>
 <p>Periodical we calculate Source Rating.</p>
 <p>We use rating from news of this source.</p>
 </div>
@@ -77,6 +77,7 @@
 <h4 style="text-align: center;">Promo option:</h4>
 <p>You can promote some news, sources, coins on home page and other pages in table lists. We add a special background to your content to highlight it among other rows.</p>
 <h4> What's need to do:</h4>
+<a href="{% url 'addpromo'%}" style="color:#67ab3a;"> add promo here </a><p>
 <ol class="ol_promo">
 <li> 1) Select your content in your profile and choose time period to your promo (Price will calculate automatic).</li>
 <li> 2) Pay in profile with crypto or paypal. You can manage you promo status and view stats in profile.</li>
@@ -102,14 +103,16 @@
 <p> 3) Create favorites for user who want to save some news. Use favorites stats for news rating calculation.</p>
 <p> 4) Daily distribution of points is fixed. Spend YENOT points for vote.</p>
 <p> 5) Automatic pull of news from sources. </p>
-<p> 6) News categories filter </p>
+<p> 6) News categories filter. </p>
+<p> 7) Community integration (twitter, telegram, facebook, discord, reddit, bitcointalk and others). </p>
 
 </div>
 <div class="ov_future" style="border-right:0px;">
 <h4>Near future on YEENOT.TODAY:</h4>
 <p> 1) Upgrade news to sharing  at the social activity, integration with twitter, telegram. </p>
 <p> 2) New types of news - ICO signals, Common news, News Fight.</p>
-<p> 3)YENOT token with airdrop for platform users and exchange to BTC/ETH and promo with YENOT tokens.</p>
+<p> 3) YENOT token with airdrop for platform users and exchange to BTC/ETH and promo with YENOT tokens.</p>
+<p> 4) New activity - like/dislike, buy/sell, news repeated </p>
 </div>
 </div>
 {% endblock %}

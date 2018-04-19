@@ -94,6 +94,14 @@ from django.contrib.auth.decorators import login_required
 def addpromo(request):
 	if request.method == 'POST':
 		form = AddPromoModelForm(request.user, request.POST)
+		yeenotsettings = YeenotSettings.objects.all()
+		form.price_promo_news = yeenotsettings.get(name='price_promo_news').num_value
+		form.price_promo_source_day = yeenotsettings.get(name='price_promo_source_day').num_value
+		form.price_promo_source_week = yeenotsettings.get(name='price_promo_source_week').num_value
+		form.price_promo_source_month = yeenotsettings.get(name='price_promo_source_month').num_value
+		form.price_promo_banner_day = yeenotsettings.get(name='price_promo_banner_day').num_value
+		form.price_promo_banner_week = yeenotsettings.get(name='price_promo_banner_week').num_value
+		form.price_promo_banner_month = yeenotsettings.get(name='price_promo_banner_month').num_value
 		'''
 		print(form.fields['newsid'].queryset)
 		newsid = request.POST.get('newsid')

@@ -207,7 +207,7 @@ CREATED TIME
 		<td style="    text-align: center;     padding: 0px 5px;">{{ source.get_promo_status_display }}</td>
 		<td style="   text-align: center;     padding: 0px 5px;"><p> REAL</p>{{ source.stats_likes}}</td>
 		<td style="   text-align: center;     padding: 0px 5px;"><p> FAKE</p>{{ source.stats_dislikes }}</td>
-		<td style="   text-align: center;     padding: 3px 5px;"><p class="prof_rating_source_min">MIN <br>{{ source.stats_max }}</p><p class="prof_rating_source_avg">AVG <br>{{ source.stats_avg }}</p><p class="prof_rating_source_max">MAX <br>{{ source.stats_min }}</p></td>
+		<td style="   text-align: center;     padding: 3px 5px;"><p class="prof_rating_source_min">MIN <br>{{ source.stats_min }}</p><p class="prof_rating_source_avg">AVG <br>{{ source.stats_avg }}</p><p class="prof_rating_source_max">MAX <br>{{ source.stats_max }}</p></td>
 		</tr>
 		
 		{% endfor %}
@@ -219,7 +219,7 @@ CREATED TIME
 	  {% endif %} 
 	  </div>
       <div id="dfg3"style="display:none;">
-	  <h3 style="text-align:center;">This statistic is develop.</h3>
+	  <h3 style="text-align:center;">This statistic under development.</h3>
 	  </div>
 	  <script>
 var current = 'dfg1';
