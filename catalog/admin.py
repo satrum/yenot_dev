@@ -55,6 +55,12 @@ class NewsAdmin(admin.ModelAdmin):
     list_filter = ('direction', 'duration', 'moderation_status', 'promo_status', 'time', 'sourceid')
     #fields = [('title', 'direction'), 'text', 'link'] надо сделать разное для add и change, и в зависимости от прав пользователя
     search_fields = ['newsid','title','text','coinid__symbol','sourceid__name']
+    
+    def make_moderated(self, request, queryset):
+        queryset.update(moderation_status='p') #'Approved for view'
+    
+    make_moderated.short_description = 'make news moderation status - Approved for view'
+    actions = [make_moderated]
 	
 class NewsInline(admin.TabularInline):
     model = News

@@ -67,7 +67,7 @@ def index(request, template='index.html', page_template='index_page.html'):#Фу
     if source == '': source=None
     if direction == '': direction=None
     print(coin, source, direction) #debug only
-    news_list = News.objects.order_by('-time')
+    news_list = News.objects.filter(moderation_status='p').order_by('-time')
     if date is not None:
         news_list = news_list.filter(time__contains=date)
     if coin is not None:
@@ -250,6 +250,9 @@ class NewsListView(generic.ListView):
 	context_object_name = 'allnews' #name of context in file news_list.html
 	paginate_by = 20
 	def get_queryset(self):
+		#news moderation filter:
+		news = News.objects.filter(moderation_status='p').order_by('-rating') #('p', 'Approved for view')
+		#news = News.objects.order_by('-rating')
 		#get parameter from kwargs url 'news/<str:time>/'
 		if 'time' in self.kwargs:
 			time = self.kwargs['time']
@@ -257,7 +260,8 @@ class NewsListView(generic.ListView):
 			time = None
 		#select range of time - all, day, week, month:
 		if time=='' or time==None:
-			return News.objects.order_by('-rating')
+			#return News.objects.order_by('-rating')
+			return news
 		else:
 			now = timezone.now()
 			if time=='day': #day
@@ -266,7 +270,7 @@ class NewsListView(generic.ListView):
 				delta = datetime.timedelta(days=7)
 			else: #month
 				delta = datetime.timedelta(days=30)
-			return News.objects.order_by('-rating').filter(time__range=(now-delta,now)) #example filtered News.objects.filter(title__icontains='BTC')[:4]
+			return news.filter(time__range=(now-delta,now)) #example filtered News.objects.filter(title__icontains='BTC')[:4]
 		#Добавить атрибут queryset в вашей реализации класса отображения, определяющего order_by().
 		#Добавить метод get_queryset в вашу реализацию класса отображения и также определить метод order_by().
 	def get_context_data(self, **kwargs):
@@ -422,6 +426,13 @@ def addnews(request):
             #print(request.FILES['proof_image'])
             extend_form = form.save(commit=False)
             extend_form.user = request.user
+            #setup moderation_status default: 'a' Approved for view: 'p'
+            try:
+                mod_config = YeenotSettings.objects.get(name='addnews_autoapprove').num_value
+                if mod_config == 1: #addnews moderation status: 'p' - auto approve
+                    extend_form.moderation_status = 'p'
+            except Exception:
+                print('no addnews_autoapprove setting')
             #get price:
             coin = str(extend_form.coinid)
             url = 'https://min-api.cryptocompare.com/data/pricemulti?fsyms='+coin+'&tsyms=USD'
@@ -434,7 +445,6 @@ def addnews(request):
                 dbcoin=Coin.objects.get(symbol=coin)
                 price=dbcoin.price
                 print('coin: {} price from db without internet: {}'.format(coin, price))
-            print(price)
             extend_form.coinprice = price
             #save
             extend_form.save()
