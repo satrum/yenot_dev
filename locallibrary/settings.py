@@ -26,7 +26,7 @@ SECRET_KEY = 'oc(kqzj^dto2^h$rtt@v%#3n=sf6x9_176-)icxqt3ap&gv1hn'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['0.0.0.0', '10.1.1.111', '127.0.0.1', 'localhost']
 # ALLOWED_HOSTS = ['195.201.88.235','yeenot.today', 'www.yeenot.today']
 
 # Application definition
