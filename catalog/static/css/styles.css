@@ -1051,6 +1051,7 @@ padding: 2px 7px;
 padding: 5px 10px;
     border: 2px solid #a0b987;
 	background: #015c00;
+	    width: 73px;
 }
 .prof_rating_source_avg{
 	text-align:center;
@@ -1059,6 +1060,7 @@ padding: 5px 10px;
 padding: 5px 11px;
     border: 2px solid #a0b987;
 	    background: #7c9907;
+	 width: 73px;
 }
 .prof_rating_source_min{
 	text-align:center;
@@ -1067,6 +1069,7 @@ padding: 5px 11px;
 padding: 5px 11px;
     border: 2px solid #a0b987;
 	    background: #b81403;
+		    width: 73px;
 }
 .prof_rating_news_max{
 	text-align:center;
