@@ -20,14 +20,14 @@
 <div class="rab_2"><p>2</p></div><p> This project was created for crypto-community voting to decide  fake or real signal is. </p>
 </div>
 <div class="ov_about" style="border-right:0px;">
-<div class="rab_2"><p>3</p></div><p> Also this project has a some game elements, like score, ranks and points for users/channels/news - all of their can get a status "crypto-guru" here.</p>
+<div class="rab_2"><p>3</p></div><p> Also this project has a some game elements, like score, ranks and points for users/sources/news - all of their can get a status "crypto-guru" here.</p>
 </div>
 </div>
 <div class="become">
 <h4>How to become a user and get a rating:</h4>
 {% if user.is_authenticated %}<div class="sidebar-nav become_signup" ><p style="margin:0px;">Signup</p></div>{% else %}<a href="{% url 'signup'%}?next={{request.path}}"><div class="sidebar-nav become_signup" >Signup</div></a>{% endif %}<h3 class="my_result">&#10144;</h3><div  class="dislike_btn_become"><p>FAKE</p></div><h4 class="my_result">VOTE</h4><div  class="like_btn_become"><p>REAL</p></div>
 <h3 class="my_result">+</h3>
-{% if user.is_authenticated %}<div class="become_add_news sidebar-nav"><a href="{% url 'addnews'%}?next={{request.path}}"><div class="round">+</div>Add New</a></div>{% else %}<div class="become_add_news sidebar-nav"><a href="{% url 'signup'%}?next={{request.path}}"><div class="round">+</div>Add New</a></div>{% endif %}<h3 class="my_result">&#61;</h3>
+{% if user.is_authenticated %}<div class="become_add_news sidebar-nav"><a href="{% url 'addnews'%}?next={{request.path}}"><div class="round">+</div>Add News</a></div>{% else %}<div class="become_add_news sidebar-nav"><a href="{% url 'signup'%}?next={{request.path}}"><div class="round">+</div>Add News</a></div>{% endif %}<h3 class="my_result">&#61;</h3>
 <h4 class="my_result"> get your rating  and points on </h4><div class="sidebar-nav become_signup_lead" ><h4 style="margin:0px;">leader's board</h4></div>
 </div>
 <div class="about">
@@ -56,7 +56,7 @@
 <div class="ov_rules" style="border-right:0px;">
 <h4 style="text-align: center;"> How you can get your points and rank:</h4>
 <ol start="1">
-<li> 1) We calculate your early and accurate opinion about news, popularity of your news and channels.</li>
+<li> 1) We calculate your early and accurate opinion about news, popularity of your news and sources.</li>
 <li> 2) Hourly/Daily we calculate YEENOT points and upgrade  the rank to all users.</li>
 <li> 3) You can find top users here: <a href="">TOP LEADER</a></li>
 </ol>
@@ -65,9 +65,9 @@
 <div class="become">
 <div class="fd">
 <h4 style="text-align: center;"> What means source "YEENOT":</h4>
-<p>All News need source. If you want type some news, but you are not the owner that news you can add only title and link on add news. The source will automatic add by "YEENOT", which means this source is not in list "channels" on our site.</p>
+<p>All News need source. If you want type some news, but you are not are not found the source, you can add only title and link on add news. The source will automatic add by "YEENOT", which means this source is not in list "source" on our site.</p>
 <h4 style="text-align: center;"> Add source:</h4>
-<p>If you owner on some source/media portal - you can <a href="{% url 'addsource'%}">add it source in your profile</a> or write us to <a href="mailto:support@yenot.today">support@yenot.today</a> , <a href="http://t.me/yenot.today">http://t.me/yenot.today</a></p>
+<p>If you owner on some source/media portal - you can <a href="{% url 'addsource'%}">add it source in your profile</a> or write us to <a href="mailto:support@yenot.today">support@yenot.today</a> , <a href="http://t.me/yenot_today">http://t.me/yenot_today</a></p>
 <p>Periodical we calculate Source Rating.</p>
 <p>We use rating from news of this source.</p>
 </div>
@@ -91,7 +91,7 @@
 <img src="{% static 'images/Avd_ops.png' %}" style="width: 99%;">
 
 <h4 style="text-align: center;"> This three type of banners located on all our site, except this page, pages for news details, profile and registration pages.</h4>
-<h4 style="text-align: center;"> If you want to advertise your project on our site please write to our email <a href="mailto:support@yenot.today" style="color: #67ab3a;">support@yenot.today</a> or <a href="http://t.me/yenot.today" style="color: #67ab3a;">http://t.me/yenot.today</a>.</h4>
+<h4 style="text-align: center;"> If you want to advertise your project on our site please write to our email <a href="mailto:support@yenot.today" style="color: #67ab3a;">support@yenot.today</a> or <a href="http://t.me/yenot_today" style="color: #67ab3a;">http://t.me/yenot_today</a>.</h4>
 </div>
 
 <div class="become">
@@ -99,7 +99,7 @@
 <div class="ov_future">
 <h4>Soon on YEENOT.TODAY:</h4>
 <p> 1) As soon as users comes to our site and get their first points, we will make a page <br>"TOP LEADER"</p>
-<p> 2) As soon as  channels comes to our site and put some news, we will make a page <br>"TOP CHANNEL"</p>
+<p> 2) As soon as  channels comes to our site and put some news, we will make a page <br>"TOP SOURCES"</p>
 <p> 3) Create favorites for user who want to save some news. Use favorites stats for news rating calculation.</p>
 <p> 4) Daily distribution of points is fixed. Spend YENOT points for vote.</p>
 <p> 5) Automatic pull of news from sources. </p>
