@@ -84,7 +84,7 @@ $("#user_list_3").tablesorter({sortList: [[6,1]]});
 			 <div class="add_news sidebar-nav"><a href="{% url 'addnews'%}?next={{request.path}}"><div class="round">+</div>Add News</a></div>
 			 <div class="sidebar-nav">
 			 {% if request.user.is_staff %}
-			 <a href="{% url 'admin:index' %}"class="logout">Admin panel</a>{% else %}<a href=""class="logout">Promotion news</a> {% endif %}</div>
+			 <a href="{% url 'admin:index' %}"class="logout">Admin panel</a>{% else %}<a href="{% url 'addpromo' %}"class="logout">Promotion news</a> {% endif %}</div>
 			 
 		   </ul>
 		   {% else %}
