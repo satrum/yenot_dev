@@ -5,7 +5,7 @@
 <div class="log_in_p_add">
 <h1 style="text-align:center;">{{ news.title }}</h1>
 <p style="text-align:center;"><strong>Author:</strong> {{ news.user.first_name }}</p>
-<p style="text-align:center;"><strong>Source:</strong> <a href="{% url 'source-detail' news.sourceid.pk %}">{{ news.sourceid }}</a> | <strong>Direction:</strong>
+<p style="text-align:center;"><strong>Source:</strong> {{ news.sourceid }} | <strong>Direction:</strong>
 {% if news.direction == 'b' %}<img src="{% static 'images/UP.png' %}">
 {% elif news.direction == 's' %}<img src="{% static 'images/Down.png' %}">
 {% endif %}
@@ -40,7 +40,7 @@
 <p><strong>Details:          </strong></p>
 <div class="text_ns_top_prof">
  <p>{{ news.text|linebreaks }}</p>
-{%if news.link %}<a href="{% url 'news-click' news.pk %}" class="rt">{{ news.link|truncatechars:100}}</a>{% endif %}
+{%if news.link %}<a href="{% url 'news-click' news.pk %}" class="rt" target="_blank">{{ news.link|truncatechars:100}}</a>{% endif %}
 </div>
 <div class="text_ns_top_prof_time">
  <p><strong>Time of creation: </strong> {{ news.time }} <br>
@@ -83,4 +83,4 @@ $.get(url, {news_id: newsid}, function(data){
   </script>
 {% endblock %}
 
-
+<a href="{% url 'source-detail' news.sourceid.pk %}"></a>
