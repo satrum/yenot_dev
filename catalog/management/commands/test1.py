@@ -21,6 +21,7 @@ from statistics import median
 FILE_COINLIST = 'coinlist.txt'
 FILE_PRICE = 'coinpricefull.txt'
 FILE_RESULT = 'result.txt'
+FILE_RESULT_RATE_USERS = 'result_rate_users.txt'
 TYPE_PRICE = 'full'
 DATADIR = 'data'
 COINIMAGESDIR = 'media/coin_images/'
@@ -195,6 +196,9 @@ class Command(BaseCommand):
 		# for user in users:
 		# 	profile = Profile.objects.get(user=user)
 		# 	print('{} {}'.format(profile.user,profile.view_newslist_block))
+		stats_votes_false=votes.count()
+		stats_profiles=profiles.count()
+		stats_votes_chenged = 0 # count of calculated votes
 		for vote in votes:
 			if vote.vote_rate_status == True: # news duration ended or vote after news ended
 				print('vote {} - news duration ended or vote after news ended, rate: {}'.format(vote.id, vote.vote_rate))
@@ -238,6 +242,7 @@ class Command(BaseCommand):
 					print('news duration ended')
 					vote.vote_rate_status=True # optimize with not recalculation
 				vote.save()
+				stats_votes_chenged += 1
 		#rate profiles:
 		all_users_today_positive = 0
 		all_users_today_active = 0 #sum_today <> 0
@@ -281,6 +286,9 @@ class Command(BaseCommand):
 				profile.rank=i
 				profile.save()
 			#print(i, profile, profile.point, profile.rank, profile.user)
+		#return:
+		return_text = 'profiles:{} sum positive:{} all active:{} votes(false): {} votes(calc):{}'.format(stats_profiles,all_users_today_positive,all_users_today_active,stats_votes_false,stats_votes_chenged)
+		return return_text
 
 
 	#'https://www.cryptocompare.com/api/data/coinlist/'
@@ -640,7 +648,11 @@ class Command(BaseCommand):
 			self.rate_sources()
 
 		if 'rate_users' in poll_id:
-			self.rate_users()
+			text = self.rate_users()
+			file = open(DATADIR+'/'+FILE_RESULT_RATE_USERS, 'a')
+			file.write(text)
+			file.write(' rate_users finished at time {}\n'.format(timezone.now()))
+			file.close()
 		
 		if 'coinlist' in poll_id:
 			index = poll_id.index('coinlist')
