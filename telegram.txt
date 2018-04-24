@@ -76,7 +76,12 @@ support: support@yeenot.today
 blog: https://medium.com/@yeenottoday
 rules: https://yeenot.today/catalog/rules/
 
-
+24/04/2018 update: 
+added duration 2 week, 3 week, 1 month 
+vote buttons on homepage redirect to signup
+telegram group of project https://t.me/yeenot_chat
+today news count: 4 active votes: 206
+BTG - art
 -----------------------------
 я нашел:
 https://t.me/chat_crypto_ru Большой чат по криптовалюте, обсуждения, общение, реклама. Список людей будет увеличиваться. 

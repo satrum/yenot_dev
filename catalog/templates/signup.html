@@ -3,6 +3,7 @@
 {% block content %}
 <div class="log_in_p" >
   <h3 style="margin:0px auto 20px;">Sign up</h3>
+  <h4 style="margin:0px auto 20px;">Already have user? <a href="{% url 'login'%}"><div class="sidebar-nav login">Login</div></a></h4>
   <form method="post">
     {% csrf_token %}
       <div>

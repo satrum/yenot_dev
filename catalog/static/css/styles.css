@@ -93,6 +93,7 @@ position: absolute;
 	.rt, .rt:hover, .rt:active{
 	color: #67ab3a !important;
 	text-decoration:none!important;
+	word-break: break-all;
 }
 .ads_prom{
     margin: 40px auto 30%;
