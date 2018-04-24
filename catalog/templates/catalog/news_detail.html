@@ -18,10 +18,14 @@
 <div class="fl">
 <p id="like_count_{{news.newsid}}">{{news.like}}</p>
 		{% if user.is_authenticated %}
-		{% if enable_vote %}
-		<div id="like_btn_{{news.newsid}}" data-newsid="{{news.newsid}}" data-url="{% url 'news-like-ajax' %}"  class="like_btn" onclick="like(this)"><p>VOTE</p></div>
-				{% endif %}
-{% endif %}
+			{% if enable_vote %}
+				<div id="like_btn_{{news.newsid}}" data-newsid="{{news.newsid}}" data-url="{% url 'news-like-ajax' %}"  class="like_btn" onclick="like(this)"><p>VOTE</p></div>
+			{% endif %}
+		{% else %}
+		<div id="like_btn_{{news.newsid}}" data-newsid="{{news.newsid}}" data-url="{% url 'news-like-ajax' %}"  class="like_btn" onclick="like(this)">
+		<a href="{% url 'signup' %}?next={{request.path}}"><p>VOTE</p></a>
+		</div>
+		{% endif %}
 
         <p> REAL</p>
 </div>		
@@ -32,6 +36,10 @@
 			{% if enable_vote %}
 				<div id="dislike_btn_{{news.newsid}}" data-newsid="{{news.newsid}}" data-url="{% url 'news-dislike-ajax' %}"  class="dislike_btn" onclick="dislike(this)"><p>VOTE</p></div>
 			{% endif %}
+		{% else %}
+		<div id="dislike_btn_{{news.newsid}}" data-newsid="{{news.newsid}}" data-url="{% url 'news-dislike-ajax' %}"  class="dislike_btn" onclick="dislike(this)">
+		<a href="{% url 'signup' %}?next={{request.path}}"><p>VOTE</p></a>
+		</div>
 		{% endif %}
 		<p>FAKE</p>
 		

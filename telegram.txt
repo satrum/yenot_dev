@@ -13,6 +13,7 @@ sms-reg, sms-activate
 		КриптоПомощьINSIDE ?
 		https://t.me/criptohelpchat
 		https://t.me/cryptoinvestorsco
+		[ЧАТ] CRYPTO TRADERS GROUP
 		
 Walter Black, [23.04.18 02:17]
 Вот этого бота я пытался потрошить, это на тему пересылки
@@ -40,7 +41,7 @@ Instagram dr_gennady
 ---------------
 криптосигральные каналы:
 @cryptosignalsioBot https://my.cryptosignals.io/
-
+https://t.me/anakamoto https://docs.google.com/forms/d/e/1FAIpQLScCMeTgB4M7sKmYzj0o62cv3EhOTbl60mbG9DxNgTfUC7-4-Q/viewform (из канала https://t.me/btc2themoon)
 ------------------------
 мое объявление:
 
@@ -76,12 +77,16 @@ support: support@yeenot.today
 blog: https://medium.com/@yeenottoday
 rules: https://yeenot.today/catalog/rules/
 
+SING UP, VOTE, BECOME A GURU OF CRYPTO SIGNALS! 
+https://yeenot.today
+group: https://t.me/yeenot_chat
+channel: https://t.me/yeenot_today
+
 24/04/2018 update: 
 added duration 2 week, 3 week, 1 month 
 vote buttons on homepage redirect to signup
 telegram group of project https://t.me/yeenot_chat
-today news count: 4 active votes: 206
-BTG - art
+all news count: 55 active votes: 206
 -----------------------------
 я нашел:
 https://t.me/chat_crypto_ru Большой чат по криптовалюте, обсуждения, общение, реклама. Список людей будет увеличиваться. 
