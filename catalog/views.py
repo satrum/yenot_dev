@@ -107,7 +107,7 @@ def index(request, template='index.html', page_template='index_page.html'):#Фу
 	#get paginator object from news_list -> news
     page = request.GET.get('page', 1)
 
-    paginator = Paginator(news_list, 7)
+    paginator = Paginator(news_list, 20)
     try:
         news = paginator.page(page)
     except PageNotAnInteger:

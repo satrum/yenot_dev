@@ -163,7 +163,7 @@ class News(models.Model):
     rating = models.DecimalField(default=0.0, blank=True, max_digits=10, decimal_places=2) #rate news up to 99 with store 2 for example 100.02
     
     #timeframe duration forecast prediction:
-    TIMEFRAME = ( ('4h', '4 hours'),('1d', '1 day'),('1w', '1 week'), )
+    TIMEFRAME = ( ('4h', '4 hours'),('1d', '1 day'),('1w', '1 week'),('2w', '2 week'),('3w', '3 week'),('1m', '1 month'), )
     duration = models.CharField(max_length=2, choices=TIMEFRAME, default='1w', verbose_name='DURATION TIME OF FORECAST')
     
     #keys:

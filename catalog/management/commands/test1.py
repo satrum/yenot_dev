@@ -108,6 +108,12 @@ class Command(BaseCommand):
 				time_delta = timedelta(days=1, hours=0, seconds=0)
 			elif duration == '1w':
 				time_delta = timedelta(days=7, hours=0, seconds=0)
+			elif duration == '2w':
+				time_delta = timedelta(days=14, hours=0, seconds=0)
+			elif duration == '3w':
+				time_delta = timedelta(days=21, hours=0, seconds=0)
+			elif duration == '1m':
+				time_delta = timedelta(days=30, hours=0, seconds=0)
 			else:
 				continue
 			#oneday = timedelta(days=RATING_MAX_DAYS, hours=0, seconds=0)
@@ -213,6 +219,12 @@ class Command(BaseCommand):
 				dur_time = timedelta(days=1)
 			elif duration == '1w':
 				dur_time = timedelta(days=7)
+			elif duration == '2w':
+				dur_time = timedelta(days=14)
+			elif duration == '3w':
+				dur_time = timedelta(days=21)
+			elif duration == '1m':
+				dur_time = timedelta(days=30)
 			else:
 				dur_time = timedelta(days=7) #default 1 week
 			vote_time = vote.vote_time
@@ -234,7 +246,7 @@ class Command(BaseCommand):
 				if new_rate < 0 and vote.vote_type =='like':
 					coef = -1
 				vote_rate = vote_rate * coef * abs(float(new_rate))
-				print('{} {} {}'.format(vote.user, vote.news, vote.vote_type))
+				print('{} {} {}'.format(vote.user, vote.news.newsid, vote.vote_type))
 				print('nr:{} dir:{} d:{} n:{} v:{} vr:{} c:{}'.format(new_rate, direction ,dur_time, news_time, vote_time, vote_rate, coef))
 				#save:
 				vote.vote_rate = vote_rate
