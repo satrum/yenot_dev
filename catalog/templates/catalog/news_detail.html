@@ -5,14 +5,18 @@
 <div class="log_in_p_add">
 <h1 style="text-align:center;">{{ news.title }}</h1>
 <p style="text-align:center;"><strong>Author:</strong> {{ news.user.first_name }}</p>
-<p style="text-align:center;"><strong>Source:</strong> {{ news.sourceid }} | <strong>Direction:</strong>
+<p style="text-align:center;"><strong>Source:</strong> {{ news.sourceid }}</p>
+<p style="text-align:center;">
+<img src="{{news.coinid.image.url}}" style="border-radius: 100%; width: 30px;">
+<a href="{% url 'index' %}?coin={{news.coinid}}" style="text-decoration:underline;"><strong>{{ news.coinid }}</strong></a> {{news.coinid.price|floatformat:3}}$
+| <strong>Direction:</strong>
 {% if news.direction == 'b' %}<img src="{% static 'images/UP.png' %}">
 {% elif news.direction == 's' %}<img src="{% static 'images/Down.png' %}">
 {% endif %}
 |
 <strong>Rating:</strong> {{ news.rating }}
 | 
-<strong>News price:</strong> {{news.coinprice|floatformat:3}}
+<strong>News price:</strong> {{news.coinprice|floatformat:3}}$
 </p>
 <div style="text-align:center;">
 <div class="fl">

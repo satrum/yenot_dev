@@ -14,6 +14,7 @@ sms-reg, sms-activate
 		https://t.me/criptohelpchat
 		https://t.me/cryptoinvestorsco
 		[ЧАТ] CRYPTO TRADERS GROUP
+		LEXX Traders CLUB https://t.me/joinchat/FNHFV0N0o4u7K5R1UYN7Ig
 		
 Walter Black, [23.04.18 02:17]
 Вот этого бота я пытался потрошить, это на тему пересылки
@@ -77,16 +78,15 @@ support: support@yeenot.today
 blog: https://medium.com/@yeenottoday
 rules: https://yeenot.today/catalog/rules/
 
-SING UP, VOTE, BECOME A GURU OF CRYPTO SIGNALS! 
-https://yeenot.today
-group: https://t.me/yeenot_chat
-channel: https://t.me/yeenot_today
-
 24/04/2018 update: 
 added duration 2 week, 3 week, 1 month 
 vote buttons on homepage redirect to signup
 telegram group of project https://t.me/yeenot_chat
 all news count: 55 active votes: 206
+
+text for posts:
+This is TRUE of FAKE signal to buy COIN now?
+This is TRUE of FAKE signal to sell COIN now?
 -----------------------------
 я нашел:
 https://t.me/chat_crypto_ru Большой чат по криптовалюте, обсуждения, общение, реклама. Список людей будет увеличиваться. 
