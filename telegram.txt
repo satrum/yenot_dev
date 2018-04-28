@@ -64,6 +64,31 @@ channel https://t.me/yeenot_today
 group https://t.me/yeenot_chat
 blog https://medium.com/@yeenottoday
 
+#крипто_канал
+"ЕНОТ"
+https://yeenot.today
+Платформа для проверки криптосигналов и оценки влияния и достоверности новостей 
+Инсайдеры и владельцы каналов могут публиковать сигналы, которые оценивает сообщество и голосует.
+Трейдеры смотрять сигналы и новости и оценивают их, для получения очков.
+Все сигналы-новости имеют рейтинг зависящий от голосований и изменения цены монеты.
+Подробнее см. в правилах на сайте https://yeenot.today/catalog/rules/
+В планах:
+Интеграция с телеграмом и социльными сетями
+Топ Каналов
+Топ Лидеров мнения
+Airdrop YEENOT очков пользователей ресурса как ERC20 токенов
+
+Регистрируйтесь, голосуйте, добавляйте сигналы для проверки.
+
+Пишите в группу проекта свои предложения по усовершенствованию.
+Очень поможете если есть информация где можно искать заинтересованную аудиторию.
+наши контакты:
+email support@yeenot.today
+channel https://t.me/yeenot_today
+group https://t.me/yeenot_chat
+blog https://medium.com/@yeenottoday
+reddit: https://www.reddit.com/user/yeenot_today/
+twitter: https://twitter.com/yeenot_today
 -------------------
 group:
 https://t.me/yeenot_chat supergroup
@@ -76,6 +101,8 @@ channel: https://t.me/yeenot_today
 group: https://t.me/yeenot_chat
 support: support@yeenot.today
 blog: https://medium.com/@yeenottoday
+reddit: https://www.reddit.com/user/yeenot_today/
+twitter: https://twitter.com/yeenot_today
 rules: https://yeenot.today/catalog/rules/
 
 24/04/2018 update: 
@@ -84,9 +111,31 @@ vote buttons on homepage redirect to signup
 telegram group of project https://t.me/yeenot_chat
 all news count: 55 active votes: 206
 
-text for posts:
-This is TRUE of FAKE signal to buy COIN now?
-This is TRUE of FAKE signal to sell COIN now?
+25/04/2018 update:
+news details page - added coin with current price, vote buttons
+all news count: 68 active votes: 246
+
+27/04/2018 update:
+all news count: 96 active votes: 363
+
+text for posts on tg:
+This is TRUE of FAKE signal to buy NEO now? https://yeenot.today/catalog/news/110
+This is TRUE of FAKE signal to sell BTC now?
+medium and reddit and twitter and bitcointalk:
+News about "Dogecoin 1.14 alpha 3" added for Verification on YEENOT TODAY https://yeenot.today/catalog/news/142
+it is time to buy Doge ? 
+FORK to be or not to be ?
+This news added for Verification yesteday on YEENOT TODAY 
+see info about official twitter and github info
+
+reddit:
+https://www.reddit.com/me/m/crypto_projects/
+
+bitcointalk:
+[center][b][font=Arial][url=https://yeenot.today][color=#F90]YEENOT TODAY - SING UP, VOTE, BECOME A GURU OF CRYPTO SIGNALS![/color]
+[color=#F90]▰▰▰▰▰▰[/color]  [color=#490]Stable Coin[/color] [color=#F90]+[/color] [color=#490]Smart Investing[/color]  [color=#F90]▰▰▰▰▰▰[/color][/url]
+[color=#F90][url=https://t.me/yeenot_today][color=#490]Telegram Channel[/url]  ●  [url=https://medium.com/@yeenottoday][color=#490]Medium Blog[/url]  ●  [url=https://twitter.com/yeenot_today][color=#490]Twitter[/url]  ●  [url=http://yeenot.today/catalog/rules/][color=#490]SITE Rules[/url]
+
 -----------------------------
 я нашел:
 https://t.me/chat_crypto_ru Большой чат по криптовалюте, обсуждения, общение, реклама. Список людей будет увеличиваться. 
