@@ -141,6 +141,7 @@ class News(models.Model):
     title = models.CharField(max_length=100,verbose_name="TITLE OF NEWS:") # резервирую название на будущее, для сигналов нет
     link =  models.URLField(default="https://yeenot.today", max_length=200,verbose_name="REFERENCE ON NEWS:") # link to source of news
     count_link_click = models.IntegerField(default=0, blank=True, null=True, help_text='count of clicks to news link')
+    count_details_view = models.IntegerField(default=0, blank=True, null=True, help_text='count of views of news detail')
     time = models.DateTimeField(default=timezone.now) #set time of add news
     proof_image = models.ImageField(upload_to='news_images/', max_length=100, blank=True,verbose_name="SCREENSHOT OF THE NEWS" ) #image of proof height_field=200, width_field=200
     MODERATE_STATUS = (
@@ -174,7 +175,7 @@ class News(models.Model):
 	#https://docs.djangoproject.com/en/2.0/ref/models/fields/#django.db.models.ForeignKey
     coinid = models.ForeignKey('Coin', on_delete=models.SET_NULL, null=True, verbose_name="COIN")
     class Meta:
-        ordering = ["time"]
+        ordering = ["-time"]
 		
     def __str__(self):
         return '%s, %s' % (self.newsid, self.title)

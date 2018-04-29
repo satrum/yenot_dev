@@ -122,7 +122,12 @@ all news count: 96 active votes: 363
 28.04.2018:
 all news count: 100 active votes: 374 all votes: 609 coins voted: 60
 NANO ok
+
+29.04.2018:
+home page and add news - coins symbol sorted
 SONM
+GVT
+
 
 
 text for posts on tg:

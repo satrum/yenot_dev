@@ -135,8 +135,9 @@ CREATED TIME
 		<a href="{{ news.get_absolute_url }}">
 		<h4>{{news.title}}</h4></a>
 		<div class="textnews_2"><p>{{news.text|truncatechars:100}}</p></div>
-		{%if news.link %}<a href="{% url 'news-click' news.pk %}" class="rt" target="_blank">{{ news.link|truncatechars:100}}</a><p class="click_count">count of clicks on link: 
-		{{ news.count_link_click }}</p>{% endif %}
+		{%if news.link %}<a href="{% url 'news-click' news.pk %}" class="rt" target="_blank">{{ news.link|truncatechars:100}}</a>
+		<p class="click_count">counts of link clicks: {{ news.count_link_click }} <!--views: {{ news.count_details_view }} --></p>
+		{% endif %}
 		</td>
 		
 		<td class="td_pd" style="width: 11%;">{{news.time|date:"d M Y"}}<br>{{news.time|time:"H:i"}}</</td>

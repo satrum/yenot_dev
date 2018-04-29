@@ -313,6 +313,10 @@ class NewsDetailView(generic.DetailView):
 			else:
 				context['enable_vote']=False
 		#print(context)
+		#count_details_view + 1
+		news = News.objects.get(newsid=self.kwargs.get('pk'))
+		news.count_details_view +=1
+		news.save()
 		return context
 
 class SourceListView(generic.ListView):
