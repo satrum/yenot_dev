@@ -97,8 +97,8 @@ def index(request, template='index.html', page_template='index_page.html'):#Фу
     #print(coinid, sourceid)
 
 	#get set of coins from news_list 
-    coins = set([Coin.objects.get(id=v['coinid']).symbol for v in News.objects.values('coinid')])
-    #print(coins)
+    coins = sorted(set([Coin.objects.get(id=v['coinid']).symbol for v in News.objects.values('coinid')]))
+    print(coins)
 	
 	#get set of titles from news_list 
     sources = set([Source.objects.get(sourceid=v['sourceid']).name for v in News.objects.values('sourceid')])
@@ -402,6 +402,7 @@ class addnewsform(forms.Form):
 from django.forms import ModelForm
 from .models import News, Coin
 class AddNewsModelForm(ModelForm):
+    coinid = forms.ModelChoiceField(queryset=Coin.objects.order_by('symbol'))
     class Meta:
         model = News
         fields = ['title','text','link','direction','duration','sourceid','proof_image','coinid']
@@ -409,6 +410,7 @@ class AddNewsModelForm(ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['sourceid'].queryset = Source.objects.filter(moderation_status__in=['o','p'])
+        self.fields['coinid'].label = 'COIN'
 '''
     def __init__(self, *args, **kwargs):
         super(AddNewsModelForm, self).__init__(*args, **kwargs)
