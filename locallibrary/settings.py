@@ -26,7 +26,7 @@ SECRET_KEY = 'oc(kqzj^dto2^h$rtt@v%#3n=sf6x9_176-)icxqt3ap&gv1hn'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['0.0.0.0', '10.1.1.111', '127.0.0.1', 'localhost']
+ALLOWED_HOSTS = ['0.0.0.0', '10.1.1.111', '127.0.0.1', 'localhost', '10.1.1.126']
 # ALLOWED_HOSTS = ['195.201.88.235','yeenot.today', 'www.yeenot.today']
 
 # Application definition
@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 	'catalog.apps.CatalogConfig',
+	'social_django', #pip install social-auth-app-django
 ]
 
 MIDDLEWARE = [
@@ -49,6 +50,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+	'social_django.middleware.SocialAuthExceptionMiddleware', #social auth
 ]
 
 ROOT_URLCONF = 'locallibrary.urls'
@@ -66,10 +68,24 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'catalog.context_processors.context_yeenot', #custom context processor with for example: google analitics
+                'social_django.context_processors.backends',  #social auth
+                'social_django.context_processors.login_redirect', #social auth
             ],
         },
     },
 ]
+
+AUTHENTICATION_BACKENDS = (
+    'social_core.backends.github.GithubOAuth2', #ok tested on localhost
+    'social_core.backends.twitter.TwitterOAuth', #!need phone registation
+    'social_core.backends.facebook.FacebookOAuth2',
+    'social_core.backends.reddit.RedditOAuth2', #need apply by reddit form
+
+    'django.contrib.auth.backends.ModelBackend',
+)
+
+#social import keys
+from .social import *
 
 WSGI_APPLICATION = 'locallibrary.wsgi.application'
 

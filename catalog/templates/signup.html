@@ -1,9 +1,14 @@
 {% extends "base_generic.html" %}
 
 {% block content %}
+{% load static %}
 <div class="log_in_p" >
-  <h3 style="margin:0px auto 20px;">Sign up</h3>
-  <h4 style="margin:0px auto 20px;">Already have user? <a href="{% url 'login'%}"><div class="sidebar-nav login">Login</div></a></h4>
+ <div class="log_s"><h4 style="margin:0px auto 0px;font-size: 20px; vertical-align:middle;display:inline-block;">Already have user?</h4> <a href="{% url 'login'%}" style="display:inline-block;margin-left: 23px;"><div class="sidebar-nav sign_up_log">Login</div></a></div>
+
+ 
+  <a href="{% url 'social:begin' 'reddit' %}?next={% url 'index' %}" ><div class="reddit"><img src="{% static '/images/Reddit.png'%}"><p>Sign up with Reddit</p></div></a>
+<hr style="border: 1px solid #36970699; width:345px; margin:15px auto 0px;"> 
+ <h3 style="margin:10px auto;">Sign up by site form:</h3>
   <form method="post">
     {% csrf_token %}
       <div>
@@ -60,6 +65,7 @@
     <button class="log_sub" type="submit">Sign up</button>
   </form>
   </div>
+
 {% endblock %}
 
 

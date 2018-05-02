@@ -1,0 +1,6 @@
+#dev settings for social auth plugin
+SOCIAL_AUTH_GITHUB_KEY = '*'
+SOCIAL_AUTH_GITHUB_SECRET = '*'
+SOCIAL_AUTH_REDDIT_KEY = '*'
+SOCIAL_AUTH_REDDIT_SECRET = '*'
+SOCIAL_AUTH_REDDIT_AUTH_EXTRA_ARGUMENTS = {'duration': 'permanent'}

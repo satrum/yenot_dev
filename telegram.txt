@@ -5,7 +5,7 @@ sms-reg, sms-activate
 
 ----------------
 23.04.2018 @SvaitoslavKozin https://t.me/public_signals insider
-28.04.2018 @sibhel Alexandr Sl
+28.04.2018 @sibhel Alexandr Sl - предложили рекламу 2 его проектов (151,152)
 ----------------
 23.04.2018
 @BLACK_Lab - заинтересовал как инсайдера:
@@ -65,6 +65,18 @@ channel https://t.me/yeenot_today
 group https://t.me/yeenot_chat
 blog https://medium.com/@yeenottoday
 
+Там все просто:
+1. Регаетесь
+2. На любой новости голосуете - оценивая влияния и достоверности новостей (с учетом направления)
+3. Через некоторое время в профиле видно сколько очков набрали и другая статистика
+4. Можете добавить свою новость, смотрите на другие новости и действуйте по аналогии. Она будет не только на сайте, так что от качетсва текста и картинки тоже многое зависит.
+5. Можете создать свой канал, это делается в профиле кнопка под Sources
+6. После создания канала, мы аппрувим его и при публикации новостей вы сможете его указывать как свой Source (источник, какнал)
+
+
+Скоро будет страница канала, топ каналов, топ лидеров мнения.
+Чем больше аудиторию мы привлечем, тем более точный будет прогноз и главное - более оперативный.
+
 #крипто_канал
 "ЕНОТ"
 https://yeenot.today
@@ -90,6 +102,7 @@ group https://t.me/yeenot_chat
 blog https://medium.com/@yeenottoday
 reddit: https://www.reddit.com/user/yeenot_today/
 twitter: https://twitter.com/yeenot_today
+
 -------------------
 group:
 https://t.me/yeenot_chat supergroup
@@ -125,19 +138,81 @@ NANO ok
 
 29.04.2018:
 home page and add news - coins symbol sorted
+favicon
+news details view counter
 SONM
-GVT
-
+GVT - текст ниже
+Golem http://golem.slides.com/golem/deck-36-38-43-47-63#/
+ICON https://cryptocoinspy.com/blockchain-network-icon-icx-unveils-token-launch-platform/
+https://account.cryptics.tech 1 QRP = 0.66 $ (35% bonus) 1ETH = 1000 QRP
 
 
 text for posts on tg:
 This is TRUE of FAKE signal to buy NEO now? https://yeenot.today/catalog/news/110
 This is TRUE of FAKE signal to sell BTC now?
 medium and reddit and twitter and bitcointalk:
-News about "Stellar Lumens [XLM] Sentiment Analysis" added for Verification on YEENOT TODAY https://yeenot.today/catalog/news/147
-it is time to buy XLM with community ?
-What your opinion about word of traders in article?
+News about "IOTA on COBINHOOD 4 may" added for Verification on YEENOT TODAY https://yeenot.today/catalog/news/157
+Crypto without fee added on Exchange without fee.
+It is time to buy IOTA ?
+What next projects on waves will use this features?
+We live in crypto wild west. We need services to verify, proof news and search most important.
 
+"Critical Vulnerability in EOS" added for Verification on YEENOT TODAY https://yeenot.today/catalog/news/158
+it is time to sell? what dev think about this threat?
+
+Japanes: prevented anonymity altcoins cryptocurrency on exchanges for trading s Dash (DASH) on this month. 
+This is a signal that DASH is follow down or not? 
+Voting to show your and community opinion about this news! https://yeenot.today/catalog/news/159
+
+"GNO is now available to trade on AirSwap" added for Verification on YEENOT TODAY https://yeenot.today/catalog/news/160
+
+"The Syscoin 3.0 Upgrade Process Begins!" added for Verification on YEENOT TODAY https://yeenot.today/catalog/news/161
+it is time price follow up?
+
+News "Vitalik: Sharding is coming" added for Verification on YEENOT TODAY  https://yeenot.today/catalog/news/162
+it is time price follow up?
+
+"things that are coming up for QASH" added for Verification on YEENOT TODAY  https://yeenot.today/catalog/news/163
+vote for QASH !
+
+News about "BTCP ARRIVING on HITBTC" added for Verification on YEENOT TODAY   https://yeenot.today/catalog/news/164
+it is time to buy BTCP?
+
+"Circle Adds Zcash to Crypto Investment App" added for proof https://yeenot.today/catalog/news/165
+Vote to show your and community opinion about this news!
+
+Crypto.IQ™
+Recommendation:
+Monero
+In our opinion, Monero is the clear choice amongst the privacy coins if you are looking for something that is fully private, fungible, and decentralized.
+All of the other coins have some aspect that falls short of what Monero offers and can potentially put your privacy and security at risk. 
+One thing to note is that, due to Monero’s comprehensive privacy protocol, there is a real possibility of governments looking to find a way to crack down on the coin.
+Its potential for use within illegal activity has attracted significant attention from the likes of the U.S. Government, so hedging your bet in this space with a pseudo-private alternative such as ZCash, Zcoin, or PIVX could be a good long-term strategy within the privacy sub-asset class. 
+Privacy coins have been a hot topic to start 2018, and we see them being major players in the ecosystem going forward. As always, we remind you that everyone should conduct their own due diligence whenever they invest in a crypto asset.
+
+"Best privacy coin - Monero" added for Verification on YEENOT TODAY
+comparison chart of all privacy coins
+https://yeenot.today/catalog/news/166 
+Which maximize privacy, and which fall short? - message from CryptoIQ
+
+https://www.reddit.com/r/CryptoCurrencyTrading
+Nanomate - service for sending NANO with all mesaging apps. 
+
+NanoMate is designed to help Nano adoption by making it easy and effective to introduce your friends to Nano by sending them a small amount.
+When you create an escrow address, you'll immediately be given a 'secret redeem link', that you can send to the recipient however you like. Any Nano you send to the generated address can be unlocked by anyone with the secret redeem link.
+An interesting side-effect of this new feature is that the recipient can now be undefined.
+You can verify this on YEENOT TODAY 
+time to rise for NANO ?
+
+GVT
+GVT - Next step for evolution of Investments - 5 YES to rise
+1. Connecting Investors with Brokers with Liquidity of many Exchanges - it is not copy strategy but AI manage strategy
+2. TA - SMA to buy, RSI - neutral
+3. Many work on github
+4. Mobile apps updates
+5. Product Presentation in 22 days
+
+Waves 
 This news added for Verification yesteday on YEENOT TODAY 
 
 reddit:

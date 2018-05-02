@@ -1,6 +1,7 @@
 {% extends "base_generic.html" %}
 
 {% block content %}
+{% load static %}
 <div class="log_in_p">
 {% if form.errors %}
 <p class="log_2d">Your username and password didn't match. Please try again.</p>
@@ -14,6 +15,9 @@
     <h3>Please login to see this page:</h3>
     {% endif %}
 {% endif %}
+
+<!-- <a href="{% url 'social:begin' 'github' %}">Login with GitHub</a><br> -->
+<a href="{% url 'social:begin' 'reddit' %}?next={% url 'index' %}" ><div class="reddit"><img src="{% static '/images/Reddit.png'%}"><p>Login with Reddit</p></div></a>
 
 <form method="post" action="{% url 'login' %}">
 {% csrf_token %}
@@ -35,7 +39,7 @@
 
 
 <input type="submit" class="log_sub" value="login" />
-<input type="hidden" name="next" value="{{ next }}" />
+<input type="hidden" name="next" value="{% url 'index' %}" />
 </form>
 
 {# Assumes you setup the password_reset view in your URLconf #}

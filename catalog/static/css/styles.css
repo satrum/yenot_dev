@@ -914,6 +914,46 @@ display:inline-block;
 
 	text-align:center;
 }
+.reddit{
+	background:#ff4500;
+	margin: 10px auto;
+	border: 1px solid ghostwhite;
+	width: 345px;
+	height:47px;
+}
+.reddit:hover, .reddit:active{
+	background:#ff4500;
+	margin: 10px auto;
+	border: 1px solid ghostwhite;
+	width: 345px;
+	height:47px;
+}
+.reddit img{
+width: 50px;
+display: inline-block;
+padding: 0px 2px 5px;
+}
+.reddit p{
+display: inline-block;
+font-size: 19px;
+
+}
+.log_s{
+width: 345px;
+margin: 0px auto 16px;
+border: 1px solid #36970699;
+height: 43px;
+padding: 3px;
+}
+.sign_up_log{
+	padding: 6px 21px;
+    background: #1f4406cc;
+    box-shadow: 1px 2px 21px -1px #9ad33c;
+    border: 1px solid #5c793e;
+    margin: 0px !important;
+
+}
+}
 .pagination>li>a:hover, .pagination>li>span {
     position: relative;
     float: left;

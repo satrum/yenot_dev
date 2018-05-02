@@ -4,7 +4,12 @@
 {% load static %}
 <div class="log_in_p_add">
 <h1 style="text-align:center;">{{ news.title }}</h1>
-<p style="text-align:center;"><strong>Author:</strong> {{ news.user.first_name }}</p>
+<p style="text-align:center;"><strong>Author:</strong>
+{% if news.user.first_name %}
+ {{ news.user.first_name }}</p>
+{% else %}
+ {{ news.user.username }}</p>
+{% endif %}
 <p style="text-align:center;"><strong>Source:</strong> {{ news.sourceid }}</p>
 <p style="text-align:center;">
 <img src="{{news.coinid.image.url}}" style="border-radius: 100%; width: 30px;">

@@ -558,6 +558,11 @@ def user_update(request):
 		print('current user: ',request.user, request.user.first_name, request.user.last_name, request.user.email)
 		print('request: ',request.POST.get)
 		if field == 'first_name':
+			if User.objects.filter(first_name=item).exclude(username=request.user).exists() or item == '': #нужна проверка на соответствие формату почтового адреса и тесты
+				print('incorrect nickname')
+				item = request.user.first_name
+			else:
+				print('validate nickname ok')
 			#change name
 			request.user.first_name = item
 			request.user.save()
