@@ -280,6 +280,8 @@ class Banner(models.Model):
         ('t', 'Top horizontal'),
         ('l', 'Under Top on Left'),
         ('r', 'Under Top on Right'),
+        ('4', 'NewsDetails on Left'),
+        ('5', 'NewsDetails on Right'),
     )
 	place = models.CharField(max_length=1, choices=PLACE_NAME, blank=True, default='t', help_text='Banner place on site')
 	def __str__(self):

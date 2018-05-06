@@ -77,9 +77,9 @@ TEMPLATES = [
 
 AUTHENTICATION_BACKENDS = (
     'social_core.backends.github.GithubOAuth2', #ok tested on localhost
-    'social_core.backends.twitter.TwitterOAuth', #!need phone registation
+    'social_core.backends.twitter.TwitterOAuth', #! phone registered, tested on localhost, need privacy URL
     'social_core.backends.facebook.FacebookOAuth2',
-    'social_core.backends.reddit.RedditOAuth2', #need apply by reddit form
+    'social_core.backends.reddit.RedditOAuth2', #ok tested and deployed
 
     'django.contrib.auth.backends.ModelBackend',
 )

@@ -317,6 +317,30 @@ class NewsDetailView(generic.DetailView):
 		news = News.objects.get(newsid=self.kwargs.get('pk'))
 		news.count_details_view +=1
 		news.save()
+		#add banners 4
+		banners = Banner.objects.filter(status=True, place='4')
+		bannerlen=len(banners)
+		if bannerlen>0:
+			banner = banners[randint(1,bannerlen)-1]
+			print(banner.id, banner.status, banner.count_view, banner.image.url)
+			banner.count_view += 1
+			banner.save()
+		else:
+			banner=''
+			print('no active left banner')
+		context['banner_left']=banner
+		#add banners 5
+		banners = Banner.objects.filter(status=True, place='5')
+		bannerlen=len(banners)
+		if bannerlen>0:
+			banner = banners[randint(1,bannerlen)-1]
+			print(banner.id, banner.status, banner.count_view, banner.image.url)
+			banner.count_view += 1
+			banner.save()
+		else:
+			banner=''
+			print('no active right banner')
+		context['banner_right']=banner
 		return context
 
 class SourceListView(generic.ListView):

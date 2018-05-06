@@ -140,11 +140,16 @@ NANO ok
 home page and add news - coins symbol sorted
 favicon
 news details view counter
+
+02.05.2018:
+login and signup - added social auth with Reddit apps (for first time without email)
+
 SONM
 GVT - текст ниже
 Golem http://golem.slides.com/golem/deck-36-38-43-47-63#/
 ICON https://cryptocoinspy.com/blockchain-network-icon-icx-unveils-token-launch-platform/
 https://account.cryptics.tech 1 QRP = 0.66 $ (35% bonus) 1ETH = 1000 QRP
+Биржа Bitfinex добавила поддержку Stellar и Verge
 
 
 text for posts on tg:
@@ -181,6 +186,96 @@ it is time to buy BTCP?
 "Circle Adds Zcash to Crypto Investment App" added for proof https://yeenot.today/catalog/news/165
 Vote to show your and community opinion about this news!
 
+"Best privacy coin - Monero" added for Verification on YEENOT TODAY
+comparison chart of all privacy coins
+https://yeenot.today/catalog/news/166 
+Which maximize privacy, and which fall short? - message from CryptoIQ
+
+What your forecast about this amazing forecasting platform?
+"Milestone Reached: 100,000 Cindicator Analysts" added for Verification on YEENOT TODAY
+https://yeenot.today/catalog/news/169
+
+"Binance Lists Loom Network (LOOM)" added for Verification on YEENOT TODAY https://yeenot.today/catalog/news/172
+it is time price follow up?
+
+"Great news from COSS - FIAT Trading is finally here!"  added for Verification on YEENOT TODAY https://yeenot.today/catalog/news/173
+Add your vote for price follow.
+
+Three New Coins Traded on OpenLedger DEX: TRON (TRX), Wagerr (WGR) and NWTC
+added for Verification on YEENOT TODAY 
+https://yeenot.today/catalog/news/174
+
+News about "NYTimes: oldman Sachs to Open a Bitcoin Trading Operation"  added for proof https://yeenot.today/catalog/news/178
+it is a big moment for Bitcoin! All in!
+
+"Aeternity - sync faster!" - this is a good signal to buy AE now? Voting for this here https://yeenot.today/catalog/news/175 
+
+News about "NEO-based APEX Network (CPX) Partners “One Of The Largest Big Data Platforms in China” - added for Verification on YEENOT TODAY https://yeenot.today/catalog/news/176
+on what it will affect more - NEO or APEX ?
+
+City of Zion launch first software bounty  https://yeenot.today/catalog/news/177 
+The first bounty is a $50,000 reward for consensus improvements.
+are you ready to invest in NEO before new projects coming to platform?
+
+"Triffic ICO will be on Ardor platform" Added for voting on YEENOT TODAY https://yeenot.today/catalog/news/179
+it is good time to hold ARDR ?
+
+"Cryptopia Exchange lists LSK" added for proof on YEENOT TODAY https://yeenot.today/catalog/news/180
+it is time price follow up? How big traders community on Cryptopia?
+
+"NAGA partnership with ONT"  added for proof on YEENOT TODAY https://yeenot.today/catalog/news/182
+vote if you beleive it will boost and grow!
+NAGA: We believe that it will help to boost and grow our business exponentially.
+
+"Bitcoin Smart Banknotes Launched in Singapore" added for voting and proof on YEENOT TODAY https://yeenot.today/catalog/news/183
+No special infrastructure, no complicated applications – just touch the banknote with an NFC-capable smartphone to be 100% sure it has valid assets.
+
+
+"IOTA Trading on Huobi will be Postponed to 4 may" added for voting and proof on YEENOT TODAY https://yeenot.today/catalog/news/184
+big exchange and community. Price boost?
+2018-05-04 06:23:52
+IOTA which was originally scheduled to start trading at 16:00, May 4(GMT+8) will be postponed. Kindly do monitor the announcement page for updates on the new trading date and time. Sorry for the inconvenience may cause.
+
+"Tron (TRX) Main Net Launch Countdown: 31 may"  added for voting and proof on YEENOT TODAY https://yeenot.today/catalog/news/185
+are your ready for migration? what is your forecast opinion?
+
+"ADA Cardano - Roadmap Update"  added for voting and proof on YEENOT TODAY https://yeenot.today/catalog/news/186
+What feature must be real amazing? Smart Contracts testnets or Stakepool with 1500 apllication now?
+
+"TrafficJunky Accepting Verge Cryptocurrency as of May 7th" added for voting, proof and forecast on YEENOT TODAY https://yeenot.today/catalog/news/187
+Interested in Verge as a method of payment? 
+
+"Internet Node Token (INT) progress"  added for voting, proof and forecast on YEENOT TODAY https://yeenot.today/catalog/news/188
+in text form!!!
+
+"Golem Deep Dive - excellent work and vision from developers. From rendering to machine learning vefirication."
+added for voting and forecast on YEENOT TODAY https://yeenot.today/catalog/news/189
+summary:
+summary:
+There is much more to Golem than verification of broadly defined nondeterministic tasks, but this seems to be one of the most prominent challenges in a decentralized and trustless setting
+A detailed introduction to Monte Carlo rendering was presented to give you a better understanding of the problems one has to tackle when fully a decentralized infrastructure is to be prepared. As most of the issues are well known, applying them in a trustless decentralized setting requires additional thoughts in order to balance: quality, security, pricing, and efficiency
+Our approach to this challenge was presented and we shared a few ideas and directions we’re already exploring in regard to improving general network security without sacrificing too much efficiency
+A few approaches to verification of rendering tasks were shown along with the introduction of Concents, optional infrastructural component purposed with securing the network and allowing software developers to implement custom licensing logic
+Then Intel SGX technology was shown as a potentially good fit with regard to both nondeterministic verification and decentralization of Concent
+
+in other use-cases:
+Machine Learning
+Machine Learning - Verification
+Proof of Work
+
+Article "Daniel Larimer - Introducing EOSIO Dawn 4.0" added for voting, proof and forecast on YEENOT TODAY https://yeenot.today/catalog/news/191
+Daniel Larimer - EOSIO Dawn 4.0 - 10 features, xcluding merges, 43 authors have pushed 818 commits to github. Now is now Now !
+
+news about "Bitcoin Cash is the oldest cryptocurrency" added for voting, proof and forecast on YEENOT TODAY https://yeenot.today/catalog/news/192
+This service was just created for checking such messages. Make your choice!
+
+169 Cindicator - Milestone Reached: 100,000 Cindicator Analysts 
+175 Aeternity - sync faster! 
+172 Binance Lists Loom Network
+162 Vitalik: Sharding is coming
+157 IOTA on COBINHOOD 4 may
+136 WooCommerce REQ Plugin
+
 Crypto.IQ™
 Recommendation:
 Monero
@@ -189,11 +284,6 @@ All of the other coins have some aspect that falls short of what Monero offers a
 One thing to note is that, due to Monero’s comprehensive privacy protocol, there is a real possibility of governments looking to find a way to crack down on the coin.
 Its potential for use within illegal activity has attracted significant attention from the likes of the U.S. Government, so hedging your bet in this space with a pseudo-private alternative such as ZCash, Zcoin, or PIVX could be a good long-term strategy within the privacy sub-asset class. 
 Privacy coins have been a hot topic to start 2018, and we see them being major players in the ecosystem going forward. As always, we remind you that everyone should conduct their own due diligence whenever they invest in a crypto asset.
-
-"Best privacy coin - Monero" added for Verification on YEENOT TODAY
-comparison chart of all privacy coins
-https://yeenot.today/catalog/news/166 
-Which maximize privacy, and which fall short? - message from CryptoIQ
 
 https://www.reddit.com/r/CryptoCurrencyTrading
 Nanomate - service for sending NANO with all mesaging apps. 
