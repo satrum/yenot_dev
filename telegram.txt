@@ -144,6 +144,11 @@ news details view counter
 02.05.2018:
 login and signup - added social auth with Reddit apps (for first time without email)
 
+06.05.2018:
+login and signup - added social auth with Twitter apps (without email)
+news details - add left and right banner
+
+
 SONM
 GVT - текст ниже
 Golem http://golem.slides.com/golem/deck-36-38-43-47-63#/
@@ -268,6 +273,12 @@ Daniel Larimer - EOSIO Dawn 4.0 - 10 features, xcluding merges, 43 authors have 
 
 news about "Bitcoin Cash is the oldest cryptocurrency" added for voting, proof and forecast on YEENOT TODAY https://yeenot.today/catalog/news/192
 This service was just created for checking such messages. Make your choice!
+
+"XVG Listed on Bitbns - India’s Only Exchange to Trade 36 Digital Assets" added for voting, proof and forecast on YEENOT TODAY https://yeenot.today/catalog/news/193
+community must say - yes!
+
+"Gifto (GTO) Research Report & Price Predictions for 2018"  added for voting, proof and forecast on YEENOT TODAY https://yeenot.today/catalog/news/194
+fans say - to the moon. Lets check it!
 
 169 Cindicator - Milestone Reached: 100,000 Cindicator Analysts 
 175 Aeternity - sync faster! 

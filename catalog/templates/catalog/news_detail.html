@@ -3,7 +3,7 @@
 {% block content %}
 {% load static %}
 {% if banner_left %}
-<div class="adv_ban_ab"></div>
+<div class="adv_ban_ab"><a href="{% url 'banner-click' banner_left.pk %}" target="_blank"><img src = "{{ banner_left.image.url}}"></a></div>
 <div class="log_in_p_add">
 {% else %}
 <div class="log_in_p_add_2">
@@ -76,7 +76,7 @@
 {% endif %}
 </div>
 {% if banner_right %}
-<div class="adv_ban_ab"></div>
+<div class="adv_ban_ab"><a href="{% url 'banner-click' banner_right.pk %}" target="_blank"><img src = "{{ banner_right.image.url}}"></a></div>
 {% else%}
 {% endif %}
 <script type="text/javascript">

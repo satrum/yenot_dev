@@ -84,6 +84,7 @@ class UserProfileAdmin(admin.ModelAdmin):
 @admin.register(Banner)
 class BannerAdmin(admin.ModelAdmin):
     list_display = ('id', 'title', 'text', 'link', 'count_view', 'count_click', 'status', 'image', 'place')
+    list_filter = ('status', 'place')
 
 
 @admin.register(Coin)

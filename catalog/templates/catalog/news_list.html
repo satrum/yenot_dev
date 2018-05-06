@@ -24,7 +24,7 @@
 {% endif %}
  <div class="table_filter">
   <div class="tab_front">
-<div class="table_btn_promo tab_fil">{% if banner_left %}<a href="{% url 'banner-click' banner_right.pk %}" target="_blank"><img src = "{{ banner_right.image.url}}"></a>{% endif %}</div>
+<div class="table_btn_promo tab_fil">{% if banner_left %}<a href="{% url 'banner-click' banner_left.pk %}" target="_blank"><img src = "{{ banner_left.image.url}}"></a>{% endif %}</div>
   <div class="table_filter_Search tab_fil">
   <p class="ns_top_text">Here you can see the TOP of news by their rating  and filter by period you needs:</p>
 		<ul class="fil_ns_top_ul">
