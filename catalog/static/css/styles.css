@@ -2,7 +2,7 @@ body{
 	    background: url(/static/images/Yeenot_gl_2.png) 15% 29% fixed;
 		background-size: cover;
 }
-p, h1, h2, h3, h4, li, button, ol, a, option, input, td, th, select, label{
+p, h1, h2, h3, h4, li, button, ol, a, a:visited, option, input, td, th, select, label{
 	font-family: 'Montserrat', sans-serif;
 	color:white;
 	font-weight:900;
@@ -440,9 +440,19 @@ width: 0px;
     padding: 25px;
     box-shadow: 1px 1px 10px 1px #82c345;
 }
-.log_in_p_add{
+.log_in_p_add {
+    margin: 40px auto 30%;
+    width: 55%;
+    text-align: left;
+    background: #43650a70;
+    padding: 25px;
+    box-shadow: 1px 1px 10px 1px #82c345;
+    display: inline-block;
+    vertical-align: middle;
+}
+.log_in_p_add_2{
 	margin: 40px auto 30%;
-    width: 700px;
+    width: 55%;
     text-align: left;
     background: #43650a70;
     padding: 25px;
@@ -464,7 +474,7 @@ width: 0px;
     border: 2px solid #4ea60a;
     height: 40px;
     box-shadow: 1px 2px 21px -1px #9ad33c;
-    background: #3b520b61;
+    background: transparent;
     padding: 2px 8px;
 }
 #id_password{
@@ -472,7 +482,7 @@ width: 0px;
     border: 2px solid #4ea60a;
     height: 40px;
     box-shadow: 1px 2px 21px -1px #9ad33c;
-    background: #3b520b61;
+    background: transparent;
     padding: 2px 8px;
 }
 #id_email{
@@ -480,7 +490,7 @@ width: 0px;
     border: 2px solid #4ea60a;
     height: 40px;
     box-shadow: 1px 2px 21px -1px #9ad33c;
-    background: #3b520b61;
+    background: transparent;
     padding: 2px 8px;
 }
 #id_new_password1{
@@ -488,7 +498,7 @@ width: 0px;
     border: 2px solid #4ea60a;
     height: 40px;
     box-shadow: 1px 2px 21px -1px #9ad33c;
-    background: #3b520b61;
+    background: transparent;
     padding: 2px 8px;
 }
 #id_password1{
@@ -496,7 +506,7 @@ width: 0px;
     border: 2px solid #4ea60a;
     height: 40px;
     box-shadow: 1px 2px 21px -1px #9ad33c;
-    background: #3b520b61;
+    background: transparent;
     padding: 2px 8px;
 }
 #id_password2{
@@ -504,7 +514,7 @@ width: 0px;
     border: 2px solid #4ea60a;
     height: 40px;
     box-shadow: 1px 2px 21px -1px #9ad33c;
-    background: #3b520b61;
+    background: transparent;
     padding: 2px 8px;
 }
 #id_new_password2{
@@ -512,7 +522,7 @@ width: 0px;
     border: 2px solid #4ea60a;
     height: 40px;
     box-shadow: 1px 2px 21px -1px #9ad33c;
-    background: #3b520b61;
+    background: transparent;
     padding: 2px 8px;
 }
 
@@ -521,7 +531,7 @@ width: 0px;
     border: 2px solid #4ea60a;
     height: 40px;
     box-shadow: 1px 2px 21px -1px #9ad33c;
-    background: #3b520b61;
+    background: transparent;
     padding: 2px 8px;
 }
 
@@ -626,11 +636,7 @@ background: #64d90b -20px 6px no-repeat;
 
 	
 }
-.sel_fil{
-    background: #48a22b17;
-    border: 1px solid #a0b987;	
-	    padding: 4px 0px;
-}
+
 
 
 #datepicker {
@@ -641,12 +647,7 @@ padding: 0px;
 option, selected{
 	    background: #234700;
 }
-.fr{
-	border: 1px solid #a0b987;
-    padding: 2px;
-    vertical-align: bottom;
-    height: 30px;
-}
+
 .mm{
 	border:0px;
 	background:transparent;
@@ -677,16 +678,12 @@ div.datepicker{
     text-align: center;
     padding: 10px;
 }
-.sel_fil:hover{
-    background: #48a22b17;
-    border: 1px solid #a0b987;	
-	    padding: 4px 0px;
-}
+
 .log_sub{
 	    width: 100px;
     height: 32px;
     box-shadow: 1px 2px 21px -1px #9ad33c;
-    background: #3b520b61;
+    background: transparent;
     border: 2px solid #4ea60a;
     margin: 8% 0px;
 }
@@ -694,7 +691,7 @@ div.datepicker{
 	width: 134px;
     height: 32px;
     box-shadow: 1px 2px 21px -1px #9ad33c;
-    background: #3b520b61;
+    background: transparent;
     border: 2px solid #4ea60a;
     margin: 4% 0px;
     font-size: 1.0em;
@@ -703,7 +700,7 @@ div.datepicker{
 	width: 178px;
     height: 32px;
     box-shadow: 1px 2px 21px -1px #9ad33c;
-    background: #3b520b61;
+    background: transparent;
     border: 2px solid #4ea60a;
     margin: 4% 0px;
     font-size: 1.0em;
@@ -712,7 +709,7 @@ div.datepicker{
     width: 100px;
     height: 32px;
     box-shadow: 1px 2px 21px -1px #9ad33c;
-    background: #3b520b61;
+    background: transparent;
     border: 2px solid #4ea60a;
     margin: 8% auto;
     display: block;
@@ -934,6 +931,30 @@ display: inline-block;
 padding: 0px 2px 5px;
 }
 .reddit p{
+display: inline-block;
+font-size: 19px;
+
+}
+.twitter{
+	background:#52c4fa;
+	margin: 10px auto;
+	border: 1px solid ghostwhite;
+	width: 345px;
+	height:47px;
+}
+.twitter:hover, .twitter:active{
+	background:#52c4fa;
+	margin: 10px auto;
+	border: 1px solid ghostwhite;
+	width: 345px;
+	height:47px;
+}
+.twitter img{
+width: 50px;
+display: inline-block;
+padding: 0px 2px 5px;
+}
+.twitter p{
 display: inline-block;
 font-size: 19px;
 
@@ -1201,12 +1222,13 @@ display: inline-block;
     text-align: center;
     width: 45%;
 }
+
 .banner_content p{
- margin:5% 0 0px;
+ margin:12% auto 0px;
 }
 .banner_content h1{
- margin: 3px;
- font-size: 2.25em;
+ margin: 6% auto;
+ font-size: 3.25em;
 }
 .banner_img{
 	    max-width: 50%;
@@ -1219,6 +1241,7 @@ display: inline-block;
 .banner_img img{
  max-width: 100%;	
 max-height:300px;
+    border: 1px solid ghostwhite;
 }
 .banner_btn{
 cursor: pointer;
@@ -1348,11 +1371,41 @@ footer{
 	    background: #447b07d9;
     border: 1px solid #a0b987;
 }
-@media (min-width: 320px) {
+.adv_ban_ab{
+	    border: 1px solid ghostwhite;
+    width: 240px;
+    height: 400px;
+    display: inline-block;
+    vertical-align: top;
+    margin: 40px 23px;
+}
+.fl{
+	    display: inline-block;
+
+}
+.logout{
+    padding: 5px 6px;
+    background: #5a9f0821;
+    box-shadow: 2px 1px 38px 4px rgba(67, 168, 65, 0.41);
+    border: 1px solid #2b4313;
+    display: inline-block;
+    vertical-align: middle; 
+}
+@media (max-width: 1199px) {
 	.type_points_2 h3 {
     margin: 0px 0px 0px 0px;
     text-align: center;
     width: 123px;
+}
+.log_in_p_add {
+    margin: 40px auto 30%;
+    width: 51%;
+    text-align: left;
+    background: #43650a70;
+    padding: 25px;
+    box-shadow: 1px 1px 10px 1px #82c345;
+    display: inline-block;
+    vertical-align: middle;
 }
 .type_points h3 {
     margin: 0px -1px 0px 0px;
@@ -1385,12 +1438,12 @@ footer {
     position: relative;
     top: 0px;
     background: url(/static/images/Yeenot_gl.png) 29% 7%;
-    min-width: 880px;
+    width: 100%;
 }
 .banner{
 	border: 1px solid #a0b987;
     margin: 20px auto;
-    width: 95%;
+    width: 70%;
 	background: #1b2d0cb0;
 }
 .signup{
@@ -1401,32 +1454,25 @@ footer {
 	cursor:pointer;
 }
 .sidebar-nav {
-    margin-top: 6px;
+    margin-top: 15px;
     display: inline-block;
     list-style: none;
 }
 .menu_main{
     padding: 5px 5px;
     background: #5a9f0842;
-    margin: 0px 13px 0px 0px;
+    margin: 0px 22px 0px 0px;
     width: 120px;
     text-align: center;
 	position: relative;
 	box-shadow: 2px 1px 38px 4px rgba(67, 168, 65, 0.41);
 }
 
-.logout{
-    padding: 5px 6px;
-    background: #5a9f0821;
-    box-shadow: 2px 1px 38px 4px rgba(67, 168, 65, 0.41);
-    border: 1px solid #2b4313;
-    display: inline-block;
-    vertical-align: middle; 
-}
+
 body {
     background: url(/static/images/Yeenot_gl_2.png) 15% 29% ;
     background-size: cover;
-    min-width: 980px;
+    min-width: 1199px;
 	max-width:100%;
 }
 footer a, footer a:hover, footer a:active{
@@ -1435,18 +1481,36 @@ footer a, footer a:hover, footer a:active{
     padding: 8px;
 }
 
-.right_banner_float{
-    margin: -85px 0px 0px 502px;
-    position: absolute;	
-}
-.table_filter_Search {
-    padding: 0px 12px;
-    display: block;
-}
-.cr{
-	    margin: -2px 12px 5px;
-}
 
+.table_filter_Search {
+    padding: 0px 19px;
+    display: inline-block;
+    width: 48%;
+    text-align: center;
+    margin: auto 4.5%;
+}
+.sel_fil {
+    background: #48a22b17;
+    border: 1px solid #a0b987;
+    padding: 3px 0px;
+    text-align: center;
+    margin: 4px 3px;
+}
+.sel_fil:hover {
+    background: #48a22b17;
+    border: 1px solid #a0b987;
+    padding: 3px 0px;
+    text-align: center;
+    margin: 4px 3px;
+}
+.fr {
+    border: 1px solid #a0b987;
+    padding: 1px;
+    vertical-align: bottom;
+    height: 28px;
+    text-align: center;
+    margin: 4px 3px;
+}
 .menu {
     width: 100%;
     border-bottom: 1px solid #a0b987;
@@ -1458,7 +1522,7 @@ footer a, footer a:hover, footer a:active{
     background: transparent;
     padding: 7px 7px;
     margin: auto;
-    width: 880px;
+    width: 100%;
 }
 .prof_inf{
 	display:inline-block;
@@ -1493,20 +1557,13 @@ width: 70%;
 	
 }
 
-.banner_content p{
- margin:12% auto 0px;
-}
-.banner_content h1{
- margin: 6% auto;
- font-size: 3.25em;
-}
+
 .col-sm-1, .col-sm-10, .col-sm-11, .col-sm-12, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9 {
 float: none;
 padding: 0px;
 }
-
 }
-@media (min-width: 1310px) {
+@media (min-width: 1200px) {
 .col-sm-1, .col-sm-10, .col-sm-11, .col-sm-12, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9 {
 float: none;
 padding: 0px;
@@ -1533,7 +1590,7 @@ footer a, footer a:hover, footer a:active{
 }
 .tab_front{
 	    background: #1b2d0cb0;
-    padding: 7px 7px;
+    padding: 5px 7px;
 	    margin: 0px;
     width: 100%;
 }
@@ -1557,7 +1614,7 @@ position: absolute;
 
 .right_banner{
     float: right;
-    margin: 7px 0px 0px;
+    margin: 5px 0px 0px;
 }
 
 .ns_top_text {
@@ -1576,11 +1633,6 @@ position: absolute;
         margin: -7px 5% 0px 30px;
 }
 
-
-
-
-
-
 footer{
     border-bottom: 0px;
     margin: 5px 0px 0px;
@@ -1590,10 +1642,6 @@ footer{
 }
 
 
-.fl{
-	    display: inline-block;
-
-}
 
 body{
 	    background: url(/static/images/Yeenot_gl_2.png) 15% 29% fixed;
@@ -1730,9 +1778,6 @@ body{
 	}
 
 
-
-
-
 .signup{
 	padding: 2px 21px;
     background: #5a9f0821;
@@ -1798,6 +1843,9 @@ body{
 
 .linetop{
 	width: 74%;
+	    vertical-align: middle;
+    text-align: center;
+	padding: 0px;
 }
 .banner{
 	border: 1px solid #a0b987;
@@ -1824,9 +1872,6 @@ body{
     padding-right: 9%;
 }
 
-
-
-
 .logo{
 	    padding: 0px;
 	    border: 1px solid #a0b987;
@@ -1840,7 +1885,22 @@ body{
     position: relative;
     margin: auto;
 	}
-
+.sel_fil{
+    background: #48a22b17;
+    border: 1px solid #a0b987;	
+	    padding: 4px 0px;
+}
+.sel_fil:hover{
+    background: #48a22b17;
+    border: 1px solid #a0b987;	
+	    padding: 4px 0px;
+}
+.fr{
+	border: 1px solid #a0b987;
+    padding: 2px;
+    vertical-align: bottom;
+    height: 30px;
+}
 	}
 
 @media (min-width: 1500px){

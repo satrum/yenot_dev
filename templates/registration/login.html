@@ -19,7 +19,7 @@
 <!-- <a href="{% url 'social:begin' 'github' %}">Login with GitHub</a><br> -->
 <a href="{% url 'social:begin' 'reddit' %}?next={% url 'index' %}" ><div class="reddit"><img src="{% static '/images/Reddit.png'%}"><p>Login with Reddit</p></div></a>
 
-<a href="{% url 'social:begin' 'twitter' %}?next={% url 'index' %}"><div class="reddit"><img src="{% static '/images/twitter.png'%}"><p>Login with Twitter</p></div></a>
+<a href="{% url 'social:begin' 'twitter' %}?next={% url 'index' %}"><div class="twitter"><img src="{% static '/images/twitter.png'%}"><p>Login with Twitter</p></div></a>
 
 <form method="post" action="{% url 'login' %}">
 {% csrf_token %}

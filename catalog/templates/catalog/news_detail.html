@@ -2,7 +2,13 @@
 
 {% block content %}
 {% load static %}
+{% if banner_left %}
+<div class="adv_ban_ab"></div>
 <div class="log_in_p_add">
+{% else %}
+<div class="log_in_p_add_2">
+{% endif %}
+
 <h1 style="text-align:center;">{{ news.title }}</h1>
 <p style="text-align:center;"><strong>Author:</strong>
 {% if news.user.first_name %}
@@ -69,6 +75,10 @@
 	<img src="{{ news.proof_image.url }}" style="width: 100%;">
 {% endif %}
 </div>
+{% if banner_right %}
+<div class="adv_ban_ab"></div>
+{% else%}
+{% endif %}
 <script type="text/javascript">
 function like(elem){
 console.log('clicked like');
