@@ -1601,7 +1601,7 @@ display:inline-block;
 .table_filter{
 border: 1px solid #a0b987;
 margin:auto;
-position: absolute;
+position: relative;
   position: sticky;
   top: 0px;
     background: url(/static/images/Yeenot_gl.png) 29% 7% fixed;
