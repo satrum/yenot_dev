@@ -63,13 +63,7 @@
 
     {% if allnews %}
 <!-- need move to css -->
-<style>
-.header{
-	    background: #010500f5;
-    text-align: center;
-    padding: 10px;
-}
-</style>
+
 	<table id="user_list">
 	<thead>
 	<tr>
@@ -90,7 +84,7 @@ CREATED TIME
 	
 	{% for news in allnews %}
 	{% if news.promo_status == 'y' %}<tr style="font-weight:bold" class="infinite-item tab_pro" >{% else %}<tr class="infinite-item tab_fon">{% endif %} 
-		<td class="td_pd" style="width: 10%;">
+		<td class="td_pd" 	style="width: 10%;">
 		<img src="{{news.coinid.image.url}}" style="border-radius: 100%; width: 77px;padding-top: 6px;">
 		<h3>{{news.coinid}}</h3>
         <p class="price_change">{{news.coinid.price|floatformat:3}}$
