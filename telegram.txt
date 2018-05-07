@@ -153,9 +153,8 @@ SONM
 GVT - текст ниже
 Golem http://golem.slides.com/golem/deck-36-38-43-47-63#/
 ICON https://cryptocoinspy.com/blockchain-network-icon-icx-unveils-token-launch-platform/
-https://account.cryptics.tech 1 QRP = 0.66 $ (35% bonus) 1ETH = 1000 QRP
+https://account.cryptics.tech 1 QRP = 0.66 $ (35% bonus whitelist 9 may) 1ETH = 1000 QRP
 Биржа Bitfinex добавила поддержку Stellar и Verge
-
 
 text for posts on tg:
 This is TRUE of FAKE signal to buy NEO now? https://yeenot.today/catalog/news/110
@@ -281,6 +280,14 @@ community must say - yes!
 fans say - to the moon. Lets check it!
 
 "Exclusive Interview with Blockport, the First Social Cryptocurrency Exchange" added for voting, proof and forecast on YEENOT TODAY https://yeenot.today/catalog/news/195
+close contact with the AFM (Authority Financial Markets) and DNB (The Dutch Central Bank) to anticipate any changes related to the upcoming regulations.
+ARK shares our vision of making blockchain and thereby cryptocurrencies accessible for everyone.
+ARK is working on ACES, which is a community project that is creating cross-chain operability protocols. This means that you will be able to transfer value across different blockchains. 
+The ACES project could provide us with the ability to react to transactions on a variety of blockchains by exposing an API that allows us to efficiently listen to (transaction) events. 
+Although Blockport is based in Amsterdam, cryptocurrencies are cross-border and so are we. This means that we first start with focusing on the European market since there is less competition and the European market needs a proper Euro-to-crypto exchange.
+Also, we are most familiar with the regulatory environment in Europe. After we have established ourselves in the European market, we will be targeting other parts of the world as well. We have a lot of people from the U.S. and Asia in our community, and we see a huge demand coming from those parts of the world as well. 
+release of Blockport’s closed Beta
+
 
 169 Cindicator - Milestone Reached: 100,000 Cindicator Analysts 
 175 Aeternity - sync faster! 
