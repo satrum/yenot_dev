@@ -42,7 +42,12 @@ li{
 	padding: 1px;
     border-left: 1px solid #a0b987;
 }
-.back a, a:hover, a:active{
+.back a{
+
+	display:inline-block;
+	vertical-align:middle;
+}
+.back a:hover{
 
 	display:inline-block;
 	vertical-align:middle;
