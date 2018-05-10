@@ -18,6 +18,39 @@ hr {
 li{
 	display:inline-block;
 }
+.betok{
+	    border: 1px solid #a0b987;
+    text-align: center;
+    background: rgba(27, 45, 12, 0.69);
+    border-bottom: 0px;
+}
+.betok2{
+	display:inline-block;
+	vertical-align:middle;
+	width: 81%;
+}
+.betok2 h4{
+	    margin: 0px;
+    padding: 1px;
+
+	font-size: 1.5em;
+}
+
+.back{
+		display:inline-block;
+	vertical-align:middle;
+	padding: 1px;
+    border-left: 1px solid #a0b987;
+}
+.back a, a:hover, a:active{
+
+	display:inline-block;
+	vertical-align:middle;
+}
+.back img{
+width: 43px;
+    padding: 5px;
+	}
 .rab {
     display: inline-block;
     padding: 2px 16px 0px 14px;
@@ -1228,6 +1261,7 @@ padding: 5px 11px;
     padding-right: 6px;
     box-shadow: 2px 1px 73px 4px rgba(67, 168, 65, 0.41);
 }
+
 .round{
 display: inline-block;
     width: 24px;
