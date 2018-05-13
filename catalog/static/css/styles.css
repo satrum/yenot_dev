@@ -1440,10 +1440,17 @@ footer{
     border: 1px solid #a0b987;
 }
 .adv_ban_ab{
-	    border: 1px solid ghostwhite;
     display: inline-block;
     vertical-align: top;
-    margin: 40px 23px;
+    margin: 40px 5px;
+}
+.adv_ban_ab_1 img{
+	    border: 1px solid ghostwhite;
+		
+}
+.adv_ban_ab_1{
+	text-align: center;
+	margin-bottom:10px;
 }
 .fl{
 	    display: inline-block;

@@ -3,7 +3,15 @@
 {% block content %}
 {% load static %}
 {% if banner_left %}
-<div class="adv_ban_ab"><a href="{% url 'banner-click' banner_left.pk %}" target="_blank"><img src = "{{ banner_left.image.url}}"></a></div>
+<div class="adv_ban_ab">
+<div class="adv_ban_ab_1">
+<a href="{% url 'banner-click' banner_left.pk %}" target="_blank"><img src = "{{ banner_left.image.url}}"></a>
+</div>
+<div>
+<ins class="bmadblock-5af7bf8803793f0010468c47" style="display:inline-block;width:300px;height:250px;"></ins>
+<script async type="application/javascript" src="//ad.bitmedia.io/js/adbybm.js/5af7bf8803793f0010468c47"></script>
+</div>
+</div>
 <div class="log_in_p_add">
 {% else %}
 <div class="log_in_p_add_2">
@@ -76,7 +84,15 @@
 {% endif %}
 </div>
 {% if banner_right %}
-<div class="adv_ban_ab"><a href="{% url 'banner-click' banner_right.pk %}" target="_blank"><img src = "{{ banner_right.image.url}}"></a></div>
+<div class="adv_ban_ab">
+<div class="adv_ban_ab_1">
+<a href="{% url 'banner-click' banner_right.pk %}" target="_blank"><img src = "{{ banner_right.image.url}}"></a>
+</div>
+<div>
+<ins class="bmadblock-5af7c6e303793f0010468d03" style="display:inline-block;width:300px;height:250px;"></ins>
+<script async type="application/javascript" src="//ad.bitmedia.io/js/adbybm.js/5af7c6e303793f0010468d03"></script>
+</div>
+</div>
 {% else%}
 {% endif %}
 <script type="text/javascript">
