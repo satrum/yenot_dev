@@ -508,7 +508,7 @@ width: 0px;
     box-shadow: 1px 1px 10px 1px #82c345;
 }
 .log_in_p_add {
-    margin: 40px auto 30%;
+    margin: 10px auto 30%;
     width: 50%;
     text-align: left;
     background: rgba(67, 101, 10, 0.44);
@@ -518,7 +518,7 @@ width: 0px;
     vertical-align: middle;
 }
 .log_in_p_add_2{
-	margin: 40px auto 30%;
+	margin: 10px auto 30%;
     width: 55%;
     text-align: left;
     background: rgba(67, 101, 10, 0.44);
@@ -1442,7 +1442,7 @@ footer{
 .adv_ban_ab{
     display: inline-block;
     vertical-align: top;
-    margin: 40px 5px;
+    margin: 10px 5px;
 }
 .adv_ban_ab_1 img{
 	    border: 1px solid ghostwhite;
@@ -1469,6 +1469,12 @@ footer{
     background: rgba(39, 64, 11, 0.49);
     border: 2px solid #315304;
 }
+.line_ban{
+	display: block;
+    width: 728px;
+    height: 90px;
+    margin: 10px auto;
+}
 @media (max-width: 1199px) {
 	.type_points_2 h3 {
     margin: 0px 0px 0px 0px;
@@ -1476,7 +1482,7 @@ footer{
     width: 123px;
 }
 .log_in_p_add {
-    margin: 40px auto 30%;
+    margin: 10px auto 30%;
     width: 47%;
     text-align: left;
     background: #43650a70;

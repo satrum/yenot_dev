@@ -2,6 +2,10 @@
 
 {% block content %}
 {% load static %}
+<div class="line_ban">
+<ins class="bmadblock-5af7cec203793f0010468dde" style="display:inline-block;width:728px;height:90px;"></ins>
+<script async type="application/javascript" src="//ad.bitmedia.io/js/adbybm.js/5af7cec203793f0010468dde"></script>
+</div>
 {% if banner_left %}
 <div class="adv_ban_ab">
 <div class="adv_ban_ab_1">
@@ -83,10 +87,12 @@
 	<img src="{{ news.proof_image.url }}" style="width: 100%;">
 {% endif %}
 </div>
+
 {% if banner_right %}
 <div class="adv_ban_ab">
 <div class="adv_ban_ab_1">
 <a href="{% url 'banner-click' banner_right.pk %}" target="_blank"><img src = "{{ banner_right.image.url}}"></a>
+
 </div>
 <div>
 <ins class="bmadblock-5af7c6e303793f0010468d03" style="display:inline-block;width:300px;height:250px;"></ins>
