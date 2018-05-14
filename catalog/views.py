@@ -181,23 +181,23 @@ def topusers(request, template='topusers.html'):
 	#achivements images
 	#sum stats about all yeenot points
 	#list top:
-	profiles = Profile.objects.filter(rank__gt=0).order_by('rank')
+	profiles = Profile.objects.filter(rank__gt=0).order_by('rank')[0:20]
 	for profile in profiles:
 		profile.name = profile.user.first_name
 		profile.news_count = News.objects.filter(user=profile.user).count()
 		if profile.name=='':
 			profile.name = profile.user
-		print(profile.rank, profile.sum_positive, profile.sum_likes, profile.sum_dislikes, profile.news_count, profile.point, profile.name)
+		#print(profile.rank, profile.sum_positive, profile.sum_likes, profile.sum_dislikes, profile.news_count, profile.point, profile.name)
 		#rank, positive vote rate, likes, dislikes, news_count, points, name
 	#user place:
 	if request.user.is_authenticated:
 		userprofile=request.user.profile
 		userprofile.name = profile.user.first_name
-		userprofile.news_count = News.objects.filter(user=profile.user).count()
+		userprofile.news_count = News.objects.filter(user=request.user).count()
 		if userprofile.name=='':
 			userprofile.name = userprofile.user
-		print('---------------')
-		print(userprofile.rank, userprofile.sum_positive, userprofile.sum_likes, userprofile.sum_dislikes, userprofile.news_count, userprofile.point, userprofile.name)
+		#print('---------------')
+		#print(userprofile.rank, userprofile.sum_positive, userprofile.sum_likes, userprofile.sum_dislikes, userprofile.news_count, userprofile.point, userprofile.name)
 		context={'profiles':profiles, 'userprofile':userprofile}
 		return render(request, template, context)
 	else:
