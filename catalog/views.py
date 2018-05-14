@@ -4,7 +4,7 @@ from django.template import RequestContext
 # Create your views here.
 ##from .models import Book, Author, BookInstance, Genre
 
-from .models import News, Source, Banner, Coin, YeenotSettings
+from .models import News, Source, Banner, Coin, YeenotSettings, Profile
 from random import randint
 from django.contrib.auth.models import User
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
@@ -172,6 +172,37 @@ def profile(request, template='profile.html'):
 		return render(request, template, context)
 	else:
 		return redirect('index')
+	
+def topusers(request, template='topusers.html'):
+	#!!!! need: 
+	#days on site, 
+	#check bio to remove yeenot in test1 rate_users
+	#change point calc with news_count
+	#achivements images
+	#sum stats about all yeenot points
+	#list top:
+	profiles = Profile.objects.filter(rank__gt=0).order_by('rank')
+	for profile in profiles:
+		profile.name = profile.user.first_name
+		profile.news_count = News.objects.filter(user=profile.user).count()
+		if profile.name=='':
+			profile.name = profile.user
+		print(profile.rank, profile.sum_positive, profile.sum_likes, profile.sum_dislikes, profile.news_count, profile.point, profile.name)
+		#rank, positive vote rate, likes, dislikes, news_count, points, name
+	#user place:
+	if request.user.is_authenticated:
+		userprofile=request.user.profile
+		userprofile.name = profile.user.first_name
+		userprofile.news_count = News.objects.filter(user=profile.user).count()
+		if userprofile.name=='':
+			userprofile.name = userprofile.user
+		print('---------------')
+		print(userprofile.rank, userprofile.sum_positive, userprofile.sum_likes, userprofile.sum_dislikes, userprofile.news_count, userprofile.point, userprofile.name)
+		context={'profiles':profiles, 'userprofile':userprofile}
+		return render(request, template, context)
+	else:
+		context={'profiles':profiles}
+		return render(request, template, context)
 	
 from django.views import generic
 

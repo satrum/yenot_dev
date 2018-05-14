@@ -1,0 +1,50 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+    <h1>LEADERBOARD</h1>
+
+    {% if profiles %}
+<!-- need move to css -->
+<style>
+tr,td {border:1px solid black;}
+</style>
+
+	<table>
+	<tr>
+		<td>RANK</td>
+		<td>NAME</td>
+		<td>POINTS</td>
+		<td>NEWS</td>
+		<td>LIKES</td>
+		<td>DISLIKES</td>
+		<td>VOTE RATING</td>
+	</tr>
+	{% if user.is_authenticated %}
+	<tr>
+	 	<td>{{userprofile.rank}}</td>
+		<td>{{userprofile.name}}</td>
+		<td>{{userprofile.point}}</td>
+		<td>{{userprofile.news_count}}</td>
+		<td>{{userprofile.sum_likes}}</td>
+		<td>{{userprofile.sum_dislikes}}</td>
+		<td>{{userprofile.sum_positive}}</td>
+	</tr>
+	{% endif %}
+	
+	{% for profile in profiles %}
+	<tr>		
+		<td>{{profile.rank}}</td>
+		<td>{{profile.name}}</td>
+		<td>{{profile.point}}</td>
+		<td>{{profile.news_count}}</td>
+		<td>{{profile.sum_likes}}</td>
+		<td>{{profile.sum_dislikes}}</td>
+		<td>{{profile.sum_positive}}</td>
+	</tr>
+	{% endfor %}
+	</table>
+    {% else %}
+      <p>There are no ranked users.</p>
+    {% endif %}       
+
+{% endblock %}

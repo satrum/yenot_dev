@@ -164,6 +164,11 @@ https://medium.com/@asuracoin/asura-coin-competitors-analysis-a47cf6717ba4 asura
 QSP 11.05.2018 crypto.iq
 ink https://www.reddit.com/r/PayWithInk/comments/8iielx/ink_protocol_xnk_a_hidden_gem_for_q2_2018/
 
+consensus:
+OAK
+https://essentia.one - Sale will begin 7th June 2018
+
+
 ok submit form https://twitter.com/Crowd_indicator - Symbiotic Network: The Beginning - 8 may
 
 https://t.me/coindar_feed_ru
@@ -376,27 +381,76 @@ Do we need stats about nodes and power of decentralization ?
 "Stratis ICO Platform Release" added for voting, proof and forecast on YEENOT TODAY https://yeenot.today/catalog/news/224
 big new for ICO issuers and contributors ?
 
-"PIVX Introducing: zStaking"  added for voting, proof and forecast on YEENOT TODAY https://yeenot.today/catalog/news/225
+-"PIVX Introducing: zStaking"  added for voting, proof and forecast on YEENOT TODAY https://yeenot.today/catalog/news/225
 does it help to increase decentralization of PIVX ?
 
-"MATRIX AI - member of UCCO"  added for voting, proof and forecast on YEENOT TODAY https://yeenot.today/catalog/news/226
+-"MATRIX AI - member of UCCO"  added for voting, proof and forecast on YEENOT TODAY https://yeenot.today/catalog/news/226
 The Universal Connectivity and Consensus Organization launched this week with founding members:
 SmartMesh, MeshBox, RSK, Dcntral, Mesh++, Stealth Grid, MATRIX.
 What is the main impact of this partnership?
 
-Article about "Launching an ICO Token on Ethereum in Less 30 min" added for voting, proof and forecast on YEENOT TODAY https://yeenot.today/catalog/news/227
+-Article about "Launching an ICO Token on Ethereum in Less 30 min" added for voting, proof and forecast on YEENOT TODAY https://yeenot.today/catalog/news/227
 So before investing in an ICO do some research on the project. What do you think about launching an ERC-20 in less than thirty minutes?
 
-info about "Syscoin 3.0" added for voting, proof and forecast on YEENOT TODAY https://yeenot.today/catalog/news/228
+-info about "Syscoin 3.0" added for voting, proof and forecast on YEENOT TODAY https://yeenot.today/catalog/news/228
 what you think about trade some consistency for some availability in Z-DAG ?
 
-"uk trading platform Crypto Facilities launches Ethereum Futures" added for voting, proof and forecast on YEENOT TODAY https://yeenot.today/catalog/news/229
+-"uk trading platform Crypto Facilities launches Ethereum Futures" added for voting, proof and forecast on YEENOT TODAY https://yeenot.today/catalog/news/229
 more liquidity for ETH !
 
-"Numerai recently locked up 3 million NMR for 10 years" added for voting, proof and forecast on YEENOT TODAY https://yeenot.today/catalog/news/230
+-"Numerai recently locked up 3 million NMR for 10 years" added for voting, proof and forecast on YEENOT TODAY https://yeenot.today/catalog/news/230
 Are NMR is one of the most used utility tokens ? What about impact about this decition?
 
+-"Substratum Node - proof that the sub is uncensoring the internet" added for voting, proof and forecast on YEENOT TODAY https://yeenot.today/catalog/news/231
+Substratum releases Early Open Beta. are you testing beta? What do you think about speed and web availability ?
 
+-"Trinity to unlock the Asian Market in China and beyond" added for voting, proof and forecast on YEENOT TODAY https://yeenot.today/catalog/news/232
+what about adoption with Alibaba and Tencent ?
+
+"Pundi X（NPXS）listed on Hotbit" added for voting, proof and forecast on YEENOT TODAY https://yeenot.today/catalog/news/233
+what you think about investment in Pundi now?
+
+"Ethereum Commonwealth is hiring Solidity smart-contract security auditors" added for voting, proof and forecast on YEENOT TODAY https://yeenot.today/catalog/news/234
+more security for ETC. Is it good for community?
+
+"TE-FOOD improve farms with deep data analysis and suggestions"  added for voting, proof and forecast on YEENOT TODAY https://yeenot.today/catalog/news/235
+6000+ business customers, 400000+ transactions per day, 34M people served.
+
+"John McAfee: Bitcoin Private most secure fork of Bitcoin" added for voting, proof and forecast on YEENOT TODAY https://yeenot.today/catalog/news/236
+good for BTCP ?
+
+"Visionz Capital research: if market is efficient, Elastos will be on the top-10 list"  added for voting, proof and forecast on YEENOT TODAY https://yeenot.today/catalog/news/237
+what you think about 5 catalysts in report?
+
+"Official Announcement of OCN Chain and its official payment token OCP"  added for voting, proof and forecast on YEENOT TODAY https://yeenot.today/catalog/news/238
+this is not what we all expected?
+
+"Zebpay announce TRX/XRP pair for trade"  added for voting, proof and forecast on YEENOT TODAY https://yeenot.today/catalog/news/239
+first XRP pair? 
+
+"Enjin Coin to be listed on Kyber Network" added for voting, proof and forecast on YEENOT TODAY https://yeenot.today/catalog/news/240
+good cross-promo. What do you think?
+
+"Bitcoin Cash (BCH) May 15th Hard Fork" added for voting, proof and forecast on YEENOT TODAY https://yeenot.today/catalog/news/241
+good news for Bitcoin Cash? Are Gemini support new fork?
+
+The Gemini bitcoin exchange founded by Tyler and Cameron Winklevoss is adding support for Zcash.
+Could be this news like a signal to growing up for ZEC? Decide and voting  now - https://yeenot.today/catalog/news/242
+
+"Syscoin added on Coinspot - Australian fiat exchange" added for voting, proof and forecast on YEENOT TODAY https://yeenot.today/catalog/news/243
+Community raised!
+
+"London Block Exchange listed OmiseGO, paired with Sterling" added for voting, proof and forecast on YEENOT TODAY https://yeenot.today/catalog/news/244
+big new for OMG ? 
+LBX is the only UK exchange offering OMG/GBP pairs alongside an OMG/BTC and OMG/ETH trading pair. 
+
+"Deployed both ERC20 & BTC support on the Request Network mainnet" added for voting, proof and forecast on YEENOT TODAY https://yeenot.today/catalog/news/245
+many good news. What we wait on Consensus?
+
+"India’s largest IOST trading competition on Koinex" added for voting, proof and forecast on YEENOT TODAY https://yeenot.today/catalog/news/246
+it's more interesting than an airdrop is not it?
+
+phrase:
 Verify cryptosignals and assessing the impact and reliability of news in crypto world
 vote, proof, forecast
 crowd power - forecast through voting and proof
@@ -452,3 +506,38 @@ P.S.: Можно рекламить свои сервисы, только тем
 ----------------------
 term of use:
 https://imgur.com/tos
+
+
+-----------------
+traffic:
+баннерообменные сети - binance.com, bittrex.com
+ok reddit
+ok cryptocompare
+ok bitcointalk
+ok twitter
+
+
+
+calendars:
+!coinmarketcal.com
+coindar.org
+coincalendar.info
+!cryptocalendar.pro
+coinscalendar.com
+coincheckup.com
+!kryptocal.com
+cryptotown.io
+
+
+stats:
+http://www.histats.com/ru/
+https://www.alexa.com/siteinfo
+http://tweepsmap.com/ - GEO Targeted Twitter Analytics and Management
+
+sentiment analisis:
+https://www.crypto-sentiment.com/
+https://alternative.me/crypto/fear-and-greed-index/ (image every day)
+https://enroyd.com/Sentiment/ !!! (отправил письмо с запросом)
+!!! https://github.com/cjhutto/vaderSentiment - то что использует enroyd (надо попробовать скормить ему предложения с twitter)
+https://monitor-volatility-bittrex.herokuapp.com/ - Анализ волатильности торговых пар биржи Bittrex (Bitfinex | Wex | Poloniex | Exmo | Liqui | Binance)
+https://sanbase-low.santiment.net/projects - erc20 projects dev activity, and blockchain data !!! (идет разработка, пока настроений нет)

@@ -1,0 +1,193 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+
+{% if banner %}
+<div class="banner">
+<div class="banner_img">
+{% load static %}
+<a href="{% url 'banner-click' banner.pk %}"><img src = "{{ banner.image.url }}"></a>
+</div>
+<div class="banner_content">
+<div>
+<h1>{{banner.title}}</h1>
+<p>{{banner.text}}</p>
+</div>
+<div>
+<div class="link banner_btn"><a href="{% url 'banner-click' banner.pk %}">Заглянуть</a></div>
+<div class="filter banner_btn"> Последние посты</div>
+</div>
+</div>
+</div>  
+ {% else %}
+ <div></div>
+{% endif %}
+  <div class="table_filter">
+  <div class="table_btn_promo tab_fil">{{banner_left.text}}</div>
+  
+  <div class="table_filter_Search tab_fil">
+  <form role="form" id="form" action="" data-def="">
+  <select name="coin">
+  <option  value="" selected >Соin</option>
+  {% for coin in coins %}
+  <option value="{{ coin }}">{{ coin }}</option>
+  {% endfor %}
+  </select>
+  
+  <select name="source">
+   <option  value="" selected >Channel</option>
+   {% for source in sources %}
+  <option value="{{ source}}">{{ source }}</option>
+  {% endfor %}
+  </select>
+  
+   <input type="submit" value="отправить">
+  </form>
+  </div>
+  
+  <div class="table_btn_promo tab_fil">{{banner_right.text}}</div>
+  </div>
+
+    {% if allnews %}
+<!-- need move to css -->
+
+<strong>All News count :</strong> {{ num_news }}
+<strong>View Type (block or table) :</strong> {{view_newslist_block}}
+<a href="{% url 'change-view' %}"><button>change view</button></a>
+
+	<table id="user_list">
+	<thead>
+	<tr>
+		<th>#</th>
+		<th>Coin</th>
+		<th>SOURCE</th>
+		<th>TEXT</th>
+<th>
+  {% if param.time == '0' %}<button value="time=1">
+  {% elif param.time == '1' %}<button value="time=0">
+  {% else %}<button value="time=1">
+  {% endif %}
+  created time</button>
+  </th>
+		<th>direction</th>
+		<th>rating</th>
+		<th>Likes</th>
+		<th></th>
+		<th>Dislikes</th>
+		<th></th>
+		<th>LINK</th>
+		<th>USERNAME</th>
+		
+	</tr>
+	</thead>
+	<tbody class="infinite-container">
+	
+	{% for news in allnews %}
+	{% if news.promo_status == 'y' %}<tr style="font-weight:bold" class="infinite-item" >{% else %}<tr class="infinite-item">{% endif %} 
+		<td>{{news.newsid}}</td>
+		<td>{{news.coinid}}</td>
+		<td>{{news.sourceid}}</td>
+		<td><a href="{{ news.get_absolute_url }}">{{news.text}}</a></td>
+		
+		<td>{{news.time}}</td>
+		<td>{{news.direction}}</td>
+		<td>{{news.rating}}</td>
+		<td id="like_count_{{news.newsid}}">{{news.like}}</td>
+		
+		{% if user.is_authenticated %}
+			{% if news.enable_vote %}
+				<td><button id="like_btn_{{news.newsid}}" data-newsid="{{news.newsid}}" data-url="{% url 'news-like-ajax' %}" class="like_btn">Like</button></td>
+			{% else %}
+			    <td></td>
+			{% endif %}
+		{% else %}
+		<td></td>
+		{% endif %}
+		
+		<td id="dislike_count_{{news.newsid}}">{{news.dislike}}</td>
+		
+		{% if user.is_authenticated %}
+			{% if news.enable_vote %}
+				<td><button id="dislike_btn_{{news.newsid}}" data-newsid="{{news.newsid}}" data-url="{% url 'news-dislike-ajax' %}" class="dislike_btn">Dislike</button></td>
+			{% else %}
+			    <td></td>
+			{% endif %}
+		{% else %}
+		<td></td>
+		{% endif %}
+		
+		<td><a href="{{ news.link }}">{{ news.link }}</a></td>
+		<td>{{news.user}}</td>
+		
+	</tr>
+	{% endfor %}
+	</tbody>
+	</table>
+  {% if allnews.has_next %}
+    <a class="infinite-more-link" href="?page={{ allnews.next_page_number}}&coin={{rget.coin}}&source={{rget.source}}">More</a>
+  {% endif %}
+
+    <div class="loading" style="display: none;">
+    Loading...
+  </div>
+  
+  <script>
+    var infinite = new Waypoint.Infinite({
+      element: $('.infinite-container')[0],
+      onBeforePageLoad: function () {
+        $('.loading').show();
+      },
+      onAfterPageLoad: function ($items) {
+        $('.loading').hide();
+		$('.like_btn').click(function(){
+    var newsid;
+    newsid = $(this).attr("data-newsid");
+	url = $(this).attr("data-url");
+    $.get(url, {news_id: newsid}, function(data){
+               $('#like_count_'+newsid).html(data);
+               $('#like_btn_'+newsid).hide();
+			   $('#dislike_btn_'+newsid).hide();
+    });
+});
+$('.dislike_btn').click(function(){
+    var newsid;
+    newsid = $(this).attr("data-newsid");
+	url = $(this).attr("data-url");
+    $.get(url, {news_id: newsid}, function(data){
+               $('#dislike_count_'+newsid).html(data);
+               $('#like_btn_'+newsid).hide();
+			   $('#dislike_btn_'+newsid).hide();
+    });
+});
+		$("#user_list").trigger("update");
+      },
+	  
+    });
+  </script>
+  <script>
+  window.onload = function () {
+  var form = $('#form'), def = form.data('def'), data = {}, action;
+  
+  $(document).on('change', '#form select', function () {
+  	var el = $(this), val = el.val(), name = el.attr('name');
+    if (val) {
+    	data[name] = val;
+    } else {
+      delete data[name];
+    }
+    action = def + "?";
+    for(var i in data) {
+      action += i + "=" + data[i] + '&';
+    }
+    action = action.substr(0, action.length - 1);
+    form.attr('action', action);
+  });
+};
+</script>
+    {% else %}
+      <p>There are no news.</p>
+    {% endif %}       
+    
+	
+{% endblock %}
+
