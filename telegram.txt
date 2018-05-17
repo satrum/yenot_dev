@@ -163,6 +163,9 @@ https://eosauthority.com/space/
 https://medium.com/@asuracoin/asura-coin-competitors-analysis-a47cf6717ba4 asura
 QSP 11.05.2018 crypto.iq
 ink https://www.reddit.com/r/PayWithInk/comments/8iielx/ink_protocol_xnk_a_hidden_gem_for_q2_2018/
+FuzeX - hitbtc, cobinhood
+Stellar (IBM Verde) - poloniex
+Soma - idex
 
 consensus:
 OAK
@@ -450,6 +453,51 @@ many good news. What we wait on Consensus?
 "India’s largest IOST trading competition on Koinex" added for voting, proof and forecast on YEENOT TODAY https://yeenot.today/catalog/news/246
 it's more interesting than an airdrop is not it?
 
+"WAN added to the ICONOMI platform! DAA Managers can now add WAN to their Digital Asset Array!" added for voting, proof and forecast on YEENOT TODAY https://yeenot.today/catalog/news/247
+How much DAA will buy WAN?
+
+"NEM: Catapult is now on private network" added for voting, proof and forecast on YEENOT TODAY https://yeenot.today/catalog/news/248
+how many companies used enterprise distributed ledger ?
+
+News about "Veridium with IBM transform carbon credit market using Stellar blockchain" added for voting, proof and forecast on YEENOT TODAY https://yeenot.today/catalog/news/249
+excellent work, Stellar!
+
+"Loopring was listed on Bithumb" added for voting, proof and forecast on YEENOT TODAY https://yeenot.today/catalog/news/250
+This is a signal to buy LRC now?
+
+"Buterin: Only DPOS BFT can efficiently scale to an unlimited number of validators" added for voting, proof and forecast on YEENOT TODAY https://yeenot.today/catalog/news/251
+more decentralization in EOS?
+
+"cobinhood announced trading contests, Flash Bounties and airdrops" added for voting, proof and forecast on YEENOT TODAY https://yeenot.today/catalog/news/252
+strong activity good for COB ?
+
+"Intel and iExec have started a collaboration on privacy-preserving offchain computing" added for voting, proof and forecast on YEENOT TODAY https://yeenot.today/catalog/news/253
+do you see demo on Consensus 2018 ?
+
+"Status Alpha 0.9.18 Release Notes" added for voting, proof and forecast on YEENOT TODAY https://yeenot.today/catalog/news/254
+Ready to test Dapps in Status? 
+
+"Soma: Our devs are working furiously to get our MVP ready" added for voting, proof and forecast on YEENOT TODAY https://yeenot.today/catalog/news/255
+Looking forward to the growth of the community?
+
+"Enterprise Ethereum Alliance Specification" added for voting, proof and forecast on YEENOT TODAY https://yeenot.today/catalog/news/256
+18 month of work, already 500+ members. What do you think about speed up business, build a greater trust, and create more efficient business models?
+
+"Streamr Launches Realtime Data Marketplace, Announces Partnership with Nokia and OSIsoft" added for voting, proof and forecast on YEENOT TODAY https://yeenot.today/catalog/news/257
+better service for Nokia customers. This is a signal to buy DATA?
+
+"Po.et (POE) is LIVE on the Bancor Network" added for voting, proof and forecast on YEENOT TODAY https://yeenot.today/catalog/news/258
+good for liquidity and security of POE?
+
+"Patientory Stiftung Unveils And Launches Open-Source Blockchain Network - HealthNet" vote on YEENOT TODAY https://yeenot.today/catalog/news/259
+good or adopters of PTOY blockchain.
+
+news about "Waves can now be accepted at thousands of online stores running on Magento!" added to vote on YEENOT TODAY https://yeenot.today/catalog/news/260
+great customer adoption for Waves!
+
+"Stratis Smart Contracts in C# Alpha Release" added to vote on YEENOT TODAY https://yeenot.today/catalog/news/261
+This makes it easier to integrate into existing enterprise architectures. Really good?
+
 phrase:
 Verify cryptosignals and assessing the impact and reliability of news in crypto world
 vote, proof, forecast
@@ -541,3 +589,4 @@ https://enroyd.com/Sentiment/ !!! (отправил письмо с запрос
 !!! https://github.com/cjhutto/vaderSentiment - то что использует enroyd (надо попробовать скормить ему предложения с twitter)
 https://monitor-volatility-bittrex.herokuapp.com/ - Анализ волатильности торговых пар биржи Bittrex (Bitfinex | Wex | Poloniex | Exmo | Liqui | Binance)
 https://sanbase-low.santiment.net/projects - erc20 projects dev activity, and blockchain data !!! (идет разработка, пока настроений нет)
+https://www.coinmunity.com/social - social stats with time graph - facebook, twitter

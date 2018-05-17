@@ -177,11 +177,25 @@ def topusers(request, template='topusers.html'):
 	#!!!! need: 
 	#days on site, 
 	#check bio to remove yeenot in test1 rate_users
-	#change point calc with news_count
+	#change point calc with news_count (news.rating*k + news.count_link_click + news.count_details_view + news.like(dislike) for all user news)
 	#achivements images
 	#sum stats about all yeenot points
+	#search:
+	search = request.GET.get('search')
+	if search == None: search=''
+	#print(search)
 	#list top:
-	profiles = Profile.objects.filter(rank__gt=0).order_by('rank')[0:20]
+	allprofiles = Profile.objects.filter(rank__gte=0,user__username__contains=search).order_by('rank')[0:20]
+	#paginator:
+	page = request.GET.get('page', 1)
+	paginator = Paginator(allprofiles, 6)
+	try:
+		profiles = paginator.page(page)
+	except PageNotAnInteger:
+		profiles = paginator.page(1)
+	except EmptyPage:
+		profiles = paginator.page(paginator.num_pages)
+	#add info to profiles:
 	for profile in profiles:
 		profile.name = profile.user.first_name
 		profile.news_count = News.objects.filter(user=profile.user).count()
@@ -192,7 +206,7 @@ def topusers(request, template='topusers.html'):
 	#user place:
 	if request.user.is_authenticated:
 		userprofile=request.user.profile
-		userprofile.name = profile.user.first_name
+		userprofile.name = userprofile.user.first_name
 		userprofile.news_count = News.objects.filter(user=request.user).count()
 		if userprofile.name=='':
 			userprofile.name = userprofile.user
