@@ -183,12 +183,24 @@ def topusers(request, template='topusers.html'):
 	#
 	#setup banners:
 	banner, banner_left, banner_right = page_banners()
+	#
 	#search:
 	search = request.GET.get('search')
 	if search == None: search=''
 	#print(search)
-	#list top:
-	allprofiles = Profile.objects.filter(rank__gt=0,user__first_name__contains=search).order_by('rank')[0:100]
+	
+	#list top 3
+	topprofiles = Profile.objects.filter(rank__gt=0,user__first_name__contains=search).order_by('rank')[0:3]
+	#add info to top 3 profiles:
+	for profile in topprofiles:
+		profile.name = profile.user.first_name
+		profile.news_count = News.objects.filter(user=profile.user).count()
+		if profile.name=='':
+			profile.name = profile.user
+		#print(profile.rank, profile.sum_positive, profile.sum_likes, profile.sum_dislikes, profile.news_count, profile.point, profile.name)
+	#print('-----------------')
+	#list top after top 3:
+	allprofiles = Profile.objects.filter(rank__gt=0,user__first_name__contains=search).order_by('rank')[3:100]
 	#paginator:
 	page = request.GET.get('page', 1)
 	paginator = Paginator(allprofiles, 12)
@@ -215,10 +227,10 @@ def topusers(request, template='topusers.html'):
 			userprofile.name = userprofile.user
 		#print('---------------')
 		#print(userprofile.rank, userprofile.sum_positive, userprofile.sum_likes, userprofile.sum_dislikes, userprofile.news_count, userprofile.point, userprofile.name)
-		context={'profiles':profiles, 'userprofile':userprofile,'banner_left':banner_left,'banner_right':banner_right}
+		context={'topprofiles':topprofiles,'profiles':profiles, 'userprofile':userprofile,'banner_left':banner_left,'banner_right':banner_right}
 		return render(request, template, context)
 	else:
-		context={'profiles':profiles,'banner_left':banner_left,'banner_right':banner_right}
+		context={'topprofiles':topprofiles,'profiles':profiles,'banner_left':banner_left,'banner_right':banner_right}
 		return render(request, template, context)
 	
 from django.views import generic
