@@ -86,7 +86,8 @@ class Command(BaseCommand):
 		print('random_news [create, delete] random news with title random_news')
 		print('sendmail [news] [id] - send all or one news to admin with MODERATE_STATUS = `a` status')
 		print('promo - change promo status, see views, clicks, time period, views.py')
-		print('rate_users - rate votes and calculate stats about users(profiles)')
+		print('rate_users - rate votes and calculate stats about users(profiles)') #!!!!!
+		print('update_first_name - read reddit accounts and add first_name to users') #!!!!!
 
 
 	def rate_news(self):

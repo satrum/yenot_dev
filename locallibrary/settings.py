@@ -87,6 +87,20 @@ AUTHENTICATION_BACKENDS = (
 #social import keys
 from .social import *
 
+#pipeline for reddit to update empty first_name:
+SOCIAL_AUTH_REDDIT_PIPELINE = (
+    'social_core.pipeline.social_auth.social_details',
+    'social_core.pipeline.social_auth.social_uid',
+    'social_core.pipeline.social_auth.auth_allowed',
+    'social_core.pipeline.social_auth.social_user',
+    'social_core.pipeline.user.get_username',
+    'social_core.pipeline.user.create_user',
+    'social_core.pipeline.social_auth.associate_user',
+    'social_core.pipeline.social_auth.load_extra_data',
+    'social_core.pipeline.user.user_details',
+    'catalog.pipeline.update_user', #copy username to first_name if empty
+)
+
 WSGI_APPLICATION = 'locallibrary.wsgi.application'
 
 

@@ -180,15 +180,18 @@ def topusers(request, template='topusers.html'):
 	#change point calc with news_count (news.rating*k + news.count_link_click + news.count_details_view + news.like(dislike) for all user news)
 	#achivements images
 	#sum stats about all yeenot points
+	#
+	#setup banners:
+	banner, banner_left, banner_right = page_banners()
 	#search:
 	search = request.GET.get('search')
 	if search == None: search=''
 	#print(search)
 	#list top:
-	allprofiles = Profile.objects.filter(rank__gte=0,user__username__contains=search).order_by('rank')[0:20]
+	allprofiles = Profile.objects.filter(rank__gt=0,user__first_name__contains=search).order_by('rank')[0:100]
 	#paginator:
 	page = request.GET.get('page', 1)
-	paginator = Paginator(allprofiles, 6)
+	paginator = Paginator(allprofiles, 12)
 	try:
 		profiles = paginator.page(page)
 	except PageNotAnInteger:
@@ -212,10 +215,10 @@ def topusers(request, template='topusers.html'):
 			userprofile.name = userprofile.user
 		#print('---------------')
 		#print(userprofile.rank, userprofile.sum_positive, userprofile.sum_likes, userprofile.sum_dislikes, userprofile.news_count, userprofile.point, userprofile.name)
-		context={'profiles':profiles, 'userprofile':userprofile}
+		context={'profiles':profiles, 'userprofile':userprofile,'banner_left':banner_left,'banner_right':banner_right}
 		return render(request, template, context)
 	else:
-		context={'profiles':profiles}
+		context={'profiles':profiles,'banner_left':banner_left,'banner_right':banner_right}
 		return render(request, template, context)
 	
 from django.views import generic
