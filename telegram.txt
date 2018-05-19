@@ -148,6 +148,10 @@ login and signup - added social auth with Reddit apps (for first time without em
 login and signup - added social auth with Twitter apps (without email)
 news details - add left and right banner
 
+19.05.2018:
+new menu
+changes in page 'rules'
+added page 'topusers' (place, points, news count, votes)
 
 SONM
 GVT - текст ниже
@@ -504,7 +508,11 @@ good for all ETH platform projects ?
 "London Block Exchange listed Status (SNT)" added to vote on YEENOT TODAY https://yeenot.today/catalog/news/264
 GBP(Fiat) exchange good for Status ?
 
+"HyperDEX is coming! Countdown 2 days" added to vote on YEENOT TODAY https://yeenot.today/catalog/news/266
+more security for cryptofunds ?
 
+"EXRT Network Listed on Enclaves" added to vote on YEENOT TODAY https://yeenot.today/catalog/news/267
+good for EXRN ?
 
 phrase:
 Verify cryptosignals and assessing the impact and reliability of news in crypto world

@@ -312,18 +312,18 @@ class Command(BaseCommand):
 	#"DGB":{
 	# "Id":"4430",
 	# "Url":"/coins/dgb/overview",
-	# "ImageUrl":"/media/12318264/7638-nty_400x400.jpg",
+	#ok "ImageUrl":"/media/12318264/7638-nty_400x400.jpg",
 	# "Name":"DGB",
-	# "Symbol":"DGB",
-	# "CoinName":"DigiByte",
+	#ok "Symbol":"DGB",
+	#ok "CoinName":"DigiByte",
 	# "FullName":"DigiByte (DGB)",
-	# "Algorithm":"Multiple",
-	# "ProofType":"PoW",
-	# "FullyPremined":"0",
+	#! "Algorithm":"Multiple",
+	#! "ProofType":"PoW",
+	#! "FullyPremined":"0",
 	# "TotalCoinSupply":"21000000000",
 	# "PreMinedValue":"N/A",
 	# "TotalCoinsFreeFloat":"N/A",
-	# "SortOrder":"11",
+	#! "SortOrder":"11",
 	# "Sponsored":false}
 	def cryptocompare_get_coinlist(self, filename):
 		url1='https://min-api.cryptocompare.com/data/all/coinlist'
