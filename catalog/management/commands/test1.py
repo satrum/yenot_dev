@@ -283,6 +283,10 @@ class Command(BaseCommand):
 			profile.sum_likes = votes.filter(vote_type='like').count()
 			profile.sum_dislikes = votes.filter(vote_type='dislike').count()
 			profile.sum_right = votes.filter(vote_rate__gt=0).count()
+			#second stage (calculate news stats):
+			news = News.objects.filter(user=profile.user)
+			print(news.count(),' news')
+			#need news aggs stats -> news_points
 			profile.point = sum_positive # first stage
 			profile.save()
 			if sum_today != 0:
