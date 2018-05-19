@@ -874,6 +874,13 @@ display: inline-block;
     margin: 20px 0px 0px 59px;
     display: inline-block;
 }
+.new_pag img{
+	    width: 65px;
+    z-index: 85;
+    position: absolute;
+    top: 58px;
+    left: 64px;
+}
 .pagination>li>a, .pagination>li>span {
     position: relative;
     float: left;
@@ -1413,12 +1420,12 @@ border-radius: 14px;
 	padding: 5px;
 }
 .inp_2{
-  padding: 5px;
+	padding: 5px;
     border: 1px solid ghostwhite;
     background: rgba(143, 213, 60, 0.56);
 }
 .us_us_find{
-  background: rgba(143, 213, 60, 0.56);
+	background: rgba(143, 213, 60, 0.56);
     border: 1px solid ghostwhite;
     text-align: center;
     width: 134px;
@@ -1723,13 +1730,22 @@ footer {
 .menu_main{
     padding: 5px 5px;
     background: rgba(90, 159, 8, 0.26);
-    margin: 0px 22px 0px 0px;
+    margin: 0px 15px 0px 0px;
     width: 120px;
     text-align: center;
 	position: relative;
 	box-shadow: 2px 1px 38px 4px rgba(67, 168, 65, 0.41);
 }
 
+.menu_main_2{
+    padding: 5px 5px;
+    background: rgba(90, 159, 8, 0.26);
+    margin: 0px 15px 0px 0px;
+    width: 132px;
+    text-align: center;
+	position: relative;
+	box-shadow: 2px 1px 38px 4px rgba(67, 168, 65, 0.41);
+}
 
 body {
     background: url(/static/images/Yeenot_gl_2.png) 15% 29% ;
@@ -2054,42 +2070,83 @@ body{
 .menu_main{
     padding: 5px 5px;
     background: rgba(90, 159, 8, 0.26);
-    margin: 0px 25px 0px 0px;
-    width: 144px;
+    margin: 0px 21px 0px 0px;
+    width: 132px;
     text-align: center;
-	position: relative;
-	box-shadow: 2px 1px 38px 4px rgba(67, 168, 65, 0.41);
+    position: relative;
+    box-shadow: 2px 1px 38px 4px rgba(67, 168, 65, 0.41);
 }
 .menu_main:hover{
     padding: 5px 5px;
     background: rgba(110, 197, 7, 0.43);
-    margin: 0px 25px 0px 0px;
-    width: 144px;
+    margin: 0px 21px 0px 0px;
+    width: 132px;
     text-align: center;
 	position: relative;
 	box-shadow: 2px 1px 38px 4px rgba(33, 164, 30, 0.71);
 }
 .menu_main::before {
-	content: "";
-	position: absolute;
-	top: -25px; 
-	left: 0;
-	width: 0;
-	height: 0;
-	border-left: 72px solid transparent;
-	border-right: 72px solid transparent;
-	border-bottom: 25px solid rgba(90, 159, 8, 0.26);
+    content: "";
+    position: absolute;
+    top: -25px;
+    left: 0;
+    width: 0;
+    height: 0;
+    border-left: 68px solid transparent;
+    border-right: 63px solid transparent;
+    border-bottom: 25px solid rgba(90, 159, 8, 0.26);
 }
 .menu_main::after {
-	content: "";
-	position: absolute;
-	bottom: -25px; 
-	left: 0;
-	width: 0;
-	height: 0;
-	border-left: 72px solid transparent;
-	border-right: 72px solid transparent;
-	border-top: 25px solid rgba(90, 159, 8, 0.26);
+    content: "";
+    position: absolute;
+    bottom: -25px;
+    left: 0;
+    width: 0;
+    height: 0;
+    border-left: 68px solid transparent;
+    border-right: 63px solid transparent;
+    border-top: 25px solid rgba(90, 159, 8, 0.26);
+}
+
+.menu_main_2{
+    padding: 5px 5px;
+    background: rgba(90, 159, 8, 0.26);
+    margin: 0px 21px 0px 0px;
+    width: 132px;
+    text-align: center;
+    position: relative;
+    box-shadow: 2px 1px 38px 4px rgba(67, 168, 65, 0.41);
+}
+.menu_main_2:hover{
+    padding: 5px 5px;
+    background: rgba(110, 197, 7, 0.43);
+    margin: 0px 21px 0px 0px;
+    width: 132px;
+    text-align: center;
+	position: relative;
+	box-shadow: 2px 1px 38px 4px rgba(33, 164, 30, 0.71);
+}
+.menu_main_2::before {
+    content: "";
+    position: absolute;
+    top: -25px;
+    left: 0;
+    width: 0;
+    height: 0;
+    border-left: 68px solid transparent;
+    border-right: 62px solid transparent;
+	border-bottom: 25px solid rgba(90, 159, 8, 0.26);
+}
+.menu_main_2::after {
+    content: "";
+    position: absolute;
+    bottom: -25px;
+    left: 0;
+    width: 0;
+    height: 0;
+    border-left: 68px solid transparent;
+    border-right: 62px solid transparent;
+    border-top: 25px solid rgba(90, 159, 8, 0.26);
 }
 .we {
     width: 100%;
