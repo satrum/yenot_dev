@@ -48,14 +48,13 @@ function addCustomInformation() {
    <script src="{% static 'jquery.waypoints.min.js' %}"></script>
    <script src="{% static 'infinite.min.js' %}"></script>
 	<script src="{% static 'jquery.tablesorter.pager.js' %}" type="text/javascript"></script>
-    <script type="text/javascript">
+	<script type="text/javascript">
     $(document).ready(function() {
 	$("#user_list").tablesorter({sortList: [[4,0]]});
     $("#user_list_2").tablesorter({sortList: [[0,1]]});
 $("#user_list_3").tablesorter({sortList: [[6,1]]});
     });          
     </script>
-	
   <!-- Add additional CSS in static file -->
   {% load static %}
   <link rel="stylesheet" href="{% static 'css/styles.css' %}">
@@ -84,7 +83,7 @@ $("#user_list_3").tablesorter({sortList: [[6,1]]});
 			{% endif %}
 		 </ul>
 		 <ul class="sidebar-nav linetop">
-          <li class="menu_main">TOP LEADERS</li>
+          <a href="{% url 'topusers' %}"><li class="menu_main">TOP LEADERS</li></a>
           <li class="menu_main">TOP SOURCES</li>	
           <a href="{% url 'news' %}"><li class="menu_main">TOP NEWS</li></a>
 		  <a href="{% url 'rules' %}"><li class="menu_main">RULES</li></a>

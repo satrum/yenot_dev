@@ -2,12 +2,11 @@
 
 
 #template for rules page
-#https://html-online.com/editor/
 
 {% block content %}
 <div class="rule_yeenot">
 <h3><strong>YEENOT Info and rules:</strong></h3>
-<p>Here you can find some information about YEENOT.TODAY and read the rules, how to add news and get your first points to your rank:</p>
+<p>Here you can find some information about YEENOT.TODAY and read the rules, how to add news and get your first points:</p>
 </div>
 <div class="about">
 <h4>About this project:</h4>
@@ -20,7 +19,7 @@
 <div class="rab_2"><p>2</p></div><p> This project was created for crypto-community voting to decide  fake or real signal is. </p>
 </div>
 <div class="ov_about" style="border-right:0px;">
-<div class="rab_2"><p>3</p></div><p> Also this project has a some game elements, like score, ranks and points for users/sources/news - all of their can get a status "crypto-guru" here.</p>
+<div class="rab_2"><p>3</p></div><p> Also this project has a some game elements, like score, get place on leaders boards and points for users/sources/news - all of their can get a status "crypto-guru" here.</p>
 </div>
 </div>
 <div class="become">
@@ -54,11 +53,11 @@
 </ol>
 </div>
 <div class="ov_rules" style="border-right:0px;">
-<h4 style="text-align: center;"> How you can get your points and rank:</h4>
+<h4 style="text-align: center;"> How you can get your points and get a first place:</h4>
 <ol start="1">
 <li> 1) We calculate your early and accurate opinion about news, popularity of your news and sources.</li>
-<li> 2) Hourly/Daily we calculate YEENOT points and upgrade  the rank to all users.</li>
-<li> 3) You can find top users here: <a href="">TOP LEADER</a></li>
+<li> 2) Hourly/Daily we calculate YEENOT points and upgrade  place on "leaders board" to all users.</li>
+<li> 3) You can find top users here: <a href="{% url 'topusers' %}">TOP LEADER</a></li>
 </ol>
 </div>
 </div>

@@ -1,15 +1,189 @@
 {% extends "base_generic.html" %}
 
 {% block content %}
-    <h1>LEADERBOARD</h1>
 
+{% load static %}
+<div class="line_ban">
+<script async src="//appsha1.cointraffic.io/js/?wkey=fagzs3"></script>
+<span id="ct_cqBJnsd"></span>
+</div>
+	{% if topprofiles %}
+	<div style="margin:0px auto; text-align: center; ">
+	
+	{% for profile in topprofiles %}
+{% if profile.rank == 1 %}
+	<div class="tuser_block_gold">
+
+<div class="ran_palce_gold">
+<h3>{{profile.rank}}</h3>
+</div>
+<h3>{{profile.name}}</h3>
+<h3>Total news: {{profile.news_count}}</h3>
+<h3>Total points: {{profile.point}}</h3>
+<div>
+<div class="green_real">
+<p>Vote for REAL :</p>
+<hr>
+<p>{{profile.sum_likes}}</p>
+</div>
+<div class="red_fake">
+<p>Vote for FAKE :</p>
+<hr>
+<p>{{profile.sum_dislikes}}</p>
+</div>
+</div>
+</div>
+{% endif %}
+{% if profile.rank == 2 %}
+	<div class="tuser_block_silver">
+
+<div class="ran_palce_silver">
+<h3>{{profile.rank}}</h3>
+</div>
+<h3>{{profile.name}}</h3>
+<h3>Total news: {{profile.news_count}}</h3>
+<h3>Total points: {{profile.point}}</h3>
+<div>
+<div class="green_real">
+<p>Vote for REAL :</p>
+<hr>
+<p>{{profile.sum_likes}}</p>
+</div>
+<div class="red_fake">
+<p>Vote for FAKE :</p>
+<hr>
+<p>{{profile.sum_dislikes}}</p>
+</div>
+</div>
+</div>
+{% endif %}
+{% if profile.rank == 3 %}
+	<div class="tuser_block_bron">
+
+<div class="ran_palce_bron">
+<h3>{{profile.rank}}</h3>
+</div>
+<h3>{{profile.name}}</h3>
+<h3>Total news: {{profile.news_count}}</h3>
+<h3>Total points: {{profile.point}}</h3>
+<div>
+<div class="green_real">
+<p>Vote for REAL :</p>
+<hr>
+<p>{{profile.sum_likes}}</p>
+</div>
+<div class="red_fake">
+<p>Vote for FAKE :</p>
+<hr>
+<p>{{profile.sum_dislikes}}</p>
+</div>
+</div>
+</div>
+{% endif %}
+{% endfor %}
+	
+	</div>
+	{% endif %}
+<div class="table_filter_2">
+  <div class="tab_front">
+<div class="table_btn_promo tab_fil">{% if banner_left %}<a href="{% url 'banner-click' banner_left.pk %}" target="_blank"><img src = "{{ banner_left.image.url}}"></a>{% endif %}</div>
+  <div class="table_filter_Search tab_fil">
+  <h4 class="us_top_text">FIND USER PLACE IN TOP 50 :</h4>
+  <form id="us_search">
+  <input type="search" id="us_search" name="search"
+     placeholder="Search by user..."
+     aria-label="Search through site content">
+    <button class="inp_2">Search</button>
+	</form>
+  <h4 class="us_top_text_2">or</h4>
+		{% if user.is_authenticated %}  <a href="{% url 'topusers' %}?search={{userprofile.name}}" class="us_us_find">Find your place!</a>{% else %}<a href="{% url 'signup' %}?next={{request.path}}" class="us_us_find">Find your place!</a>
+	{% endif %}	 
+</div>	
+		<div class="table_btn_promo tab_fil right_banner">  {% if banner_right %}<a href="{% url 'banner-click' banner_right.pk %}" target="_blank"><img src = "{{ banner_right.image.url}}"></a>{% endif %}</div>
+</div>
+</div>
     {% if profiles %}
 <!-- need move to css -->
-<style>
-tr,td {border:1px solid black;}
-</style>
 
-	<table>
+<div style="margin:0px auto; text-align: center; ">
+<div class="loader-ellips infinite-container" >
+{% for profile in profiles %}
+
+<div class="tuser_block infinite-item">
+
+<div class="ran_palce">
+<h4>{{profile.rank}}</h4>
+</div>
+<h3>{{profile.name}}</h3>
+<h3>Total news: {{profile.news_count}}</h3>
+<h3>Total points: {{profile.point}}</h3>
+<div>
+<div class="green_real">
+<p>Vote for REAL :</p>
+<hr>
+<p>{{profile.sum_likes}}</p>
+</div>
+<div class="red_fake">
+<p>Vote for FAKE :</p>
+<hr>
+<p>{{profile.sum_dislikes}}</p>
+</div>
+</div>
+</div>
+
+{% endfor %}
+</div>
+ {% if profiles.has_next %}
+    <a class="infinite-more-link" href="?page={{profiles.next_page_number}}&search={{rget.search}}">More</a>
+  {% endif %}
+
+    <div class="loading" style="display: none;">
+    Loading...
+  </div>
+	</div>
+	
+	  <script>
+  window.onload = function () {
+  var form = $('#form'), def = form.data('def'), data = {}, action;
+  
+  $(document).on('clikc', '#form search', function () {
+  	var el = $(this), val = el.val(), name = el.attr('name');
+    if (val) {
+    	data[name] = val;
+    } else {
+      delete data[name];
+    }
+    action = def + "?";
+    for(var i in data) {
+      action += i + "=" + data[i] + '&';
+    }
+    action = action.substr(0, action.length - 1);
+    form.attr('action', action);
+  });
+};
+</script>
+<script>
+    var infinite = new Waypoint.Infinite({
+      element: $('.infinite-container')[0],
+      onBeforePageLoad: function () {
+        $('.loading').show();
+		console.log('before pageLoad ajax');
+				
+      },
+      onAfterPageLoad: function ($items) {
+        $('.loading').hide();
+		console.log('after pageLoad ajax');
+					
+      },
+	  
+    });
+	</script>
+    {% else %}
+      <p>There are no ranked users.</p>
+    {% endif %}       
+
+{% endblock %}
+<table>
 	<tr>
 		<td>RANK</td>
 		<td>NAME</td>
@@ -43,8 +217,3 @@ tr,td {border:1px solid black;}
 	</tr>
 	{% endfor %}
 	</table>
-    {% else %}
-      <p>There are no ranked users.</p>
-    {% endif %}       
-
-{% endblock %}

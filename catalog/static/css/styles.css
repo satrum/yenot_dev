@@ -1341,7 +1341,178 @@ cursor: pointer;
      text-align: center;
     padding: 0px 6px;
 }
+.topuser_text{
+	text-align: center;
+    background: rgba(187, 246, 5, 0.44);
+    padding: 5px;
+    width: 265px;
+    margin: 15px auto;
+    border: 1px solid ghostwhite;
+}
+.tuser_block{
+display: inline-block;
+    vertical-align: top;
+    width: 28%;
+    background: url(../images/stek_green.png)45% 43%;
+    margin: 15px 10px;
+    border: 11px double #a0b987;
+	 border-radius: 14px;
+}
+.tuser_block_gold{
+display: inline-block;
+    vertical-align: top;
+    width: 28%;
+    background: url(../images/stek_gold.png)45% 43%;
+    margin: 15px 10px;
+border: 11px double rgba(178, 237, 33, 0.75);
+    border-radius: 14px;
 
+}
+.tuser_block_silver{
+display: inline-block;
+    vertical-align: top;
+    width: 28%;
+    background: url(../images/stek_silver.png) 100% 46%;
+    margin: 15px 10px;
+    border: 11px double rgba(219, 221, 212, 0.95);
+border-radius: 14px;
+
+}
+.tuser_block_bron{
+display: inline-block;
+    vertical-align: top;
+    width: 28%;
+    background: url(../images/stek_bron.png) 50% 94%;
+    margin: 15px 10px;
+    border: 11px double rgb(145, 90, 42);
+border-radius: 14px;
+
+}
+.topuser_text_50 {
+    text-align: center;
+    background: rgba(93, 141, 38, 0.43);
+    padding: 5px;
+    width: 288px;
+    margin: 15px auto;
+    border: 1px solid ghostwhite;
+
+}
+.us_top_text{
+	display: inline-block;
+	    margin: 20px 10px;
+}
+.us_top_text_2{
+	display: inline-block;
+	     margin: auto 7px;
+}
+#us_search{
+	display: inline-block;
+    background: transparent;
+    color: white;
+    border: 1px solid ghostwhite;
+	padding: 5px;
+}
+.inp_2{
+	padding: 5px;
+    border: 1px solid ghostwhite;
+    background: #8fd53c8f;
+}
+.us_us_find{
+	background: #8fd53c8f;
+    border: 1px solid ghostwhite;
+    text-align: center;
+    width: 142px;
+    padding: 5px;
+    display: inline-block;
+}
+.ran_palce{
+	    background: url(../images/ran.png) no-repeat 50%;
+        width: 79px;
+    height: 79px;
+    margin: 7px auto;
+	border-radius: 100%;
+    border: 7px double #a0b987;
+}
+.ran_palce_gold{
+background: url(../images/ran_gold_4.png) no-repeat 50%;
+    width: 79px;
+    height: 79px;
+    margin: 7px auto;
+    border-radius: 100%;
+    border: 7px double rgba(178, 237, 33, 0.75);
+}
+.ran_palce_silver{
+background: url(../images/ran_silver_4.png) no-repeat 50%;
+    width: 79px;
+    height: 79px;
+    margin: 7px auto;
+    border-radius: 100%;
+	border: 7px double rgba(219, 221, 212, 0.95);
+}
+.ran_palce_bron{
+background: url(../images/ran_bron_4.png) no-repeat 50%;
+    width: 79px;
+    height: 79px;
+    margin: 7px auto;
+    border-radius: 100%;
+	border: 7px double rgb(145, 90, 42);
+}
+.ran_palce h4{
+	text-align: center;
+    padding: 24px 0px;
+    font-size: 1em;
+    margin: 0px;
+}
+.ran_palce_gold h3{
+	text-align: center;
+    padding: 17px 0px;
+    font-size: 2em;
+    margin: 0px;
+}
+.ran_palce_silver h3{
+	text-align: center;
+    padding: 17px 0px;
+    font-size: 2em;
+    margin: 0px;
+}
+.ran_palce_bron h3{
+	text-align: center;
+    padding: 17px 0px;
+    font-size: 2em;
+    margin: 0px;
+}
+.green_real{
+	display: inline-block;
+    background: rgba(94, 149, 33, 0.69);
+    padding: 2px 10px;
+    margin: 3px;
+	border: 1px solid ghostwhite;
+}
+.green_real p{
+	    margin: 3px;
+}
+.green_real hr {
+    margin-top: 2px;
+    margin-bottom: 5px;
+    border: 0;
+    border-top: 1px solid #a0b987;
+}
+.red_fake{
+	display: inline-block;
+    background: rgba(255, 47, 0, 0.79);
+    padding: 2px 10px;
+    margin: 8px;
+	border: 1px solid ghostwhite;
+}
+.red_fake p{
+	    margin: 3px;
+}
+.red_fake hr {
+    margin-top: 2px;
+    margin-bottom: 5px;
+    border: 0;
+    border-top: 1px solid #a0b987;
+}
 .price_change{
 background: #1f45024d;
     padding: 3px 0px;
@@ -1472,7 +1643,6 @@ footer{
 .line_ban{
 	display: block;
     width: 728px;
-    height: 90px;
     margin: 10px auto;
 }
 @media (max-width: 1199px) {
@@ -1517,6 +1687,14 @@ footer {
     padding-left: 1px;
 }
 	.table_filter {
+    border: 1px solid #a0b987;
+    margin: auto;
+    position: relative;
+    top: 0px;
+    background: url(/static/images/Yeenot_gl.png) 29% 7%;
+    width: 100%;
+}
+	.table_filter_2 {
     border: 1px solid #a0b987;
     margin: auto;
     position: relative;
@@ -1687,6 +1865,13 @@ border: 1px solid #a0b987;
 margin:auto;
 position: relative;
   position: sticky;
+  top: 0px;
+    background: url(/static/images/Yeenot_gl.png) 29% 7% fixed;
+}
+.table_filter_2{
+border: 1px solid #a0b987;
+margin:auto;
+position: relative;
   top: 0px;
     background: url(/static/images/Yeenot_gl.png) 29% 7% fixed;
 }
