@@ -874,13 +874,7 @@ display: inline-block;
     margin: 20px 0px 0px 59px;
     display: inline-block;
 }
-.new_pag img{
-	    width: 65px;
-    z-index: 85;
-    position: absolute;
-    top: 58px;
-    left: 64px;
-}
+
 .pagination>li>a, .pagination>li>span {
     position: relative;
     float: left;
@@ -1835,7 +1829,13 @@ width: 70%;
 	
 }
 
-
+.new_pag img {
+    width: 65px;
+    z-index: 85;
+    position: absolute;
+    top: 75px;
+    left: 44px;
+}
 .col-sm-1, .col-sm-10, .col-sm-11, .col-sm-12, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9 {
 float: none;
 padding: 0px;
@@ -1845,6 +1845,13 @@ padding: 0px;
 .col-sm-1, .col-sm-10, .col-sm-11, .col-sm-12, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9 {
 float: none;
 padding: 0px;
+}
+.new_pag img{
+	    width: 65px;
+    z-index: 85;
+    position: absolute;
+    top: 58px;
+    left: 64px;
 }
 .type_points h3 {
 margin: 0px 12px 0px 0px;
