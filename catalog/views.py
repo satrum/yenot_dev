@@ -200,7 +200,7 @@ def topusers(request, template='topusers.html'):
 		#print(profile.rank, profile.sum_positive, profile.sum_likes, profile.sum_dislikes, profile.news_count, profile.point, profile.name)
 	#print('-----------------')
 	#list top after top 3:
-	allprofiles = Profile.objects.filter(rank__gt=3,user__first_name__contains=search).order_by('rank')[0:50]
+	allprofiles = Profile.objects.filter(rank__gt=3,user__first_name__contains=search).order_by('rank')[0:47]
 	#paginator:
 	page = request.GET.get('page', 1)
 	paginator = Paginator(allprofiles, 12)
