@@ -50,6 +50,7 @@ from django.db import models
 from django.utils import timezone
 from django.core.mail import send_mail, get_connection
 from datetime import datetime, timedelta
+from django.db.models import Avg, Max, Min, Sum
 
 #email:
 SMTP_EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
@@ -285,9 +286,13 @@ class Command(BaseCommand):
 			profile.sum_right = votes.filter(vote_rate__gt=0).count()
 			#second stage (calculate news stats):
 			news = News.objects.filter(user=profile.user)
-			print(news.count(),' news')
+			profile.sum_news = news.count()
+			if profile.sum_news>0:
+				profile.sum_news_rating = news.aggregate(Sum('rating'))['rating__sum']
+				print(news.count(),' news, ', profile.sum_news_rating,' sum news rating')
 			#need news aggs stats -> news_points
-			profile.point = sum_positive # first stage
+			#profile.point = sum_positive # first stage
+			profile.point = sum_all + profile.sum_news_rating #second stage
 			profile.save()
 			if sum_today != 0:
 				all_users_today_active += 1
@@ -301,7 +306,9 @@ class Command(BaseCommand):
 			if profile.point>0:
 				i+=1
 				profile.rank=i
-				profile.save()
+			else:
+				profile.rank=0
+			profile.save()
 			#print(i, profile, profile.point, profile.rank, profile.user)
 		#return:
 		return_text = 'profiles:{} sum positive:{} all active:{} votes(false): {} votes(calc):{}'.format(stats_profiles,all_users_today_positive,all_users_today_active,stats_votes_false,stats_votes_chenged)

@@ -45,7 +45,7 @@
 	<div class="prof_inf">
 	<h3 style="text-align:center;">Your points:</h3>
 	<div class="type_points">
-	<h3><strong>Your points</strong><br>{{ profile.sum_all }}</h3>
+	<h3><strong>Your points</strong><br>{{ profile.sum_all }} + {{ profile.sum_news_rating|floatformat:2 }}</h3>
 	</div>
 	<div class="type_points">
 	<p style="color: green;"><strong>Sum of all points you get</strong> + {{ profile.sum_positive }}</h4>
@@ -62,7 +62,7 @@
 	</div>
 	
 	<div class="prof_news">
-	<h3 style="text-align: center;">Your count news: {{ profile.news_count }} </h3>
+	<h3 style="text-align: center;">Your count news: {{ profile.news_count }} / Sum news rating: {{ profile.sum_news_rating|floatformat:2 }}</h3>
 	<div class="prof_rating">
 		<div class="prof_rating_news_min">
 	<p><strong>MIN rating of the news</strong></p><div class="min_rating"><p>{{ profile.rating_min|floatformat:2 }}</p></div>
