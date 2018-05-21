@@ -18,6 +18,7 @@ hr {
 li{
 	display:inline-block;
 }
+
 .betok{
 	    border: 1px solid #a0b987;
     text-align: center;
@@ -1622,7 +1623,7 @@ footer{
 }
 .adv_ban_ab_1{
 	text-align: center;
-	margin-bottom:10px;
+	    margin: 0px 30px 10px;
 }
 .fl{
 	    display: inline-block;
