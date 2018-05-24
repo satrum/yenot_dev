@@ -235,16 +235,8 @@ def topusers(request, template='topusers.html'):
 	
 import datetime
 def coinlist(request, template='coinlist.html'):
-	allcoins = Coin.objects.filter(mktcap__gt=0)
-	page = request.GET.get('page', 1)
-	paginator = Paginator(allcoins, 100)
-	try:
-		coins = paginator.page(page)
-	except PageNotAnInteger:
-		coins = paginator.page(1)
-	except EmptyPage:
-		coins = paginator.page(paginator.num_pages)
-	for coin in coins:
+	allcoins = Coin.objects.filter(mktcap__gt=0)#[0:500]
+	for coin in allcoins:
 		coin.news_count = News.objects.filter(coinid = coin).count()
 		#get cryptocompare:
 		try:
@@ -258,6 +250,15 @@ def coinlist(request, template='coinlist.html'):
 			coin.reddit_comments_per_day = cc_coin.reddit_comments_per_day
 		except:
 			continue
+	page = request.GET.get('page', 1)
+	paginator = Paginator(allcoins, 100)
+	try:
+		coins = paginator.page(page)
+	except PageNotAnInteger:
+		coins = paginator.page(1)
+	except EmptyPage:
+		coins = paginator.page(paginator.num_pages)
+
 	context = {'coins':coins}
 	return render(request, template, context)
 	
