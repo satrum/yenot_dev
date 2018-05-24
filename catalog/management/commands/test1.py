@@ -6,11 +6,11 @@
 #Hour limit - 150000, Minute limit - 1000, Second limit - 50
 
 
-import os,sys
+import os,sys,glob
 # print(os.getcwd())
 # print(sys.argv)
 from django.core.management.base import BaseCommand, CommandError
-from catalog.models import News, Coin, Source, UserVotes, Profile, YeenotSettings
+from catalog.models import News, Coin, Source, UserVotes, Profile, YeenotSettings, CoinCryptocompare
 from django.contrib.auth.models import User
 
 import requests
@@ -20,6 +20,7 @@ from statistics import median
 
 FILE_COINLIST = 'coinlist.txt'
 FILE_PRICE = 'coinpricefull.txt'
+FILE_SNAPSHOT_CC = 'coinsnapshotcc.txt'
 FILE_RESULT = 'result.txt'
 FILE_RESULT_RATE_USERS = 'result_rate_users.txt'
 TYPE_PRICE = 'full'
@@ -27,7 +28,7 @@ DATADIR = 'data'
 COINIMAGESDIR = 'media/coin_images/'
 RATING_MAX_DAYS = 7
 
-EXCLUDE_LIST = ['ARENA','CNO', 'BTH', 'ADL']
+EXCLUDE_LIST = ['ARENA','CNO', 'BTH', 'ADL','HOLD','MDX','ATOM*','DCS','LVL*','XUN','CWX', 'AMIS']
 
 #usage: 20.02.2018
 #cd c:\WORK\Docs\python\web\locallibrary
@@ -89,6 +90,12 @@ class Command(BaseCommand):
 		print('promo - change promo status, see views, clicks, time period, views.py')
 		print('rate_users - rate votes and calculate stats about users(profiles)') #!!!!!
 		print('update_first_name - read reddit accounts and add first_name to users') #!!!!!
+		print('coinsnapshot - read json from file coinlist , get snapshot, write json to coinsnapshotcc file') #ok
+		print('coinsnapshot_print - read json from file coinsnapshotcc, print data') #ok
+		print('coinsnapshot_update - read json from file coinsnapshotcc, update data in Coin_Cryptocompare')#ok
+		print('coinsocial - read json from file coinlist , get social, write json to social file with date')#!!!!
+		print('coinsocial_update - read json from last time social file, update data in Coin_Cryptocompare')#!!!! twitter - ok, reddit - ok
+		#need: facebook, cryptocompare, github
 
 
 	def rate_news(self):
@@ -501,8 +508,13 @@ class Command(BaseCommand):
 				elif dbcoin.symbol not in filecoins:
 					print('coin {} not found in coinlist'.format(dbcoin.symbol))
 				else:
-					#name
+					#name and others from filecoins
 					dbcoin.name = filecoins[dbcoin.symbol]['CoinName']
+					dbcoin.Algorithm = filecoins[dbcoin.symbol]['Algorithm']
+					dbcoin.ProofType = filecoins[dbcoin.symbol]['ProofType']
+					#dbcoin.SortOrder = int(filecoins[dbcoin.symbol]['SortOrder'])
+					dbcoin.TotalCoinSupply = filecoins[dbcoin.symbol]['TotalCoinSupply']
+					dbcoin.Id_cc = int(filecoins[dbcoin.symbol]['Id'])
 					#price
 					pricedata = rawdata[dbcoin.symbol]['USD']
 					dbcoin.price = pricedata['PRICE']
@@ -536,8 +548,16 @@ class Command(BaseCommand):
 				else:
 					#newdbcoin = Coin.objects.create()
 					newdbcoin = Coin()
+					#from filecoins
 					newdbcoin.symbol = symbol
+					#print(filecoins[symbol])
 					newdbcoin.name = filecoins[symbol]['CoinName']
+					newdbcoin.Algorithm = filecoins[symbol]['Algorithm']
+					newdbcoin.ProofType = filecoins[symbol]['ProofType']
+					#newdbcoin.SortOrder = int(filecoins[symbol]['SortOrder'])
+					newdbcoin.TotalCoinSupply = filecoins[symbol]['TotalCoinSupply']
+					newdbcoin.Id_cc = id(filecoins[symbol]['Id'])
+					#from pricedata
 					pricedata = rawdata[symbol]['USD']
 					newdbcoin.price = pricedata['PRICE']
 					newdbcoin.change = pricedata['CHANGEPCT24HOUR']
@@ -567,6 +587,129 @@ class Command(BaseCommand):
 		print('coins updated:', count_update)
 		print('coins added  :', count_add)
 
+################# Cryptocompare snapshot and social functions ######################
+	def cryptocompare_get_snapshot(self, coinlist_file, coinsnapshot_file):
+		#get coins from coinlist
+		file = open(DATADIR+'/'+coinlist_file, 'r')
+		filecoins = json.load(file)
+		file.close()
+
+		file = open(DATADIR+'/'+coinsnapshot_file, 'w')
+		data={}
+		counter=0
+		for coin in filecoins:
+			counter+=1
+			id = filecoins[coin]['Id']
+			print(id, coin, counter)
+			url = 'https://www.cryptocompare.com/api/data/coinsnapshotfullbyid/?id='+id
+			response = requests.get(url)
+			temp = response.json()['Data']['General']
+			data[id]=temp
+		json.dump(data, file)
+		file.close()
+
+	def coin_cryptocompare_update(self, coinsnapshot_file):
+		file = open(DATADIR+'/'+FILE_SNAPSHOT_CC, 'r')
+		filecoins = json.load(file)
+		file.close()
+		#cc_coins = CoinCryptocompare.objects.get(Id_cc = 1)
+		#print(cc_coins)
+		count_update = 0
+		count_add = 0
+		for id in filecoins:
+			try:
+				cc_coin = CoinCryptocompare.objects.get(Id_cc = id) #!!!!need debug dublication
+				print('coin found in db and updated. id: {} symbol: {}'.format(id, filecoins[id]['Symbol']))
+				count_update +=1
+			except:
+				print('coin not found and created. id: {} symbol: {}'.format(id, filecoins[id]['Symbol']))
+				cc_coin = CoinCryptocompare()
+				count_add +=1
+			cc_coin.Id_cc = id
+			cc_coin.symbol = filecoins[id]['Symbol']
+			cc_coin.name = filecoins[id]['Name']
+			cc_coin.Description = filecoins[id]['Description']
+			cc_coin.WebsiteUrl = filecoins[id]['WebsiteUrl']
+			StartDate = filecoins[id]['StartDate'].split('/')
+			cc_coin.StartDate = datetime(int(StartDate[2]), int(StartDate[1]), int(StartDate[0]))
+			cc_coin.save()
+		print('updated: {} added: {}'.format(count_update, count_add))
+
+	def cryptocompare_get_social(self, coinlist_file):
+		file = open(DATADIR+'/'+coinlist_file, 'r')
+		filecoins = json.load(file)
+		file.close()
+
+		current_date = timezone.now().strftime("%Y-%m-%d-%H-%M") #strftime("%Y-%m-%d-%H-%M-%S")
+		print(current_date)
+		file = open(DATADIR+'/social/'+current_date+'.txt', 'w')
+		data={}
+		counter=0
+		for coin in filecoins:
+			counter+=1
+			id = filecoins[coin]['Id']
+			print(id, coin, counter)
+			url = 'https://www.cryptocompare.com/api/data/socialstats/?id='+id
+			response = requests.get(url)
+			temp = response.json()['Data']
+			data[id]=temp
+		json.dump(data, file)
+		file.close()
+
+	def coin_cryptocompare_update_social(self):
+		list_of_files = glob.glob(DATADIR+'/social/*') # * means all if need specific format then *.csv
+		latest_file = max(list_of_files, key=os.path.getctime)
+		print (latest_file)
+
+		file = open(latest_file, 'r')
+		filecoins = json.load(file)
+		file.close()
+
+		count_twitter = 0
+		count_reddit = 0
+		count_all = 0
+		for id in filecoins:
+			count_all+=1
+			#print(id) #for debug doublication
+			cc_coin = CoinCryptocompare.objects.get(Id_cc = id)
+			#twitter:
+			twitter = filecoins[id]['Twitter']
+			try:
+				twitter_link = twitter['link']
+				twitter_followers = twitter['followers']
+				twitter_posts = twitter['statuses']
+				print(id, filecoins[id]['General']['Name'], twitter_link, twitter_posts, twitter_followers)
+				count_twitter+=1
+				cc_coin.twitter_link = twitter_link
+				cc_coin.twitter_followers = twitter_followers
+				cc_coin.twitter_posts = twitter_posts
+				#cc_coin.save()
+			except:
+				print(id, filecoins[id]['General']['Name'],' no twitter link')
+			#Reddit:
+			reddit = filecoins[id]['Reddit']
+			try:
+				reddit_link = reddit['link']
+				reddit_subscribers = reddit['subscribers']
+				reddit_active_users = reddit['active_users']
+				reddit_posts_per_day = float(reddit['posts_per_day'])
+				reddit_comments_per_day = reddit['comments_per_day']
+				print(id, filecoins[id]['General']['Name'], reddit_link, reddit_subscribers, reddit_active_users, reddit_posts_per_day, reddit_comments_per_day)
+				#print(reddit_posts_per_day, type(reddit_posts_per_day))
+				cc_coin.reddit_link = reddit_link
+				cc_coin.reddit_subscribers = reddit_subscribers
+				cc_coin.reddit_active_users = reddit_active_users
+				cc_coin.reddit_posts_per_day = reddit_posts_per_day
+				cc_coin.reddit_comments_per_day = reddit_comments_per_day
+				count_reddit+=1
+				#cc_coin.save()
+			except:
+				print(id, filecoins[id]['General']['Name'],' no reddit link')
+			cc_coin.save()
+
+		print('all:{} twitter:{} reddit:{}'.format(count_all, count_twitter, count_reddit))
+
+################# end Cryptocompare snapshot and social functions ######################
 
 
 	def coinlist_from_db(self):
@@ -763,6 +906,27 @@ class Command(BaseCommand):
 
 		if 'sendmail' in poll_id:
 			self.sendmail()
+
+		if 'coinsnapshot' in poll_id:
+			self.cryptocompare_get_snapshot(FILE_COINLIST, FILE_SNAPSHOT_CC)
+		
+		if 'coinsnapshot_print' in poll_id:
+			file = open(DATADIR+'/'+FILE_SNAPSHOT_CC, 'r')
+			coins = json.load(file)
+			file.close()
+			for id in coins:
+				coin = coins[id]
+				print(id, coin['Symbol'], coin['Name'], coin['WebsiteUrl'], coin['StartDate'])
+
+		if 'coinsnapshot_update' in poll_id:
+			self.coin_cryptocompare_update(FILE_SNAPSHOT_CC)
+
+		if 'coinsocial' in poll_id:
+			self.cryptocompare_get_social(FILE_COINLIST)
+
+		if 'coinsocial_update' in poll_id:
+			self.coin_cryptocompare_update_social()
+
 
 
 

@@ -1,0 +1,49 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+<style ..>
+td.markettable {
+  font-size: 8pt;
+  text-align: center;  
+}
+</style>
+
+<table border = "1" width = "100%" cellpadding = "1" cellspacing = "0">
+	<tr>
+		<td class="markettable">link</td>
+		<td class="markettable">SYMBOL</td>
+		<td class="markettable">NAME</td>
+		<td class="markettable">PRICE</td>
+		<td class="markettable">CHANGE/DAY</td>
+		<td class="markettable">VOLUME</td>
+		<td class="markettable">MARKETCAP</td>
+		<td class="markettable">TOTAL COIN SUPPLY</td>
+		<td class="markettable">START DATE</td>
+		<td class="markettable">SITE NEWS COUNT</td>
+		<td class="markettable">Tweets</td>
+		<td class="markettable">Followers</td>
+		<td class="markettable">Rd Subscribe</td>
+		<td class="markettable">Rd comments/day</td>
+	</tr>
+	{% for coin in coins %}
+	<tr>		
+		<td><img src="{{coin.image.url}}" style="border-radius: 100%; width:30px;"></td>
+		<td class="markettable">{{coin.symbol}}</td>
+		<td class="markettable">{{coin.name}}</td>
+		<td class="markettable">{{coin.price|floatformat:3}}</td>
+		<td class="markettable"><font color="{% if coin.change > 0 %}green{% else %}red{% endif %}">{{coin.change|floatformat:2}}</font></td>
+		<td class="markettable">{{coin.volume|floatformat:3}}</td>
+		<td class="markettable">{{coin.mktcap|floatformat:3}}</td>
+		<td class="markettable">{{coin.TotalCoinSupply}}</td>
+		<td class="markettable">{{coin.StartDate|date:"d M Y"}}</td>
+		<td class="markettable">{% if coin.news_count > 0 %}{{coin.news_count}}{% endif %}</td>
+		<td class="markettable">{{coin.twitter_posts}}</td>
+		<td class="markettable">{{coin.twitter_followers}}</td>
+		<td class="markettable">{{coin.reddit_subscribers}}</td>
+		<td class="markettable">{{coin.reddit_comments_per_day}}</td>
+		
+	</tr>
+	{% endfor %}
+</table>
+
+{% endblock %}

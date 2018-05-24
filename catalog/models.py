@@ -298,6 +298,12 @@ class Coin(models.Model):
 	volume = models.DecimalField(max_digits=20, decimal_places=8, help_text="total volume in USD")
 	mktcap = models.DecimalField(max_digits=20, decimal_places=8, help_text="market cap in USD")
 	image = models.ImageField(upload_to='coin_images/', max_length=100, blank=True)
+	#from cryptocompare coinlist
+	Algorithm = models.CharField(max_length=20,default='',help_text="Algorithm from cryptocompare")
+	ProofType = models.CharField(max_length=20,default='',help_text="ProofType from cryptocompare")
+	#SortOrder = models.IntegerField(default=0,help_text='SortOrder from cryptocompare')
+	TotalCoinSupply = models.CharField(max_length=20,default='',help_text="TotalCoinSupply from cryptocompare")
+	Id_cc = models.IntegerField(default=0,help_text='ID for cryptocompare calls')
 	
 	class Meta:
 		ordering = ["-volume"]
@@ -305,6 +311,31 @@ class Coin(models.Model):
 	def __str__(self):
 		return self.symbol
 
+#https://www.cryptocompare.com/api
+#https://www.cryptocompare.com/api/data/coinsnapshotfullbyid/?id=1182 //for BTC
+#https://www.cryptocompare.com/api/data/socialstats/?id=1182 //for BTC
+class CoinCryptocompare(models.Model):
+	Id_cc = models.IntegerField(default=0,help_text='Id for cryptocompare calls')
+	#from coinsnapshotfullbyid ['Data']['General']
+	symbol = models.CharField(max_length=10, help_text='symbol from coinsnapshot')
+	name = models.CharField(max_length=100, help_text='name from coinsnapshot')
+	Description = models.TextField(help_text='Description from coinsnapshot')
+	WebsiteUrl = models.URLField(default='', max_length=100, help_text='WebsiteUrl from coinsnapshot')
+	StartDate = models.DateField(help_text='StartDate from coinsnapshot') #example cloak: "04/05/2014" date(year, month, day) default=timezone.now
+	#!blockchain info (later)
+	#!ico info (later)
+	#social info:
+	twitter_link = models.URLField(default='', max_length=100, help_text='Twitter url from socialstats')
+	twitter_followers = models.IntegerField(default=0,help_text='Twitter followers from socialstats')
+	twitter_posts = models.IntegerField(default=0,help_text='Twitter statuses from socialstats')
+	reddit_link = models.URLField(default='', max_length=100, help_text='Reddit url from socialstats')
+	reddit_subscribers = models.IntegerField(default=0,help_text='Reddit subscribers from socialstats')
+	reddit_active_users = models.IntegerField(default=0,help_text='Reddit active_users from socialstats')
+	reddit_posts_per_day = models.DecimalField(max_digits=10, decimal_places=2, default=0,help_text='Reddit posts/day from socialstats')
+	reddit_comments_per_day = models.DecimalField(max_digits=10, decimal_places=2, default=0,help_text='Reddit comments/day from socialstats')
+	def short_description(self):
+		return truncatechars(self.Description, 50)
+		
 class YeenotSettings(models.Model):
 	name = models.CharField(max_length=30)
 	#text_value = models.CharField(max_length=20, help_text="text value of settings")

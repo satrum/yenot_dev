@@ -46,7 +46,7 @@ class BookInstanceAdmin(admin.ModelAdmin):
 '''
 #-------------------------
 #ENOT
-from .models import News, Source, UserVotes, Profile, Banner, Coin, YeenotSettings, Promo_task
+from .models import News, Source, UserVotes, Profile, Banner, Coin, YeenotSettings, Promo_task, CoinCryptocompare
 
 #admin.site.register(News)
 @admin.register(News)
@@ -89,10 +89,16 @@ class BannerAdmin(admin.ModelAdmin):
 
 @admin.register(Coin)
 class CoinAdmin(admin.ModelAdmin):
-    list_display = ('id', 'symbol', 'name', 'price', 'change', 'volume', 'mktcap', 'image') #
+    list_display = ('id', 'symbol', 'name', 'price', 'change', 'volume', 'mktcap', 'Id_cc', 'Algorithm', 'ProofType', 'TotalCoinSupply', 'image') #
     search_fields = ['symbol','name']
+    list_filter = ('Algorithm', 'ProofType')
     inlines = [NewsInline]
 
+@admin.register(CoinCryptocompare)
+class CoinCryptocompareAdmin(admin.ModelAdmin):
+	list_display = ('Id_cc','symbol','name','short_description','WebsiteUrl','StartDate', 'twitter_link', 'twitter_followers', 'twitter_posts', 'reddit_link', 'reddit_subscribers', 'reddit_active_users','reddit_posts_per_day','reddit_comments_per_day')
+	search_fields = ['symbol','name','WebsiteUrl','twitter_link','reddit_link','Id_cc']
+	
 @admin.register(YeenotSettings)
 class YeenotSettingsAdmin(admin.ModelAdmin):
 	list_display = ('id', 'name', 'num_value')

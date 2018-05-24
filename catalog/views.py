@@ -4,7 +4,7 @@ from django.template import RequestContext
 # Create your views here.
 ##from .models import Book, Author, BookInstance, Genre
 
-from .models import News, Source, Banner, Coin, YeenotSettings, Profile
+from .models import News, Source, Banner, Coin, YeenotSettings, Profile, CoinCryptocompare
 from random import randint
 from django.contrib.auth.models import User
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
@@ -232,6 +232,34 @@ def topusers(request, template='topusers.html'):
 	else:
 		context={'topprofiles':topprofiles,'profiles':profiles,'banner_left':banner_left,'banner_right':banner_right}
 		return render(request, template, context)
+	
+import datetime
+def coinlist(request, template='coinlist.html'):
+	allcoins = Coin.objects.filter(mktcap__gt=0)
+	page = request.GET.get('page', 1)
+	paginator = Paginator(allcoins, 100)
+	try:
+		coins = paginator.page(page)
+	except PageNotAnInteger:
+		coins = paginator.page(1)
+	except EmptyPage:
+		coins = paginator.page(paginator.num_pages)
+	for coin in coins:
+		coin.news_count = News.objects.filter(coinid = coin).count()
+		#get cryptocompare:
+		try:
+			cc_coin = CoinCryptocompare.objects.get(Id_cc = coin.Id_cc)
+			coin.StartDate = cc_coin.StartDate
+			if coin.StartDate == datetime.date(1,1,1):
+				coin.StartDate = ''
+			coin.twitter_posts = cc_coin.twitter_posts
+			coin.twitter_followers = cc_coin.twitter_followers
+			coin.reddit_subscribers = cc_coin.reddit_subscribers
+			coin.reddit_comments_per_day = cc_coin.reddit_comments_per_day
+		except:
+			continue
+	context = {'coins':coins}
+	return render(request, template, context)
 	
 from django.views import generic
 
