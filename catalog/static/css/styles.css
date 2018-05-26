@@ -792,6 +792,7 @@ background: #35ae16;
     border: 2px solid silver;
     cursor: pointer;
 	
+
 }
 .green_top{
 	background:#7fd5188f;
@@ -1646,6 +1647,64 @@ footer{
 	display: block;
     width: 728px;
     margin: 10px auto;
+}
+.share_link {
+display: inline-block;
+    vertical-align: top;
+    margin: 3px 0px 0px;
+}
+.share{
+	width: 77%;
+    text-align: center;
+    margin: auto;
+    border: 1px solid rgba(192, 230, 78, 0.53);
+    background: rgba(86, 133, 11, 0.45);
+    box-shadow: 1px 1px 10px 1px #82c345;
+	padding: 3px;
+}
+.telegram-share{
+  position: relative;
+  display: inline-block;
+  height: 20px;
+  padding: 1px 8px 1px 6px;
+  font-weight: 500;
+  color: #fff;
+  cursor: pointer;
+  background-color: #0088cc;
+  border-radius: 3px;
+  box-sizing: border-box;
+  text-decoration: none;
+  font-size: 11px;
+}
+
+.telegram-share span{
+  display: inline-block;
+  margin: 1px;
+}
+
+.telegram-share i{
+  display: inline-block;
+  height: 20px;
+  vertical-align: top;
+  width: 12px;
+  background-repeat: no-repeat;
+  background-position-y: 4px;
+  background-size: 10px;
+  /* This image is included below :) */
+  background-image: url(../images/telegram-plane.png);
+}
+
+.telegram-share:hover{
+  background-color: #007dbb;
+}
+
+.telegram-share:active{
+  background-color: #026698;
+}
+.share h3{
+	    display: inline-block;
+    vertical-align: middle;
+    margin: 0px auto;
 }
 @media (max-width: 1199px) {
 	.type_points_2 h3 {

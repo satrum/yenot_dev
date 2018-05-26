@@ -23,7 +23,15 @@
 {% else %}
 <div class="log_in_p_add_2">
 {% endif %}
-
+<div class="share">
+<h3>SHARE THIS SIGNAL TO:</h3>
+<div class="share_link">
+<a href="https://twitter.com/share?hashtags=YEENOT.TODAY&text={{ news.title }}&ref_src=twsrc%5Etfw" target="_blank" class="share_link twitter-share-button share_link " data-show-count="false"> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script></a></div>
+<a class="telegram-share share_link" href="javascript:window.open('https://t.me/share/url?url='+encodeURIComponent(window.location.href), '_blank')">
+  <i></i>
+  <span>Telegram</span>
+</a>
+</div>
 <h1 style="text-align:center;">{{ news.title }}</h1>
 <p style="text-align:center;"><strong>Author:</strong>
 {% if news.user.first_name %}
