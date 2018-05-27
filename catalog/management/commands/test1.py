@@ -17,6 +17,7 @@ import requests
 import json
 import os
 from statistics import median
+import collections #for coinsnapshot_print
 
 FILE_COINLIST = 'coinlist.txt'
 FILE_PRICE = 'coinpricefull.txt'
@@ -521,6 +522,7 @@ class Command(BaseCommand):
 					dbcoin.change = pricedata['CHANGEPCT24HOUR']
 					dbcoin.volume = pricedata['TOTALVOLUME24HTO']
 					dbcoin.mktcap = pricedata['MKTCAP']
+					dbcoin.supply = pricedata['SUPPLY']
 					#image
 					if 'ImageUrl' not in filecoins[dbcoin.symbol].keys():
 						print('not find ImageUrl for coin:'+ dbcoin.symbol)
@@ -563,6 +565,7 @@ class Command(BaseCommand):
 					newdbcoin.change = pricedata['CHANGEPCT24HOUR']
 					newdbcoin.volume = pricedata['TOTALVOLUME24HTO']
 					newdbcoin.mktcap = pricedata['MKTCAP']
+					newdbcoin.supply = pricedata['SUPPLY']
 					if 'ImageUrl' not in filecoins[symbol].keys():
 						print('not find ImageUrl for coin:'+ dbcoin.symbol)
 					else:
@@ -917,6 +920,13 @@ class Command(BaseCommand):
 			for id in coins:
 				coin = coins[id]
 				print(id, coin['Symbol'], coin['Name'], coin['WebsiteUrl'], coin['StartDate'])
+				#cc_coin = CoinCryptocompare.objects.get(Id_cc = id)
+				#print(cc_coin)
+			a = [id for id in coins]
+			#print(a)
+			b =  [item for item, count in collections.Counter(a).items() if count > 1]
+			print('dublication:', b)
+
 
 		if 'coinsnapshot_update' in poll_id:
 			self.coin_cryptocompare_update(FILE_SNAPSHOT_CC)

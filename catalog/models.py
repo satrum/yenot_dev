@@ -297,6 +297,7 @@ class Coin(models.Model):
 	change = models.DecimalField(max_digits=20, decimal_places=8, help_text="change of price 24 hour in perecents")
 	volume = models.DecimalField(max_digits=20, decimal_places=8, help_text="total volume in USD")
 	mktcap = models.DecimalField(max_digits=20, decimal_places=8, help_text="market cap in USD")
+	supply = models.DecimalField(max_digits=20, decimal_places=0, help_text="coin supply", default=0)
 	image = models.ImageField(upload_to='coin_images/', max_length=100, blank=True)
 	#from cryptocompare coinlist
 	Algorithm = models.CharField(max_length=20,default='',help_text="Algorithm from cryptocompare")
@@ -304,6 +305,7 @@ class Coin(models.Model):
 	#SortOrder = models.IntegerField(default=0,help_text='SortOrder from cryptocompare')
 	TotalCoinSupply = models.CharField(max_length=20,default='',help_text="TotalCoinSupply from cryptocompare")
 	Id_cc = models.IntegerField(default=0,help_text='ID for cryptocompare calls')
+	updatetime = models.DateTimeField(auto_now=True, help_text='last time data save')
 	
 	class Meta:
 		ordering = ["-volume"]

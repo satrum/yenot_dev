@@ -7,6 +7,7 @@ td.markettable {
   text-align: center;  
 }
 </style>
+<h3>count of coins: {{coin_counter}}</h3>
 
 <table border = "1" width = "100%" cellpadding = "1" cellspacing = "0">
 	<tr>
@@ -17,6 +18,7 @@ td.markettable {
 		<td class="markettable">CHANGE/DAY</td>
 		<td class="markettable">VOLUME</td>
 		<td class="markettable">MARKETCAP</td>
+		<td class="markettable">COIN SUPPLY</td>
 		<td class="markettable">TOTAL COIN SUPPLY</td>
 		<td class="markettable">START DATE</td>
 		<td class="markettable">SITE NEWS COUNT</td>
@@ -34,6 +36,7 @@ td.markettable {
 		<td class="markettable"><font color="{% if coin.change > 0 %}green{% else %}red{% endif %}">{{coin.change|floatformat:2}}</font></td>
 		<td class="markettable">{{coin.volume|floatformat:3}}</td>
 		<td class="markettable">{{coin.mktcap|floatformat:3}}</td>
+		<td class="markettable">{{coin.supply}}</td>
 		<td class="markettable">{{coin.TotalCoinSupply}}</td>
 		<td class="markettable">{{coin.StartDate|date:"d M Y"}}</td>
 		<td class="markettable">{% if coin.news_count > 0 %}{{coin.news_count}}{% endif %}</td>
@@ -47,3 +50,6 @@ td.markettable {
 </table>
 
 {% endblock %}
+
+parameters:
+search='' contain in name or symbol filter

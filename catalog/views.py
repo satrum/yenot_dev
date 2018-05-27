@@ -147,7 +147,7 @@ def index(request, template='index.html', page_template='index_page.html'):#Фу
     
     return render(request, template, context)
 
-from django.db.models import Avg, Max, Min, Sum
+from django.db.models import Avg, Max, Min, Sum, Q
 
 def profile(request, template='profile.html'):
 	if request.user.is_authenticated:
@@ -235,7 +235,12 @@ def topusers(request, template='topusers.html'):
 	
 import datetime
 def coinlist(request, template='coinlist.html'):
-	allcoins = Coin.objects.filter(mktcap__gt=0)#[0:500]
+	#search:
+	search = request.GET.get('search')
+	if search == None: search=''
+	
+	allcoins = Coin.objects.filter(Q(volume__gt=0,symbol__contains=search)|Q(volume__gt=0,name__contains=search))#(mktcap__gt=0)#[0:500]
+	coin_counter = allcoins.count()
 	for coin in allcoins:
 		coin.news_count = News.objects.filter(coinid = coin).count()
 		#get cryptocompare:
@@ -251,7 +256,7 @@ def coinlist(request, template='coinlist.html'):
 		except:
 			continue
 	page = request.GET.get('page', 1)
-	paginator = Paginator(allcoins, 100)
+	paginator = Paginator(allcoins, 200)
 	try:
 		coins = paginator.page(page)
 	except PageNotAnInteger:
@@ -259,7 +264,7 @@ def coinlist(request, template='coinlist.html'):
 	except EmptyPage:
 		coins = paginator.page(paginator.num_pages)
 
-	context = {'coins':coins}
+	context = {'coins':coins, 'coin_counter':coin_counter}
 	return render(request, template, context)
 	
 from django.views import generic
