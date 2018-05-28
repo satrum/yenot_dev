@@ -9,6 +9,32 @@ td.markettable {
 </style>
 <h3>count of coins: {{coin_counter}}</h3>
 
+<form id="us_search">
+<input type="search" id="us_search" name="search" placeholder="Search coin..." aria-label="Search through site content">
+<button class="inp_2">Search</button>
+</form>
+
+<div class="table_filter_Search tab_fil">
+  <form role="form" id="form" action="" data-def="">
+  
+  <select class="sel_fil" name="algo">
+  <option  value="" selected >Algo</option>
+  {% for item in algo %}
+  <option value="{{ item }}">{{ item }}</option>
+  {% endfor %}
+  </select>
+  
+  <select class="sel_fil" name="consensus">
+   <option  value="" selected >Consensus</option>
+   {% for item in consensus %}
+  <option  value="{{ item }}">{{ item }}</option>
+  {% endfor %}
+  </select>
+  
+   <input class="inp" type="submit" value="FILTER">
+  </form>
+</div>
+
 <table border = "1" width = "100%" cellpadding = "1" cellspacing = "0">
 	<tr>
 		<td class="markettable">link</td>
@@ -21,6 +47,8 @@ td.markettable {
 		<td class="markettable">COIN SUPPLY</td>
 		<td class="markettable">TOTAL COIN SUPPLY</td>
 		<td class="markettable">START DATE</td>
+		<td class="markettable">Algo</td>
+		<td class="markettable">Consensus</td>
 		<td class="markettable">SITE NEWS COUNT</td>
 		<td class="markettable">Tweets</td>
 		<td class="markettable">Followers</td>
@@ -39,6 +67,8 @@ td.markettable {
 		<td class="markettable">{{coin.supply}}</td>
 		<td class="markettable">{{coin.TotalCoinSupply}}</td>
 		<td class="markettable">{{coin.StartDate|date:"d M Y"}}</td>
+		<td class="markettable">{{coin.Algorithm}}</td>
+		<td class="markettable">{{coin.ProofType}}</td>
 		<td class="markettable">{% if coin.news_count > 0 %}{{coin.news_count}}{% endif %}</td>
 		<td class="markettable">{{coin.twitter_posts}}</td>
 		<td class="markettable">{{coin.twitter_followers}}</td>
@@ -53,3 +83,13 @@ td.markettable {
 
 parameters:
 search='' contain in name or symbol filter
+
+функционал:
+ок 1. поиск по имени или символу
+2. фильтры - algo, consensus, news on yeenot 
+3. sorting - volume (default), mktcap, change, social stats, news on yeenot
+4. columns _ выбор дополнительных колонок и наборы колонок (market, info, social, ta indicators, sentiment)
+5. exchanges pairs - когда буду загружать информацию по всем обменникам для данной монеты, можно сделать фильтр по обменникам
+6. больше столбцов со временем - volatility, change/7day, 30day, 90day, 1h
+7. Выбор между разными рангами - cryptocompare(volume), coinmarketcap, coingecko
+еще могут быть фильтры по значениям - ползунок значение в пределах таких то

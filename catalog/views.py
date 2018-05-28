@@ -239,7 +239,14 @@ def coinlist(request, template='coinlist.html'):
 	search = request.GET.get('search')
 	if search == None: search=''
 	
-	allcoins = Coin.objects.filter(Q(volume__gt=0,symbol__contains=search)|Q(volume__gt=0,name__contains=search))#(mktcap__gt=0)#[0:500]
+	allcoins = Coin.objects.filter(Q(volume__gt=0,symbol__contains=search)|Q(volume__gt=0,name__contains=search))[0:100]#(mktcap__gt=0)#[0:500]
+	
+	#filter:
+	#algo = Coin.objects.order_by('Algorithm').values_list('Algorithm', flat=True).distinct()
+	#consensus = Coin.objects.order_by('ProofType').values_list('ProofType', flat=True).distinct()
+	algo = set(allcoins.values_list('Algorithm', flat=True))
+	consensus = set(allcoins.values_list('ProofType', flat=True))
+	
 	coin_counter = allcoins.count()
 	for coin in allcoins:
 		coin.news_count = News.objects.filter(coinid = coin).count()
@@ -256,7 +263,7 @@ def coinlist(request, template='coinlist.html'):
 		except:
 			continue
 	page = request.GET.get('page', 1)
-	paginator = Paginator(allcoins, 200)
+	paginator = Paginator(allcoins, 100)
 	try:
 		coins = paginator.page(page)
 	except PageNotAnInteger:
@@ -264,7 +271,7 @@ def coinlist(request, template='coinlist.html'):
 	except EmptyPage:
 		coins = paginator.page(paginator.num_pages)
 
-	context = {'coins':coins, 'coin_counter':coin_counter}
+	context = {'coins':coins,'coin_counter':coin_counter,'algo':algo,'consensus':consensus}
 	return render(request, template, context)
 	
 from django.views import generic
