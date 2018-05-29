@@ -303,7 +303,7 @@ class Coin(models.Model):
 	Algorithm = models.CharField(max_length=20,default='',help_text="Algorithm from cryptocompare")
 	ProofType = models.CharField(max_length=20,default='',help_text="ProofType from cryptocompare")
 	#SortOrder = models.IntegerField(default=0,help_text='SortOrder from cryptocompare')
-	TotalCoinSupply = models.CharField(max_length=20,default='',help_text="TotalCoinSupply from cryptocompare")
+	TotalCoinSupply = models.CharField(max_length=30,default='',help_text="TotalCoinSupply from cryptocompare")
 	Id_cc = models.IntegerField(default=0,help_text='ID for cryptocompare calls')
 	updatetime = models.DateTimeField(auto_now=True, help_text='last time data save')
 	
