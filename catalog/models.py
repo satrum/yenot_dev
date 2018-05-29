@@ -300,10 +300,10 @@ class Coin(models.Model):
 	supply = models.DecimalField(max_digits=20, decimal_places=0, help_text="coin supply", default=0)
 	image = models.ImageField(upload_to='coin_images/', max_length=100, blank=True)
 	#from cryptocompare coinlist
-	Algorithm = models.CharField(max_length=20,default='',help_text="Algorithm from cryptocompare")
-	ProofType = models.CharField(max_length=20,default='',help_text="ProofType from cryptocompare")
+	Algorithm = models.CharField(max_length=40,default='',help_text="Algorithm from cryptocompare")
+	ProofType = models.CharField(max_length=40,default='',help_text="ProofType from cryptocompare")
 	#SortOrder = models.IntegerField(default=0,help_text='SortOrder from cryptocompare')
-	TotalCoinSupply = models.CharField(max_length=30,default='',help_text="TotalCoinSupply from cryptocompare")
+	TotalCoinSupply = models.CharField(max_length=40,default='',help_text="TotalCoinSupply from cryptocompare")
 	Id_cc = models.IntegerField(default=0,help_text='ID for cryptocompare calls')
 	updatetime = models.DateTimeField(auto_now=True, help_text='last time data save')
 	
