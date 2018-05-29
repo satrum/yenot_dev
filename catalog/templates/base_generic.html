@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   
-  {% block title %}<title>YEENOT</title>{% endblock %}
+  {% if news.title %}<title>{{ news.title }}</title>{% else %}<title>YEENOT</title>{% endif %}
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -46,6 +46,7 @@ function addCustomInformation() {
    {% load static %}
    <link rel="shortcut icon" href="{% static 'images/favicon_3.ico' %}" type="image/x-icon">
    <script src="{% static 'jquery.waypoints.min.js' %}"></script>
+
    <script src="{% static 'infinite.min.js' %}"></script>
 	<script src="{% static 'jquery.tablesorter.pager.js' %}" type="text/javascript"></script>
 	<script type="text/javascript">
@@ -61,6 +62,7 @@ $("#user_list_3").tablesorter({sortList: [[6,1]]});
 </head>
 <body>
 <script async src="//appsha1.cointraffic.io/js/?wkey=fagzs3"></script>
+
 <div class="container-fluid">
 
     <div class="row">

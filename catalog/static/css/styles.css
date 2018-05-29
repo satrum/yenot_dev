@@ -1654,12 +1654,8 @@ display: inline-block;
     margin: 3px 0px 0px;
 }
 .share{
-	width: 77%;
     text-align: center;
     margin: auto;
-    border: 1px solid rgba(192, 230, 78, 0.53);
-    background: rgba(86, 133, 11, 0.45);
-    box-shadow: 1px 1px 10px 1px #82c345;
 	padding: 3px;
 }
 .telegram-share{
@@ -1670,36 +1666,42 @@ display: inline-block;
   font-weight: 500;
   color: #fff;
   cursor: pointer;
-  background-color: #0088cc;
   border-radius: 3px;
   box-sizing: border-box;
   text-decoration: none;
   font-size: 11px;
 }
-
-.telegram-share span{
-  display: inline-block;
-  margin: 1px;
+.tel_share img{
+	    width: 47px;
+    transform: rotate(-12deg);
+    height: 53px;
+    margin-top: -7px;
+	    margin-left: -9px;
 }
-
-.telegram-share i{
-  display: inline-block;
-  height: 20px;
-  vertical-align: top;
-  width: 12px;
-  background-repeat: no-repeat;
-  background-position-y: 4px;
-  background-size: 10px;
-  /* This image is included below :) */
-  background-image: url(../images/telegram-plane.png);
+.red_share img{
+	        width: 53px;
+    margin-top: -11px;
+    margin-left: -14px;
 }
-
-.telegram-share:hover{
-  background-color: #007dbb;
+.FB_share img{
+    width: 32px;
+    margin-top: -8px;
+    margin-left: -14px;
 }
-
-.telegram-share:active{
-  background-color: #026698;
+.pocket_share img{
+	        width: 53px;
+    margin-top: -7px;
+    margin-left: -14px;
+}
+.in_share img{
+width: 49px;
+    margin-top: -7px;
+    margin-left: -14px;
+}
+.g_share img{
+width: 49px;
+    margin-top: -7px;
+    margin-left: -14px;
 }
 .share h3{
 	    display: inline-block;
