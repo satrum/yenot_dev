@@ -632,7 +632,7 @@ class Command(BaseCommand):
 			cc_coin.symbol = filecoins[id]['Symbol']
 			cc_coin.name = filecoins[id]['Name']
 			cc_coin.Description = filecoins[id]['Description']
-			cc_coin.WebsiteUrl = filecoins[id]['WebsiteUrl']
+			cc_coin.WebsiteUrl = filecoins[id]['WebsiteUrl'].split('?utm_source')[0]
 			StartDate = filecoins[id]['StartDate'].split('/')
 			cc_coin.StartDate = datetime(int(StartDate[2]), int(StartDate[1]), int(StartDate[0]))
 			cc_coin.save()
@@ -920,6 +920,9 @@ class Command(BaseCommand):
 			for id in coins:
 				coin = coins[id]
 				print(id, coin['Symbol'], coin['Name'], coin['WebsiteUrl'], coin['StartDate'])
+				#print(id,coin['WebsiteUrl'].split('?')[0])
+				#if coin['WebsiteUrl'].split('?utm_source')[0]!=coin['WebsiteUrl']:
+				#	print (coin['WebsiteUrl'])
 				#cc_coin = CoinCryptocompare.objects.get(Id_cc = id)
 				#print(cc_coin)
 			a = [id for id in coins]
