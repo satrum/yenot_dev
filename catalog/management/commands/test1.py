@@ -558,7 +558,7 @@ class Command(BaseCommand):
 					newdbcoin.ProofType = filecoins[symbol]['ProofType']
 					#newdbcoin.SortOrder = int(filecoins[symbol]['SortOrder'])
 					newdbcoin.TotalCoinSupply = filecoins[symbol]['TotalCoinSupply']
-					newdbcoin.Id_cc = id(filecoins[symbol]['Id'])
+					newdbcoin.Id_cc = int(filecoins[symbol]['Id'])
 					#from pricedata
 					pricedata = rawdata[symbol]['USD']
 					newdbcoin.price = pricedata['PRICE']
