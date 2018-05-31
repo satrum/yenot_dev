@@ -25,9 +25,14 @@
 {% endif %}
 <div class="share">
 <div class="share_link">
+<a class="telegram-share share_link g_share" href="{% url 'news-share' %}?id={{news.newsid}}&social=gp" target="_blank">
+<img src="{% static 'images/g_share.png' %}">
+</a>
+<!--
 <a class="telegram-share share_link g_share" href="https://plus.google.com/share?url=https://yeenot.today{{request.get_full_path}}" target="_blank">
  <img src="{% static 'images/g_share.png' %}">
 </a>
+-->
 <a target=_blank href="https://twitter.com/share?hashtags=YEENOT.TODAY,{{ news.coinid }},cryptocurrency,crypto&text={{ news.title }}&url=https://yeenot.today{{request.get_full_path}}"  onclick="window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');" target="_self"><img src="{% static 'images/twitter_share.png' %}" style="width: 43px;"></a></div>
 <a class="telegram-share share_link tel_share" href="javascript:window.open('https://t.me/share/url?url='+encodeURIComponent(window.location.href), '_blank')" target="_blank">
  <img src="{% static 'images/telegram-plane.png' %}">
@@ -110,7 +115,9 @@
 	<h4 style="text-align:center; margin:10px 0px;"><strong>Image of proof:</strong></h4>
 	<img src="{{ news.proof_image.url }}" style="width: 100%;">
 {% endif %}
+
 </div>
+
 
 {% if banner_right %}
 <div class="adv_ban_ab">

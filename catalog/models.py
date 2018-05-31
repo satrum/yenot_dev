@@ -144,6 +144,16 @@ class News(models.Model):
     link =  models.URLField(default="https://yeenot.today", max_length=200,verbose_name="REFERENCE ON NEWS:") # link to source of news
     count_link_click = models.IntegerField(default=0, blank=True, null=True, help_text='count of clicks to news link')
     count_details_view = models.IntegerField(default=0, blank=True, null=True, help_text='count of views of news detail')
+    #share counters:
+    cs_gp = models.IntegerField(default=0, blank=True, null=True, help_text='Count of clicks to Share news on Goggle Plus')
+    cs_tw = models.IntegerField(default=0, blank=True, null=True, help_text='count of clicks to share news on twitter')
+    cs_tg = models.IntegerField(default=0, blank=True, null=True, help_text='count of clicks to share news on telegram')
+    cs_rd = models.IntegerField(default=0, blank=True, null=True, help_text='count of clicks to share news on reddit')
+    cs_fb = models.IntegerField(default=0, blank=True, null=True, help_text='count of clicks to share news on facebook')
+    cs_po = models.IntegerField(default=0, blank=True, null=True, help_text='count of clicks to share news on pocket')
+    cs_ln = models.IntegerField(default=0, blank=True, null=True, help_text='count of clicks to share news on linkedin')
+    cs_sum= models.IntegerField(default=0, blank=True, null=True, help_text='count of clicks to share news on all social')
+	
     time = models.DateTimeField(default=timezone.now) #set time of add news
     proof_image = models.ImageField(upload_to='news_images/', max_length=100, blank=True,verbose_name="SCREENSHOT OF THE NEWS" ) #image of proof height_field=200, width_field=200
     MODERATE_STATUS = (
@@ -304,6 +314,8 @@ class Coin(models.Model):
 	ProofType = models.CharField(max_length=40,default='',help_text="ProofType from cryptocompare")
 	#SortOrder = models.IntegerField(default=0,help_text='SortOrder from cryptocompare')
 	TotalCoinSupply = models.CharField(max_length=40,default='',help_text="TotalCoinSupply from cryptocompare")
+	#TotalCoinSupply = models.DecimalField(max_digits=20, decimal_places=0,help_text="TotalCoinSupply from cryptocompare", default=0)
+	supply_share = models.DecimalField(max_digits=20, decimal_places=3, help_text="coin supply share", default=1)
 	Id_cc = models.IntegerField(default=0,help_text='ID for cryptocompare calls')
 	updatetime = models.DateTimeField(auto_now=True, help_text='last time data save')
 	

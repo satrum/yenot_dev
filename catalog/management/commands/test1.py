@@ -97,6 +97,7 @@ class Command(BaseCommand):
 		print('coinsocial - read json from file coinlist , get social, write json to social file with date')#!!!!
 		print('coinsocial_update - read json from last time social file, update data in Coin_Cryptocompare')#!!!! twitter - ok, reddit - ok
 		#need: facebook, cryptocompare, github
+		#update_cycle_2 1/day: coinlist -> wait -> coinadd add -> coinimage -> coinsnapshot+coinsocial
 
 
 	def rate_news(self):
@@ -514,7 +515,12 @@ class Command(BaseCommand):
 					dbcoin.Algorithm = filecoins[dbcoin.symbol]['Algorithm']
 					dbcoin.ProofType = filecoins[dbcoin.symbol]['ProofType']
 					#dbcoin.SortOrder = int(filecoins[dbcoin.symbol]['SortOrder'])
-					dbcoin.TotalCoinSupply = filecoins[dbcoin.symbol]['TotalCoinSupply']
+					total = filecoins[dbcoin.symbol]['TotalCoinSupply']
+					if total == 'N/A' or total == '0' or total == '':
+						dbcoin.TotalCoinSupply = ''
+					else:
+						dbcoin.TotalCoinSupply = total.split('.')[0].replace(',','').replace(' ','')
+					#dbcoin.TotalCoinSupply = filecoins[dbcoin.symbol]['TotalCoinSupply']
 					dbcoin.Id_cc = int(filecoins[dbcoin.symbol]['Id'])
 					#price
 					pricedata = rawdata[dbcoin.symbol]['USD']
@@ -523,6 +529,10 @@ class Command(BaseCommand):
 					dbcoin.volume = pricedata['TOTALVOLUME24HTO']
 					dbcoin.mktcap = pricedata['MKTCAP']
 					dbcoin.supply = pricedata['SUPPLY']
+					if total == 'N/A' or total == '0' or total == '':
+						dbcoin.supply_share = 1
+					else:
+						dbcoin.supply_share = pricedata['SUPPLY']/int(dbcoin.TotalCoinSupply)
 					#image
 					if 'ImageUrl' not in filecoins[dbcoin.symbol].keys():
 						print('not find ImageUrl for coin:'+ dbcoin.symbol)
@@ -557,7 +567,12 @@ class Command(BaseCommand):
 					newdbcoin.Algorithm = filecoins[symbol]['Algorithm']
 					newdbcoin.ProofType = filecoins[symbol]['ProofType']
 					#newdbcoin.SortOrder = int(filecoins[symbol]['SortOrder'])
-					newdbcoin.TotalCoinSupply = filecoins[symbol]['TotalCoinSupply']
+					total = filecoins[symbol]['TotalCoinSupply']
+					if total == 'N/A' or total == '0' or total == '':
+						newdbcoin.TotalCoinSupply = ''
+					else:
+						newdbcoin.TotalCoinSupply = total.split('.')[0].replace(',','').replace(' ','')
+					#newdbcoin.TotalCoinSupply = filecoins[symbol]['TotalCoinSupply']
 					newdbcoin.Id_cc = int(filecoins[symbol]['Id'])
 					#from pricedata
 					pricedata = rawdata[symbol]['USD']
@@ -566,6 +581,10 @@ class Command(BaseCommand):
 					newdbcoin.volume = pricedata['TOTALVOLUME24HTO']
 					newdbcoin.mktcap = pricedata['MKTCAP']
 					newdbcoin.supply = pricedata['SUPPLY']
+					if total == 'N/A' or total == '0' or total == '':
+						newdbcoin.supply_share = 1
+					else:
+						newdbcoin.supply_share = pricedata['SUPPLY']/int(newdbcoin.TotalCoinSupply)
 					if 'ImageUrl' not in filecoins[symbol].keys():
 						print('not find ImageUrl for coin:'+ dbcoin.symbol)
 					else:

@@ -34,6 +34,7 @@ urlpatterns += [
 	path('profile/user_update/', views.user_update, name='user_update'),
 	path('profile/addpromo/', views_promo.addpromo, name='addpromo'),
 	path('news_click/<int:pk>', views.news_click, name='news-click'),
+	path('news_share/', views.news_share, name='news-share'),
 	path('topusers/', views.topusers, name='topusers'),
 	path('market/', views.coinlist, name='coinlist'),
 	#need:

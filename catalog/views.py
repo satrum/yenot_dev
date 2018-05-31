@@ -250,6 +250,14 @@ def coinlist(request, template='coinlist.html'):
 	coin_counter = allcoins.count()
 	for coin in allcoins:
 		coin.news_count = News.objects.filter(coinid = coin).count()
+		#supply % calculate:
+		supply = coin.TotalCoinSupply
+		if supply == 'N/A' or supply == '0' or supply == '':
+			coin.TotalCoinSupply = ''
+		else:
+			coin.TotalCoinSupply = supply.split('.')[0].replace(',','').replace(' ','')
+			#coin.TotalCoinSupply = int(coin.TotalCoinSupply)
+			#coin.supply_share = 100*coin.supply/int(coin.TotalCoinSupply)
 		#get cryptocompare:
 		try:
 			cc_coin = CoinCryptocompare.objects.get(Id_cc = coin.Id_cc)
@@ -670,6 +678,19 @@ def news_click(request, pk):
 	new.count_link_click += 1
 	new.save()
 	return HttpResponseRedirect(new.link)
+	
+def news_share(request):
+	if request.method == 'GET':
+		newsid = request.GET['id']
+		social = request.GET['social']
+	new = News.objects.get(pk=int(newsid))
+	new.cs_sum+= 1
+	if social=='gp':
+		new.cs_gp+=1
+		url='https://plus.google.com/share?url='+request.build_absolute_uri(new.get_absolute_url())
+	new.save()
+	print(url)
+	return HttpResponseRedirect(url)
 
 
 from django.http import Http404, HttpResponse

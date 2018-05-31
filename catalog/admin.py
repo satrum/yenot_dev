@@ -51,7 +51,7 @@ from .models import News, Source, UserVotes, Profile, Banner, Coin, YeenotSettin
 #admin.site.register(News)
 @admin.register(News)
 class NewsAdmin(admin.ModelAdmin):
-    list_display = ('newsid', 'title', 'direction', 'duration', 'coinid', 'coinprice', 'short_text', 'time', 'link', 'rating', 'sourceid','like','dislike','user','moderation_status', 'promo_status', 'proof_image','count_link_click', 'count_details_view')
+    list_display = ('newsid', 'title', 'direction', 'duration', 'coinid', 'coinprice', 'short_text', 'time', 'link', 'rating', 'sourceid','like','dislike','user','moderation_status', 'promo_status', 'proof_image','count_link_click', 'count_details_view','cs_sum','cs_gp','cs_tw','cs_tg','cs_rd','cs_fb','cs_po','cs_ln')
     list_filter = ('direction', 'duration', 'moderation_status', 'promo_status', 'time', 'sourceid')
     #fields = [('title', 'direction'), 'text', 'link'] надо сделать разное для add и change, и в зависимости от прав пользователя
     search_fields = ['newsid','title','text','coinid__symbol','sourceid__name']
@@ -89,7 +89,7 @@ class BannerAdmin(admin.ModelAdmin):
 
 @admin.register(Coin)
 class CoinAdmin(admin.ModelAdmin):
-    list_display = ('id', 'symbol', 'name', 'price', 'change', 'volume', 'mktcap', 'supply','TotalCoinSupply','Algorithm','ProofType','Id_cc','updatetime','image')
+    list_display = ('id', 'symbol', 'name', 'price', 'change', 'volume', 'mktcap', 'supply','TotalCoinSupply','supply_share','Algorithm','ProofType','Id_cc','updatetime','image')
     search_fields = ['symbol','name']
     list_filter = ('Algorithm', 'ProofType')
     inlines = [NewsInline]
