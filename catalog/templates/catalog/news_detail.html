@@ -24,7 +24,6 @@
 <div class="log_in_p_add_2">
 {% endif %}
 <div class="share">
-<div class="share_link">
 <a class="telegram-share share_link g_share" href="{% url 'news-share' %}?id={{news.newsid}}&social=gp" target="_blank">
 <img src="{% static 'images/g_share.png' %}">
 </a>
@@ -33,23 +32,54 @@
  <img src="{% static 'images/g_share.png' %}">
 </a>
 -->
-<a target=_blank href="https://twitter.com/share?hashtags=YEENOT.TODAY,{{ news.coinid }},cryptocurrency,crypto&text={{ news.title }}&url=https://yeenot.today{{request.get_full_path}}"  onclick="window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');" target="_self"><img src="{% static 'images/twitter_share.png' %}" style="width: 43px;"></a></div>
+<a class="share_link" href="{% url 'news-share' %}?id={{news.newsid}}&social=tw" target="_blank">
+<img src="{% static 'images/twitter_share.png' %}" style="width: 43px;">
+</a>
+<!--
+<a target=_blank class="share_link" href="https://twitter.com/share?hashtags=YEENOT.TODAY,{{ news.coinid }},cryptocurrency,crypto&text={{ news.title }}&url=https://yeenot.today{{request.get_full_path}}"  onclick="window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');" target="_self"><img src="{% static 'images/twitter_share.png' %}" style="width: 43px;"></a>
+-->
+<a class="telegram-share share_link tel_share" href="{% url 'news-share' %}?id={{news.newsid}}&social=tg" target="_blank">
+ <img src="{% static 'images/telegram-plane.png' %}">
+</a>
+<!--
 <a class="telegram-share share_link tel_share" href="javascript:window.open('https://t.me/share/url?url='+encodeURIComponent(window.location.href), '_blank')" target="_blank">
  <img src="{% static 'images/telegram-plane.png' %}">
 </a>
+-->
+<a class="telegram-share share_link red_share" href="{% url 'news-share' %}?id={{news.newsid}}&social=rd" target="_blank">
+ <img src="{% static 'images/reddit_share.png' %}">
+</a>
+<!--
 <a class="telegram-share share_link red_share" href="https://www.reddit.com/submit?title={{ news.title }}&url=https://yeenot.today{{request.get_full_path}}" target="_blank">
  <img src="{% static 'images/reddit_share.png' %}">
 </a>
+-->
+<a class="telegram-share share_link FB_share" href="{% url 'news-share' %}?id={{news.newsid}}&social=fb" target="_blank">
+ <img src="{% static 'images/facebook_share.png' %}">
+</a>
+<!--
 <a class="telegram-share share_link FB_share" href="http://www.facebook.com/sharer/sharer.php?s=100&amp;p[url]=https://yeenot.today{{request.get_full_path}}&amp;p[images][0]=https://yeenot.today/static/images/YO.png&amp;p[title]={{ news.title }}"  target="_blank">
  <img src="{% static 'images/facebook_share.png' %}">
 </a>
+-->
+<a class="telegram-share share_link pocket_share" href="{% url 'news-share' %}?id={{news.newsid}}&social=po" target="_blank">
+ <img src="{% static 'images/pocket_share.png' %}" >
+</a>
+<!--
 <a class="telegram-share share_link pocket_share" href="http://profitquery.com/add-to/pocket/?url=https://yeenot.today{{request.get_full_path}}&title={{ news.title }}" target="_blank">
  <img src="{% static 'images/pocket_share.png' %}" >
 </a>
+-->
+<a class="telegram-share share_link in_share" href="{% url 'news-share' %}?id={{news.newsid}}&social=ln" target="_blank">
+ <img src="{% static 'images/in_share.png' %}">
+</a>
+<!--
 <a class="telegram-share share_link in_share" href="https://www.linkedin.com/shareArticle?title={{ news.title }}&url=https://yeenot.today{{request.get_full_path}}" target="_blank">
  <img src="{% static 'images/in_share.png' %}">
 </a>
+-->
 </div>
+
 <h1 style="text-align:center;">{{ news.title }}</h1>
 <p style="text-align:center;"><strong>Author:</strong>
 {% if news.user.first_name %}

@@ -239,7 +239,7 @@ def coinlist(request, template='coinlist.html'):
 	search = request.GET.get('search')
 	if search == None: search=''
 	
-	allcoins = Coin.objects.filter(Q(volume__gt=0,symbol__contains=search)|Q(volume__gt=0,name__contains=search))[0:100]#(mktcap__gt=0)#[0:500]
+	allcoins = Coin.objects.filter(Q(volume__gt=0,symbol__icontains=search)|Q(volume__gt=0,name__icontains=search))[0:100]#(mktcap__gt=0)#[0:500]
 	
 	#filter:
 	#algo = Coin.objects.order_by('Algorithm').values_list('Algorithm', flat=True).distinct()
@@ -688,6 +688,27 @@ def news_share(request):
 	if social=='gp':
 		new.cs_gp+=1
 		url='https://plus.google.com/share?url='+request.build_absolute_uri(new.get_absolute_url())
+	if social=='tw':
+		new.cs_tw+=1
+		#coin = Coin.objects.get(symbol=new.coinid)
+		#id = new.coinid.Id_cc
+		#twitterurl=CoinCryptocompare.objects.get(Id_cc=id)
+		url='https://twitter.com/share?hashtags=YEENOT.TODAY,'+new.coinid.symbol.split('*')[0]+',cryptocurrency,crypto&text='+new.title+'&url='+request.build_absolute_uri(new.get_absolute_url())
+	if social=='tg':
+		new.cs_tg+=1
+		url='https://t.me/share/url?url='+request.build_absolute_uri(new.get_absolute_url())+'&text='+new.title
+	if social=='rd':
+		new.cs_rd+=1
+		url='https://www.reddit.com/submit?title='+new.title+'&url='+request.build_absolute_uri(new.get_absolute_url())
+	if social=='fb':
+		new.cs_fb+=1
+		url='http://www.facebook.com/sharer/sharer.php?s=100&p[url]='+request.build_absolute_uri(new.get_absolute_url())+'&p[images][0]=https://yeenot.today/static/images/YO.png&p[title]='+new.title
+	if social=='po':
+		new.cs_po+=1
+		url='http://profitquery.com/add-to/pocket/?url='+request.build_absolute_uri(new.get_absolute_url())+'&title='+new.title
+	if social=='ln':
+		new.cs_ln+=1
+		url='https://www.linkedin.com/shareArticle?title='+new.title+'&url='+request.build_absolute_uri(new.get_absolute_url())
 	new.save()
 	print(url)
 	return HttpResponseRedirect(url)
