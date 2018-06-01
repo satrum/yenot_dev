@@ -5,6 +5,9 @@
   {% if news.title %}<title>{{ news.title }}</title>{% else %}<title>YEENOT</title>{% endif %}
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta property="og:image" content="https://yeenot.today/static/images/YO.png">
+  <meta property="og:image:secure_url" content="https://yeenot.today/static/images/YO.png">
+  <link rel="image_src" href="/static/images/YO.png">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
   <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
@@ -49,6 +52,8 @@ function addCustomInformation() {
 
    <script src="{% static 'infinite.min.js' %}"></script>
 	<script src="{% static 'jquery.tablesorter.pager.js' %}" type="text/javascript"></script>
+	<script src="{% static '/noUiSlider/nouislider.js' %}" type="text/javascript"></script>
+	<link rel="stylesheet" href="{% static '/noUiSlider/nouislider.css' %}">
 	<script type="text/javascript">
     $(document).ready(function() {
 	$("#user_list").tablesorter({sortList: [[4,0]]});

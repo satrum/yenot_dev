@@ -1,30 +1,57 @@
 {% extends "base_generic.html" %}
 
 {% block content %}
-<style ..>
-td.markettable {
-  font-size: 8pt;
-  text-align: center;  
-}
-</style>
-<h3>count of coins: {{coin_counter}}</h3>
-
-<form id="us_search">
+<div class="line_ban">
+<span id="ct_cqBJnsd"></span>
+</div>
+<div class="table_filter_2">
+  <div class="tab_front_2">
+<div class="table_btn_promo tab_fil">{% if banner_left %}<a href="{% url 'banner-click' banner_left.pk %}" target="_blank"><img src = "{{ banner_left.image.url}}"></a>{% endif %}</div>
+  <div class="table_filter_Search_2 tab_fil">
+  <form id="us_search_2">
 <input type="search" id="us_search" name="search" placeholder="Search coin..." aria-label="Search through site content">
 <button class="inp_2">Search</button>
 </form>
-
-<div class="table_filter_Search tab_fil">
+  <h4 class="us_top_text_3">SHOW COINS:</h4><input class="rad" name="direction" type="radio" value="" id="radi1" checked><label for="radi1"><span></span> <h4 class="us_top_text_3">TOP {{coin_counter}}</h4></label>
+   <input  class="rad" name="direction" type="radio" id="radi2" value="b"><label for="radi2"><span></span><h4 class="us_top_text_3">All</h4></label>
+</div>	
+		<div class="table_btn_promo tab_fil right_banner">  {% if banner_right %}<a href="{% url 'banner-click' banner_right.pk %}" target="_blank"><img src = "{{ banner_right.image.url}}"></a>{% endif %}</div>
+</div>
+</div>
+<div class="table_filter_3">
+ <div class="tab_front_3">
+ <div class="caret_vol">
+ <div class="roll">
+ <h4>VOLUME:</h4>
+  <span id="range-value-1" class="rit"></span><p class="rit">-</p><span id="range-value-2" class="rit"></span>
+  <div id="slider3"></div>
+ </div>
+ <div class="roll">
+ <h4>MARKETCAP:</h4>
+  <span id="range-value-3" class="rit"></span><p class="rit">-</p><span id="range-value-4" class="rit"></span>
+  <div id="slider4"></div>
+ </div>
+ <div class="roll">
+ <h4>COIN SUPPLY:</h4>
+  <span id="range-value-5" class="rit"></span><p class="rit">-</p><span id="range-value-6" class="rit"></span>
+  <div id="slider5"></div>
+ </div>
+ <div class="roll">
+ <h4>TOTAL COIN SUPPLY:</h4>
+ <span id="range-value-7"class="rit"></span><p class="rit">-</p><span id="range-value-8" class="rit"></span>
+   <div id="slider6"></div>
+</div>
+   </div>
   <form role="form" id="form" action="" data-def="">
   
-  <select class="sel_fil" name="algo">
+  <select class="sel_fil_2" name="algo">
   <option  value="" selected >Algo</option>
   {% for item in algo %}
   <option value="{{ item }}">{{ item }}</option>
   {% endfor %}
   </select>
   
-  <select class="sel_fil" name="consensus">
+  <select class="sel_fil_2" name="consensus">
    <option  value="" selected >Consensus</option>
    {% for item in consensus %}
   <option  value="{{ item }}">{{ item }}</option>
@@ -34,51 +61,131 @@ td.markettable {
    <input class="inp" type="submit" value="FILTER">
   </form>
 </div>
+</div>
 
-<table border = "1" width = "100%" cellpadding = "1" cellspacing = "0">
+<table id="user_list">
+<thead>
 	<tr>
-		<td class="markettable">link</td>
-		<td class="markettable">SYMBOL</td>
-		<td class="markettable">NAME</td>
-		<td class="markettable">PRICE</td>
-		<td class="markettable">CHANGE/DAY</td>
-		<td class="markettable">VOLUME</td>
-		<td class="markettable">MARKETCAP</td>
-		<td class="markettable">COIN SUPPLY</td>
-		<td class="markettable">TOTAL COIN SUPPLY</td>
-		<td class="markettable">START DATE</td>
-		<td class="markettable">Algo</td>
-		<td class="markettable">Consensus</td>
-		<td class="markettable">SITE NEWS COUNT</td>
-		<td class="markettable">Tweets</td>
-		<td class="markettable">Followers</td>
-		<td class="markettable">Rd Subscribe</td>
-		<td class="markettable">Rd comments/day</td>
-	</tr>
-	{% for coin in coins %}
-	<tr>		
-		<td><img src="{{coin.image.url}}" style="border-radius: 100%; width:30px;"></td>
-		<td class="markettable">{{coin.symbol}}</td>
-		<td class="markettable">{{coin.name}}</td>
-		<td class="markettable">{{coin.price|floatformat:3}}</td>
-		<td class="markettable"><font color="{% if coin.change > 0 %}green{% else %}red{% endif %}">{{coin.change|floatformat:2}}</font></td>
-		<td class="markettable">{{coin.volume|floatformat:3}}</td>
-		<td class="markettable">{{coin.mktcap|floatformat:3}}</td>
-		<td class="markettable">{{coin.supply}}</td>
-		<td class="markettable">{{coin.TotalCoinSupply}}</td>
-		<td class="markettable">{{coin.StartDate|date:"d M Y"}}</td>
-		<td class="markettable">{{coin.Algorithm}}</td>
-		<td class="markettable">{{coin.ProofType}}</td>
-		<td class="markettable">{% if coin.news_count > 0 %}{{coin.news_count}}{% endif %}</td>
-		<td class="markettable">{{coin.twitter_posts}}</td>
-		<td class="markettable">{{coin.twitter_followers}}</td>
-		<td class="markettable">{{coin.reddit_subscribers}}</td>
-		<td class="markettable">{{coin.reddit_comments_per_day}}</td>
+		<th class="markettable">NAME</th>
+		<th class="markettable">CHANGE/DAY</th>
+		<th class="markettable">VOLUME</th>
+		<th class="markettable">MARKETCAP</th>
+		<th class="markettable">COIN SUPPLY</th>
+		<th class="markettable">TOTAL COIN SUPPLY</th>
+		<th class="markettable">SUPPLY %</th>
+		<th class="markettable">START DATE</th>
+		<th class="markettable">SITE NEWS COUNT</th>
 		
 	</tr>
+	</thead>
+	<tbody class="infinite-container">
+	{% for coin in coins %}
+	
+	<tr class="infinite-item tab_fon">	
+		<td class="td_pd" 	style="width: 10%;">
+		<img src="{{coin.image.url}}" style="border-radius: 100%; width: 77px;padding-top: 6px;">
+		<h3>{{coin.name}} ({{coin.symbol}})</h3>
+        <p class="price_change">{{news.coinid.price|floatformat:3}}$
+		({{news.coinid.change|floatformat:1}}%)</p>		
+		</td>
+		<td class="td_pd"><font color="{% if coin.change > 0 %}green{% else %}red{% endif %}">{{coin.change|floatformat:2}}</font></td>
+		<td class="td_pd">{{coin.volume|floatformat:3}}</td>
+		<td class="td_pd">{{coin.mktcap|floatformat:3}}</td>
+		<td class="td_pd">{{coin.supply}}</td>
+		<td class="td_pd">{{coin.TotalCoinSupply}}</td>
+		<td class="td_pd">{{coin.supply_share|floatformat:3}}</td>
+		<td class="td_pd">{{coin.StartDate|date:"d M Y"}}</td>
+		<td class="td_pd">{% if coin.news_count > 0 %}{{coin.news_count}}{% endif %}</td>
+		
+	</tr>
+	<tr class="infinite-item tab_fon">
+	<td class="td_pd">Tweets:</td>
+	<td class="td_pd">{{coin.twitter_posts}}</td>
+		<td class="td_pd">Followers:</td>
+		<td class="td_pd">{{coin.twitter_followers}}</td>
+		<td class="td_pd">Rd Subscribe :</td>
+				<td  class="td_pd">{{coin.reddit_subscribers}}</td>
+		<td class="td_pd">Rd comments/day</td>
+		<td class="td_pd">{{coin.reddit_comments_per_day}}</td>
+	</tr>
 	{% endfor %}
+	</tbody>
 </table>
+<script>
+var snapSlider = document.getElementById('slider3');
 
+noUiSlider.create(snapSlider, {
+	start: [0, 1000],
+	connect: true,
+	range: {
+		'min': 0,
+		'max': 1000
+	}
+});
+var snapValues = [
+	document.getElementById('range-value-1'),
+	document.getElementById('range-value-2')
+];
+
+snapSlider.noUiSlider.on('update', function( values, handle ) {
+	snapValues[handle].innerHTML = values[handle];
+});
+var slider = document.getElementById('slider4');
+
+noUiSlider.create(slider, {
+	start: [0, 100],
+	connect: true,
+	range: {
+		'min': 0,
+		'max': 100
+	}
+	
+});
+var UsnapValues = [
+	document.getElementById('range-value-3'),
+	document.getElementById('range-value-4')
+];
+
+slider.noUiSlider.on('update', function( values, handle ) {
+	UsnapValues[handle].innerHTML = values[handle];
+});
+var sslider = document.getElementById('slider5');
+
+noUiSlider.create(sslider, {
+	start: [0, 100],
+	connect: true,
+	range: {
+		'min': 0,
+		'max': 100
+	}
+});
+var DsnapValues = [
+	document.getElementById('range-value-5'),
+	document.getElementById('range-value-6')
+];
+
+sslider.noUiSlider.on('update', function( values, handle ) {
+	DsnapValues[handle].innerHTML = values[handle];
+});
+var uslider = document.getElementById('slider6');
+
+noUiSlider.create(uslider, {
+	start: [0, 100],
+	connect: true,
+	range: {
+		'min': 0,
+		'max': 100
+	}
+});
+var RsnapValues = [
+	document.getElementById('range-value-7'),
+	document.getElementById('range-value-8')
+];
+
+uslider.noUiSlider.on('update', function( values, handle ) {
+	RsnapValues[handle].innerHTML = values[handle];
+});
+	</script>
 {% endblock %}
 
 parameters:
