@@ -354,7 +354,7 @@ import json
 
 class Exchange(models.Model):
 	exchange = models.CharField(max_length=20, help_text='name of exchange')
-	coinlist = models.CharField(max_length=25000, help_text='list of coins symbol')
+	coinlist = models.CharField(max_length=10000, help_text='list of coins symbol')
 	coinlist_update = models.CharField(max_length=1000, help_text='list of new coins symbol')
 	count = models.IntegerField(default=0,help_text='count of coins')
 
