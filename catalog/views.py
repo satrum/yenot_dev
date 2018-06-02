@@ -235,6 +235,8 @@ def topusers(request, template='topusers.html'):
 	
 import datetime
 def coinlist(request, template='coinlist.html'):
+	#setup banners:
+	banner, banner_left, banner_right = page_banners()
 	#search:
 	search = request.GET.get('search')
 	if search == None: search=''
@@ -306,7 +308,7 @@ def coinlist(request, template='coinlist.html'):
 	except EmptyPage:
 		coins = paginator.page(paginator.num_pages)
 
-	context = {'coins':coins,'coin_counter':coin_counter,'algo':algo,'consensus':consensus}
+	context = {'coins':coins,'coin_counter':coin_counter,'algo':algo,'consensus':consensus,'banner_left':banner_left,'banner_right':banner_right}
 	return render(request, template, context)
 	
 from django.views import generic
