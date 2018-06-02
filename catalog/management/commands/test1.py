@@ -11,6 +11,7 @@ import os,sys,glob
 # print(sys.argv)
 from django.core.management.base import BaseCommand, CommandError
 from catalog.models import News, Coin, Source, UserVotes, Profile, YeenotSettings, CoinCryptocompare
+from catalog.models import Exchange
 from django.contrib.auth.models import User
 
 import requests
@@ -22,6 +23,7 @@ import collections #for coinsnapshot_print
 FILE_COINLIST = 'coinlist.txt'
 FILE_PRICE = 'coinpricefull.txt'
 FILE_SNAPSHOT_CC = 'coinsnapshotcc.txt'
+FILE_EXCHANGE_PAIRS = 'pairs.txt'
 FILE_RESULT = 'result.txt'
 FILE_RESULT_RATE_USERS = 'result_rate_users.txt'
 TYPE_PRICE = 'full'
@@ -98,6 +100,8 @@ class Command(BaseCommand):
 		print('coinsocial_update - read json from last time social file, update data in Coin_Cryptocompare')#!!!! twitter - ok, reddit - ok
 		#need: facebook, cryptocompare, github
 		#update_cycle_2 1/day: coinlist -> wait -> coinadd add -> coinimage -> coinsnapshot+coinsocial
+		print('exchange_pairs - get exchange pairs, save to file, update model exchange_pairs')#!!! need create news and exclude exchanges
+		print('coingecko_get - get coinlist, save to file')
 
 
 	def rate_news(self):
@@ -812,6 +816,100 @@ class Command(BaseCommand):
 		min_price_left = str(response.json()['Minute']['CallsLeft']['Price'])
 		return 'hm:'+hour_price_made+' hl:'+hour_price_left+' mm:'+min_price_made+' ml:'+min_price_left
 
+	def exchange_pairs(self, action='update'):
+		#get and save data to file
+		url='https://min-api.cryptocompare.com/data/all/exchanges'
+		response = requests.get(url)
+		data = response.json()
+		current_date = timezone.now().strftime("%Y-%m-%d-%H-%M") #strftime("%Y-%m-%d-%H-%M-%S")
+		print(current_date)
+		file = open(DATADIR+'/pairs/'+current_date+'.txt', 'w', encoding='utf8')
+		json.dump(data, file)
+		file.close()
+
+		#open file to results
+		file_result = open(DATADIR+'/pairs/'+FILE_EXCHANGE_PAIRS, 'a')
+
+		#add exchange or update coinlist in exchange
+		coins=0
+		pairs=0
+		max_len = 0
+
+		dbcoins = set(Coin.objects.values_list('symbol', flat=True))
+		#print('length:',len(dbcoins),dbcoins)
+
+		for exchange in data:
+			#print(exchange,len(data[exchange]))
+			coins+=len(data[exchange])
+			coinlist=[]
+			for ex_pairs in data[exchange]:
+				#print(data[exchange][ex_pairs])
+				pairs+=len(data[exchange][ex_pairs])
+				coinlist.append(ex_pairs)
+			coinset = set(coinlist) #all coins need unique
+			#check coins in db and remove
+			count_before=len(coinlist)
+			coinlist = [coin for coin in coinset if coin in dbcoins]
+
+			#print(notfound,' not found in db for exchange ', exchange)
+			json_coinlist = json.dumps(coinlist) #list to string
+			length = len(json_coinlist) #string length
+			count = len(coinlist) #coins count
+			#if exchange=='Yobit' or exchange=='Poloniex' or exchange=='Etherdelta':
+			print(exchange, 'before:', count_before, 'after:', count, length)
+			if length>max_len:
+				max_len=length
+			try: #get exchange
+				dbexchange = Exchange.objects.get(exchange=exchange)
+			except: #new exchange
+				dbexchange = Exchange()
+				dbexchange.exchange = exchange
+				dbexchange.coinlist = json_coinlist
+				dbexchange.coinlist_update='[]'
+				dbexchange.count = count
+				dbexchange.save()
+				text = 'new exchange found: {} new: {}\n'.format(exchange, dbexchange.coinlist)
+				print(text)
+				file_result.write(text)
+				continue
+			if count>dbexchange.count:
+				#coinlist_update
+				current_list = json.loads(dbexchange.coinlist)
+				update_list = list(set(coinlist) - set(current_list))
+				#print(exchange, current_list, coinlist, update_list)
+				coinlist_update = json.loads(dbexchange.coinlist_update)
+				update_list.extend(coinlist_update)
+				#print(update_list, type(update_list))
+				dbexchange.coinlist_update = json.dumps(update_list) #write update list to db
+				#coinlist and count
+				dbexchange.coinlist = json_coinlist
+				dbexchange.count = count
+				dbexchange.save()
+				text = 'updates found in exchange: {} new: {}\n'.format(exchange, dbexchange.coinlist_update)
+				print(text)
+				file_result.write(text)
+		
+		text = 'exchanges: {} ex_coins: {} ex_pairs: {} max length: {}\n'.format(len(data), coins, pairs, max_len)
+		print(text)
+		file_result.write(text)
+		file_result.close()
+
+		#create news:
+
+########### coingecko ##############
+#https://api.coingecko.com/api/v3/coins/list - List all supported coins id, name and symbol (no pagination required)
+#https://api.coingecko.com/api/v3/coins/{id} - Get current data (name, price, market, … including exchange tickers) for a coin
+	def coingecko_get(self):
+		url='https://api.coingecko.com/api/v3/coins/list'
+		response = requests.get(url)
+		data = response.json()
+		file = open(DATADIR+'/coingecko/list.txt', 'w', encoding='utf8')
+		json.dump(data, file)
+		file.close()
+
+####################################
+
+
 	def handle(self, *args, **options):
 		try:
 			print('arguments exists:')
@@ -958,6 +1056,13 @@ class Command(BaseCommand):
 
 		if 'coinsocial_update' in poll_id:
 			self.coin_cryptocompare_update_social()
+
+		if 'exchange_pairs' in poll_id:
+			self.exchange_pairs() #execute
+
+		if 'coingecko_get' in poll_id:
+			self.coingecko_get()
+		
 
 
 

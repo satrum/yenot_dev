@@ -4,7 +4,7 @@ from django.template import RequestContext
 # Create your views here.
 ##from .models import Book, Author, BookInstance, Genre
 
-from .models import News, Source, Banner, Coin, YeenotSettings, Profile, CoinCryptocompare
+from .models import News, Source, Banner, Coin, YeenotSettings, Profile, CoinCryptocompare, Exchange
 from random import randint
 from django.contrib.auth.models import User
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
@@ -239,13 +239,40 @@ def coinlist(request, template='coinlist.html'):
 	search = request.GET.get('search')
 	if search == None: search=''
 	
-	allcoins = Coin.objects.filter(Q(volume__gt=0,symbol__icontains=search)|Q(volume__gt=0,name__icontains=search))[0:100]#(mktcap__gt=0)#[0:500]
+	allcoins = Coin.objects.filter(Q(volume__gt=0,symbol__icontains=search)|Q(volume__gt=0,name__icontains=search))#[0:500]#(mktcap__gt=0)#[0:500]
 	
-	#filter:
-	#algo = Coin.objects.order_by('Algorithm').values_list('Algorithm', flat=True).distinct()
-	#consensus = Coin.objects.order_by('ProofType').values_list('ProofType', flat=True).distinct()
-	algo = set(allcoins.values_list('Algorithm', flat=True))
-	consensus = set(allcoins.values_list('ProofType', flat=True))
+	#Algorithm filter:
+	get_algo = request.GET.get('algo')
+	if get_algo == '': get_algo = None
+	if get_algo is not None:
+		allcoins = Coin.objects.filter(pk__in = allcoins,Algorithm__icontains=get_algo) #need after slice
+	
+	#ProofType filter:
+	get_cons = request.GET.get('consensus')
+	if get_cons == '': get_cons = None
+	if get_cons is not None:
+		allcoins = Coin.objects.filter(pk__in = allcoins,ProofType__icontains=get_cons) #need after slice
+		
+	#exchanges filter:
+	exchanges = request.GET.get('exchanges')
+	if exchanges == '': exchanges = None
+	if exchanges is not None:
+		exlist = exchanges.split(',')
+		exquery = Exchange.objects.filter(exchange__in = exlist)
+		excoins = set()
+		for ex in exquery:
+			#print( len( ex.get_coinlist() ) )
+			excoins = excoins | set(ex.get_coinlist()) #join |
+		#excoins = excoins | set(ex.get_coinlist()) # intersection &
+		#print(len(excoins))
+		allcoins = Coin.objects.filter(pk__in = allcoins,symbol__in=excoins) #need after slice ,
+		#print(len(allcoins))
+	
+	#filter lists:
+	algo = Coin.objects.order_by('Algorithm').values_list('Algorithm', flat=True).distinct()
+	consensus = Coin.objects.order_by('ProofType').values_list('ProofType', flat=True).distinct()
+	#algo = set(allcoins.values_list('Algorithm', flat=True))
+	#consensus = set(allcoins.values_list('ProofType', flat=True))
 	
 	coin_counter = allcoins.count()
 	for coin in allcoins:

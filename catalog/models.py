@@ -349,6 +349,20 @@ class CoinCryptocompare(models.Model):
 	reddit_comments_per_day = models.DecimalField(max_digits=10, decimal_places=2, default=0,help_text='Reddit comments/day from socialstats')
 	def short_description(self):
 		return truncatechars(self.Description, 50)
+
+import json
+
+class Exchange(models.Model):
+	exchange = models.CharField(max_length=20, help_text='name of exchange')
+	coinlist = models.CharField(max_length=25000, help_text='list of coins symbol')
+	coinlist_update = models.CharField(max_length=1000, help_text='list of new coins symbol')
+	count = models.IntegerField(default=0,help_text='count of coins')
+
+	def set_coinlist(self, x):
+		self.coinlist = json.dumps(x)
+
+	def get_coinlist(self):
+		return json.loads(self.coinlist)
 		
 class YeenotSettings(models.Model):
 	name = models.CharField(max_length=30)
