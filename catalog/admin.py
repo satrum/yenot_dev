@@ -46,7 +46,7 @@ class BookInstanceAdmin(admin.ModelAdmin):
 '''
 #-------------------------
 #ENOT
-from .models import News, Source, UserVotes, Profile, Banner, Coin, YeenotSettings, Promo_task, CoinCryptocompare, Exchange
+from .models import News, Source, UserVotes, Profile, Banner, Coin, YeenotSettings, Promo_task, CoinCryptocompare, Exchange, CoinGecko
 
 #admin.site.register(News)
 @admin.register(News)
@@ -104,6 +104,12 @@ class ExchangeAdmin(admin.ModelAdmin):
 	list_display = ('exchange','count','coinlist','coinlist_update')
 	search_fields = ['exchange','coinlist']
 
+@admin.register(CoinGecko)
+class CoinGeckoAdmin(admin.ModelAdmin):
+	list_display = ('coinid','coinidname','symbol','name','geckoid')
+	search_fields = ['coinidname','symbol','name','geckoid']
+	list_max_show_all = 2000
+	list_per_page = 200
 	
 @admin.register(YeenotSettings)
 class YeenotSettingsAdmin(admin.ModelAdmin):

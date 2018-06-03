@@ -11,7 +11,7 @@ import os,sys,glob
 # print(sys.argv)
 from django.core.management.base import BaseCommand, CommandError
 from catalog.models import News, Coin, Source, UserVotes, Profile, YeenotSettings, CoinCryptocompare
-from catalog.models import Exchange
+from catalog.models import Exchange, CoinGecko
 from django.contrib.auth.models import User
 
 import requests
@@ -100,8 +100,11 @@ class Command(BaseCommand):
 		print('coinsocial_update - read json from last time social file, update data in Coin_Cryptocompare')#!!!! twitter - ok, reddit - ok
 		#need: facebook, cryptocompare, github
 		#update_cycle_2 1/day: coinlist -> wait -> coinadd add -> coinimage -> coinsnapshot+coinsocial
-		print('exchange_pairs - get exchange pairs, save to file, update model exchange_pairs')#!!! need create news and exclude exchanges
+		print('exchange_pairs - get exchange pairs, save to file, update model exchange_pairs')
+		#!!! need create news and exclude exchanges, need compare current dblist with new list (возможны изменения в строну уменьшения)
 		print('coingecko_get - get coinlist, save to file')
+		#!!! need export/import model and check from D to Z
+		#need coingecko_coinmarketdata по всем монетам
 
 
 	def rate_news(self):
@@ -900,12 +903,106 @@ class Command(BaseCommand):
 #https://api.coingecko.com/api/v3/coins/list - List all supported coins id, name and symbol (no pagination required)
 #https://api.coingecko.com/api/v3/coins/{id} - Get current data (name, price, market, … including exchange tickers) for a coin
 	def coingecko_get(self):
+		#this coins no add
+		excepted = [
+			'acchain',
+			'ace',
+			'bowhead-health',
+			'applecoin',
+			'arbitraging',
+			'arcade-token',
+			'aston',
+			'b2bcoin',
+			'blue',
+			'capital',
+			'cash-poker-pro',
+			'cibus',
+			'consensus',
+			'corethum',
+			'daostack',
+			'first-bitcoin',
+			'global-tour-coin',
+			'harmonycoin',
+			'hydro-protocol',
+			'inchain',
+			'invacio',
+
+		]
+		#K check
+
 		url='https://api.coingecko.com/api/v3/coins/list'
 		response = requests.get(url)
 		data = response.json()
 		file = open(DATADIR+'/coingecko/list.txt', 'w', encoding='utf8')
 		json.dump(data, file)
 		file.close()
+		#get db Coin:
+		dbcoins = list(Coin.objects.values_list('symbol','name'))
+		#get db CoinGecko:
+		#geckocoins = CoinGecko.objects.all()
+
+		print('coins in db:',len(dbcoins))
+		#stats:
+		print('coins in coingecko:',len(data))#1909 at 02.06.2018
+		data = sorted(data, key=lambda k: k['symbol'])
+		count_found = 0 #in gecko
+		count_notfound = 0 #in gecko
+		saved = 0 #saved in gecko
+		savedlist = []
+		for item in data:
+			if item['id'] in excepted:
+				print(item,' excepted')
+				try:
+					geckocoin = CoinGecko.objects.get(geckoid=item['id'])
+					geckocoin.delete()
+				except Exception as error:
+					pass
+					#print(error, item)
+				continue
+			try:
+				geckocoin = CoinGecko.objects.get(geckoid=item['id'])
+				count_found+=1
+			except:
+				count_notfound+=1
+				#print('item {} not found in gecko db'.format(item))
+				symbol = item['symbol'].upper()
+				#search item in dbcoins
+				try:
+					dbcoin = Coin.objects.get(symbol=symbol)
+					print('found in coin db:',dbcoin,'item:',item)
+					geckocoin = CoinGecko(coinid=dbcoin)
+					#geckocoin.coinid = dbcoin.id
+					geckocoin.coinidname = dbcoin.name
+					geckocoin.symbol = item['symbol']
+					geckocoin.name = item['name']
+					geckocoin.geckoid = item['id']
+					geckocoin.save()
+					saved+=1
+					print('saved:',item)
+					savedlist.append(item)
+				except Exception as error:
+					pass
+					#print(error, '--------',symbol)
+					#print('symbol {} not found in coin db'.format(symbol))
+
+			continue
+
+			# symbol = item['symbol'].upper()
+			# found=False
+			# for dbcoin in dbcoins:
+			# 	if symbol == dbcoin[0]:
+			# 		dbsymbol = dbcoin[0]
+			# 		dbname = dbcoin[1]
+			# 		found = True
+			# 		break
+			# if found:
+			# 	count_found+=1
+			# 	print ('gecko:',item['symbol'],item['name'],'db:',item['id'], dbsymbol, dbname)
+			# else:
+			# 	count_notfound+=1
+			# 	print ('------ not found in db -------- gecko:',item['symbol'],item['name'],item['id'])
+		print('found: {} not found: {} saved: {}'.format(count_found, count_notfound, saved))
+		print(savedlist)
 
 ####################################
 

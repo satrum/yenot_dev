@@ -364,6 +364,16 @@ class Exchange(models.Model):
 	def get_coinlist(self):
 		return json.loads(self.coinlist)
 		
+class CoinGecko(models.Model):
+	coinid = models.ForeignKey(Coin, unique=True, on_delete=models.CASCADE, null=True, verbose_name="COIN", related_name="coin_gecko")
+	coinidname = models.CharField(max_length=100, default='', help_text='name from model Coin')
+	symbol = models.CharField(max_length=10, help_text='coingecko symbol')
+	name = models.CharField(max_length=100, help_text='coingecko name')
+	geckoid = models.CharField(max_length=100, help_text='coingecko id')
+
+	def __str__(self):
+		return self.geckoid
+		
 class YeenotSettings(models.Model):
 	name = models.CharField(max_length=30)
 	#text_value = models.CharField(max_length=20, help_text="text value of settings")
