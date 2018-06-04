@@ -102,8 +102,9 @@ class Command(BaseCommand):
 		#update_cycle_2 1/day: coinlist -> wait -> coinadd add -> coinimage -> coinsnapshot+coinsocial
 		print('exchange_pairs - get exchange pairs, save to file, update model exchange_pairs')
 		#!!! need create news and exclude exchanges, need compare current dblist with new list (возможны изменения в строну уменьшения)
-		print('coingecko_get - get coinlist, save to file')
-		#!!! need export/import model and check from D to Z
+		print('coingecko_get - get coinlist, save to file coingecko/list.txt , add to CoinGecko')
+		print('coingecko_export - get CoinGecko, save to file coingecko/export.txt')
+		#!!! need import model and check from D to Z
 		#need coingecko_coinmarketdata по всем монетам
 
 
@@ -902,6 +903,39 @@ class Command(BaseCommand):
 ########### coingecko ##############
 #https://api.coingecko.com/api/v3/coins/list - List all supported coins id, name and symbol (no pagination required)
 #https://api.coingecko.com/api/v3/coins/{id} - Get current data (name, price, market, … including exchange tickers) for a coin
+	def coingecko_export(self):
+		geckocoins = CoinGecko.objects.values()
+		coinlist = []
+		for geckocoin in geckocoins:
+			coinsymbol = Coin.objects.get(id=geckocoin['coinid_id'])
+			geckocoin['coinid_id']=coinsymbol.symbol
+			coinlist.append(geckocoin)
+			print(geckocoin)
+		file = open(DATADIR+'/coingecko/export.txt', 'w', encoding='utf8')
+		json.dump(coinlist, file)
+		file.close()
+		print('coins in list: ',len(coinlist))
+
+	def coingecko_import(self):
+		file = open(DATADIR+'/coingecko/export.txt', 'r')
+		filecoins = json.load(file)
+		file.close()
+		count_saved=0
+		for filecoin in filecoins:
+			#print(filecoin)
+			try: 
+				dbcoin = Coin.objects.get(symbol=filecoin['coinid_id']) #get Coin by symbol from file
+				geckocoin = CoinGecko(coinid=dbcoin)
+				geckocoin.coinidname = dbcoin.name
+				geckocoin.symbol = filecoin['symbol']
+				geckocoin.name = filecoin['name']
+				geckocoin.geckoid = filecoin['geckoid']
+				geckocoin.save()
+				count_saved+=1
+			except Exception as error:
+				print('not saved:', filecoin, 'error:', error)
+		print('saved:', count_saved)
+
 	def coingecko_get(self):
 		#this coins no add
 		excepted = [
@@ -926,6 +960,22 @@ class Command(BaseCommand):
 			'hydro-protocol',
 			'inchain',
 			'invacio',
+			'key-token',
+			'marinecoin',
+			'multiven',
+			'natcoin',
+			'neptunecoin',
+			'pally',
+			'piecoin',
+			'pointium',
+			'prcoin',
+			'sakura-bloom',
+			'sigame',
+			'smarto',
+			'sp8de',
+			'sphere-social',
+			'strikebitclub',
+			'tokenstars-team',
 
 		]
 		#K check
@@ -1159,6 +1209,12 @@ class Command(BaseCommand):
 
 		if 'coingecko_get' in poll_id:
 			self.coingecko_get()
+
+		if 'coingecko_export' in poll_id:
+			self.coingecko_export()
+
+		if 'coingecko_import' in poll_id:
+			self.coingecko_import()
 		
 
 
