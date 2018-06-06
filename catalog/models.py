@@ -318,6 +318,7 @@ class Coin(models.Model):
 	supply_share = models.DecimalField(max_digits=20, decimal_places=3, help_text="coin supply share", default=1)
 	Id_cc = models.IntegerField(default=0,help_text='ID for cryptocompare calls')
 	updatetime = models.DateTimeField(auto_now=True, help_text='last time data save')
+	news_count = models.IntegerField(default=0,help_text='count of news on yeenot for coin')
 	
 	class Meta:
 		ordering = ["-volume"]
@@ -363,6 +364,9 @@ class Exchange(models.Model):
 
 	def get_coinlist(self):
 		return json.loads(self.coinlist)
+	
+	class Meta:
+		ordering = ["exchange"]
 		
 class CoinGecko(models.Model):
 	coinid = models.ForeignKey(Coin, unique=True, on_delete=models.CASCADE, null=True, verbose_name="COIN", related_name="coin_gecko")
@@ -377,7 +381,7 @@ class CoinGecko(models.Model):
 class YeenotSettings(models.Model):
 	name = models.CharField(max_length=30)
 	#text_value = models.CharField(max_length=20, help_text="text value of settings")
-	num_value = models.DecimalField(default=0.0, blank=True, max_digits=10, decimal_places=2, help_text="digital value of settings")
+	num_value = models.DecimalField(default=0.0, blank=True, max_digits=20, decimal_places=8, help_text="digital value of settings")
 
 class Promo_task(models.Model):
 	user     = models.ForeignKey(User,   on_delete=models.SET_NULL, null=True, blank=True, related_name="user_promo") #owner(manager) of Promo_task

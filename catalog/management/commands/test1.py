@@ -80,7 +80,8 @@ class Command(BaseCommand):
 		print('coinlist_exclude - read full price, get coins with price, remove coins without from coinlist')
 		print('coinimage - read from coinlist and update folder media/coin_images/ with images') #!!!!!!!
 		print('coininfo [symbol] - read info about coin')
-		print('coinadd [action - all, update, add]- read coinlist from file and update list on db model Coin - coin.id, coin.symbol, coin.name')
+		print('coinadd [action - all, update, add]- read coinlist from file and update list on db model Coin - coin.id, coin.symbol, coin.name, etc...')
+		print('.......also - calculate coin.news_count, coin_stats for volume, mktcap, change24h')#!!! another stats
 		print('update_cycle - coinprice + coinlist_exclude + coinadd update + rate_news + rate_sources')
 		print('coinprint_db - list info from Model Coin')
 		print('get_price [symbol default=BTC]')
@@ -104,8 +105,9 @@ class Command(BaseCommand):
 		#!!! need create news and exclude exchanges, need compare current dblist with new list (возможны изменения в строну уменьшения)
 		print('coingecko_get - get coinlist, save to file coingecko/list.txt , add to CoinGecko')
 		print('coingecko_export - get CoinGecko, save to file coingecko/export.txt')
-		#!!! need import model and check from D to Z
-		#need coingecko_coinmarketdata по всем монетам
+		print('coingecko_import - get file coingecko/export.txt and add data to CoinGecko')
+		print('coingecko_getall - get CoinGecko, save all data to file coingecko/all/id.txt')
+		#need coingecko_getall coinmarketdata and stats по всем монетам
 
 
 	def rate_news(self):
@@ -616,6 +618,34 @@ class Command(BaseCommand):
 					# print('image: {}'.format(newdbcoin.image))
 		print('coins updated:', count_update)
 		print('coins added  :', count_add)
+		#update news_count:
+		yeenotnews = News.objects.values_list('coinid', flat=True)
+		coin_id_set = set(yeenotnews)
+		print('set of coins with yeenot news:',coin_id_set)
+		for id in coin_id_set:
+			coin = Coin.objects.get(id=id)
+			coin.news_count = yeenotnews.filter(coinid=id).count()
+			print(coin.id, coin.symbol, coin.news_count)
+			coin.save()
+		#update aggregation stats from dbcoins:
+		'''
+		example:
+		{'change__min': Decimal('-80.00000000'), 'mktcap__max': Decimal('130742290177.00000000'),
+		 'volume__max': Decimal('2786191258.85099983'), 'change__max': Decimal('800.00000000')}
+		'''
+		agg_value = dbcoins.aggregate(num_value = models.Max('volume'))
+		obj, created = YeenotSettings.objects.update_or_create(name='coins_volume_max',defaults=agg_value)
+		print(obj.id, obj.num_value, created)
+		agg_value = dbcoins.aggregate(num_value = models.Max('mktcap'))
+		obj, created = YeenotSettings.objects.update_or_create(name='coins_mktcap_max',defaults=agg_value)
+		print(obj.id, obj.num_value, created)
+		agg_value = dbcoins.aggregate(num_value = models.Min('change'))
+		obj, created = YeenotSettings.objects.update_or_create(name='coins_change24h_min',defaults=agg_value)
+		print(obj.id, obj.num_value, created)
+		agg_value = dbcoins.aggregate(num_value = models.Max('change'))
+		obj, created = YeenotSettings.objects.update_or_create(name='coins_change24h_max',defaults=agg_value)
+		print(obj.id, obj.num_value, created)
+    	
 
 ################# Cryptocompare snapshot and social functions ######################
 	def cryptocompare_get_snapshot(self, coinlist_file, coinsnapshot_file):
@@ -934,7 +964,7 @@ class Command(BaseCommand):
 				count_saved+=1
 			except Exception as error:
 				print('not saved:', filecoin, 'error:', error)
-		print('saved:', count_saved)
+		print('file coins:',len(filecoins),'saved:', count_saved)
 
 	def coingecko_get(self):
 		#this coins no add
@@ -953,6 +983,7 @@ class Command(BaseCommand):
 			'cibus',
 			'consensus',
 			'corethum',
+			'cybereits',
 			'daostack',
 			'first-bitcoin',
 			'global-tour-coin',
@@ -961,6 +992,7 @@ class Command(BaseCommand):
 			'inchain',
 			'invacio',
 			'key-token',
+			'link-platform',
 			'marinecoin',
 			'multiven',
 			'natcoin',
@@ -975,6 +1007,7 @@ class Command(BaseCommand):
 			'sp8de',
 			'sphere-social',
 			'strikebitclub',
+			'swishcoin',
 			'tokenstars-team',
 
 		]
@@ -1053,6 +1086,23 @@ class Command(BaseCommand):
 			# 	print ('------ not found in db -------- gecko:',item['symbol'],item['name'],item['id'])
 		print('found: {} not found: {} saved: {}'.format(count_found, count_notfound, saved))
 		print(savedlist)
+
+	def coingecko_getall(self):
+		geckocoins = CoinGecko.objects.all()
+		count=0
+		for geckocoin in geckocoins:
+			try:
+				id = geckocoin.geckoid
+				url='https://api.coingecko.com/api/v3/coins/'+id
+				response = requests.get(url)
+				data = response.json()
+				file = open(DATADIR+'/coingecko/all/'+id+'.txt', 'w', encoding='utf8')
+				json.dump(data, file)
+				file.close()
+				count+=1
+				print(id, count)
+			except Exception as error:
+				print(id, error)
 
 ####################################
 
@@ -1215,6 +1265,9 @@ class Command(BaseCommand):
 
 		if 'coingecko_import' in poll_id:
 			self.coingecko_import()
+
+		if 'coingecko_getall' in poll_id:
+			self.coingecko_getall()
 		
 
 

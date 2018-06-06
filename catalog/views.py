@@ -235,8 +235,15 @@ def topusers(request, template='topusers.html'):
 	
 import datetime
 def coinlist(request, template='coinlist.html'):
+	rget=request.GET
+	print(rget)
 	#setup banners:
 	banner, banner_left, banner_right = page_banners()
+	#max and min:
+	coins_volume_max = YeenotSettings.objects.get(name='coins_volume_max').num_value
+	coins_mktcap_max = YeenotSettings.objects.get(name='coins_mktcap_max').num_value
+	coins_change24h_min = YeenotSettings.objects.get(name='coins_change24h_min').num_value
+	coins_change24h_max = YeenotSettings.objects.get(name='coins_change24h_max').num_value
 	#search:
 	search = request.GET.get('search')
 	if search == None: search=''
@@ -275,10 +282,11 @@ def coinlist(request, template='coinlist.html'):
 	consensus = Coin.objects.order_by('ProofType').values_list('ProofType', flat=True).distinct()
 	#algo = set(allcoins.values_list('Algorithm', flat=True))
 	#consensus = set(allcoins.values_list('ProofType', flat=True))
+	exchangelist = Exchange.objects.filter(count__gt=0)
 	
 	coin_counter = allcoins.count()
 	for coin in allcoins:
-		coin.news_count = News.objects.filter(coinid = coin).count()
+		#coin.news_count = News.objects.filter(coinid = coin).count() # count already in Coin model
 		#supply % calculate:
 		supply = coin.TotalCoinSupply
 		if supply == 'N/A' or supply == '0' or supply == '':
@@ -308,7 +316,18 @@ def coinlist(request, template='coinlist.html'):
 	except EmptyPage:
 		coins = paginator.page(paginator.num_pages)
 
-	context = {'coins':coins,'coin_counter':coin_counter,'algo':algo,'consensus':consensus,'banner_left':banner_left,'banner_right':banner_right}
+	context = {
+	'coins_volume_max':coins_volume_max,
+	'coins_mktcap_max':coins_mktcap_max,
+	'coins_change24h_min':coins_change24h_min,
+	'coins_change24h_max':coins_change24h_max,
+	'coins':coins,
+	'coin_counter':coin_counter,
+	'algo':algo,
+	'consensus':consensus,
+	'exchangelist':exchangelist,
+	'banner_left':banner_left,
+	'banner_right':banner_right}
 	return render(request, template, context)
 	
 from django.views import generic

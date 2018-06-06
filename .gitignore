@@ -8,3 +8,6 @@ email.txt
 catalog/management/commands/__pycache__/test1.cpython-35.pyc
 catalog/__pycache__/models.cpython-35.pyc
 *.pyc
+data/coingecko/all/*
+catalog/migrations/*
+media/*
