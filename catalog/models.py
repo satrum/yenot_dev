@@ -369,12 +369,23 @@ class Exchange(models.Model):
 		ordering = ["exchange"]
 		
 class CoinGecko(models.Model):
-	coinid = models.ForeignKey(Coin, unique=True, on_delete=models.CASCADE, null=True, verbose_name="COIN", related_name="coin_gecko")
+	#coinid = models.ForeignKey(Coin, unique=True, on_delete=models.CASCADE, null=True, verbose_name="COIN", related_name="coin_gecko")
+	coinid = models.OneToOneField(Coin, on_delete=models.CASCADE, null=True, verbose_name="COIN", related_name="coin_gecko")
 	coinidname = models.CharField(max_length=100, default='', help_text='name from model Coin')
 	symbol = models.CharField(max_length=10, help_text='coingecko symbol')
 	name = models.CharField(max_length=100, help_text='coingecko name')
 	geckoid = models.CharField(max_length=100, help_text='coingecko id')
-
+	#marketdata:
+	p24h = models.DecimalField(max_digits=20, decimal_places=8, default=0)
+	p7d  = models.DecimalField(max_digits=20, decimal_places=8, default=0)
+	p14d = models.DecimalField(max_digits=20, decimal_places=8, default=0)
+	p30d = models.DecimalField(max_digits=20, decimal_places=8, default=0)
+	circulating_supply=models.DecimalField(max_digits=20, decimal_places=0, default=0)
+	coingecko_score = models.DecimalField(max_digits=6, decimal_places=3, default=0)
+	current_price = models.DecimalField(max_digits=20, decimal_places=8, default=0)
+	market_cap = models.DecimalField(max_digits=20, decimal_places=8, default=0)
+	total_volume = models.DecimalField(max_digits=20, decimal_places=8, default=0)
+	
 	def __str__(self):
 		return self.geckoid
 		

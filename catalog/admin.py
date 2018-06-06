@@ -106,7 +106,7 @@ class ExchangeAdmin(admin.ModelAdmin):
 
 @admin.register(CoinGecko)
 class CoinGeckoAdmin(admin.ModelAdmin):
-	list_display = ('coinid','coinidname','symbol','name','geckoid')
+	list_display = ('coinid','coinidname','symbol','name','geckoid','coingecko_score','p24h','p7d','p14d','p30d','current_price','market_cap','total_volume','circulating_supply')
 	search_fields = ['coinidname','symbol','name','geckoid']
 	list_max_show_all = 2000
 	list_per_page = 200

@@ -1,0 +1,2 @@
+found: 1227 not found: 658 saved: 8
+[{'symbol': 'aka', 'id': 'akroma', 'name': 'Akroma'}, {'symbol': 'bbn', 'id': 'banyan-network', 'name': 'Banyan Network'}, {'symbol': 'bix', 'id': 'bibox-token', 'name': 'Bibox Token'}, {'symbol': 'cnn', 'id': 'cnn', 'name': 'CNN'}, {'symbol': 'cpx', 'id': 'apex', 'name': 'Apex Network'}, {'symbol': 'lgo', 'id': 'legolas-exchange', 'name': 'Legolas Exchange'}, {'symbol': 'man', 'id': 'matrix-ai-network', 'name': 'Matrix AI Network'}, {'symbol': 'uuu', 'id': 'u-network', 'name': 'U Network'}]

@@ -103,11 +103,12 @@ class Command(BaseCommand):
 		#update_cycle_2 1/day: coinlist -> wait -> coinadd add -> coinimage -> coinsnapshot+coinsocial
 		print('exchange_pairs - get exchange pairs, save to file, update model exchange_pairs')
 		#!!! need create news and exclude exchanges, need compare current dblist with new list (возможны изменения в строну уменьшения)
-		print('coingecko_get - get coinlist, save to file coingecko/list.txt , add to CoinGecko')
+		print('coingecko_get - get coinlist API, save to file coingecko/list.txt , add to CoinGecko')
 		print('coingecko_export - get CoinGecko, save to file coingecko/export.txt')
 		print('coingecko_import - get file coingecko/export.txt and add data to CoinGecko')
-		print('coingecko_getall - get CoinGecko, save all data to file coingecko/all/id.txt')
+		print('coingecko_getall - get CoinGecko, request API for coins, save all data to file coingecko/all/id.txt')
 		#need coingecko_getall coinmarketdata and stats по всем монетам
+		print('coingecko_update - get files coingecko/all/id.txt and update data in CoinGecko')
 
 
 	def rate_news(self):
@@ -1104,6 +1105,50 @@ class Command(BaseCommand):
 			except Exception as error:
 				print(id, error)
 
+	def coingecko_update(self):
+		geckocoins = CoinGecko.objects.all()
+		for geckocoin in geckocoins:
+			id = geckocoin.geckoid
+			file = open(DATADIR+'/coingecko/all/'+id+'.txt', 'r')
+			filecoin = json.load(file)
+			file.close()
+			#print(filecoin['categories'])
+			#print(id)
+			try:
+				market=filecoin['market_data']
+				geckocoin.p24h = float(market['price_change_percentage_24h'])
+				geckocoin.p7d  = float(market['price_change_percentage_7d'])
+				geckocoin.p14d = float(market['price_change_percentage_14d'])
+				geckocoin.p30d = float(market['price_change_percentage_30d'])
+				geckocoin.circulating_supply=float(market['circulating_supply'])
+				geckocoin.coingecko_score = filecoin['coingecko_score']
+				geckocoin.current_price = float(market['current_price']['usd'])
+				geckocoin.market_cap = float(market['market_cap']['usd'])
+				geckocoin.total_volume = float(market['total_volume']['usd'])
+				#developer_score = filecoin['developer_score']
+				#community_score = filecoin['community_score']
+				#liquidity_score = filecoin['liquidity_score']
+				#public_interest_score = filecoin['public_interest_score']
+				#p60d = float(market['price_change_percentage_60d'])
+				#---print('name:{} 1d:{} 7d:{} 14d:{} 30d:{} 60d:{}'.format(id, p24h, p7d, p14d, p30d, p60d))
+				#print('name:{} 1d:{} 7d:{} 30d:{}'.format(id, p24h, p7d, p30d))
+				#print(id, supply)
+				geckocoin.save()
+			except Exception as error:
+				print(id, error)
+			'''
+			tickers = filecoin['tickers']
+			#print(id, len(tickers))
+			for ticker in tickers:
+				#print(ticker)
+				base = ticker['base']
+				target = ticker['target']
+				market = ticker['market']['name']
+				#print(market+': '+base+'/'+target)
+			'''
+			
+
+
 ####################################
 
 
@@ -1268,6 +1313,9 @@ class Command(BaseCommand):
 
 		if 'coingecko_getall' in poll_id:
 			self.coingecko_getall()
+
+		if 'coingecko_update' in poll_id:
+			self.coingecko_update()
 		
 
 
