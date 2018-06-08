@@ -4,25 +4,30 @@
 <div class="line_ban">
 <span id="ct_cqBJnsd"></span>
 </div>
-<div class="table_filter_2">
-  <div class="tab_front_2">
-<div class="table_btn_promo tab_fil">{% if banner_left %}<a href="{% url 'banner-click' banner_left.pk %}" target="_blank"><img src = "{{ banner_left.image.url}}"></a>{% endif %}</div>
-  <div class="table_filter_Search_2 tab_fil">
-  <form id="us_search_2">
-<input type="search" id="us_search" name="search" placeholder="Search coin..." aria-label="Search through site content">
-<button class="inp_2">Search</button>
-</form>
-  <h4 class="us_top_text_3">SHOW COINS:</h4><input class="rad" name="direction" type="radio" value="" id="radi1" checked><label for="radi1"><span></span> <h4 class="us_top_text_3">TOP {{coin_counter}}</h4></label>
-   <input  class="rad" name="direction" type="radio" id="radi2" value="b"><label for="radi2"><span></span><h4 class="us_top_text_3">All</h4></label>
-</div>	
-		<div class="table_btn_promo tab_fil right_banner">  {% if banner_right %}<a href="{% url 'banner-click' banner_right.pk %}" target="_blank"><img src = "{{ banner_right.image.url}}"></a>{% endif %}</div>
-</div>
-</div>
+
+
 <div class="table_filter_3">
+
  <div class="tab_front_3">
+  <form id="us_search_3">
+ <div class="caret_vol">
+ <h4 class="us_top_text_3">COINS ON PAGE : {{coin_counter}}</h4>
+<a href="{% url 'coinlist' %}" class="update_coinlist">SHOW ALL</a>
+ <h4 class="caret_tech">SEARCH COIN:</h4>
+<input type="search" id="us_search_5" name="search" placeholder="SEARCH COIN..." aria-label="Search through site content">
+ <h4 class="caret_tech">SEARCH EXCHANGES:</h4>
+
+<select class="ui fluid search selection dropdown slade" name="search"  multiple="" style="width: 248px;">
+  <option value="">EXCHANGES...</option>
+   {% for coin in coins %}
+  <option value="{{ exchangelist }}">{{ exchangelist }}</option>
+   {% endfor %}
+   
+</select>
+ </div>
  <div class="caret_vol">
  <div class="roll">
- <h4>VOLUME:</h4>
+ <h4>VOLUME 24h:</h4>
   <span id="range-value-1" class="rit"></span><p class="rit">-</p><span id="range-value-2" class="rit"></span>
   <div id="slider3"></div>
  </div>
@@ -38,74 +43,97 @@
  </div>
  <div class="roll">
  <h4>TOTAL COIN SUPPLY:</h4>
- <span id="range-value-7"class="rit"></span><p class="rit">-</p><span id="range-value-8" class="rit"></span>
+ <span id="range-value-7" class="rit"></span><p class="rit">-</p><span id="range-value-8" class="rit"></span>
    <div id="slider6"></div>
 </div>
    </div>
-  <form role="form" id="form" action="" data-def="">
-  
-  <select class="sel_fil_2" name="algo">
-  <option  value="" selected >Algo</option>
+    <div class="caret_vol_2">
+  <div class="caret_tech_3">
+  <h4 class="caret_tech_5">CHANGE BY 24h:</h4>
+  <span id="range-value-9" class="rit"></span><p class="rit">-</p><span id="range-value-11" class="rit"></span>
+   <div id="slider7"></div>
+  </div>
+  <select class="sel_fil_3" name="algo">
+  <option  value="" selected >Algorithm</option>
   {% for item in algo %}
   <option value="{{ item }}">{{ item }}</option>
   {% endfor %}
   </select>
-  
-  <select class="sel_fil_2" name="consensus">
+  <select class="sel_fil_3" name="consensus">
    <option  value="" selected >Consensus</option>
    {% for item in consensus %}
   <option  value="{{ item }}">{{ item }}</option>
   {% endfor %}
   </select>
-  
-   <input class="inp" type="submit" value="FILTER">
-  </form>
-</div>
-</div>
+     <input class="inp_3" type="submit" value="FILTER">
+  </div>
+   </form>
 
+</div>
+</div>
+<div class="table_filter">
+  <div class="tab_front_2">
+<div class="table_btn_promo tab_fil">{% if banner_left %}<a href="{% url 'banner-click' banner_left.pk %}" target="_blank"><img src = "{{ banner_left.image.url}}"></a>{% endif %}</div>
+  <div class="table_filter_Search_3 tab_fil">
+  
+  <h4 class="us_top_text_3">SHOW STATISTIC : </h4><a href="#" class="type_m"><h4 class="us_top_text_3">MARKET</h4></a>
+  <a href="#" class="type_m"> <h4 class="us_top_text_3">SOCIAL</h4></a> 
+</div>	
+		<div class="table_btn_promo tab_fil right_banner">  {% if banner_right %}<a href="{% url 'banner-click' banner_right.pk %}" target="_blank"><img src = "{{ banner_right.image.url}}"></a>{% endif %}</div>
+</div>
+</div>
 <table id="user_list">
 <thead>
 	<tr>
-		<th class="markettable">NAME</th>
-		<th class="markettable">CHANGE/DAY</th>
-		<th class="markettable">VOLUME</th>
+		<th class="markettable">COIN</th>
+		<th class="markettable">PRICE</th>
+		<!-- <th class="markettable">1h</th> -->
+		<th class="markettable">1d</th>
+		<!-- <th class="markettable">7d</th> -->
+		<!-- <th class="markettable">1m</th> -->
+		<th class="markettable">VOLUME<br>24h</th>
 		<th class="markettable">MARKETCAP</th>
 		<th class="markettable">COIN SUPPLY</th>
-		<th class="markettable">TOTAL COIN SUPPLY</th>
+		<th class="markettable">TOTAL SUPPLY</th>
 		<th class="markettable">SUPPLY %</th>
 		<th class="markettable">START DATE</th>
-		<th class="markettable">SITE NEWS COUNT</th>
-		
+		<th class="markettable">YEENOT SIGNAL</th>
+		<th class="markettable">TWEETS</th>
+		<th class="markettable">FOLLOWERS</th>
+		<th class="markettable">NEW TWEETS</th>
+		<th class="markettable">REDDIT SUB</th>
+		<th class="markettable">REDDIT POSTS</th>
+		<th class="markettable">NEW REDDIT POSTS</th>
 	</tr>
 	</thead>
 	<tbody class="infinite-container">
 	{% for coin in coins %}
 	
 	<tr class="infinite-item tab_fon">	
-		<td class="td_pd" 	style="width: 10%;">
-		<img src="{{coin.image.url}}" style="border-radius: 100%; width: 77px;padding-top: 6px;">
-		<h3>{{coin.name}} ({{coin.symbol}})</h3>
-        <p class="price_change">{{news.coinid.price|floatformat:3}}$
+		<td class="td_pd">
+		<img src="{{coin.image.url}}" style="border-radius: 100%; width: 39px;padding-top: 5px;">
+		<h4 style="font-size: 0.9em;">{{coin.name}}<br>({{coin.symbol}})</h4>
+		</td>
+        <td class="td_pd">
+		<p class="price_change">{{news.coinid.price|floatformat:3}}$
 		({{news.coinid.change|floatformat:1}}%)</p>		
 		</td>
 		<td class="td_pd"><font color="{% if coin.change > 0 %}green{% else %}red{% endif %}">{{coin.change|floatformat:2}}</font></td>
+		<!-- <td class="td_pd"><font color="{% if coin.change > 0 %}green{% else %}red{% endif %}">{{coin.change|floatformat:2}}</font></td> -->
+		<!-- <td class="td_pd"><font color="{% if coin.change > 0 %}green{% else %}red{% endif %}">{{coin.change|floatformat:2}}</font></td> -->
+		<!-- <td class="td_pd"><font color="{% if coin.change > 0 %}green{% else %}red{% endif %}">{{coin.change|floatformat:2}}</font></td> -->
 		<td class="td_pd">{{coin.volume|floatformat:3}}</td>
 		<td class="td_pd">{{coin.mktcap|floatformat:3}}</td>
 		<td class="td_pd">{{coin.supply}}</td>
 		<td class="td_pd">{{coin.TotalCoinSupply}}</td>
-		<td class="td_pd">{{coin.supply_share|floatformat:3}}</td>
+		<td class="td_pd">{{coin.supply_share|floatformat:2}}</td>
 		<td class="td_pd">{{coin.StartDate|date:"d M Y"}}</td>
 		<td class="td_pd">{% if coin.news_count > 0 %}{{coin.news_count}}{% endif %}</td>
-		
-	</tr>
-	<tr class="infinite-item tab_fon">
-	<td class="td_pd">Tweets:</td>
-	<td class="td_pd">{{coin.twitter_posts}}</td>
-		<td class="td_pd">Followers:</td>
+		<td class="td_pd">{{coin.twitter_posts}}</td>
 		<td class="td_pd">{{coin.twitter_followers}}</td>
-		<td class="td_pd">Rd Subscribe :</td>
-				<td  class="td_pd">{{coin.reddit_subscribers}}</td>
-		<td class="td_pd">Rd comments/day</td>
+		<td class="td_pd">{{coin.twitter_followers}}</td>
+		<td class="td_pd">{{coin.reddit_subscribers}}</td>
+		<td class="td_pd">{{coin.reddit_comments_per_day}}</td>
 		<td class="td_pd">{{coin.reddit_comments_per_day}}</td>
 	</tr>
 	{% endfor %}
@@ -185,12 +213,59 @@ var RsnapValues = [
 uslider.noUiSlider.on('update', function( values, handle ) {
 	RsnapValues[handle].innerHTML = values[handle];
 });
+var kslider = document.getElementById('slider7');
+
+noUiSlider.create(kslider, {
+	start: [0, 100],
+	connect: true,
+	range: {
+		'min': 0,
+		'max': 100
+	}
+});
+var asnapValues = [
+	document.getElementById('range-value-9'),
+	document.getElementById('range-value-11')
+];
+
+kslider.noUiSlider.on('update', function( values, handle ) {
+	asnapValues[handle].innerHTML = values[handle];
+});
+	</script>
+	<script>
+$('.ui.dropdown').dropdown({
+  allowAdditions: true,
+  forceSelection: false,
+});
 	</script>
 {% endblock %}
-
+{% if '/catalog/market/' == request.path %} class="type_m_2"{% else %} class="type_m"{% endif %}
 parameters:
 search='' contain in name or symbol filter
-
+<a href="#" class="type_m"><h4 class="us_top_text_3">TECHNICAL ANALYSIS</h4></a>
+ <div class="caret_tech_3">
+  <h4 class="caret_tech_5">COIN CHANGE BY:</h4>
+   <label for="1h" class="dr">
+   <input type="checkbox" id="1h" name="inter" value="1h">
+    <span class="checkmark2"></span>  
+  <h4 class="caret_tech_4">HOUR</h4>
+  </label>
+   <label for="1d" class="dr">
+   <input type="checkbox" id="1d" name="inter" value="1d" checked>
+     <span class="checkmark"></span>
+    <h4 class="caret_tech_2">DAY</h4>
+	</label>
+    <label for="7d" class="dr">
+   <input type="checkbox" id="7d" name="inter" value="7d">
+	 <span class="checkmark2"></span>
+	<h4 class="caret_tech_4">WEEK</h4>
+	</label>
+   <label for="month" class="dr">  
+  <input type="checkbox" id="month" name="inter" value="month">
+	 <span class="checkmark2"></span>
+	<h4 class="caret_tech_4">MONTH</h4>
+	</label>
+  </div>
 функционал:
 ок 1. поиск по имени или символу
 2. фильтры - algo, consensus, news on yeenot 

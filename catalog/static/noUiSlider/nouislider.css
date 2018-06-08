@@ -75,11 +75,11 @@ html:not([dir="rtl"]) .noUi-horizontal .noUi-origin {
 /* Slider size and handle placement;
  */
 .noUi-horizontal {
-  height: 18px;
+  height: 10px;
 }
 .noUi-horizontal .noUi-handle {
-  width: 34px;
-  height: 28px;
+    width: 21px;
+    height: 20px;
   left: -17px;
   top: -6px;
 }
@@ -137,14 +137,14 @@ background: #c7f3b2;
   content: "";
   display: block;
   position: absolute;
-  height: 14px;
-  width: 1px;
-  background: #E8E7E6;
-  left: 14px;
-  top: 6px;
+height: 14px;
+    width: 1px;
+    background: #E8E7E6;
+    left: 8px;
+    top: 2px;
 }
 .noUi-handle:after {
-  left: 17px;
+     left: 12px;
 }
 .noUi-vertical .noUi-handle:before,
 .noUi-vertical .noUi-handle:after {
