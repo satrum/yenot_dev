@@ -248,7 +248,12 @@ def coinlist(request, template='coinlist.html'):
 	search = request.GET.get('search')
 	if search == None: search=''
 	
-	allcoins = Coin.objects.filter(Q(volume__gt=0,symbol__icontains=search)|Q(volume__gt=0,name__icontains=search))#[0:500]#(mktcap__gt=0)#[0:500]
+	top = rget.get('top')
+	if top==None or top=='':
+		allcoins = Coin.objects.filter(Q(volume__gt=0,symbol__icontains=search)|Q(volume__gt=0,name__icontains=search))#[0:500]#(mktcap__gt=0)#[0:500]
+	else:
+		allcoins = Coin.objects.all()[0:int(top)]
+		print(allcoins)
 	
 	#Algorithm filter:
 	get_algo = request.GET.get('algo')
@@ -263,15 +268,22 @@ def coinlist(request, template='coinlist.html'):
 		allcoins = Coin.objects.filter(pk__in = allcoins,ProofType__icontains=get_cons) #need after slice
 		
 	#exchanges filter:
-	exchanges = request.GET.get('exchanges')
-	if exchanges == '': exchanges = None
+	exchanges = request.GET.getlist('exchanges')
+	print(exchanges, type(exchanges))
+	if exchanges == []: exchanges = None
 	if exchanges is not None:
-		exlist = exchanges.split(',')
-		exquery = Exchange.objects.filter(exchange__in = exlist)
-		excoins = set()
-		for ex in exquery:
+		#exlist = exchanges.split(',')
+		#exquery = Exchange.objects.filter(exchange__in = exlist)
+		exquery = Exchange.objects.filter(exchange__in = exchanges)
+		#print(exquery)
+		#excoins = set()
+		for i in range(len(exquery)):
+			ex = exquery[i]
+			if i==0:
+				excoins = set(ex.get_coinlist())
+			else:
 			#print( len( ex.get_coinlist() ) )
-			excoins = excoins | set(ex.get_coinlist()) #join |
+				excoins = excoins | set(ex.get_coinlist()) #join |
 		#excoins = excoins | set(ex.get_coinlist()) # intersection &
 		#print(len(excoins))
 		allcoins = Coin.objects.filter(pk__in = allcoins,symbol__in=excoins) #need after slice ,
@@ -327,7 +339,8 @@ def coinlist(request, template='coinlist.html'):
 	'consensus':consensus,
 	'exchangelist':exchangelist,
 	'banner_left':banner_left,
-	'banner_right':banner_right}
+	'banner_right':banner_right,
+	'rget':rget}
 	return render(request, template, context)
 	
 from django.views import generic

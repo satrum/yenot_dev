@@ -17,10 +17,10 @@
 <input type="search" id="us_search_5" name="search" placeholder="SEARCH COIN..." aria-label="Search through site content">
  <h4 class="caret_tech">SEARCH EXCHANGES:</h4>
 
-<select class="ui fluid search selection dropdown slade" name="search"  multiple="" style="width: 248px;">
+<select class="ui fluid search selection dropdown slade" name="exchanges"  multiple="" style="width: 248px;">
   <option value="">EXCHANGES...</option>
-   {% for coin in coins %}
-  <option value="{{ exchangelist }}">{{ exchangelist }}</option>
+   {% for exchange in exchangelist %}
+  <option value="{{ exchange.exchange }}">{{ exchange.exchange }}({{ exchange.count }})</option>
    {% endfor %}
    
 </select>
@@ -89,7 +89,7 @@
 		<th class="markettable">PRICE</th>
 		<!-- <th class="markettable">1h</th> -->
 		<th class="markettable">1d</th>
-		<!-- <th class="markettable">7d</th> -->
+		<th class="markettable">1d gecko</th>
 		<!-- <th class="markettable">1m</th> -->
 		<th class="markettable">VOLUME<br>24h</th>
 		<th class="markettable">MARKETCAP</th>
@@ -119,11 +119,11 @@
 		({{news.coinid.change|floatformat:1}}%)</p>		
 		</td>
 		<td class="td_pd"><font color="{% if coin.change > 0 %}green{% else %}red{% endif %}">{{coin.change|floatformat:2}}</font></td>
+		<td class="td_pd"><font color="{% if coin.coin_gecko.p24h > 0 %}green{% else %}red{% endif %}">{{coin.coin_gecko.p24h|floatformat:2}}</font></td>
 		<!-- <td class="td_pd"><font color="{% if coin.change > 0 %}green{% else %}red{% endif %}">{{coin.change|floatformat:2}}</font></td> -->
 		<!-- <td class="td_pd"><font color="{% if coin.change > 0 %}green{% else %}red{% endif %}">{{coin.change|floatformat:2}}</font></td> -->
-		<!-- <td class="td_pd"><font color="{% if coin.change > 0 %}green{% else %}red{% endif %}">{{coin.change|floatformat:2}}</font></td> -->
-		<td class="td_pd">{{coin.volume|floatformat:3}}</td>
-		<td class="td_pd">{{coin.mktcap|floatformat:3}}</td>
+		<td class="td_pd">{{coin.volume|floatformat:0}}</td>
+		<td class="td_pd">{{coin.mktcap|floatformat:0}}</td>
 		<td class="td_pd">{{coin.supply}}</td>
 		<td class="td_pd">{{coin.TotalCoinSupply}}</td>
 		<td class="td_pd">{{coin.supply_share|floatformat:2}}</td>

@@ -103,6 +103,7 @@ class Command(BaseCommand):
 		#update_cycle_2 1/day: coinlist -> wait -> coinadd add -> coinimage -> coinsnapshot+coinsocial
 		print('exchange_pairs - get exchange pairs, save to file, update model exchange_pairs')
 		#!!! need create news and exclude exchanges, need compare current dblist with new list (возможны изменения в строну уменьшения)
+		#!!! need clearing of coinlist_update
 		print('coingecko_get - get coinlist API, save to file coingecko/list.txt , add to CoinGecko')
 		print('coingecko_export - get CoinGecko, save to file coingecko/export.txt')
 		print('coingecko_import - get file coingecko/export.txt and add data to CoinGecko')
