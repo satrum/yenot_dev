@@ -104,8 +104,7 @@ class Command(BaseCommand):
 		print('exchange_pairs - get exchange pairs, save to file, update model exchange_pairs')
 		#!!! need create news and exclude exchanges, need compare current dblist with new list (возможны изменения в строну уменьшения)
 		#!!! need clearing of coinlist_update
-		print('coingecko_get - get coinlist API, save to file coingecko/list.txt , add to CoinGecko')
-		#!!! need save result to file
+		print('coingecko_get - get coinlist API, save to file coingecko/list.txt , add to CoinGecko, save result.txt')
 		#!!! need manual add (MIOTA and others) from list in function
 		print('coingecko_export - get CoinGecko, save to file coingecko/export.txt')
 		print('coingecko_import - get file coingecko/export.txt and add data to CoinGecko')
@@ -1090,6 +1089,13 @@ class Command(BaseCommand):
 			# 	print ('------ not found in db -------- gecko:',item['symbol'],item['name'],item['id'])
 		print('found: {} not found: {} saved: {}'.format(count_found, count_notfound, saved))
 		print(savedlist)
+		#open file to results
+		file_result = open(DATADIR+'/coingecko/saveresult.txt', 'a')
+		file_result.write('current time:{}\n'.format(timezone.now()))
+		file_result.write('coins in db:{} coins in coingecko:{}\n'.format(len(dbcoins),len(data)))
+		file_result.write('found: {} not found: {} saved: {}\n'.format(count_found, count_notfound, saved))
+		json.dump(savedlist, file_result)
+		file_result.close()
 
 	def coingecko_getall(self):
 		geckocoins = CoinGecko.objects.all()
