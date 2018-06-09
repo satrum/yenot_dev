@@ -105,6 +105,8 @@ class Command(BaseCommand):
 		#!!! need create news and exclude exchanges, need compare current dblist with new list (возможны изменения в строну уменьшения)
 		#!!! need clearing of coinlist_update
 		print('coingecko_get - get coinlist API, save to file coingecko/list.txt , add to CoinGecko')
+		#!!! need save result to file
+		#!!! need manual add (MIOTA and others) from list in function
 		print('coingecko_export - get CoinGecko, save to file coingecko/export.txt')
 		print('coingecko_import - get file coingecko/export.txt and add data to CoinGecko')
 		print('coingecko_getall - get CoinGecko, request API for coins, save all data to file coingecko/all/id.txt')

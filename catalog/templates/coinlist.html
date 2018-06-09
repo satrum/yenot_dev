@@ -89,8 +89,8 @@
 		<th class="markettable">PRICE</th>
 		<!-- <th class="markettable">1h</th> -->
 		<th class="markettable">1d</th>
-		<th class="markettable">1d gecko</th>
-		<!-- <th class="markettable">1m</th> -->
+		<th class="markettable">7d</th>
+		<th class="markettable">1m</th>
 		<th class="markettable">VOLUME<br>24h</th>
 		<th class="markettable">MARKETCAP</th>
 		<th class="markettable">COIN SUPPLY</th>
@@ -111,7 +111,7 @@
 	
 	<tr class="infinite-item tab_fon">	
 		<td class="td_pd">
-		<img src="{{coin.image.url}}" style="border-radius: 100%; width: 39px;padding-top: 5px;">
+		{% if coin.image %}<img src="{{coin.image.url}}" style="border-radius: 100%; width: 39px;padding-top: 5px;">{% endif %}
 		<h4 style="font-size: 0.9em;">{{coin.name}}<br>({{coin.symbol}})</h4>
 		</td>
         <td class="td_pd">
@@ -119,8 +119,8 @@
 		({{news.coinid.change|floatformat:1}}%)</p>		
 		</td>
 		<td class="td_pd"><font color="{% if coin.change > 0 %}green{% else %}red{% endif %}">{{coin.change|floatformat:2}}</font></td>
-		<td class="td_pd"><font color="{% if coin.coin_gecko.p24h > 0 %}green{% else %}red{% endif %}">{{coin.coin_gecko.p24h|floatformat:2}}</font></td>
-		<!-- <td class="td_pd"><font color="{% if coin.change > 0 %}green{% else %}red{% endif %}">{{coin.change|floatformat:2}}</font></td> -->
+		<td class="td_pd"><font color="{% if coin.coin_gecko.p7d > 0 %}green{% else %}red{% endif %}">{{coin.coin_gecko.p7d|floatformat:2}}</font></td>
+		<td class="td_pd"><font color="{% if coin.coin_gecko.p30d > 0 %}green{% else %}red{% endif %}">{{coin.coin_gecko.p30d|floatformat:2}}</font></td>
 		<!-- <td class="td_pd"><font color="{% if coin.change > 0 %}green{% else %}red{% endif %}">{{coin.change|floatformat:2}}</font></td> -->
 		<td class="td_pd">{{coin.volume|floatformat:0}}</td>
 		<td class="td_pd">{{coin.mktcap|floatformat:0}}</td>

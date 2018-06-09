@@ -319,6 +319,7 @@ def coinlist(request, template='coinlist.html'):
 			coin.reddit_comments_per_day = cc_coin.reddit_comments_per_day
 		except:
 			continue
+	'''
 	page = request.GET.get('page', 1)
 	paginator = Paginator(allcoins, 100)
 	try:
@@ -327,13 +328,13 @@ def coinlist(request, template='coinlist.html'):
 		coins = paginator.page(1)
 	except EmptyPage:
 		coins = paginator.page(paginator.num_pages)
-
+	'''
 	context = {
 	'coins_volume_max':coins_volume_max,
 	'coins_mktcap_max':coins_mktcap_max,
 	'coins_change24h_min':coins_change24h_min,
 	'coins_change24h_max':coins_change24h_max,
-	'coins':coins,
+	'coins':allcoins, #'coins':coins,
 	'coin_counter':coin_counter,
 	'algo':algo,
 	'consensus':consensus,
