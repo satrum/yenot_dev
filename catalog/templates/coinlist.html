@@ -11,13 +11,10 @@
  <div class="tab_front_3">
   <form id="us_search_3">
  <div class="caret_vol">
- <h4 class="us_top_text_3">COINS ON PAGE : {{coin_counter}}</h4>
-<a href="{% url 'coinlist' %}" class="update_coinlist">SHOW ALL</a>
- <h4 class="caret_tech">SEARCH COIN:</h4>
-<input type="search" id="us_search_5" name="search" placeholder="SEARCH COIN..." aria-label="Search through site content">
- <h4 class="caret_tech">SEARCH EXCHANGES:</h4>
 
-<select class="ui fluid search selection dropdown slade" name="exchanges"  multiple="" style="width: 248px;">
+ <h4 class="caret_tech">SELECT EXCHANGES:</h4>
+
+<select class="ui fluid search selection dropdown slade" name="exchanges"  multiple="">
   <option value="">EXCHANGES...</option>
    {% for exchange in exchangelist %}
   <option value="{{ exchange.exchange }}">{{ exchange.exchange }}({{ exchange.count }})</option>
@@ -28,31 +25,39 @@
  <div class="caret_vol">
  <div class="roll">
  <h4>VOLUME 24h:</h4>
+   <input type="hidden" id="budget-input1" name="vol_min" value="">
+  <input type="hidden" id="budget-input2" name="vol_max" value="">
   <span id="range-value-1" class="rit"></span><p class="rit">-</p><span id="range-value-2" class="rit"></span>
   <div id="slider3"></div>
  </div>
  <div class="roll">
  <h4>MARKETCAP:</h4>
+   <input type="hidden" id="budget-input3" name="mc_min" value="">
+  <input type="hidden" id="budget-input4" name="mc_max" value="">
   <span id="range-value-3" class="rit"></span><p class="rit">-</p><span id="range-value-4" class="rit"></span>
   <div id="slider4"></div>
  </div>
  <div class="roll">
- <h4>COIN SUPPLY:</h4>
-  <span id="range-value-5" class="rit"></span><p class="rit">-</p><span id="range-value-6" class="rit"></span>
+ <h4>CHANGE BY 24h:</h4>
+  <input type="hidden" id="budget-input5" name="ch_min" value="">
+  <input type="hidden" id="budget-input6" name="ch_max" value="">
+  <span id="range-value-5" class="rit"></span><p class="rit">-</p><span id="range-value-6" class="rit" name="nvmax"></span>
   <div id="slider5"></div>
  </div>
  <div class="roll">
- <h4>TOTAL COIN SUPPLY:</h4>
+ <h4>SUPPLY %:</h4>
+ <input type="hidden" id="budget-input7" name="sup_min" value="">
+  <input type="hidden" id="budget-input8" name="sup_max" value="">
  <span id="range-value-7" class="rit"></span><p class="rit">-</p><span id="range-value-8" class="rit"></span>
+ 
    <div id="slider6"></div>
 </div>
    </div>
     <div class="caret_vol_2">
-  <div class="caret_tech_3">
-  <h4 class="caret_tech_5">CHANGE BY 24h:</h4>
-  <span id="range-value-9" class="rit"></span><p class="rit">-</p><span id="range-value-11" class="rit"></span>
-   <div id="slider7"></div>
-  </div>
+   <h4 class="us_top_text_3">COINS ON PAGE : {{coin_counter}}</h4>
+<a href="{% url 'coinlist' %}" class="update_coinlist">SHOW ALL</a>
+ <h4 class="caret_tech">SEARCH COIN:</h4>
+<input type="search" id="us_search_5" name="search" placeholder="SEARCH COIN..." aria-label="Search through site content">
   <select class="sel_fil_3" name="algo">
   <option  value="" selected >Algorithm</option>
   {% for item in algo %}
@@ -143,29 +148,32 @@
 var snapSlider = document.getElementById('slider3');
 
 noUiSlider.create(snapSlider, {
-	start: [0, 1000],
+	start: [{% if rget.vol_min %} {{rget.vol_min}} {% else %}0{% endif %},{% if rget.vol_max %} {{rget.vol_max}} {% else %}{{coins_volume_max}}{% endif %}],
 	connect: true,
 	range: {
 		'min': 0,
-		'max': 1000
+		'max': {{coins_volume_max}}
 	}
 });
 var snapValues = [
 	document.getElementById('range-value-1'),
 	document.getElementById('range-value-2')
 ];
-
+var budgetInput1 = document.getElementById('budget-input1');
+var budgetInput2 = document.getElementById('budget-input2');
 snapSlider.noUiSlider.on('update', function( values, handle ) {
 	snapValues[handle].innerHTML = values[handle];
+	budgetInput1.value =  parseInt(values[0]);
+	budgetInput2.value =  parseInt(values[1]);
 });
 var slider = document.getElementById('slider4');
 
 noUiSlider.create(slider, {
-	start: [0, 100],
+	start: [{% if rget.mc_min %} {{rget.mc_min}} {% else %}0 {% endif %}, {% if rget.mc_max %} {{rget.mc_max}} {% else %}{{coins_mktcap_max}}{% endif %}],
 	connect: true,
 	range: {
 		'min': 0,
-		'max': 100
+		'max': {{coins_mktcap_max}}
 	}
 	
 });
@@ -173,65 +181,57 @@ var UsnapValues = [
 	document.getElementById('range-value-3'),
 	document.getElementById('range-value-4')
 ];
-
+var budgetInput3 = document.getElementById('budget-input3');
+var budgetInput4 = document.getElementById('budget-input4');
 slider.noUiSlider.on('update', function( values, handle ) {
 	UsnapValues[handle].innerHTML = values[handle];
+	budgetInput3.value =  parseInt(values[0]);
+	budgetInput4.value =  parseInt(values[1]);
 });
 var sslider = document.getElementById('slider5');
 
 noUiSlider.create(sslider, {
-	start: [0, 100],
+	start: [{% if rget.ch_min %} {{rget.ch_min}} {% else %} {{coins_change24h_min}} {% endif %}, {% if rget.ch_max %} {{rget.ch_max}} {% else %}{{coins_change24h_max}} {% endif %}],
 	connect: true,
 	range: {
-		'min': 0,
-		'max': 100
+		'min': {{coins_change24h_min}},
+		'max': {{coins_change24h_max}}
 	}
 });
 var DsnapValues = [
 	document.getElementById('range-value-5'),
 	document.getElementById('range-value-6')
 ];
-
+var budgetInput5 = document.getElementById('budget-input5');
+var budgetInput6 = document.getElementById('budget-input6');
 sslider.noUiSlider.on('update', function( values, handle ) {
 	DsnapValues[handle].innerHTML = values[handle];
+	budgetInput5.value =  parseInt(values[0]);
+	budgetInput6.value =  parseInt(values[1]);
 });
 var uslider = document.getElementById('slider6');
 
 noUiSlider.create(uslider, {
-	start: [0, 100],
+	start: [{% if rget.sup_min %} {{rget.sup_min}} {% else %}0 {% endif %}, {% if rget.sup_max %} {{rget.sup_max}} {% else %}1{% endif %}],
 	connect: true,
 	range: {
 		'min': 0,
-		'max': 100
+		'max': 1
 	}
 });
 var RsnapValues = [
 	document.getElementById('range-value-7'),
 	document.getElementById('range-value-8')
 ];
-
+var budgetInput7 = document.getElementById('budget-input7');
+var budgetInput8 = document.getElementById('budget-input8');
 uslider.noUiSlider.on('update', function( values, handle ) {
 	RsnapValues[handle].innerHTML = values[handle];
-});
-var kslider = document.getElementById('slider7');
-
-noUiSlider.create(kslider, {
-	start: [0, 100],
-	connect: true,
-	range: {
-		'min': 0,
-		'max': 100
-	}
-});
-var asnapValues = [
-	document.getElementById('range-value-9'),
-	document.getElementById('range-value-11')
-];
-
-kslider.noUiSlider.on('update', function( values, handle ) {
-	asnapValues[handle].innerHTML = values[handle];
+	budgetInput7.value =  parseInt(values[0]);
+	budgetInput8.value =  parseInt(values[1]);
 });
 	</script>
+
 	<script>
 $('.ui.dropdown').dropdown({
   allowAdditions: true,

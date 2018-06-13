@@ -1770,7 +1770,7 @@ width: 49px;
     text-align: center;
 }
 .table_filter_Search_3{
-	padding: 18px 12px;
+	padding: 16px 12px;
     display: inline-block;
     margin: auto;
     width: 57%;
@@ -1782,7 +1782,7 @@ width: 49px;
     color: white !important;
     border: 1px solid ghostwhite !important;
     padding: 5px !important;
-	width:300px !important;
+	width:50% !important;
 }
 .table_filter_3{
 border: 1px solid #a0b987;
