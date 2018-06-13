@@ -15,7 +15,8 @@
  <h4 class="caret_tech">SELECT EXCHANGES:</h4>
 
 <select class="ui fluid search selection dropdown slade" name="exchanges"  multiple="">
-  <option value="">EXCHANGES...</option>
+  <option value="">EXCHANGES... {% for item in exquery %} {{item.exchange}}({{item.count}}) {% endfor %}
+  </option>
    {% for exchange in exchangelist %}
   <option value="{{ exchange.exchange }}">{{ exchange.exchange }}({{ exchange.count }})</option>
    {% endfor %}
@@ -87,15 +88,15 @@
 		<div class="table_btn_promo tab_fil right_banner">  {% if banner_right %}<a href="{% url 'banner-click' banner_right.pk %}" target="_blank"><img src = "{{ banner_right.image.url}}"></a>{% endif %}</div>
 </div>
 </div>
-<table id="user_list">
+<table id="user_list_3">
 <thead>
 	<tr>
 		<th class="markettable">COIN</th>
-		<th class="markettable">PRICE</th>
+		<th class="markettable">PRICE $</th>
 		<!-- <th class="markettable">1h</th> -->
-		<th class="markettable">1d</th>
-		<th class="markettable">7d</th>
-		<th class="markettable">1m</th>
+		<th class="markettable">1d%</th>
+		<th class="markettable">7d%</th>
+		<th class="markettable">1m%</th>
 		<th class="markettable">VOLUME<br>24h</th>
 		<th class="markettable">MARKETCAP</th>
 		<th class="markettable">COIN SUPPLY</th>
@@ -120,8 +121,7 @@
 		<h4 style="font-size: 0.9em;">{{coin.name}}<br>({{coin.symbol}})</h4>
 		</td>
         <td class="td_pd">
-		<p class="price_change">{{news.coinid.price|floatformat:3}}$
-		({{news.coinid.change|floatformat:1}}%)</p>		
+		<p class="price_change">{{coin.price|floatformat:3}}</p>		
 		</td>
 		<td class="td_pd"><font color="{% if coin.change > 0 %}green{% else %}red{% endif %}">{{coin.change|floatformat:2}}</font></td>
 		<td class="td_pd"><font color="{% if coin.coin_gecko.p7d > 0 %}green{% else %}red{% endif %}">{{coin.coin_gecko.p7d|floatformat:2}}</font></td>
@@ -152,6 +152,13 @@ noUiSlider.create(snapSlider, {
 	connect: true,
 	range: {
 		'min': 0,
+		'10%': 1000,
+		'30%': 10000,
+		'40%': 100000,
+		'50%': 1000000,
+		'60%': 10000000,
+		'80%': 100000000,
+		'90%': 1000000000,
 		'max': {{coins_volume_max}}
 	}
 });
@@ -173,6 +180,15 @@ noUiSlider.create(slider, {
 	connect: true,
 	range: {
 		'min': 0,
+		'10%': 1000,
+		'20%': 10000,
+		'30%': 100000,
+		'40%': 1000000,
+		'50%': 10000000,
+		'60%': 100000000,
+		'70%': 1000000000,
+		'80%': 10000000000,
+		'90%': 100000000000,
 		'max': {{coins_mktcap_max}}
 	}
 	
@@ -195,6 +211,9 @@ noUiSlider.create(sslider, {
 	connect: true,
 	range: {
 		'min': {{coins_change24h_min}},
+		'10%':-100,
+		'50%': 0,
+		'90%': 100,
 		'max': {{coins_change24h_max}}
 	}
 });
@@ -218,6 +237,7 @@ noUiSlider.create(uslider, {
 		'min': 0,
 		'max': 1
 	}
+	
 });
 var RsnapValues = [
 	document.getElementById('range-value-7'),
@@ -227,8 +247,8 @@ var budgetInput7 = document.getElementById('budget-input7');
 var budgetInput8 = document.getElementById('budget-input8');
 uslider.noUiSlider.on('update', function( values, handle ) {
 	RsnapValues[handle].innerHTML = values[handle];
-	budgetInput7.value =  parseInt(values[0]);
-	budgetInput8.value =  parseInt(values[1]);
+	budgetInput7.value =  parseFloat(values[0]);
+	budgetInput8.value =  parseFloat(values[1]);
 });
 	</script>
 

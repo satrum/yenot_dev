@@ -106,11 +106,29 @@ class Command(BaseCommand):
 		#!!! need clearing of coinlist_update
 		print('coingecko_get - get coinlist API, save to file coingecko/list.txt , add to CoinGecko, save result.txt')
 		#!!! need manual add (MIOTA and others) from list in function
+		#!!! fastest method of update: https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd
+		#[Alpha] List all supported coins price, market cap, volume, and market related data (no pagination required)
+		'''
+		"id": "bitcoin",
+	    "symbol": "btc",
+	    "name": "Bitcoin",
+	    "current_price": 7534.35874634154,
+	    "market_cap": 128718582106.5531,
+	    "total_volume": 1123239107.9021242,
+	    "high_24h": 7605.38589614029,
+	    "low_24h": 7505.72763862948,
+	    "price_change_24h": "7.14542922808",
+	    "price_change_percentage_24h": "0.0949279491234099",
+	    "market_cap_change_24h": "135623011.734",
+	    "market_cap_change_percentage_24h": "0.10547510547956",
+	    "circulating_supply": "17084212.0"
+    	'''
 		print('coingecko_export - get CoinGecko, save to file coingecko/export.txt')
 		print('coingecko_import - get file coingecko/export.txt and add data to CoinGecko')
 		print('coingecko_getall - get CoinGecko, request API for coins, save all data to file coingecko/all/id.txt')
 		#need coingecko_getall coinmarketdata and stats по всем монетам
 		print('coingecko_update - get files coingecko/all/id.txt and update data in CoinGecko')
+		print('daily [all, XXX(symbol), AHT, update ] read coinlist from file, get daily OHLCV from cryptocompare, calculate AHT and write to db ')#!!!!
 
 
 	def rate_news(self):
@@ -648,7 +666,43 @@ class Command(BaseCommand):
 		agg_value = dbcoins.aggregate(num_value = models.Max('change'))
 		obj, created = YeenotSettings.objects.update_or_create(name='coins_change24h_max',defaults=agg_value)
 		print(obj.id, obj.num_value, created)
-    	
+
+
+	def cryptocompare_get_DOHLCV(self, action='all'):
+		#read from coinlist file
+		file = open(DATADIR+'/'+FILE_COINLIST, 'r')
+		filecoins = json.load(file)
+		file.close()
+
+		#https://min-api.cryptocompare.com/data/histoday?fsym=BTC&tsym=USD&allData=1
+		if action=='all':
+			pass
+		elif action=='AHT':
+			pass
+		else:
+			print('get daily OHLCV for {}/USD'.format(action))
+			url = 'https://min-api.cryptocompare.com/data/histoday?fsym='+action+'&tsym=USD&allData=1'#limit=1'
+			response = requests.get(url)
+			DOHLCV=response.json()
+			#print(DOHLCV) 
+			#'TimeTo': 1528848000, 'TimeFrom': 1520208000, 'Response': 'Success'
+			#'Data': [{'close': 11440.73, 'open': 11503.94, 'high': 11694.15, 'time': 1520208000, 'low': 11431.55, 'volumefrom': 68323.51, 'volumeto': 791471905.1}
+			if DOHLCV['Response']=='Success':
+				data = DOHLCV['Data']
+				days = len(data)
+				print('days: {}'.format(days))
+				aht = max(data, key=lambda x:x['high'])
+				ahtdate =  datetime.fromtimestamp(aht['time'])#.strftime('%Y-%m-%d %H:%M:%S')
+				print('all time high: {} date: {}'.format(aht['high'],ahtdate))
+				#save data:
+				
+
+		#get coin list
+		#check file
+		#get full data and save file
+		#calculate ath from file
+		#save to model
+
 
 ################# Cryptocompare snapshot and social functions ######################
 	def cryptocompare_get_snapshot(self, coinlist_file, coinsnapshot_file):
@@ -1072,6 +1126,8 @@ class Command(BaseCommand):
 					#print('symbol {} not found in coin db'.format(symbol))
 
 			continue
+			#https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd
+
 
 			# symbol = item['symbol'].upper()
 			# found=False
@@ -1142,6 +1198,33 @@ class Command(BaseCommand):
 				#---print('name:{} 1d:{} 7d:{} 14d:{} 30d:{} 60d:{}'.format(id, p24h, p7d, p14d, p30d, p60d))
 				#print('name:{} 1d:{} 7d:{} 30d:{}'.format(id, p24h, p7d, p30d))
 				#print(id, supply)
+				'''
+				  "market_cap_rank": 71,
+				  "coingecko_rank": 60,
+				  "coingecko_score": 53.099,
+				  "developer_score": 70.438,
+				  "community_score": 42.495,
+				  "liquidity_score": 53.328,
+				  "public_interest_score": 30.637,
+				  "community_data": {
+				    "facebook_likes": 59192,
+				    "twitter_followers": 841,
+				    "reddit_average_posts_48h": 0.111,
+				    "reddit_average_comments_48h": 0.556,
+				    "reddit_subscribers": 4672,
+				    "reddit_accounts_active_48h": 987
+				  },
+				  "developer_data": {
+				    "forks": 130,
+				    "stars": 411,
+				    "subscribers": 70,
+				    "total_issues": 20,
+				    "closed_issues": 12,
+				    "pull_requests_merged": 170,
+				    "pull_request_contributors": 5,
+				    "commit_count_4_weeks": 30
+				  },
+				'''
 				geckocoin.save()
 			except Exception as error:
 				print(id, error)
@@ -1253,6 +1336,14 @@ class Command(BaseCommand):
 			except Exception:
 				action = 'all'
 			self.coinadd(action)
+
+		if 'daily' in poll_id:
+			index = poll_id.index('daily')
+			try:
+				action = poll_id[index+1]
+			except Exception:
+				action = 'all'
+			self.cryptocompare_get_DOHLCV(action)
 
 		if 'update_cycle' in poll_id:
 			self.cryptocompare_get_price(FILE_COINLIST, FILE_PRICE, TYPE_PRICE)

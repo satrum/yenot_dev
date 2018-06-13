@@ -289,6 +289,20 @@ def coinlist(request, template='coinlist.html'):
 		allcoins = Coin.objects.filter(pk__in = allcoins,symbol__in=excoins) #need after slice ,
 		#print(len(allcoins))
 	
+	#vol_min=0&vol_max=3484598928&mc_min=0&mc_max=66949548217&ch_min=-99&ch_max=1900&sup_min=0&sup_max=1
+	if rget.get('vol_min') is not None: #all range parameter together
+		vol_min = float(rget.get('vol_min'))
+		vol_max = float(rget.get('vol_max'))+1
+		mc_min = float(rget.get('mc_min'))
+		mc_max = float(rget.get('mc_max'))+1
+		ch_min = float(rget.get('ch_min'))
+		ch_max = float(rget.get('ch_max'))
+		sup_min = float(rget.get('sup_min'))
+		sup_max = float(rget.get('sup_max'))
+		#print(type(vol_max), vol_max)
+		allcoins = Coin.objects.filter(pk__in = allcoins, volume__gte=vol_min, volume__lte=vol_max, mktcap__gte=mc_min, mktcap__lte=mc_max, change__gte=ch_min, change__lte=ch_max, supply_share__gte=sup_min, supply_share__lte=sup_max)
+	
+	
 	#filter lists:
 	algo = Coin.objects.order_by('Algorithm').values_list('Algorithm', flat=True).distinct()
 	consensus = Coin.objects.order_by('ProofType').values_list('ProofType', flat=True).distinct()
@@ -341,7 +355,11 @@ def coinlist(request, template='coinlist.html'):
 	'exchangelist':exchangelist,
 	'banner_left':banner_left,
 	'banner_right':banner_right,
-	'rget':rget}
+	'rget':rget,
+	}
+	if 'exquery' in locals():
+		context['exquery']=exquery
+		#print(exquery)
 	return render(request, template, context)
 	
 from django.views import generic
