@@ -92,7 +92,7 @@
 <table id="user_list_3">
 <thead>
 	<tr>
-		<th class="markettable" style="width: 6%;">COIN</th>
+		<th class="markettable" style="width: 13%;">COIN</th>
 		<th class="markettable">PRICE $</th>
 		<th class="markettable">1d%</th>
 		<!-- <th class="markettable">7d%</th> -->
@@ -118,7 +118,7 @@
 	{% for coin in coins %}
 	
 	<tr class="infinite-item tab_fon">	
-		<td class="td_pd" style="width: 6%;">
+		<td class="td_pd">
 		{% if coin.image %}<img src="{{coin.image.url}}" style="border-radius: 100%; width: 30px;vertical-align: top;">{% endif %}
 		<h4 style="font-size: 0.9em;width: 20%;margin: 2px;display: inline-block;">{{coin.name}}<br>({{coin.symbol}})</h4>
 		</td>
