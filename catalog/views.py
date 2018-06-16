@@ -248,9 +248,12 @@ def coinlist(request, template='coinlist.html'):
 	search = request.GET.get('search')
 	if search == None: search=''
 	
+	#today:
+	today = datetime.date.today() - datetime.timedelta(days=1)
+	
 	top = rget.get('top')
 	if top==None or top=='':
-		allcoins = Coin.objects.filter(Q(volume__gt=0,symbol__icontains=search)|Q(volume__gt=0,name__icontains=search))#[0:500]#(mktcap__gt=0)#[0:500]
+		allcoins = Coin.objects.filter(Q(volume__gt=0,updatetime__gte=today,symbol__icontains=search)|Q(volume__gt=0,updatetime__gte=today,name__icontains=search))#[0:500]#(mktcap__gt=0)#[0:500]
 	else:
 		allcoins = Coin.objects.all()[0:int(top)]
 		print(allcoins)

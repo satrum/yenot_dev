@@ -128,7 +128,11 @@ class Command(BaseCommand):
 		print('coingecko_getall - get CoinGecko, request API for coins, save all data to file coingecko/all/id.txt')
 		#need coingecko_getall coinmarketdata and stats по всем монетам
 		print('coingecko_update - get files coingecko/all/id.txt and update data in CoinGecko')
-		print('daily [all, XXX(symbol), AHT, update ] read coinlist from file, get daily OHLCV from cryptocompare, calculate AHT and write to db ')#!!!!
+		print('daily [get, update, [symbol] ] read coinlist from file, get daily OHLCV from cryptocompare, save to file, calculate ATH and Volatility and write to db')
+		#need optimize 7day volatility with hours OHLCV
+		#need [symbol]/BTC ATH
+		#need plots
+		#need days from ATH, trade days counts
 
 
 	def rate_news(self):
@@ -668,22 +672,132 @@ class Command(BaseCommand):
 		print(obj.id, obj.num_value, created)
 
 
-	def cryptocompare_get_DOHLCV(self, action='all'):
+	def cryptocompare_get_DOHLCV(self, action='get'): #get update or symbol
+		# Load the required modules and packages
+		import numpy as np
+		import pandas as pd
+		import time
+		import datetime
+		
 		#read from coinlist file
 		file = open(DATADIR+'/'+FILE_COINLIST, 'r')
 		filecoins = json.load(file)
 		file.close()
 
 		#https://min-api.cryptocompare.com/data/histoday?fsym=BTC&tsym=USD&allData=1
-		if action=='all':
-			pass
-		elif action=='AHT':
-			pass
+		if action=='update':
+			print('filecoins: {}'.format(len(filecoins)))
+			for filecoin in filecoins:
+				filename = filecoin.replace("*", "_")
+				file = open(DATADIR+'/daily/'+filename+'.txt', 'r')
+				dataraw = json.load(file) #get DOHLCV['Data'] from file
+				days_before = len(dataraw)
+				#remove HIGH > 100*CLOSE
+				print('check data for:',filecoin)
+				data=[]
+				for daydata in dataraw:
+					if daydata['high']>100*daydata['close'] or daydata['high']>100*daydata['open'] or daydata['high']>100*daydata['low']:
+						pass
+						#print(daydata)
+					else:
+						data.append(daydata)
+				days = len(data)
+
+				# Computing AHT
+				ath = max(data, key=lambda x:x['high'])
+				athdate =  datetime.datetime.fromtimestamp(ath['time'])#.strftime('%Y-%m-%d %H:%M:%S')
+				#print('all time high: {} date: {}'.format(ath['high'],athdate))
+				# Computing Volatility
+				df = pd.DataFrame(data)
+				df['Log_Ret'] = np.log(df['close'] / df['close'].shift(1))
+				volatility30day =  df['Log_Ret'].tail(30).std(ddof=0)*np.sqrt(30)
+				volatility7day =  df['Log_Ret'].tail(7).std(ddof=0)*np.sqrt(7)
+				#print('volatility 30day: {} '.format(volatility30day))
+				#if days<30:
+				print('coin:{} days_b: {} days_a:{} ath:{} athdate: {} volatility 30day: {}'.format(filecoin, days_before, days, ath['high'], athdate, volatility30day))
+				dbcoin = Coin.objects.get(symbol=filecoin)
+				dbcoin.ath = ath['high']
+				dbcoin.athdate = athdate
+				dbcoin.athchange = float(dbcoin.price)/ath['high']
+				if days>30:
+					dbcoin.volatility30day = volatility30day
+				else:
+					dbcoin.volatility30day = 0
+				if days>7:
+					dbcoin.volatility7day = volatility7day
+				else:
+					dbcoin.volatility7day = 0
+				dbcoin.save()
+
+		elif action=='get': #get daily OHLCV for coins in filecoins if not downloaded today with pause control 
+			count=0
+			error_count=0
+			error_list=[]
+			downloaded_count=0
+			#list_of_files = [item.split('\\')[1].split('.')[0].replace('_','*') for item in glob.glob(DATADIR+'/daily/*')]
+			
+			#times = [os.path.getctime(item) for item in glob.glob(DATADIR+'/daily/*')]
+			#print('downloaded:',len(times))
+			today = datetime.date.today() - datetime.timedelta(days=1)
+			float_today=time.mktime(today.timetuple())
+			print('today: {} unix: {}'.format(today,float_today))
+			list_of_files = [item.split('\\')[1].split('.')[0].replace('_','*') for item in glob.glob(DATADIR+'/daily/*') if os.path.getctime(item)>float_today]
+			print('downloaded last day:',len(list_of_files))
+
+			for filecoin in filecoins:
+				count+=1
+				print('count:{} get daily OHLCV for {}/USD'.format(count,filecoin))
+				if filecoin in list_of_files:
+					print('already downloaded last day')
+					continue
+				#check file: filecoin.txt
+				#change * to _
+				filename = filecoin.replace("*", "_")
+				#get info:
+				url = 'https://min-api.cryptocompare.com/data/histoday?fsym='+filecoin+'&tsym=USD&allData=1'#limit=1'
+				response = requests.get(url)
+				DOHLCV = response.json()
+				if DOHLCV['Response']=='Success':
+					data = DOHLCV['Data']
+					#save data:
+					file = open(DATADIR+'/daily/'+filename+'.txt', 'w', encoding='utf8')
+					json.dump(data, file)
+					file.close()
+					print('saved in file {}.txt days: {}'.format(filename, len(data)))
+					downloaded_count+=1
+				else:
+					print(DOHLCV['Response'])
+					error_count+=1
+					error_list.append(filecoin)
+				url = 'https://min-api.cryptocompare.com/stats/rate/limit'
+				response = requests.get(url).json()
+				hleft = response['Hour']['CallsLeft']['Histo']
+				mleft = response['Minute']['CallsLeft']['Histo']
+				sleft = response['Second']['CallsLeft']['Histo']
+				print('HOUR made: {} left: {}'.format(response['Hour']['CallsMade']['Histo'],hleft))
+				print('MIN  made: {} left: {}'.format(response['Minute']['CallsMade']['Histo'],mleft))
+				print('SEC  made: {} left: {}'.format(response['Second']['CallsMade']['Histo'],sleft))
+				if mleft<=6:
+					print('MIN: sleep for 30 sec')
+					time.sleep(30)
+				'''
+				if count>200:
+					break
+				'''	
+			print('filecoins: {}'.format(len(filecoins)))
+			print('already downloaded last day:',len(list_of_files))
+			print('errors:',error_count)
+			print('coins with error:',error_list)
+			print('downloaded:',downloaded_count)
+		
 		else:
 			print('get daily OHLCV for {}/USD'.format(action))
 			url = 'https://min-api.cryptocompare.com/data/histoday?fsym='+action+'&tsym=USD&allData=1'#limit=1'
 			response = requests.get(url)
 			DOHLCV=response.json()
+			url2 = 'https://min-api.cryptocompare.com/data/histohour?fsym='+action+'&tsym=USD&limit=348' # 7*24*2
+			response2 = requests.get(url2)
+			HOHLCV=response2.json()
 			#print(DOHLCV) 
 			#'TimeTo': 1528848000, 'TimeFrom': 1520208000, 'Response': 'Success'
 			#'Data': [{'close': 11440.73, 'open': 11503.94, 'high': 11694.15, 'time': 1520208000, 'low': 11431.55, 'volumefrom': 68323.51, 'volumeto': 791471905.1}
@@ -692,16 +806,49 @@ class Command(BaseCommand):
 				days = len(data)
 				print('days: {}'.format(days))
 				aht = max(data, key=lambda x:x['high'])
-				ahtdate =  datetime.fromtimestamp(aht['time'])#.strftime('%Y-%m-%d %H:%M:%S')
+				ahtdate =  datetime.datetime.fromtimestamp(aht['time'])#.strftime('%Y-%m-%d %H:%M:%S')
 				print('all time high: {} date: {}'.format(aht['high'],ahtdate))
 				#save data:
-				
+				file = open(DATADIR+'/daily/'+action+'.txt', 'w', encoding='utf8')
+				json.dump(data, file)
+				file.close()
+			if HOHLCV['Response']=='Success':
+				data2 = HOHLCV['Data']
+				hours = len(data2)
+				print('hours: {}'.format(hours))
+				print(data[-1])
 
-		#get coin list
-		#check file
-		#get full data and save file
-		#calculate ath from file
-		#save to model
+			## Computing Volatility
+			df = pd.DataFrame(data)
+			df_hours = pd.DataFrame(data2)
+			#vals = df.values
+			#print(vals)
+
+			# Compute the logarithmic returns using the Closing price 
+			df['Log_Ret'] = np.log(df['close'] / df['close'].shift(1))
+			df_hours['Log_Ret'] = np.log(df_hours['close'] / df_hours['close'].shift(1))
+			#print(df.head())
+			#print(df['Log_Ret'])
+
+			# Compute Volatility using the pandas rolling standard deviation function
+			df_hours['7dayVolatility'] = df_hours['Log_Ret'].rolling(174).std(ddof=0) * np.sqrt(174)
+			df['7dayVolatility'] = df['Log_Ret'].rolling(7).std(ddof=0) * np.sqrt(7)
+			df['30dayVolatility'] = df['Log_Ret'].rolling(30).std(ddof=0) * np.sqrt(30)
+			df['60dayVolatility'] = df['Log_Ret'].rolling(60).std(ddof=0) * np.sqrt(60)
+			print(df.tail(10))
+			print(df_hours.tail(10))
+			volatility_30day =  df['Log_Ret'].tail(30).std(ddof=0)*np.sqrt(30)
+			print(volatility_30day)
+
+			# Plot the NIFTY Price series and the Volatility
+			plot = df[['close', '30dayVolatility']].tail(365).plot(subplots=True, color='blue',figsize=(8, 6))
+			fig = plot[0].get_figure()
+			fig.savefig(DATADIR+'/daily/volatility'+action+'.png')
+
+			url = 'https://min-api.cryptocompare.com/stats/rate/limit'
+			response = requests.get(url)
+			rate = response.json()
+			print(rate)
 
 
 ################# Cryptocompare snapshot and social functions ######################

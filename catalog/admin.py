@@ -89,7 +89,7 @@ class BannerAdmin(admin.ModelAdmin):
 
 @admin.register(Coin)
 class CoinAdmin(admin.ModelAdmin):
-    list_display = ('id', 'symbol', 'name', 'price', 'change', 'volume', 'mktcap', 'supply','TotalCoinSupply','supply_share','Algorithm','ProofType','Id_cc','news_count','updatetime','image')
+    list_display = ('id', 'symbol', 'name', 'price', 'change', 'volume', 'mktcap', 'ath', 'athdate', 'athchange', 'volatility30day', 'volatility7day', 'supply','TotalCoinSupply','supply_share','Algorithm','ProofType','Id_cc','news_count','updatetime','image')
     search_fields = ['symbol','name']
     list_filter = ('Algorithm', 'ProofType')
     inlines = [NewsInline]
