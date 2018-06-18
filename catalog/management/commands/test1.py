@@ -702,7 +702,8 @@ class Command(BaseCommand):
 					else:
 						data.append(daydata)
 				days = len(data)
-
+				if days==0:
+					continue
 				# Computing AHT
 				ath = max(data, key=lambda x:x['high'])
 				athdate =  datetime.datetime.fromtimestamp(ath['time'])#.strftime('%Y-%m-%d %H:%M:%S')
