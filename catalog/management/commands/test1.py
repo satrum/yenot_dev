@@ -741,7 +741,11 @@ class Command(BaseCommand):
 			today = datetime.date.today() - datetime.timedelta(days=1)
 			float_today=time.mktime(today.timetuple())
 			print('today: {} unix: {}'.format(today,float_today))
-			list_of_files = [item.split('\\')[1].split('.')[0].replace('_','*') for item in glob.glob(DATADIR+'/daily/*') if os.path.getctime(item)>float_today]
+			if os.name=='nt':
+				list_of_files = [item.split('\\')[1].split('.')[0].replace('_','*') for item in glob.glob(DATADIR+'/daily/*') if os.path.getctime(item)>float_today]
+			elif os.name=='posix':
+				list_of_files = [item.split('/')[-1].split('.')[0].replace('_','*') for item in glob.glob(DATADIR+'/daily/*') if os.path.getctime(item)>float_today]
+
 			print('downloaded last day:',len(list_of_files))
 
 			for filecoin in filecoins:
@@ -777,6 +781,7 @@ class Command(BaseCommand):
 				print('HOUR made: {} left: {}'.format(response['Hour']['CallsMade']['Histo'],hleft))
 				print('MIN  made: {} left: {}'.format(response['Minute']['CallsMade']['Histo'],mleft))
 				print('SEC  made: {} left: {}'.format(response['Second']['CallsMade']['Histo'],sleft))
+				time.sleep(0.25)
 				if mleft<=6:
 					print('MIN: sleep for 30 sec')
 					time.sleep(30)
