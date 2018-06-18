@@ -322,8 +322,8 @@ class Coin(models.Model):
 	ath = models.DecimalField(max_digits=20, decimal_places=8, help_text="all time high price of coin", default=0)
 	athdate = models.DateField(help_text='date of ATH', default=timezone.now)
 	athchange = models.DecimalField(max_digits=20, decimal_places=8, help_text="price/ath if ath>0", default=0)
-	volatility30day = models.DecimalField(max_digits=20, decimal_places=8, help_text="30 day volatility from daily DOHLCV", default=0)
-	volatility7day =  models.DecimalField(max_digits=20, decimal_places=8, help_text="7 day volatility from daily DOHLCV", default=0)
+	volatility30day = models.DecimalField(max_digits=20, decimal_places=8, help_text="30 day volatility from daily DOHLCV in %", default=0)
+	volatility7day =  models.DecimalField(max_digits=20, decimal_places=8, help_text="7 day volatility from daily DOHLCV in %", default=0)
 	
 	class Meta:
 		ordering = ["-volume"]

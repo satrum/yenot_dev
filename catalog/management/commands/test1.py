@@ -128,7 +128,7 @@ class Command(BaseCommand):
 		print('coingecko_getall - get CoinGecko, request API for coins, save all data to file coingecko/all/id.txt')
 		#need coingecko_getall coinmarketdata and stats по всем монетам
 		print('coingecko_update - get files coingecko/all/id.txt and update data in CoinGecko')
-		print('daily [get, update, [symbol] ] read coinlist from file, get daily OHLCV from cryptocompare, save to file, calculate ATH and Volatility and write to db')
+		print('daily [get, update, [symbol] ] read coinlist from file, get daily OHLCV from cryptocompare, save to file, calculate ATH and Volatility and write to db')#ok
 		#need optimize 7day volatility with hours OHLCV
 		#need [symbol]/BTC ATH
 		#need plots
@@ -710,8 +710,8 @@ class Command(BaseCommand):
 				# Computing Volatility
 				df = pd.DataFrame(data)
 				df['Log_Ret'] = np.log(df['close'] / df['close'].shift(1))
-				volatility30day =  df['Log_Ret'].tail(30).std(ddof=0)*np.sqrt(30)
-				volatility7day =  df['Log_Ret'].tail(7).std(ddof=0)*np.sqrt(7)
+				volatility30day =  100*df['Log_Ret'].tail(30).std(ddof=0)*np.sqrt(30)
+				volatility7day =  100*df['Log_Ret'].tail(7).std(ddof=0)*np.sqrt(7)
 				#print('volatility 30day: {} '.format(volatility30day))
 				#if days<30:
 				print('coin:{} days_b: {} days_a:{} ath:{} athdate: {} volatility 30day: {}'.format(filecoin, days_before, days, ath['high'], athdate, volatility30day))
@@ -1187,8 +1187,10 @@ class Command(BaseCommand):
 			'cibus',
 			'consensus',
 			'corethum',
+			'cryptoharbor',
 			'cybereits',
 			'daostack',
+			'delphi-systems',
 			'first-bitcoin',
 			'global-tour-coin',
 			'harmonycoin',
@@ -1199,6 +1201,7 @@ class Command(BaseCommand):
 			'link-platform',
 			'marinecoin',
 			'multiven',
+			'mytoken',
 			'natcoin',
 			'neptunecoin',
 			'pally',
