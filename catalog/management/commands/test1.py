@@ -128,11 +128,13 @@ class Command(BaseCommand):
 		print('coingecko_getall - get CoinGecko, request API for coins, save all data to file coingecko/all/id.txt')
 		#need coingecko_getall coinmarketdata and stats по всем монетам
 		print('coingecko_update - get files coingecko/all/id.txt and update data in CoinGecko')
-		print('daily [get, update, [symbol] ] read coinlist from file, get daily OHLCV from cryptocompare, save to file, calculate ATH and Volatility and write to db')
-		#need optimize 7day volatility with hours OHLCV
+		print('daily [get, update, [symbol] ] read coinlist from file, get daily OHLCV from cryptocompare, save to file, calculate ATH and Volatility and write to db')#ok
+		#need optimize 7day volatility with hours OHLCV (folder 'data/hour')
 		#need [symbol]/BTC ATH
 		#need plots
 		#need days from ATH, trade days counts
+		#need update every 6 hours (today = datetime.datetime.today() - datetime.timedelta(hours=4))
+		#need download delta OHLCV
 
 
 	def rate_news(self):
@@ -687,10 +689,18 @@ class Command(BaseCommand):
 		#https://min-api.cryptocompare.com/data/histoday?fsym=BTC&tsym=USD&allData=1
 		if action=='update':
 			print('filecoins: {}'.format(len(filecoins)))
+			error_list_nofile=[]
+			error_list_noindb=[]
 			for filecoin in filecoins:
 				filename = filecoin.replace("*", "_")
-				file = open(DATADIR+'/daily/'+filename+'.txt', 'r')
-				dataraw = json.load(file) #get DOHLCV['Data'] from file
+				#print(filecoin, filename)
+				if os.path.exists(DATADIR+'/daily/'+filename+'.txt'):
+					with open(DATADIR+'/daily/'+filename+'.txt', 'r') as file:
+						dataraw = json.load(file) #get DOHLCV['Data'] from file
+				else:
+					print('error read or parse file ', filename)
+					error_list_nofile.append(filecoin)
+					continue
 				days_before = len(dataraw)
 				#remove HIGH > 100*CLOSE
 				print('check data for:',filecoin)
@@ -702,7 +712,8 @@ class Command(BaseCommand):
 					else:
 						data.append(daydata)
 				days = len(data)
-
+				if days==0:
+					continue
 				# Computing AHT
 				ath = max(data, key=lambda x:x['high'])
 				athdate =  datetime.datetime.fromtimestamp(ath['time'])#.strftime('%Y-%m-%d %H:%M:%S')
@@ -710,12 +721,17 @@ class Command(BaseCommand):
 				# Computing Volatility
 				df = pd.DataFrame(data)
 				df['Log_Ret'] = np.log(df['close'] / df['close'].shift(1))
-				volatility30day =  df['Log_Ret'].tail(30).std(ddof=0)*np.sqrt(30)
-				volatility7day =  df['Log_Ret'].tail(7).std(ddof=0)*np.sqrt(7)
+				volatility30day =  100*df['Log_Ret'].tail(30).std(ddof=0)*np.sqrt(30)
+				volatility7day =  100*df['Log_Ret'].tail(7).std(ddof=0)*np.sqrt(7)
 				#print('volatility 30day: {} '.format(volatility30day))
 				#if days<30:
 				print('coin:{} days_b: {} days_a:{} ath:{} athdate: {} volatility 30day: {}'.format(filecoin, days_before, days, ath['high'], athdate, volatility30day))
-				dbcoin = Coin.objects.get(symbol=filecoin)
+				try:
+					dbcoin = Coin.objects.get(symbol=filecoin)
+				except Exception as error:
+					print('not found coin in db: ',filecoin,error)
+					error_list_noindb.append(filecoin)
+					continue
 				dbcoin.ath = ath['high']
 				dbcoin.athdate = athdate
 				dbcoin.athchange = float(dbcoin.price)/ath['high']
@@ -728,6 +744,14 @@ class Command(BaseCommand):
 				else:
 					dbcoin.volatility7day = 0
 				dbcoin.save()
+			
+			text = '\ndaily update current time :{}\n'.format(datetime.datetime.today())
+			text+= 'coins file not found:\n{}\n'.format(error_list_nofile)
+			text+= 'coins not in db:\n{}\n'.format(error_list_noindb)
+			print(text)
+			file_result = open(DATADIR+'/result_daily.txt', 'a')
+			file_result.write(text)
+			file_result.close()
 
 		elif action=='get': #get daily OHLCV for coins in filecoins if not downloaded today with pause control 
 			count=0
@@ -738,17 +762,25 @@ class Command(BaseCommand):
 			
 			#times = [os.path.getctime(item) for item in glob.glob(DATADIR+'/daily/*')]
 			#print('downloaded:',len(times))
-			today = datetime.date.today() - datetime.timedelta(days=1)
+			today = datetime.datetime.today() - datetime.timedelta(hours=12)#days=1)
 			float_today=time.mktime(today.timetuple())
 			print('today: {} unix: {}'.format(today,float_today))
-			list_of_files = [item.split('\\')[1].split('.')[0].replace('_','*') for item in glob.glob(DATADIR+'/daily/*') if os.path.getctime(item)>float_today]
+			#os.path.getmtime(item) - last change time
+			if os.name=='nt':
+				print('windows')
+				list_of_files = [item.split('\\')[1].split('.')[0].replace('_','*') for item in glob.glob(DATADIR+'/daily/*') if os.path.getmtime(item)>float_today]
+			elif os.name=='posix':
+				print('linux')
+				list_of_files = [item.split('/')[-1].split('.')[0].replace('_','*') for item in glob.glob(DATADIR+'/daily/*') if os.path.getmtime(item)>float_today]
+
 			print('downloaded last day:',len(list_of_files))
+			print(list_of_files)
 
 			for filecoin in filecoins:
 				count+=1
 				print('count:{} get daily OHLCV for {}/USD'.format(count,filecoin))
 				if filecoin in list_of_files:
-					print('already downloaded last day')
+					print('already downloaded last 12 hours')
 					continue
 				#check file: filecoin.txt
 				#change * to _
@@ -777,6 +809,7 @@ class Command(BaseCommand):
 				print('HOUR made: {} left: {}'.format(response['Hour']['CallsMade']['Histo'],hleft))
 				print('MIN  made: {} left: {}'.format(response['Minute']['CallsMade']['Histo'],mleft))
 				print('SEC  made: {} left: {}'.format(response['Second']['CallsMade']['Histo'],sleft))
+				time.sleep(0.25)
 				if mleft<=6:
 					print('MIN: sleep for 30 sec')
 					time.sleep(30)
@@ -784,11 +817,18 @@ class Command(BaseCommand):
 				if count>200:
 					break
 				'''	
-			print('filecoins: {}'.format(len(filecoins)))
-			print('already downloaded last day:',len(list_of_files))
-			print('errors:',error_count)
-			print('coins with error:',error_list)
-			print('downloaded:',downloaded_count)
+			text = '\ndaily get current time:{}\n'.format(datetime.datetime.today())
+			text+= 'filecoins: {}\n'.format(len(filecoins))
+			text+= 'already downloaded last day: {}\n'.format(len(list_of_files))
+			text+= 'errors:{}\n'.format(error_count)
+			text+= 'coins with error:{}\n'.format(error_list)
+			text+= 'downloaded:{}\n'.format(downloaded_count)
+			print(text)
+			#save result to result_daily.txt
+			file_result = open(DATADIR+'/result_daily.txt', 'a')
+			file_result.write(text)
+			file_result.close()
+
 		
 		else:
 			print('get daily OHLCV for {}/USD'.format(action))
@@ -1187,8 +1227,10 @@ class Command(BaseCommand):
 			'cibus',
 			'consensus',
 			'corethum',
+			'cryptoharbor',
 			'cybereits',
 			'daostack',
+			'delphi-systems',
 			'first-bitcoin',
 			'global-tour-coin',
 			'harmonycoin',
@@ -1199,6 +1241,7 @@ class Command(BaseCommand):
 			'link-platform',
 			'marinecoin',
 			'multiven',
+			'mytoken',
 			'natcoin',
 			'neptunecoin',
 			'pally',
