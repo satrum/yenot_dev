@@ -1350,9 +1350,16 @@ cursor: pointer;
      text-align: center;
     padding: 0px 6px;
 }
+.td_p3{
+     text-align: center;
+    padding: 0px 6px;
+	    font-size: 0.86em;
+		font-weight: bold;
+}
 .td_pd2{
      text-align: left;
     padding: 0px 6px;
+	    font-size: 0.9em;
 }
 .topuser_text{
 	text-align: center;
