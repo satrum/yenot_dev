@@ -133,7 +133,7 @@ class Command(BaseCommand):
 		#need [symbol]/BTC ATH
 		#need plots
 		#need days from ATH, trade days counts
-		#need update every 6 hours (today = datetime.datetime.today() - datetime.timedelta(hours=4))
+		#ok - need update every 6 hours (today = datetime.datetime.today() - datetime.timedelta(hours=12))
 		#need download delta OHLCV
 
 
@@ -1171,6 +1171,7 @@ class Command(BaseCommand):
 		print(text)
 		file_result.write(text)
 		file_result.close()
+
 
 		#create news:
 

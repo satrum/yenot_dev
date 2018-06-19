@@ -333,7 +333,8 @@ def coinlist(request, template='coinlist.html'):
 			coin.twitter_posts = cc_coin.twitter_posts
 			coin.twitter_followers = cc_coin.twitter_followers
 			coin.reddit_subscribers = cc_coin.reddit_subscribers
-			coin.reddit_comments_per_day = cc_coin.reddit_comments_per_day
+			coin.reddit_active_users = cc_coin.reddit_active_users
+			coin.reddit_posts_per_day = cc_coin.reddit_posts_per_day
 		except:
 			continue
 	'''
