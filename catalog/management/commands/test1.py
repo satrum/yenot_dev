@@ -129,10 +129,12 @@ class Command(BaseCommand):
 		#need coingecko_getall coinmarketdata and stats по всем монетам
 		print('coingecko_update - get files coingecko/all/id.txt and update data in CoinGecko')
 		print('daily [get, update, [symbol] ] read coinlist from file, get daily OHLCV from cryptocompare, save to file, calculate ATH and Volatility and write to db')#ok
-		#need optimize 7day volatility with hours OHLCV
+		#need optimize 7day volatility with hours OHLCV (folder 'data/hour')
 		#need [symbol]/BTC ATH
 		#need plots
 		#need days from ATH, trade days counts
+		#need update every 6 hours (today = datetime.datetime.today() - datetime.timedelta(hours=4))
+		#need download delta OHLCV
 
 
 	def rate_news(self):
@@ -739,15 +741,19 @@ class Command(BaseCommand):
 			
 			#times = [os.path.getctime(item) for item in glob.glob(DATADIR+'/daily/*')]
 			#print('downloaded:',len(times))
-			today = datetime.date.today() - datetime.timedelta(days=1)
+			today = datetime.datetime.today() - datetime.timedelta(hours=6)#days=1)
 			float_today=time.mktime(today.timetuple())
 			print('today: {} unix: {}'.format(today,float_today))
+			#os.path.getmtime(item) - last change time
 			if os.name=='nt':
-				list_of_files = [item.split('\\')[1].split('.')[0].replace('_','*') for item in glob.glob(DATADIR+'/daily/*') if os.path.getctime(item)>float_today]
+				print('windows')
+				list_of_files = [item.split('\\')[1].split('.')[0].replace('_','*') for item in glob.glob(DATADIR+'/daily/*') if os.path.getmtime(item)>float_today]
 			elif os.name=='posix':
-				list_of_files = [item.split('/')[-1].split('.')[0].replace('_','*') for item in glob.glob(DATADIR+'/daily/*') if os.path.getctime(item)>float_today]
+				print('linux')
+				list_of_files = [item.split('/')[-1].split('.')[0].replace('_','*') for item in glob.glob(DATADIR+'/daily/*') if os.path.getmtime(item)>float_today]
 
 			print('downloaded last day:',len(list_of_files))
+			print(list_of_files)
 
 			for filecoin in filecoins:
 				count+=1
@@ -790,11 +796,18 @@ class Command(BaseCommand):
 				if count>200:
 					break
 				'''	
-			print('filecoins: {}'.format(len(filecoins)))
-			print('already downloaded last day:',len(list_of_files))
-			print('errors:',error_count)
-			print('coins with error:',error_list)
-			print('downloaded:',downloaded_count)
+			text = '\ncurrent time:{}\n'.format(datetime.datetime.today())
+			text+= 'filecoins: {}\n'.format(len(filecoins))
+			text+= 'already downloaded last day: {}\n'.format(len(list_of_files))
+			text+= 'errors:{}\n'.format(error_count)
+			text+= 'coins with error:{}\n'.format(error_list)
+			text+= 'downloaded:{}\n'.format(downloaded_count)
+			print(text)
+			#save result to result_daily.txt
+			file_result = open(DATADIR+'/result_daily.txt', 'a')
+			file_result.write(text)
+			file_result.close()
+
 		
 		else:
 			print('get daily OHLCV for {}/USD'.format(action))

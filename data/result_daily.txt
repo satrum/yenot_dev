@@ -1,0 +1,52 @@
+filecoins: 1394
+already downloaded last day: 0
+errors:533
+coins with error:['BON', 'AIR*', 'CRM', 'FLIP', 'LEAF', 'FUNC', 'KMD', 'BIX', 'TRUMP', 'FFC', '365', 'PEPECASH', 'XPS', 'BIFI', 'AEON', 'NTRN', 'CMT*', 'AIB', '611', 'XEM', 'LTB', 'TNC', 'KURT', 'PRIX', 'PLC', 'EFYT', 'EVR', 'FGZ', 'XIN', 'SKY', 'MCO', 'RVN', 'STALIN', 'OMG', 'LBC', 'PUT', 'LAT', 'XYO', 'DRA', 'UGC', 'TKS', 'EKO', 'CRW', 'KORE', 'ARTE', 'ADZ', 'CLUB', 'MONETA', 'XMY', 'EVX', 'GPU', 'HGT', 'BERRY', 'CCC', 'TRC', 'NXT', 'COR', 'GEM', 'VTX', 'INSN', 'CAB', 'AMN', 'ETBS', 'LVG', 'MCAP', 'SKR*', 'STX', 'DSH', 'FLOT', 'BTCD', 'ELIX', 'NGC', 'ETP', 'FTX', 'NETKO', 'PAC', 'DCY', 'MOD', 'PLR', 'ERC20', 'XLM', 'RKC', 'CRAB', 'PARETO', 'BRAIN', 'MAC', 'VISIO', 'ELLA', 'SEL', '42', 'DROP', 'PTOY', 'AIX', 'PINKX', 'TCT', 'VOISE', 'SC', 'AE', 'EDG', 'GOT', 'VAL', 'LDM', 'DCT', 'BEST', 'RAIN', 'OC', 'MOJO', 'BIOS', 'NAS', 'ADA', 'LSK', 'LA', 'SANDG', 'EGC', 'SUR', 'OK', 'GVT', 'MONEY', 'RKT', 'IGNIS', 'MGO', 'SALT', 'CAV', 'AV', 'PIRL', 'CRC**', 'PTC', 'LEDU', 'CXT', 'RFR', 'LEMON', 'WGR', 'HDG', 'CNN', 'ARCO', 'VLX', 'WPR', 'LCC', 'REA', 'ENRG', 'SLR', 'ARDR', 'IETH', 'SIG', 'BWK', 'MARX', 'UTT', 'MBIT', 'XBC', 'JIF', 'FT', 'GRWI', 'HAC', 'EVC', 'CCN', 'SLS', 'MED*', 'DAN', 'KARMA', 'MED', 'UCT', 'XCXT', 'PHI', 'TIE', 'ATL', 'BASH', 'HTML5', 'DIM', 'ADST', 'GUESS', 'XDN', 'NET', 'TTC', 'OS76', 'EMB', 'VPRC', 'EQM', 'EXMR', 'IFLT', 'TFL', 'FCT', 'LYM', 'BCY', 'EVIL', 'HBZ', 'ZUR', 'RTB', 'TROLL', 'TAJ', 'ARB', 'GMT', 'DAR', 'GCR', 'UR', 'KICK', 'BOLI', 'UUU', 'MONK', 'VRC', 'DRT', 'MDA', 'SND', 'KNC', 'BITB', 'SNC', 'SETH', 'VVI', 'TIT', 'DIME', 'HVN', 'GAM', 'LALA', 'FXT', 'IRL', 'BRK', 'ZRX', 'DADI', 'BTC', 'ERC', 'OMX', 'TOK', 'POST', 'CHAN', 'SPC', 'PASL', 'MNTP', 'STQ', 'ACN', 'SHORTY', 'PIE', 'XNX', 'R', 'SDRN', 'EXP', 'VLT', 'SPEC', 'IBANK', 'SIB', 'NTM', 'BT2', 'KEY', 'ISL', 'ODN', 'HUSH', 'BBCC', 'GBG', 'CYC', 'ATM', 'SWING', 'GPL', 'BIOB', 'HYDRO', 'BCAP', 'INC', 'HMQ', 'LINX', 'NEF', 'TSE', 'DTH', 'CAT', 'ICN', 'RADS', 'CHSB', 'GNT', 'BTCRED', 'SFE', 'NEU', 'OCN', 'ACT*', 'ALIS', 'UQC', 'VTY', 'DGDC', 'MPRO', 'CREDO', 'SRNT', 'BPT', 'MCAR', 'VIU', 'SCL', 'HMC', 'VTR', 'UNI', 'XRE', 'TAU', 'OMNI', 'TRA', 'XTZ', '2GIVE', 'SPHTX', 'ECASH', 'ONION', 'VIVO', 'NEXO', 'BLZ', 'DLT', 'BLAZR', 'AXP', 'YMC', 'SPF', 'DGD', 'PAYP', 'SMT*', 'UTN', 'TOKC', 'CDT', 'OAX', 'GRLC', 'TAAS', 'AMP', 'PST', 'XVP', 'NANO', 'SPACE', 'BMT', 'SKULL', 'GNO', 'PINK', 'CLR*', 'NYC', 'REM', 'RLX', 'MNE', 'SKIN', 'CS*', 'DMT', 'SOUL', 'PRC', 'WILD', 'ENG', 'XBL', 'MUE', 'NDC', 'NXS', 'APH', 'DRXNE', 'BRX', 'LGD', 'EOSDAC', 'LTD', 'USDT', 'PYLNT', 'ZIL', 'H2O', 'DOGE', 'ERO', 'QAU', 'NEBL', 'XVG', 'IXC', 'XRL', 'GAP', 'DATA', 'ELC', 'RDN*', 'DENT', 'SH', 'DARK', 'IC', 'WRT', 'BDG', 'LUX', 'SEQ', 'LGO', 'HQX', 'BCF', 'ARK', 'VIA', 'VIBE', 'NOAH', 'DFT', 'MOBI', 'BBP', 'LBTC', 'ABT', 'CHOOF', 'CURE', 'ETHS', 'ALEX', 'TRST', 'ONT', 'MOOND', 'RIDE', 'PPT', 'AHT', 'NKC', 'BTCM', 'PND', 'SEND', 'JOK', 'DPP', 'MNC', 'NTO', 'BOS', 'QASH', 'KOLION', 'TAP', 'DUO', 'AXIOM', 'ONX', 'KBR', 'XBY', 'HIRE', 'IXT', 'VIB', 'GSC', 'SNT', 'DXC', 'STA', 'AMM', 'STRAT', 'ADH', 'SRC', 'GNR', 'TKY', 'RNS', 'NCASH', 'TAG', 'TRTL', 'GUN', 'TKN*', 'GHS*', 'TES', 'RMC', 'REP', 'KEK', 'LKK', 'NAMO', 'CPN', 'ARY', 'DIG', 'GUP', 'DRP', 'LOC', 'HEEL', 'XAUR', 'CLN', 'NMS', 'JANE', 'ORLY', 'DEM', 'THETA', 'PLBT', 'CBX', 'XUC', 'PRES', 'BTO', 'YES', 'CFI', 'IDH', '404', 'TNT', 'CBT', 'ATOM', 'DBTC', 'SENC', 'MAN*', 'QKC', 'PFR', 'PRL', 'PHR', 'ELM', 'ACC', 'SPHR', 'DEA', 'NCT', 'EDT', 'XNG', 'UTK', 'FONZ', 'QBT*', 'NET*', 'SBC', 'ERT', 'PROC', 'LOG', 'MAD*', 'VEN', 'CTO', 'MRP', 'BITOK', 'CC', 'JNT', 'BTCP', 'LEO', 'DNT', 'FYN', 'INSTAR', 'DGC', 'M1', 'INK', 'LDOGE', 'XSG', 'WAVES', 'IOT', 'UNITS', 'LUC', 'EBET', 'DASH', 'BQX', 'FTC', 'UBTC', 'BIT', 'XBTS', 'KCS', 'BOAT', 'BFT', 'DRG', 'MAY', 'INDI', 'EMGO', 'SFC', 'SHIP', 'ZEN', 'REBL', 'ELE', 'ERY', 'TRUST', 'NAVI', 'MDT*', 'GOAL', 'AMBER', 'FLT', 'HWC', 'NXC', 'ILC', 'DRGN', 'XPM', 'PAL', 'CMT', 'XTO', 'ACID', 'GLD']
+downloaded:861
+filecoins: 1394
+already downloaded last day: 1370
+errors:0
+coins with error:[]
+downloaded:24
+
+current time:2018-06-19
+filecoins: 1394
+already downloaded last day: 1394
+errors:0
+coins with error:[]
+downloaded:0
+
+current time:2018-06-19 13:27:52.817877
+filecoins: 1394
+already downloaded last day: 1394
+errors:0
+coins with error:[]
+downloaded:0
+
+current time:2018-06-19 13:29:30.621146
+filecoins: 1394
+already downloaded last day: 1394
+errors:0
+coins with error:[]
+downloaded:0
+
+current time:2018-06-19 13:29:47.864935
+filecoins: 1394
+already downloaded last day: 1394
+errors:0
+coins with error:[]
+downloaded:0
+
+current time:2018-06-19 13:30:02.490463
+filecoins: 1394
+already downloaded last day: 1394
+errors:0
+coins with error:[]
+downloaded:0
+
+current time:2018-06-19 13:31:52.848521
+filecoins: 1394
+already downloaded last day: 1354
+errors:0
+coins with error:[]
+downloaded:40
