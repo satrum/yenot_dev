@@ -1350,6 +1350,10 @@ cursor: pointer;
      text-align: center;
     padding: 0px 6px;
 }
+.td_pd2{
+     text-align: left;
+    padding: 0px 6px;
+}
 .topuser_text{
 	text-align: center;
     background: rgba(187, 246, 5, 0.44);
@@ -1420,26 +1424,65 @@ border-radius: 14px;
     vertical-align: middle;
 }
 .type_m{
-	    border: 1px solid ghostwhite;
+    border: 1px solid ghostwhite;
     padding: 8px;
     margin: 2px;
+    display: inline-block;
+    cursor: pointer;
 }
 .type_m:hover{
-	    border: 1px solid ghostwhite;
+    border: 1px solid ghostwhite;
     padding: 8px;
     margin: 2px;
+    display: inline-block;
+    cursor: pointer;
 	background:#64b609;
 }
 .type_m2{
-	    border: 1px solid ghostwhite;
+    border: 1px solid ghostwhite;
     padding: 8px;
     margin: 2px;
+    display: inline-block;
+    cursor: pointer;
 	background:#64b609;
 }
 .type_m2:hover{
-	    border: 1px solid ghostwhite;
+    border: 1px solid ghostwhite;
     padding: 8px;
     margin: 2px;
+    display: inline-block;
+    cursor: pointer;
+	background:#64b609;
+}
+.type_mt{
+    border: 1px solid ghostwhite;
+    padding: 8px;
+    margin: 2px;
+    display: inline-block;
+    cursor: pointer;
+}
+.type_mt:hover{
+    border: 1px solid ghostwhite;
+    padding: 8px;
+    margin: 2px;
+    display: inline-block;
+    cursor: pointer;
+	background:#64b609;
+}
+.type_mt2{
+    border: 1px solid ghostwhite;
+    padding: 8px;
+    margin: 2px;
+    display: inline-block;
+    cursor: pointer;
+	background:#64b609;
+}
+.type_mt2:hover{
+    border: 1px solid ghostwhite;
+    padding: 8px;
+    margin: 2px;
+    display: inline-block;
+    cursor: pointer;
 	background:#64b609;
 }
 #us_search{
@@ -1575,7 +1618,14 @@ background: #1f45024d;
     padding: 3px 0px;
 	border: 1px solid yellowgreen;
 	}
-	
+	.price_change2{
+background: #1f45024d;
+    padding: 3px 5px;
+	border: 1px solid yellowgreen;
+	}
+	#tw{
+		display:none;
+	}
 #user_list{
 	width: 100%;
 }
@@ -1762,6 +1812,16 @@ width: 49px;
     vertical-align: middle;
     margin: 0px auto;
 }
+
+#market1 col{
+display:none;
+}
+#user_list_3.mark2 tr > #market2 {
+
+}
+#user_list_3.mark2 tr > #market1 {
+    display: none;
+}
 .table_filter_Search_2{
     padding: 10px 12px;
     display: inline-block;
@@ -1770,7 +1830,7 @@ width: 49px;
     text-align: center;
 }
 .table_filter_Search_3{
-	padding: 16px 12px;
+	padding: 4px 12px;
     display: inline-block;
     margin: auto;
     width: 57%;

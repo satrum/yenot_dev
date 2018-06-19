@@ -8266,7 +8266,7 @@ $.fn.dropdown.settings.templates = {
 
   // generates label for multiselect
   label: function(value, text) {
-    return text + '<i class="delete icon"></i>';
+    return text + '<i class="delete icon">&#10006</i>';
   },
 
 

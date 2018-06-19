@@ -11335,11 +11335,9 @@ i.icon.deafness:before {
 }
 
 i.icon.delete.calendar:before {
-  content: "\f273";
 }
 
 i.icon.delete:before {
-  content: "\f00d";
 }
 
 i.icon.detective:before {
@@ -12104,7 +12102,7 @@ i.icon.user.close:before {
 }
 
 i.icon.user.delete:before {
-  content: "\f235";
+
 }
 
 i.icon.user.x:before {
@@ -14227,6 +14225,7 @@ a.ui.label {
   opacity: 0.5;
   -webkit-transition: background 0.1s ease;
   transition: background 0.1s ease;
+  color:black;
 }
 
 .ui.label > .delete.icon:hover {
@@ -31913,7 +31912,7 @@ select.ui.dropdown {
     vertical-align: top;
     white-space: normal;
     font-size: 0,1em;
-    padding: 0.1714286em 0.471429em;
+    padding: 0.214286em 0.471429em;
     margin: 0.14285714rem 0.28571429rem 0.14285714rem 0em;
     -webkit-box-shadow: 0px 0px 0px 1px rgba(34, 36, 38, 0.15) inset;
     box-shadow: 0px 0px 0px 1px rgba(34, 36, 38, 0.15) inset;

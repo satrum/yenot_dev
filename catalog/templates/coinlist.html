@@ -16,8 +16,7 @@
  <h4 class="caret_tech">SELECT EXCHANGES:</h4>
 
 <select class="ui fluid search selection dropdown slade" name="exchanges"  multiple="">
-  <option value="">EXCHANGES... {% for item in exquery %} {{item.exchange}}({{item.count}}) {% endfor %}
-  </option>
+  <option value="">EXCHANGES... </option>
    {% for exchange in exchangelist %}
   <option value="{{ exchange.exchange }}">{{ exchange.exchange }}({{ exchange.count }})</option>
    {% endfor %}
@@ -83,70 +82,79 @@
 <div class="table_btn_promo tab_fil">{% if banner_left %}<a href="{% url 'banner-click' banner_left.pk %}" target="_blank"><img src = "{{ banner_left.image.url}}"></a>{% endif %}</div>
   <div class="table_filter_Search_3 tab_fil">
   
-  <h4 class="us_top_text_3">SHOW STATISTIC : </h4><a href="#" class="type_m"><h4 class="us_top_text_3">MARKET</h4></a>
-  <a href="#" class="type_m"> <h4 class="us_top_text_3">SOCIAL</h4></a> 
+  <h4 class="us_top_text_3">SHOW STATISTIC : </h4><div class="type_m2" onclick="javascript:toggleColumn2(); qwe(this);"> <h4 class="us_top_text_3">MARKET</h4></div>
+  <div class="type_mt" onclick="javascript:toggleColumn();rty(this)"> <h4 class="us_top_text_3">SOCIAL</h4></div> 
 </div>	
 		<div class="table_btn_promo tab_fil right_banner">  {% if banner_right %}<a href="{% url 'banner-click' banner_right.pk %}" target="_blank"><img src = "{{ banner_right.image.url}}"></a>{% endif %}</div>
 </div>
 </div>
 <table id="user_list_3">
+    <!-- <colgroup><col span="5"></colgroup> -->
+    <!-- <colgroup id="market1"><col span="7"></colgroup> -->
+	<!-- <colgroup id="market2" ><col span="6"></colgroup> -->
 <thead>
 	<tr>
-		<th class="markettable" style="width: 13%;">COIN</th>
-		<th class="markettable">PRICE $</th>
-		<th class="markettable">1d%</th>
-		<!-- <th class="markettable">7d%</th> -->
-		<!-- <th class="markettable">1m%</th> -->
-		<th class="markettable">VOL 24h</th>
-		<th class="markettable">MARKETCAP</th>
-		<th class="markettable">COIN SUPPLY</th>
-		<th class="markettable">TOTAL SUPPLY</th>
-		<th class="markettable" style="width: 10%;">SUPPLY %</th>
-		<th class="markettable">ATH</th>
-		<th class="markettable">Volatility</th>
-		<th class="markettable" style="width: 10%;">START DATE</th>
-		<th class="markettable"style="width: 10%;"><img src="{% static 'images/yeenot.png' %}" style="height: 27px;width: 28px;"> SIGNAL </th>		
-		<!-- <th class="markettable">TWEETS</th> -->
-		<!-- <th class="markettable">FOLLOWERS</th> -->
-		<!-- <th class="markettable">NEW TWEETS</th> -->
-		<!-- <th class="markettable">REDDIT SUB</th> -->
-		<!-- <th class="markettable">REDDIT POSTS</th> -->
-		<!-- <th class="markettable">NEW REDDIT POSTS</th> -->
+		<th class="markettable1" style="width: 13%;">COIN</th>
+		<th class="markettable1" style="width: 6%;">$</th>
+		<th class="markettable1">1d%</th>
+		<th class="markettable">7d%</th>
+		<th class="markettable">1m%</th>
+		<th class="markettable1">VOL 24h</th>
+		<th class="markettable1">MARKETCAP</th>
+		<th class="markettable2" >COIN SUPPLY</th>
+		<th class="markettable2" style="width: 8%;">SUPPLY %</th>
+		<th class="markettable2" style="width: 6%;">ATH</th>
+		<th class="markettable2" style="width: 6%;">PRICE/ ATH</th>		
+		<th class="markettable2" style="width: 6%;">ATH DATE</th>
+		<th class="markettable2" >VOLATILITY 7d</th>		
+		<th class="markettable2" >VOLATILITY 30d</th>
+		<th class="markettable2" style="width: 10%;">START DATE</th>
+		<th class="markettable2" style="width: 10%;"><img src="{% static 'images/yeenot.png' %}" style="height: 27px;width: 28px;"> SIGNAL </th>		
+		
+		<th class="markettable3" id="tw"><img src="{% static 'images/twitter.png' %}" style="height: 27px;width: 28px;"><br>TWEETS</th>
+		<th class="markettable3" id="tw"><img src="{% static 'images/twitter.png' %}" style="height: 27px;width: 28px;"><br>FOLLOWERS</th>
+		<th class="markettable3" id="tw"><img src="{% static 'images/red_stat.png' %}" style="height: 26px;width: 29px;"> <br>SUBSCRYBERS</th>
+		<th class="markettable3" id="tw"><img src="{% static 'images/red_stat.png' %}" style="height: 26px;width: 29px;"><br>ACTIVE USERS</th>
+		<th class="markettable3" id="tw"><img src="{% static 'images/red_stat.png' %}" style="height: 26px;width: 29px;"><br>POSTS PER DAY</th>
+
 	</tr>
 	</thead>
 	<tbody class="infinite-container">
 	{% for coin in coins %}
 	
 	<tr class="infinite-item tab_fon">	
-		<td class="td_pd">
-		{% if coin.image %}<img src="{{coin.image.url}}" style="border-radius: 100%; width: 30px;vertical-align: top;">{% endif %}
-		<h4 style="font-size: 0.9em;width: 20%;margin: 2px;display: inline-block;">{{coin.name}}<br>({{coin.symbol}})</h4>
+		<td class="td_pd2">
+		{% if coin.image %}<img src="{{coin.image.url}}" style="border-radius: 100%; width: 30px;vertical-align: middle;">{% endif %}
+		<h4 style="font-size: 0.9em;width: 20%;padding-right:32px;display: inline-block; vertical-align:middle;">{{coin.name}}<br>({{coin.symbol}})</h4>
 		</td>
         <td class="td_pd">
-		<p class="price_change">{{coin.price|floatformat:3}}</p>		
+		<p class="price_change2">{{coin.price|floatformat:3}}</p>		
 		</td>
 		<td class="td_pd"><font color="{% if coin.change > 0 %}green{% else %}red{% endif %}">{{coin.change|floatformat:2}}</font></td>
-		<!-- <td class="td_pd"><font color="{% if coin.coin_gecko.p7d > 0 %}green{% else %}red{% endif %}">{{coin.coin_gecko.p7d|floatformat:2}}</font></td> -->
-		<!-- <td class="td_pd"><font color="{% if coin.coin_gecko.p30d > 0 %}green{% else %}red{% endif %}">{{coin.coin_gecko.p30d|floatformat:2}}</font></td> -->
-		<!-- <td class="td_pd"><font color="{% if coin.change > 0 %}green{% else %}red{% endif %}">{{coin.change|floatformat:2}}</font></td> -->
+		<td class="td_pd"><font color="{% if coin.coin_gecko.p7d > 0 %}green{% else %}red{% endif %}">{{coin.coin_gecko.p7d|floatformat:2}}</font></td>
+		<td class="td_pd"><font color="{% if coin.coin_gecko.p30d > 0 %}green{% else %}red{% endif %}">{{coin.coin_gecko.p30d|floatformat:2}}</font></td>
 		<td class="td_pd">{{coin.volume|floatformat:0}}</td>
 		<td class="td_pd">{{coin.mktcap|floatformat:0}}</td>
-		<td class="td_pd">{{coin.supply}}</td>
-		<td class="td_pd">{{coin.TotalCoinSupply}}</td>
-		<td class="td_pd">{{coin.supply_share|floatformat:2}}</td>
-				<td class="td_pd">{{coin.twitter_posts}}</td>
-		<td class="td_pd">{{coin.twitter_followers}}</td>
-		<td class="td_pd">{{coin.StartDate|date:"d M Y"}}</td>
+		<td class="td_pd supl" >{{coin.supply}}</td>
+		<td class="td_pd"  >{{coin.supply_share|floatformat:2}}</td>
+				<td class="td_pd"  >{{coin.ath|floatformat:3}}</td>
+		<td class="td_pd"  >{{coin.athchange|floatformat:2}}</td>
+		<td class="td_pd"  >{{coin.athdate|date:"d M Y"}}</td>			
+		<td class="td_pd"  >{{coin.volatility7day|floatformat:2}}</td>
+		<td class="td_pd"  >{{coin.volatility30day|floatformat:2}}</td>
+				<td class="td_pd"  >{{coin.StartDate|date:"d M Y"}}</td>
 		<td class="td_pd">{% if coin.news_count > 0 %}{{coin.news_count}}{% endif %}</td>
+		<td class="td_pd" id="tw" >{{coin.twitter_posts}}</td>
+		<td class="td_pd" id="tw">{{coin.twitter_followers}}</td>
+		<td class="td_pd" id="tw">{{coin.reddit_subscribers}}</td>
+		<td class="td_pd" id="tw">{{coin.reddit_active_users}}</td>
+		<td class="td_pd" id="tw">{{coin.reddit_posts_per_day}}</td>
 
-		<!-- <td class="td_pd">{{coin.twitter_followers}}</td> -->
-		<!-- <td class="td_pd">{{coin.reddit_subscribers}}</td> -->
-		<!-- <td class="td_pd">{{coin.reddit_comments_per_day}}</td> -->
-		<!-- <td class="td_pd">{{coin.reddit_comments_per_day}}</td> -->
 	</tr>
 	{% endfor %}
 	</tbody>
 </table>
+
 <script>
 var snapSlider = document.getElementById('slider3');
 
@@ -289,6 +297,7 @@ search='' contain in name or symbol filter
 	<h4 class="caret_tech_4">MONTH</h4>
 	</label>
   </div>
+  {% for item in exquery %} {{item.exchange}}({{item.count}}) {% endfor %}
 функционал:
 ок 1. поиск по имени или символу
 2. фильтры - algo, consensus, news on yeenot 
