@@ -937,7 +937,12 @@ class Command(BaseCommand):
 			StartDate = filecoins[id]['StartDate'].split('/')
 			cc_coin.StartDate = datetime(int(StartDate[2]), int(StartDate[1]), int(StartDate[0]))
 			cc_coin.save()
-		print('updated: {} added: {}'.format(count_update, count_add))
+		
+		text = '\nsnapshot update current time :{}\n'.format(datetime.today())
+		text+= 'updated: {} added: {}'.format(count_update, count_add)
+		print(text)
+		with open(DATADIR+'/result_snapshot.txt', 'a') as file_result:
+			file_result.write(text)
 
 	def cryptocompare_get_social(self, coinlist_file):
 		file = open(DATADIR+'/'+coinlist_file, 'r')
@@ -1011,7 +1016,12 @@ class Command(BaseCommand):
 				print(id, filecoins[id]['General']['Name'],' no reddit link')
 			cc_coin.save()
 
-		print('all:{} twitter:{} reddit:{}'.format(count_all, count_twitter, count_reddit))
+		print()
+		text = '\nsocial update current time :{}\n'.format(datetime.today())
+		text+= 'all:{} twitter:{} reddit:{}'.format(count_all, count_twitter, count_reddit)
+		print(text)
+		with open(DATADIR+'/result_social.txt', 'a') as file_result:
+			file_result.write(text)
 
 ################# end Cryptocompare snapshot and social functions ######################
 
