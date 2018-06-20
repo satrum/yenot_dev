@@ -660,10 +660,10 @@ class Command(BaseCommand):
 		{'change__min': Decimal('-80.00000000'), 'mktcap__max': Decimal('130742290177.00000000'),
 		 'volume__max': Decimal('2786191258.85099983'), 'change__max': Decimal('800.00000000')}
 		'''
-		agg_value = dbcoins.aggregate(num_value = models.Max('volume'))
+		agg_value = dbcoins.aggregate(num_value = models.Max('volume')*1.1)
 		obj, created = YeenotSettings.objects.update_or_create(name='coins_volume_max',defaults=agg_value)
 		print(obj.id, obj.num_value, created)
-		agg_value = dbcoins.aggregate(num_value = models.Max('mktcap'))
+		agg_value = dbcoins.aggregate(num_value = models.Max('mktcap')*1.1)
 		obj, created = YeenotSettings.objects.update_or_create(name='coins_mktcap_max',defaults=agg_value)
 		print(obj.id, obj.num_value, created)
 		agg_value = dbcoins.aggregate(num_value = models.Min('change'))
