@@ -4,7 +4,7 @@ from django.template import RequestContext
 # Create your views here.
 ##from .models import Book, Author, BookInstance, Genre
 
-from .models import News, Source, Banner, Coin, YeenotSettings, Profile, CoinCryptocompare, Exchange
+from .models import News, Source, Banner, Coin, YeenotSettings, Profile, CoinCryptocompare, Exchange, CoinGecko
 from random import randint
 from django.contrib.auth.models import User
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
@@ -324,6 +324,15 @@ def coinlist(request, template='coinlist.html'):
 			coin.TotalCoinSupply = supply.split('.')[0].replace(',','').replace(' ','')
 			#coin.TotalCoinSupply = int(coin.TotalCoinSupply)
 			#coin.supply_share = 100*coin.supply/int(coin.TotalCoinSupply)
+		#get coingecko if marketcap = 0 (!!! need change test1 coinadd for faster work)
+		if coin.mktcap == 0:
+			try:
+				coingecko = CoinGecko.objects.get(coinid=coin)
+				coin.mktcap = coingecko.market_cap
+				#print('found mrkcap in coingecko for coin {} mrkcap={}'.format(coin,coin.mktcap))
+			except:
+				pass
+				#print('mrkcap not found in coingecko for coin {}'.format(coin))
 		#get cryptocompare:
 		try:
 			cc_coin = CoinCryptocompare.objects.get(Id_cc = coin.Id_cc)
