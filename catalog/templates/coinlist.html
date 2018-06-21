@@ -150,7 +150,7 @@
 		<td class="td_pd3"  >{{coin.volatility7day|floatformat:2}}</td>
 		<td class="td_pd3"  >{{coin.volatility30day|floatformat:2}}</td>
 				<td class="td_pd3"  >{{coin.StartDate|date:"d M Y"}}</td>
-		<td class="td_pd3">{% if coin.news_count > 0 %}{{coin.news_count}}{% endif %}</td>
+		<td class="td_pd3">{% if coin.news_count > 0 %}<a href="{% url 'index' %}?coin={{coin.symbol}}">{{coin.news_count}}</a>{% endif %}</td>
 		<td class="td_pd3" id="tw" >{{coin.twitter_posts}}</td>
 		<td class="td_pd3" id="tw">{{coin.twitter_followers}}</td>
 		<td class="td_pd3" id="tw">{{coin.reddit_subscribers}}</td>

@@ -100,7 +100,7 @@ $("#user_list_3").tablesorter({sortList: [[5,1]]});
 		 <ul class="sidebar-nav linetop">
 		 <div class="new_pag"><img src="{% static 'images/new.png' %}"></div>
           <a href="{% url 'topusers' %}"><li class="menu_main">TOP LEADERS</li></a>
-         <li class="menu_main_2"style="color: rgba(177, 182, 170, 0.75);">COINS MARKET</li>
+         <a href="{% url 'coinlist' %}?top=100"><li class="menu_main_2">COINS MARKET</li></a>
 		  <a href="{% url 'news' %}"><li class="menu_main">TOP NEWS</li></a>
 		  <li class="menu_main" style="color: rgba(177, 182, 170, 0.75);">TOP SOURCES</li>	
           
