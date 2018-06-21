@@ -280,13 +280,18 @@ def coinlist(request, template='coinlist.html'):
 		exquery = Exchange.objects.filter(exchange__in = exchanges)
 		#print(exquery)
 		#excoins = set()
+		join = rget.get('join') # 0 - (| OR full join), 1 - (& AND intersect join)
+		print('number of exchanges:',len(exquery),'join:', join)
 		for i in range(len(exquery)):
 			ex = exquery[i]
 			if i==0:
 				excoins = set(ex.get_coinlist())
 			else:
 			#print( len( ex.get_coinlist() ) )
-				excoins = excoins | set(ex.get_coinlist()) #join |
+				if join == '0':
+					excoins = excoins | set(ex.get_coinlist()) #full join | OR
+				else:
+					excoins = excoins & set(ex.get_coinlist()) #intersection join & AND
 		#excoins = excoins | set(ex.get_coinlist()) # intersection &
 		#print(len(excoins))
 		allcoins = Coin.objects.filter(pk__in = allcoins,symbol__in=excoins) #need after slice ,
