@@ -1818,6 +1818,13 @@ footer{
     display: inline-block;
     vertical-align: middle; 
 }
+.logout2{
+    background: rgba(90, 159, 8, 0.13);
+    box-shadow: 2px 1px 38px 4px rgba(67, 168, 65, 0.41);
+    border: 1px solid #2b4313;
+    display: inline-block;
+    vertical-align: middle; 
+}
 .tab_pro{
 	    font-weight: bold;
     background: rgba(39, 64, 11, 0.49);

@@ -89,12 +89,14 @@ $("#user_list_3").tablesorter({sortList: [[5,1]]});
 		 <div class="sl_menu">
 		 <ul class="sidebar-nav we">
           <li class="linetop"><h3><strong>SIGN UP, VOTE, BECOME A GURU OF CRYPTO SIGNALS!</strong></h3></li>
+
 		  {% if user.is_authenticated %}
            			
 			 <li><a href="{% url 'profile' %}" class="logout">{{ user.get_username|title | truncatechars:15 }}'s profile</a></li>
 			 <li><a href="{% url 'logout'%}?next={{request.path}}" class="logout">Logout</a></li>
 			{% else %}
-			
+		     <a href="{% url 'login'%}?next={{request.path}}"><div class=" logout2 login ">Login</div></a>
+			 <a href="{% url 'signup'%}?next={{request.path}}"><div class="logout signup" >Signup</div></a>
 			{% endif %}
 		 </ul>
 		 <ul class="sidebar-nav linetop">
@@ -116,8 +118,7 @@ $("#user_list_3").tablesorter({sortList: [[5,1]]});
 			 
 		   </ul>
 		   {% else %}
-			 <a href="{% url 'login'%}?next={{request.path}}"><div class="sidebar-nav login">Login</div></a>
-			 <a href="{% url 'signup'%}?next={{request.path}}"><div class="sidebar-nav signup" >Signup</div></a>
+			 <div class="add_news sidebar-nav" style="margin-left: 38px;"><a href="{% url 'signup'%}?next={{request.path}}"><div class="round">+</div>Add News</a></div>
 		   {% endif %}
 		   </div>
 	  </div>
