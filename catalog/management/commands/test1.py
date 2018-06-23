@@ -691,6 +691,7 @@ class Command(BaseCommand):
 			print('filecoins: {}'.format(len(filecoins)))
 			error_list_nofile=[]
 			error_list_noindb=[]
+			error_list_notsaved=[]
 			for filecoin in filecoins:
 				filename = filecoin.replace("*", "_")
 				#print(filecoin, filename)
@@ -726,28 +727,36 @@ class Command(BaseCommand):
 				#print('volatility 30day: {} '.format(volatility30day))
 				#if days<30:
 				print('coin:{} days_b: {} days_a:{} ath:{} athdate: {} volatility 30day: {}'.format(filecoin, days_before, days, ath['high'], athdate, volatility30day))
+				#search in DB Coin
 				try:
 					dbcoin = Coin.objects.get(symbol=filecoin)
 				except Exception as error:
 					print('not found coin in db: ',filecoin,error)
 					error_list_noindb.append(filecoin)
 					continue
-				dbcoin.ath = ath['high']
-				dbcoin.athdate = athdate
-				dbcoin.athchange = float(dbcoin.price)/ath['high']
-				if days>30:
-					dbcoin.volatility30day = volatility30day
-				else:
-					dbcoin.volatility30day = 0
-				if days>7:
-					dbcoin.volatility7day = volatility7day
-				else:
-					dbcoin.volatility7day = 0
-				dbcoin.save()
+				#update Coin
+				try:
+					dbcoin.ath = ath['high']
+					dbcoin.athdate = athdate
+					dbcoin.athchange = float(dbcoin.price)/ath['high']
+					if days>30:
+						dbcoin.volatility30day = volatility30day
+					else:
+						dbcoin.volatility30day = 0
+					if days>7:
+						dbcoin.volatility7day = volatility7day
+					else:
+						dbcoin.volatility7day = 0
+					dbcoin.save()
+				except Exception as error:
+					print('not saved with error: ',filecoin, error)
+					error_list_notsaved.append(filecoin)
+					continue
 			
 			text = '\ndaily update current time :{}\n'.format(datetime.datetime.today())
 			text+= 'coins file not found:\n{}\n'.format(error_list_nofile)
 			text+= 'coins not in db:\n{}\n'.format(error_list_noindb)
+			text+= 'coins not saved to db:\n{}\n'.format(error_list_notsaved)
 			print(text)
 			file_result = open(DATADIR+'/result_daily.txt', 'a')
 			file_result.write(text)

@@ -146,11 +146,11 @@
 		<td class="td_pd3"  >{{coin.supply_share|floatformat:2}}</td>
 				<td class="td_pd3"  >{{coin.ath|floatformat:3}}</td>
 		<td class="td_pd3"  >{{coin.athchange|floatformat:2}}</td>
-		<td class="td_pd3"  >{{coin.athdate|date:"d M Y"}}</td>			
+		<td class="td_pd3"  >{{coin.athdate|date:"c"}}</td>			
 		<td class="td_pd3"  >{{coin.volatility7day|floatformat:2}}</td>
 		<td class="td_pd3"  >{{coin.volatility30day|floatformat:2}}</td>
-				<td class="td_pd3"  >{{coin.StartDate|date:"d M Y"}}</td>
-		<td class="td_pd3">{% if coin.news_count > 0 %}<a href="{% url 'index' %}?coin={{coin.symbol}}">{{coin.news_count}}</a>{% endif %}</td>
+				<td class="td_pd3"  >{{coin.StartDate|date:"c"}}</td>
+		<td class="td_pd3">{% if coin.news_count > 0 %}<a href="{% url 'index' %}?coin={{coin.symbol}}" style="text-decoration:underline;">{{coin.news_count}}</a>{% endif %}</td>
 		<td class="td_pd3" id="tw" >{{coin.twitter_posts}}</td>
 		<td class="td_pd3" id="tw">{{coin.twitter_followers}}</td>
 		<td class="td_pd3" id="tw">{{coin.reddit_subscribers}}</td>
@@ -314,3 +314,5 @@ search='' contain in name or symbol filter
 6. больше столбцов со временем - volatility, change/7day, 30day, 90day, 1h
 7. Выбор между разными рангами - cryptocompare(volume), coinmarketcap, coingecko
 еще могут быть фильтры по значениям - ползунок значение в пределах таких то
+
+{{coin.StartDate|date:"Y-m-d"}} или {{coin.StartDate|date:"c"}}
