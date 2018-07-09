@@ -85,16 +85,24 @@ https://yeenot.today
 Трейдеры смотрять сигналы и новости и оценивают их, для получения очков.
 Все сигналы-новости имеют рейтинг зависящий от голосований и изменения цены монеты.
 Подробнее см. в правилах на сайте https://yeenot.today/catalog/rules/
+
+Новый функционал:
+Топ лидеров мнения
+Маркетлист с гибкой фильтрацией , поиском и дополнительной статистикой
+
 В планах:
 Интеграция с телеграмом и социльными сетями
 Топ Каналов
-Топ Лидеров мнения
-Airdrop YEENOT очков пользователей ресурса как ERC20 токенов
+Airdrop, Bounty YEENOT очков пользователей ресурса как ERC20 токенов
+Новостной агрегатор
+Страницы криптовалют с рыночными данными, тех. анализом и анализом блокчейна
+Портфолио
+Избранное, уведомления, подписки
+и кое-что еще, но это пока секрет
 
 Регистрируйтесь, голосуйте, добавляйте сигналы для проверки.
 
 Пишите в группу проекта свои предложения по усовершенствованию.
-Очень поможете если есть информация где можно искать заинтересованную аудиторию.
 наши контакты:
 email support@yeenot.today
 channel https://t.me/yeenot_today
@@ -556,6 +564,153 @@ ACAT price go up?
 "Elastos Partners with BIT.GAME and Joins META Union Alliance" added for voting https://yeenot.today/catalog/news/295
 This is a signal to buy Elastos now?
 
+"Another promising project @COTInetwork is using @wingsplatform for promotion and valuation" added for voting, proof and forecast on YEENOT TODAY https://yeenot.today/catalog/news/297
+
+"EOS about to SPIKE, watch or take action" added for voting, proof and forecast on YEENOT TODAY https://yeenot.today/catalog/news/298
+EOS price go up?
+
+"20 reasons to buy PIVX" added for voting, proof and forecast on YEENOT TODAY https://yeenot.today/catalog/news/299
+great for PIVX grow up?
+
+"First Cardano smart contracts testnet launches today, the KEVM testnet" added for voting, proof and forecast on YEENOT TODAY https://yeenot.today/catalog/news/300
+great for ADA ?
+
+"Morpheus.Network (MORPH) tokens has been listed on LATOKEN Exchange" added for voting, proof and forecast on YEENOT TODAY https://yeenot.today/catalog/news/301
+
+
+"VIDEO: A First Look at Secret Contracts - Enigma at Consensus" added for voting, proof and forecast on YEENOT TODAY https://yeenot.today/catalog/news/305
+great for ENG ? Vote and share!
+
+This May, Enigma brought code to Consensus: our first public look at the power of secret contracts. 
+Here is the demo video we showed on stage at the conference! This video shows a basic coin-mixer built on Enigma. 
+What would normally take a significant amount of original engineering research and coding can now be accomplished in just a few lines of Solidity code. 
+This is just one of many, many applications for secret contracts - the true potential for Enigma is unlimited. 
+
+*What is Enigma?* 
+Enigma is a fundamental protocol that goes beyond blockchain to bring real utility to decentralization. Enigma is using new privacy technologies to create the first platform for scalable, end-to-end, privacy-enabled dApps. With Enigma, “smart contracts” become “secret contracts,” where input data is kept hidden from nodes in the Enigma network that execute code. This functionality is essential for protecting sensitive data and creating truly decentralized solutions at scale. 
+What are secret contracts? https://www.youtube.com/redirect?event=video_description&v=67pwZRGGR70&q=https%3A%2F%2Fblog.enigma.co%2Fdefining-secret-contracts-f40ddee67ef2&redir_token=hEV85q5dTSrx-nGkjSPLbxOsWwp8MTUyNzc5NTE2NUAxNTI3NzA4NzY1
+Our roadmap: https://www.youtube.com/redirect?event=video_description&v=67pwZRGGR70&q=https%3A%2F%2Fblog.enigma.co%2Fenigmas-ambition-our-latest-roadmap-8d50107ad314&redir_token=hEV85q5dTSrx-nGkjSPLbxOsWwp8MTUyNzc5NTE2NUAxNTI3NzA4NzY1
+Enigma's latest update: https://www.youtube.com/redirect?event=video_description&v=67pwZRGGR70&q=https%3A%2F%2Fblog.enigma.co%2Foops-we-brought-code-to-consensus-ceda0f566c8b&redir_token=hEV85q5dTSrx-nGkjSPLbxOsWwp8MTUyNzc5NTE2NUAxNTI3NzA4NzY1
+Enigma website: http://www.enigma.co 
+Enigma blog: http://blog.enigma.co 
+Telegram: http://t.me/enigmaproject 
+Discord: http://discord.gg/SJK32GY 
+Reddit: http://reddit.com/r/enigmaproject
+
+"Siacoin to make attempt for Big Breakout" added for voting, proof and forecast on YEENOT TODAY https://yeenot.today/catalog/news/306
+what you think about TA direction in 2 weeks?
+
+"Loom Network - Introducing Zombie Battleground — A Collectible Card Game That Runs on the Blockchain" added for voting, proof and forecast on YEENOT TODAY https://yeenot.today/catalog/news/307
+big news from loom in a week. Great for LOOM and ETH ledger?
+
+"Cardano technical analysis from EXCAVO" added for voting, proof and forecast on YEENOT TODAY https://yeenot.today/catalog/news/308
+Can ADA break resistance level?
+
+Контент на который ссылается новость - проверен. Это официальная статья на medium, от проекта Elastos. Кроме того, цель проекта Yeenot состоит в проверке контента сообществом.
+
+"Ontology Global Capital (OGC) Launches with Selina Xu as the Founding Venture Partner" added for voting, proof and forecast on YEENOT TODAY https://yeenot.today/catalog/news/314
+
+"The VeChainThor Public Testnet is now available." added for voting, proof and forecast on YEENOT TODAY https://yeenot.today/catalog/news/315
+good for VEN ?
+Thor is VeChain's new generation blockchain project. It's the official implementation written in golang.
+
+"Hybrid Intelligence Generates Annual Return of 166% in Bitcoin" added for voting, proof and forecast on YEENOT TODAY https://yeenot.today/catalog/news/316
+great for community growth?
+
+"ICON (ICX) and Deloitte Startup Advisory Group have signed a Memorandum of Understanding" added for voting, proof and forecast on YEENOT TODAY https://yeenot.today/catalog/news/317
+ICX price go up?
+
+"Civic and Effect.AI Enabling People to Better Train AI" added for voting, proof and forecast on YEENOT TODAYhttps://yeenot.today/catalog/news/318
+can this partnership rise CVC community?
+
+"Release of Reqify, the first payments plugin for Shopify built on top of the Request Network" added for voting, proof and forecast on YEENOT TODAY https://yeenot.today/catalog/news/319
+great adoption for REQ?
+
+"HitBTC has listed Bitcoin Interest (BCI) deposit wallet" added for voting, proof and forecast on YEENOT TODAY https://yeenot.today/catalog/news/320
+
+"LATOKEN announce EDU ICO" added for voting, proof and forecast on YEENOT TODAY https://yeenot.today/catalog/news/321
+good for fundraising platform LA?
+Open Source University (EDU) private presale is now available on LATOKEN Platform. 
+
+"ICON-Bodhi, Strategic partnership" added for voting, proof and forecast on YEENOT TODAY https://yeenot.today/catalog/news/325
+good for ICX community?
+
+"Saturn Network Launch First Decentralized Exchange On ETC" added for voting, proof and forecast on YEENOT TODAY https://yeenot.today/catalog/news/328
+good for ETC price and community?
+
+"OCNex - OCN Exchange will be officially added into roadmap" added for voting, proof and forecast on YEENOT TODAY https://yeenot.today/catalog/news/329
+OCN price will go up?
+
+"Huobi US Strategic Partner HBUS will be launching on July 6, 2018" added for voting, proof and forecast on YEENOT TODAY https://yeenot.today/catalog/news/332
+Zero Fee Trading for Everyone! Good for HT ?
+
+"HPB has received strategic investment of over twenty thousand ETH" - added for voting, proof and forecast on YEENOT TODAY https://yeenot.today/catalog/news/333
+Can this really help grow and build the HPB ecosystem and community ?
+
+"Announcement for the release of the Neo-based Trinity State Channel Protocol" added for voting, proof and forecast on YEENOT TODAY https://yeenot.today/catalog/news/335
+It makes real-time payment for the main chain assets, low transaction costs, scalability and privacy protection possible. Good for TNC ?
+
+"Stratis is excited to announce the launch of the Stratis Academy" added for voting, proof and forecast on YEENOT TODAY https://yeenot.today/catalog/news/336
+are you interesting of learning hub in blockchain tech?
+
+"Kin is finally integrated into Kik" added for voting, proof and forecast on YEENOT TODAY https://yeenot.today/catalog/news/338
+Great news for community.
+
+"KuCoin listed ZINC" added for voting, proof and forecast on YEENOT TODAY https://yeenot.today/catalog/news/343
+
+"TenX BIN number" added for voting, proof and forecast on YEENOT TODAY https://yeenot.today/catalog/news/344
+Banking license soon for PAY?
+
+"Ontology 1.0 is now live" added for voting, proof and forecast on YEENOT TODAY https://yeenot.today/catalog/news/345
+What feature of release Prometheus most interesting for you?
+
+"officially launched Mithril Vault Beta" added for voting, proof and forecast on YEENOT TODAY https://yeenot.today/catalog/news/347
+good for MITH price?
+
+News about "Chairman of Major Japanese Bank Says Ripple Can be the Global Standard of Money" added for voting, proof and forecast on YEENOT TODAY https://yeenot.today/catalog/news/349
+XRP price go up?
+
+News about "Tezos Betanet Launch" added for voting, proof and forecast on YEENOT TODAY https://yeenot.today/catalog/news/350
+good for XTZ ?
+
+"ADA/BTC TA: Cardano VS Bitcoin Might Start Moving Higher" added for voting, proof and forecast on YEENOT TODAY https://yeenot.today/catalog/news/351
+ADA price go up to new resistance level?
+
+"XLM/BTC TA: XLM potential fractal" added for voting, proof and forecast on YEENOT TODAY https://yeenot.today/catalog/news/354
+XLM price will go up to new support level?
+
+"GVT deposits and tier discount systems are already available on Genesis Markets" added for voting, proof and forecast on YEENOT TODAY https://yeenot.today/catalog/news/355
+good for GVT price?
+
+"Coinbase Custody is Officially Open For Business" added for voting, proof and forecast on YEENOT TODAY https://yeenot.today/catalog/news/356
+BTC price go to new level?
+
+"Zilliqa (ZIL) Review: A Next-Generation High Throughput Blockchain Platform" added for voting, proof and forecast on YEENOT TODAY https://yeenot.today/catalog/news/357
+Good time to invest in ZIL ?
+
+"Odyssey(OCN) Officially Listed on Fcoin" added for voting, proof and forecast on YEENOT TODAY https://yeenot.today/catalog/news/358
+Good time to invest in OCN ?  What main killing feature on Fcoin?
+
+"ClearPoll LAUNCHES IN 60 DAYS" added for voting, proof and forecast on YEENOT TODAY https://yeenot.today/catalog/news/359
+Good time to invest in POLL ?
+
+"Introducing OST Ledger & Balance APIs" added for voting, proof and forecast on YEENOT TODAY https://yeenot.today/catalog/news/360
+good time for branded digital token economy ?
+
+"[b]Binance: Incident Recap on Irregular SYS Trading[/b]" added for voting, proof and forecast on YEENOT TODAY [b]https://yeenot.today/catalog/news/361[/b]
+SYS price will go down ?
+
+"Monaco Announces Working VISA Cards" added for voting, proof and forecast on YEENOT TODAY https://yeenot.today/catalog/news/362
+Good news for MCO adoption?
+
+"NEO Entered the Era of Decentralization" added for voting, proof and forecast on YEENOT TODAY https://yeenot.today/catalog/news/363
+Stay hold on NEO?
+
+"Largest Blockchain Center In Asia Launched By NEM (XEM)" added for voting, proof and forecast on YEENOT TODAY https://yeenot.today/catalog/news/364
+big news for XEM communities! 
+
+Also, you can see price, market and social statistic here https://yeenot.today/catalog/market/?top=100
+
 phrase:
 Verify cryptosignals and assessing the impact and reliability of news in crypto world
 vote, proof, forecast
@@ -602,6 +757,9 @@ bitcointalk:
 [center][b][font=Arial][url=https://yeenot.today][color=#F90]YEENOT TODAY - SING UP, VOTE, BECOME A GURU OF CRYPTO SIGNALS![/color]
 [color=#F90]▰▰▰▰▰▰[/color]  [color=#490]Stable Coin[/color] [color=#F90]+[/color] [color=#490]Smart Investing[/color]  [color=#F90]▰▰▰▰▰▰[/color][/url]
 [color=#F90][url=https://t.me/yeenot_today][color=#490]Telegram Channel[/url]  ●  [url=https://medium.com/@yeenottoday][color=#490]Medium Blog[/url]  ●  [url=https://twitter.com/yeenot_today][color=#490]Twitter[/url]  ●  [url=http://yeenot.today/catalog/rules/][color=#490]SITE Rules[/url]
+
+About market list:
+
 
 -----------------------------
 я нашел:

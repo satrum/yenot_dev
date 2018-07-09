@@ -847,6 +847,9 @@ class Command(BaseCommand):
 			url2 = 'https://min-api.cryptocompare.com/data/histohour?fsym='+action+'&tsym=USD&limit=348' # 7*24*2
 			response2 = requests.get(url2)
 			HOHLCV=response2.json()
+			url3 = 'https://min-api.cryptocompare.com/data/histominute?fsym='+action+'&tsym=USD&limit=2880' # 24*60*2 = 1440 *2
+			response3 = requests.get(url3)
+			MOHLCV=response3.json()
 			#print(DOHLCV) 
 			#'TimeTo': 1528848000, 'TimeFrom': 1520208000, 'Response': 'Success'
 			#'Data': [{'close': 11440.73, 'open': 11503.94, 'high': 11694.15, 'time': 1520208000, 'low': 11431.55, 'volumefrom': 68323.51, 'volumeto': 791471905.1}
@@ -865,29 +868,40 @@ class Command(BaseCommand):
 				data2 = HOHLCV['Data']
 				hours = len(data2)
 				print('hours: {}'.format(hours))
-				print(data[-1])
+				print(data2[-1])
+			if MOHLCV['Response']=='Success':
+				data3 = MOHLCV['Data']
+				mins = len(data3)
+				print('mins: {}'.format(mins))
+				print(data3[-1])
 
 			## Computing Volatility
 			df = pd.DataFrame(data)
 			df_hours = pd.DataFrame(data2)
+			df_mins = pd.DataFrame(data3)
 			#vals = df.values
 			#print(vals)
 
 			# Compute the logarithmic returns using the Closing price 
 			df['Log_Ret'] = np.log(df['close'] / df['close'].shift(1))
 			df_hours['Log_Ret'] = np.log(df_hours['close'] / df_hours['close'].shift(1))
+			df_mins['Log_Ret'] = np.log(df_mins['close'] / df_mins['close'].shift(1))
 			#print(df.head())
 			#print(df['Log_Ret'])
 
 			# Compute Volatility using the pandas rolling standard deviation function
 			df_hours['7dayVolatility'] = df_hours['Log_Ret'].rolling(174).std(ddof=0) * np.sqrt(174)
+			df_mins['1dayVolatility'] = df_mins['Log_Ret'].rolling(1440).std(ddof=0) * np.sqrt(1440)
 			df['7dayVolatility'] = df['Log_Ret'].rolling(7).std(ddof=0) * np.sqrt(7)
 			df['30dayVolatility'] = df['Log_Ret'].rolling(30).std(ddof=0) * np.sqrt(30)
-			df['60dayVolatility'] = df['Log_Ret'].rolling(60).std(ddof=0) * np.sqrt(60)
-			print(df.tail(10))
-			print(df_hours.tail(10))
+			df['90dayVolatility'] = df['Log_Ret'].rolling(90).std(ddof=0) * np.sqrt(90)
+			print(df.tail(5))
+			print(df_hours.tail(5))
+			print(df_mins.tail(5))
 			volatility_30day =  df['Log_Ret'].tail(30).std(ddof=0)*np.sqrt(30)
-			print(volatility_30day)
+			print('30:',volatility_30day)
+			volatility_90day =  df['Log_Ret'].tail(90).std(ddof=0)*np.sqrt(90)
+			print('90:',volatility_90day)
 
 			# Plot the NIFTY Price series and the Volatility
 			plot = df[['close', '30dayVolatility']].tail(365).plot(subplots=True, color='blue',figsize=(8, 6))
